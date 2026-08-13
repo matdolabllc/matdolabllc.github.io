@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 190" role="img" aria-label="Uploading a name sheet">
+  <circle cx="120" cy="96" r="80" fill="#4fd1c5" opacity="0.18"/>
+
+  <!-- spreadsheet sheet -->
+  <rect x="60" y="40" width="120" height="104" rx="12" fill="#faf8f1" stroke="#1d3b34" stroke-width="3.2"/>
+  <path d="M60 52a12 12 0 0 1 12-12h96a12 12 0 0 1 12 12v10H60z" fill="#1f6f63"/>
+  <rect x="70" y="47" width="26" height="8" rx="4" fill="#faf8f1" opacity="0.9"/>
+  <rect x="104" y="47" width="26" height="8" rx="4" fill="#faf8f1" opacity="0.6"/>
+  <rect x="138" y="47" width="26" height="8" rx="4" fill="#faf8f1" opacity="0.6"/>
+  <!-- grid -->
+  <line x1="98" y1="62" x2="98" y2="144" stroke="#d7d3c4" stroke-width="2.4"/>
+  <line x1="132" y1="62" x2="132" y2="144" stroke="#d7d3c4" stroke-width="2.4"/>
+  <line x1="166" y1="62" x2="166" y2="144" stroke="#d7d3c4" stroke-width="2.4"/>
+  <line x1="60" y1="84" x2="180" y2="84" stroke="#d7d3c4" stroke-width="2.4"/>
+  <line x1="60" y1="106" x2="180" y2="106" stroke="#d7d3c4" stroke-width="2.4"/>
+  <!-- cells -->
+  <rect x="68" y="69" width="22" height="8" rx="4" fill="#2f8f7f"/>
+  <rect x="106" y="69" width="18" height="8" rx="4" fill="#7c9a6f"/>
+  <rect x="68" y="91" width="22" height="8" rx="4" fill="#2f8f7f"/>
+  <rect x="106" y="91" width="18" height="8" rx="4" fill="#7c9a6f"/>
+
+  <!-- upload / import badge -->
+  <circle cx="164" cy="138" r="19" fill="#1f6f63" stroke="#faf8f1" stroke-width="3"/>
+  <path d="M164 145v-13" stroke="#faf8f1" stroke-width="3.2" stroke-linecap="round"/>
+  <path d="M158 138l6 -6 6 6" fill="none" stroke="#faf8f1" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

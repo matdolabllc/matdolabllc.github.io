@@ -2,27 +2,30 @@
 import Layout from "../layouts/Layout.astro";
 import StoreBadges from "../components/StoreBadges.astro";
 
-// Flip cards: front cartoon → back app screenshot.
+// Flip cards: front cartoon → back short how-to video of the real app.
 const familyFlow = [
-  { cartoon: "check-in",  label: "Check in",          screen: "screen-checkin" },
-  { cartoon: "welcome",   label: "Welcome",           screen: "screen-confirmation" },
-  { cartoon: "check-out", label: "See you next time", screen: "screen-checkout" },
+  { cartoon: "check-in",  label: "Check in",       video: "check-in" },
+  { cartoon: "check-out", label: "Check out",      video: "check-out" },
+  { cartoon: "reset",     label: "Reset check-in", video: "reset" },
 ];
 const teamFlow = [
-  { cartoon: "dashboard",    label: "Dashboard",     screen: "screen-dashboard" },
-  { cartoon: "edit-profile", label: "Edit profile",  screen: "screen-profile" },
-  { cartoon: "export",       label: "Export record", screen: "screen-export" },
+  { cartoon: "add-names",    label: "Add attendees",     video: "add-name" },
+  { cartoon: "edit-profile", label: "Edit profile",      video: "edit-profile" },
+  { cartoon: "upload",       label: "Import CSV",        video: "upload" },
+  { cartoon: "export",       label: "Export CSV",        video: "export-csv" },
+  { cartoon: "enroll",       label: "Enroll & unenroll", video: "enroll-unenroll" },
+  { cartoon: "pin",          label: "Set PIN",           video: "set-pin" },
 ];
 
 const useCases = [
   { t: "Tutoring centers", icon: "book" },
+  { t: "Test prep & enrichment", icon: "sun" },
   { t: "Sunday schools", icon: "heart" },
-  { t: "Daycares", icon: "sun" },
   { t: "After-school programs", icon: "clock" },
   { t: "Music & art studios", icon: "music" },
   { t: "Clubs & sports", icon: "whistle" },
   { t: "Summer camps", icon: "tent" },
-  { t: "Community classes", icon: "users" },
+  { t: "Homeschool co-ops", icon: "users" },
 ];
 
 const priceIncludes = [
@@ -30,7 +33,6 @@ const priceIncludes = [
   "Unlimited attendees and classes",
   "Your data stays on your device — always private",
   "Works offline, no accounts",
-  "Free updates",
 ];
 
 const ICONS: Record<string, string> = {
@@ -47,7 +49,7 @@ const ucIcon = (k: string) => ICONS[k] || "";
 ---
 <Layout
   title="Matdo Check — Simple, reliable attendance check-in"
-  description="Matdo Check is a simple, reliable check-in and attendance app for tutoring centers, Sunday schools, and daycares. 30-day free trial, then a $59.99 one-time license. No subscription; data stays on your device."
+  description="Matdo Check is a simple, reliable check-in and attendance app for tutoring and enrichment centers, Sunday schools, clubs, and camps. 30-day free trial, then a $59.99 one-time license. No subscription; data stays on your device."
 >
   <!-- HERO -->
   <section class="hero">
@@ -55,7 +57,7 @@ const ucIcon = (k: string) => ICONS[k] || "";
       <div class="hero-copy">
         <h1 class="hero-title">Matdo Check</h1>
         <p class="hero-sub">Simple. Reliable. Easy setup. No subscription.</p>
-        <p class="hero-lede">The calm way to check attendees in and out — for tutoring centers, Sunday schools, and daycares. On the tablet you already have.</p>
+        <p class="hero-lede">The calm way to check attendees in and out — for tutoring and enrichment centers, Sunday schools, clubs, and camps. On the tablet you already have.</p>
       </div>
       <div class="hero-actions">
         <StoreBadges class="hero-badges" vertical />
@@ -76,62 +78,60 @@ const ucIcon = (k: string) => ICONS[k] || "";
     </div>
   </section>
 
-  <!-- HOW IT WORKS — flip cards -->
+  <!-- HOW IT WORKS — tap a cartoon to watch a how-to -->
   <section id="how" class="section-pad band-cream2">
     <div class="wrap">
       <div class="sec-head center reveal">
-        <span class="eyebrow">How it works</span>
-        <h2>One simple loop — for families and your team.</h2>
-        <p>Tap any card to flip it and see the real app.</p>
+        <span class="eyebrow">Quick tutorials</span>
+        <h2>Tap a card to watch how it's done.</h2>
+        <p>Each one opens a short, slowed-down how-to from the real app.</p>
       </div>
 
       <div class="flow reveal">
         <div class="flow-lane">
-          <span class="lane-tag family">The attendee's day</span>
-          <div class="flow-track">
-            {familyFlow.map((n, i) => (
-              <>
-                <button class="flip-card" aria-pressed="false" aria-label={`${n.label} — tap to see the app screen`}>
-                  <span class="fc-inner">
-                    <span class="fc-face fc-front">
-                      <img src={`/demo/cartoons/${n.cartoon}.svg`} alt="" width="240" height="190" />
-                      <span class="fc-label">{n.label}</span>
-                    </span>
-                    <span class="fc-face fc-back">
-                      <span class="fc-shot"><img src={`/demo/screens/${n.screen}.webp`} alt={n.label} width="1600" height="1000" loading="lazy" /></span>
-                    </span>
-                  </span>
-                </button>
-                {i < familyFlow.length - 1 && <span class="flow-arrow" aria-hidden="true">→</span>}
-              </>
+          <span class="lane-tag family">At the front desk</span>
+          <div class="tut-grid">
+            {familyFlow.map((n) => (
+              <button class="tut-card" data-video={n.video} data-title={n.label} aria-label={`Watch how to: ${n.label}`}>
+                <span class="tut-art">
+                  <img src={`/demo/cartoons/${n.cartoon}.svg`} alt="" width="240" height="190" />
+                  <span class="tut-play" aria-hidden="true">▶</span>
+                </span>
+                <span class="tut-label">{n.label}</span>
+              </button>
             ))}
           </div>
         </div>
 
         <div class="flow-lane">
-          <span class="lane-tag team">Your team's tools</span>
-          <div class="flow-track">
-            {teamFlow.map((n, i) => (
-              <>
-                <button class="flip-card" aria-pressed="false" aria-label={`${n.label} — tap to see the app screen`}>
-                  <span class="fc-inner">
-                    <span class="fc-face fc-front">
-                      <img src={`/demo/cartoons/${n.cartoon}.svg`} alt="" width="240" height="190" />
-                      <span class="fc-label">{n.label}</span>
-                    </span>
-                    <span class="fc-face fc-back">
-                      <span class="fc-shot"><img src={`/demo/screens/${n.screen}.webp`} alt={n.label} width="1600" height="1000" loading="lazy" /></span>
-                    </span>
-                  </span>
-                </button>
-                {i < teamFlow.length - 1 && <span class="flow-arrow" aria-hidden="true">→</span>}
-              </>
+          <span class="lane-tag team">For your team</span>
+          <div class="tut-grid">
+            {teamFlow.map((n) => (
+              <button class="tut-card" data-video={n.video} data-title={n.label} aria-label={`Watch how to: ${n.label}`}>
+                <span class="tut-art">
+                  <img src={`/demo/cartoons/${n.cartoon}.svg`} alt="" width="240" height="190" />
+                  <span class="tut-play" aria-hidden="true">▶</span>
+                </span>
+                <span class="tut-label">{n.label}</span>
+              </button>
             ))}
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Tutorial lightbox -->
+  <div id="tut-lb" class="tut-lb" hidden>
+    <div class="tut-lb-scrim" data-close></div>
+    <figure class="tut-lb-panel" role="dialog" aria-modal="true" aria-labelledby="tut-lb-title">
+      <button class="tut-lb-close" data-close aria-label="Close tutorial">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" width="20" height="20"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <video id="tut-lb-video" class="tut-lb-video" muted loop playsinline></video>
+      <figcaption id="tut-lb-title" class="tut-lb-title"></figcaption>
+    </figure>
+  </div>
 
   <!-- USE CASES -->
   <section class="section-pad">
@@ -176,20 +176,53 @@ const ucIcon = (k: string) => ICONS[k] || "";
           ))}
         </ul>
         <StoreBadges class="price-badges" />
-        <p class="price-note">Start free — no card required. Coming soon to the App Store and Google Play.</p>
+        <p class="price-note">Start free — no card required. Buy once on the App Store or Google Play (coming soon).</p>
       </div>
     </div>
   </section>
 </Layout>
 
 <script>
-  // Flip cards
-  document.querySelectorAll<HTMLButtonElement>(".flip-card").forEach((card) => {
-    card.addEventListener("click", () => {
-      const flipped = card.classList.toggle("flipped");
-      card.setAttribute("aria-pressed", String(flipped));
-    });
+  // Tutorial lightbox: tap a cartoon → big, slowed how-to video. Tap it (or the
+  // backdrop / ✕ / Esc) to close.
+  const RATE = 0.7; // play slower so it's easy to follow
+  const lb = document.getElementById("tut-lb");
+  const lbVideo = document.getElementById("tut-lb-video") as HTMLVideoElement | null;
+  const lbTitle = document.getElementById("tut-lb-title");
+
+  function keepRate() { if (lbVideo) lbVideo.playbackRate = RATE; }
+
+  function openTut(video: string, title: string) {
+    if (!lb || !lbVideo) return;
+    lbVideo.innerHTML = "";
+    const webm = document.createElement("source"); webm.src = `/demo/tutorials/${video}.webm`; webm.type = "video/webm";
+    const mp4 = document.createElement("source"); mp4.src = `/demo/tutorials/${video}.mp4`; mp4.type = "video/mp4";
+    lbVideo.append(webm, mp4);
+    if (lbTitle) lbTitle.textContent = title;
+    lb.hidden = false;
+    document.body.style.overflow = "hidden";
+    lbVideo.load();
+    lbVideo.currentTime = 0;
+    keepRate();
+    lbVideo.play().then(keepRate).catch(() => {});
+  }
+
+  function closeTut() {
+    if (!lb || !lbVideo) return;
+    lbVideo.pause();
+    lb.hidden = true;
+    document.body.style.overflow = "";
+  }
+
+  lbVideo?.addEventListener("loadeddata", keepRate);
+  lbVideo?.addEventListener("play", keepRate);
+  lbVideo?.addEventListener("click", closeTut);
+
+  document.querySelectorAll<HTMLButtonElement>(".tut-card").forEach((card) => {
+    card.addEventListener("click", () => openTut(card.dataset.video || "", card.dataset.title || ""));
   });
+  lb?.querySelectorAll<HTMLElement>("[data-close]").forEach((el) => el.addEventListener("click", closeTut));
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && lb && !lb.hidden) closeTut(); });
 
   // Nudge the hero video to autoplay (muted) and pause when off-screen.
   const heroVideo = document.querySelector<HTMLVideoElement>(".demo-video");
@@ -226,20 +259,26 @@ const ucIcon = (k: string) => ICONS[k] || "";
   .lane-tag { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.35rem 0.8rem; border-radius: 999px; margin-bottom: 14px; }
   .lane-tag.family { color: var(--color-teal); background: rgb(79 209 197 / 0.16); }
   .lane-tag.team { color: #a8843c; background: rgb(240 226 189 / 0.55); }
-  .flow-track { display: flex; align-items: center; gap: 6px; }
+  .tut-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .tut-card { background: var(--color-cream); border: 2px solid var(--color-line); border-radius: var(--radius); padding: 16px 12px 18px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; }
+  .tut-card:hover { transform: translateY(-4px); border-color: var(--color-teal); box-shadow: 0 10px 26px rgb(31 111 99 / 0.14); }
+  .tut-art { position: relative; width: 82%; display: block; }
+  .tut-art img { display: block; width: 100%; height: auto; }
+  .tut-play { position: absolute; inset: 0; margin: auto; width: 46px; height: 46px; display: grid; place-items: center; border-radius: 50%; background: rgb(31 111 99 / 0.92); color: #fff; font-size: 0.9rem; padding-left: 3px; opacity: 0; transform: scale(0.8); transition: opacity 0.2s ease, transform 0.2s ease; box-shadow: 0 8px 22px rgb(0 0 0 / 0.22); }
+  .tut-card:hover .tut-play { opacity: 1; transform: scale(1); }
+  .tut-label { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; color: var(--color-forest); }
 
-  .flip-card { flex: 1; height: 250px; background: none; border: none; padding: 0; cursor: pointer; perspective: 1200px; }
-  .fc-inner { display: block; position: relative; width: 100%; height: 100%; transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); transform-style: preserve-3d; }
-  .flip-card.flipped .fc-inner { transform: rotateY(180deg); }
-  .fc-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: var(--radius); border: 2px solid var(--color-line); overflow: hidden; display: flex; flex-direction: column; align-items: center; }
-  .fc-front { background: var(--color-cream); justify-content: center; gap: 6px; padding: 10px; transition: border-color 0.2s, box-shadow 0.2s; }
-  .flip-card:hover .fc-front { border-color: var(--color-teal); box-shadow: 0 8px 22px rgb(31 111 99 / 0.12); }
-  .fc-front img { width: 82%; height: auto; }
-  .fc-label { font-family: var(--font-display); font-weight: 600; font-size: 1.08rem; color: var(--color-forest); }
-  .fc-back { background: #fff; transform: rotateY(180deg); border-color: var(--color-teal); justify-content: center; padding: 12px; }
-  .fc-shot { width: 100%; border-radius: 10px; overflow: hidden; border: 1px solid var(--color-line); box-shadow: var(--shadow-sm); background: var(--color-cream2); }
-  .fc-shot img { display: block; width: 100%; height: auto; }
-  .flow-arrow { flex: none; color: var(--color-sage); font-size: 1.4rem; font-weight: 700; }
+  /* Lightbox */
+  .tut-lb { position: fixed; inset: 0; z-index: 300; display: flex; align-items: center; justify-content: center; padding: 24px; }
+  .tut-lb[hidden] { display: none; }
+  .tut-lb-scrim { position: absolute; inset: 0; background: rgb(18 28 25 / 0.62); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); animation: lbFade 0.25s ease; }
+  .tut-lb-panel { position: relative; z-index: 1; margin: 0; display: flex; flex-direction: column; align-items: center; gap: 14px; animation: lbPop 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
+  .tut-lb-video { display: block; width: min(760px, 92vw); height: auto; border-radius: 16px; box-shadow: 0 30px 80px rgb(0 0 0 / 0.4); border: 1px solid rgb(255 255 255 / 0.12); background: #0e1f1b; cursor: pointer; }
+  .tut-lb-title { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem; color: #fff; text-align: center; }
+  .tut-lb-close { position: absolute; top: -14px; right: -14px; width: 40px; height: 40px; border-radius: 50%; border: none; background: #fff; color: var(--color-ink); display: grid; place-items: center; cursor: pointer; box-shadow: var(--shadow-md); transition: transform 0.15s ease; }
+  .tut-lb-close:hover { transform: scale(1.08); }
+  @keyframes lbFade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes lbPop { from { opacity: 0; transform: scale(0.94); } to { opacity: 1; transform: none; } }
 
   /* ── Use cases ── */
   .usecases { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
@@ -261,6 +300,8 @@ const ucIcon = (k: string) => ICONS[k] || "";
   .price-list li svg { color: var(--color-teal); flex: none; margin-top: 2px; }
   .price-card :global(.price-badges) { justify-content: center; margin-top: 0.5rem; }
   .price-note { font-size: 0.8rem; color: #8b968f; margin-top: 1.2rem; }
+  .price-note + .price-note { margin-top: 0.5rem; }
+  .price-link { color: var(--color-teal); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
 
   @media (max-width: 900px) {
     .hero { padding: 116px 0 44px; }
@@ -269,8 +310,9 @@ const ucIcon = (k: string) => ICONS[k] || "";
     .usecases { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 620px) {
-    .flow-track { flex-direction: column; }
-    .flow-arrow { transform: rotate(90deg); }
-    .flip-card { width: 100%; height: 300px; }
+    .tut-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 400px) {
+    .tut-grid { grid-template-columns: 1fr; }
   }
 </style>

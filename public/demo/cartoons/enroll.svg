@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 190" role="img" aria-label="Enrolling or unenrolling an attendee">
+  <circle cx="120" cy="96" r="80" fill="#4fd1c5" opacity="0.18"/>
+  <ellipse cx="120" cy="162" rx="66" ry="8" fill="#f3eede"/>
+
+  <!-- person -->
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <path d="M92 118 a28 28 0 0 1 56 0z" fill="#2f8f7f"/>
+    <circle cx="120" cy="80" r="19" fill="#E8C9A2"/>
+    <path d="M101 79 a19 19 0 0 1 38 0 q-19 -13 -38 0z" fill="#2A3A36"/>
+    <circle cx="113" cy="80" r="2" fill="#1a2422"/>
+    <circle cx="127" cy="80" r="2" fill="#1a2422"/>
+    <path d="M113 87 q7 5 14 0" fill="none" stroke="#1a2422" stroke-width="2.4"/>
+  </g>
+
+  <!-- enrollment toggle (on) -->
+  <rect x="78" y="130" width="84" height="38" rx="19" fill="#1f6f63" stroke="#1d3b34" stroke-width="3"/>
+  <circle cx="143" cy="149" r="14" fill="#faf8f1"/>
+  <path d="M137 149l4 4 8 -9" fill="none" stroke="#1f6f63" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
