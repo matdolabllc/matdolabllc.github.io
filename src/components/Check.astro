@@ -1,0 +1,8 @@
+---
+// Small check-mark icon used in bullet lists and pills
+interface Props { width?: number; }
+const { width = 18 } = Astro.props;
+---
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width={width} height={width} aria-hidden="true">
+  <path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 190" role="img" aria-label="Adding names to a roster">
+  <circle cx="120" cy="96" r="80" fill="#4fd1c5" opacity="0.18"/>
+
+  <!-- device -->
+  <rect x="62" y="30" width="108" height="122" rx="14" fill="#faf8f1" stroke="#1d3b34" stroke-width="3.2"/>
+  <rect x="78" y="44" width="50" height="9" rx="4.5" fill="#2f8f7f"/>
+
+  <!-- name rows -->
+  <circle cx="82" cy="72" r="6" fill="#7c9a6f"/>
+  <rect x="94" y="66" width="60" height="12" rx="6" fill="#f3eede"/>
+  <circle cx="82" cy="94" r="6" fill="#7c9a6f"/>
+  <rect x="94" y="88" width="60" height="12" rx="6" fill="#f3eede"/>
+  <circle cx="82" cy="116" r="6" fill="#4fd1c5"/>
+  <rect x="94" y="110" width="60" height="12" rx="6" fill="#e6f7f4"/>
+
+  <!-- plus button -->
+  <circle cx="152" cy="146" r="18" fill="#1f6f63" stroke="#faf8f1" stroke-width="3"/>
+  <rect x="144" y="144" width="16" height="4" rx="2" fill="#faf8f1"/>
+  <rect x="150" y="138" width="4" height="16" rx="2" fill="#faf8f1"/>
+</svg>

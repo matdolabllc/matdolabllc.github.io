@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 190" role="img" aria-label="A child happily welcomed">
+  <circle cx="120" cy="96" r="80" fill="#4fd1c5" opacity="0.18"/>
+  <ellipse cx="120" cy="160" rx="70" ry="9" fill="#f3eede"/>
+
+  <!-- sparkles -->
+  <g fill="#f0c33a" opacity="0.9">
+    <path d="M70 62 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3z"/>
+    <path d="M172 54 l2.4 5.6 5.6 2.4 -5.6 2.4 -2.4 5.6 -2.4 -5.6 -5.6 -2.4 5.6 -2.4z"/>
+  </g>
+  <circle cx="60" cy="104" r="3.6" fill="#4fd1c5"/>
+  <circle cx="182" cy="96" r="3.6" fill="#2f8f7f"/>
+
+  <!-- child, arms up -->
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <rect x="110" y="126" width="9" height="30" rx="4.5" fill="#1d3b34"/>
+    <rect x="123" y="126" width="9" height="30" rx="4.5" fill="#1d3b34"/>
+    <path d="M104 120 q0 -34 17 -34 q17 0 17 34 z" fill="#2f8f7f"/>
+    <!-- arms raised -->
+    <path d="M109 100 L92 80" stroke="#E8C9A2" stroke-width="7.5"/>
+    <circle cx="90" cy="78" r="5" fill="#E8C9A2"/>
+    <path d="M133 100 L150 80" stroke="#E8C9A2" stroke-width="7.5"/>
+    <circle cx="152" cy="78" r="5" fill="#E8C9A2"/>
+    <!-- head -->
+    <circle cx="121" cy="70" r="15" fill="#E8C9A2"/>
+    <path d="M106 69 a15 15 0 0 1 30 0 q-15 -11 -30 0 z" fill="#2A3A36"/>
+    <circle cx="116" cy="70" r="1.7" fill="#1a2422"/>
+    <circle cx="126" cy="70" r="1.7" fill="#1a2422"/>
+    <path d="M115 76 q6 5 12 0" fill="none" stroke="#1a2422" stroke-width="2.2"/>
+  </g>
+</svg>

@@ -1,0 +1,147 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const features = [
+  { t: "Simple", d: "Anyone can use it on day one. No training, no manual.", icon: "smile" },
+  { t: "Fast", d: "Check in or grade a stack in seconds, not minutes.", icon: "bolt" },
+  { t: "Reliable", d: "It just works, every day — even without internet.", icon: "shield" },
+  { t: "Private", d: "Your data stays on your device. No cloud, no tracking.", icon: "lock" },
+  { t: "Affordable", d: "A one-time license. No subscription, no per-seat fees.", icon: "tag" },
+];
+
+const ICONS: Record<string, string> = {
+  smile: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 14.5s1.6 2 4 2 4-2 4-2"/><path d="M9 9.5h.01M15 9.5h.01"/></svg>',
+  bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg>',
+  shield: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>',
+  lock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
+  tag: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 12 22l-9-9V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><path d="M7.5 7.5h.01"/></svg>',
+};
+const icon = (k: string) => ICONS[k] || "";
+---
+<Layout
+  title="Matdo — Less admin, more teaching"
+  description="Matdo makes simple, reliable apps for tutoring centers, Sunday schools, and daycares. Matdo Check for attendance; Matdo Grade for AI homework grading (coming soon)."
+>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="hero-eyebrow">Matdo</p>
+      <h1 class="hero-title">Less Admin. More Teaching.</h1>
+      <p class="hero-sub">Simple, reliable, affordable tools for educators.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 1 — the two apps -->
+  <section class="section-pad apps-sec">
+    <div class="wrap">
+      <div class="apps">
+        <!-- Matdo Check (available) -->
+        <article class="app-card reveal">
+          <a class="app-shot" href="/check" aria-label="Explore Matdo Check">
+            <img src="/demo/screens/screen-home.webp" width="1600" height="1000" alt="Matdo Check — the check-in screen" />
+          </a>
+          <div class="app-meta">
+            <div>
+              <h3>Matdo Check</h3>
+              <p>Check-in &amp; attendance</p>
+            </div>
+            <a class="app-link" href="/check">Explore →</a>
+          </div>
+        </article>
+
+        <!-- Matdo Grade (coming soon) -->
+        <article class="app-card reveal is-soon">
+          <div class="app-shot">
+            <img src="/demo/screens/screen-grade.webp" width="1600" height="1000" loading="lazy" alt="Matdo Grade — AI homework grading" />
+            <span class="soon-ribbon">Coming soon</span>
+          </div>
+          <div class="app-meta">
+            <div>
+              <h3>Matdo Grade</h3>
+              <p>AI homework grading</p>
+            </div>
+            <span class="app-link disabled" aria-disabled="true">Coming soon</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2 — why Matdo -->
+  <section class="section-pad band-cream2">
+    <div class="wrap">
+      <div class="sec-head center reveal">
+        <span class="eyebrow">Why Matdo?</span>
+        <h2>Powerful where it counts. Simple everywhere else.</h2>
+      </div>
+      <div class="why">
+        {features.map((f) => (
+          <div class="why-item reveal">
+            <span class="why-ic" set:html={icon(f.icon)} />
+            <h4>{f.t}</h4>
+            <p>{f.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 — CTA -->
+  <section class="section-pad">
+    <div class="wrap">
+      <div class="cta reveal">
+        <h2>Bring Matdo to your workplace.</h2>
+        <a class="btn btn-cta" href="/contact">Contact us →</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Hero */
+  .hero { padding: 160px 0 40px; text-align: center; }
+  .hero-eyebrow { font-family: var(--font-sans); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--color-teal); }
+  .hero-title { font-size: clamp(2.2rem, 6vw, 4.4rem); line-height: 1.05; letter-spacing: -0.03em; margin-top: 0.8rem; }
+  .hero-sub { font-size: 1.2rem; color: #3d4b47; max-width: 40rem; margin: 1.2rem auto 0; }
+
+  /* Section 1 — apps */
+  .apps-sec { padding-top: 3rem; }
+  .apps { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; }
+  .app-card { background: #fff; border: 1px solid var(--color-line); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+  .app-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+  .app-shot { display: block; position: relative; background: var(--color-cream2); border-bottom: 1px solid var(--color-line); }
+  .app-shot img { display: block; width: 100%; height: auto; }
+  .app-card.is-soon .app-shot img { filter: saturate(0.92); }
+  .soon-ribbon { position: absolute; top: 16px; right: 16px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #08130d; background: var(--color-gold); padding: 6px 12px; border-radius: 999px; box-shadow: var(--shadow-sm); }
+  .app-meta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 22px 26px; }
+  .app-meta h3 { font-size: 1.5rem; }
+  .app-meta p { color: #4a5854; font-size: 0.98rem; margin-top: 2px; }
+  .app-link { font-weight: 600; color: var(--color-teal); white-space: nowrap; transition: gap 0.2s; }
+  .app-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .app-link.disabled { color: #9aa39d; cursor: default; }
+
+  /* Section 2 — why */
+  .why { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+  .why-item { background: #fff; border: 1px solid var(--color-line); border-radius: var(--radius); padding: 30px 26px; text-align: center; box-shadow: var(--shadow-sm); }
+  .why-ic { display: inline-grid; place-items: center; width: 56px; height: 56px; border-radius: 16px; background: rgb(79 209 197 / 0.16); color: var(--color-teal); margin-bottom: 1rem; }
+  .why-ic :global(svg) { width: 28px; height: 28px; }
+  .why-item h4 { font-size: 1.2rem; margin-bottom: 0.4rem; }
+  .why-item p { color: #4a5854; font-size: 0.94rem; line-height: 1.5; }
+
+  /* Section 4 — CTA */
+  .cta { background: linear-gradient(140deg, var(--color-forest), var(--color-teal)); border-radius: 32px; padding: clamp(40px, 7vw, 72px); text-align: center; color: #fff; box-shadow: var(--shadow-lg); position: relative; overflow: hidden; }
+  .cta::before { content: ""; position: absolute; width: 320px; height: 320px; border-radius: 50%; background: radial-gradient(circle, rgb(79 209 197 / 0.35), transparent 70%); top: -120px; right: -60px; }
+  .cta h2 { color: #fff; font-size: clamp(2rem, 4vw, 3rem); position: relative; z-index: 1; margin-bottom: 1.8rem; }
+  .cta p { color: rgb(255 255 255 / 0.85); max-width: 34rem; margin: 1rem auto 2rem; position: relative; z-index: 1; font-size: 1.1rem; }
+  .btn-cta { background: #fff; color: var(--color-forest); position: relative; z-index: 1; box-shadow: 0 10px 30px rgb(0 0 0 / 0.2); }
+  .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgb(0 0 0 / 0.25); background: var(--color-gold); }
+
+  @media (max-width: 900px) {
+    .hero { padding: 128px 0 24px; }
+    .apps { grid-template-columns: 1fr; gap: 26px; }
+    .why { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 520px) {
+    .why { grid-template-columns: 1fr; }
+  }
+</style>

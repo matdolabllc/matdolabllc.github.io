@@ -1,0 +1,276 @@
+---
+import Layout from "../layouts/Layout.astro";
+import StoreBadges from "../components/StoreBadges.astro";
+
+// Flip cards: front cartoon → back app screenshot.
+const familyFlow = [
+  { cartoon: "check-in",  label: "Check in",          screen: "screen-checkin" },
+  { cartoon: "welcome",   label: "Welcome",           screen: "screen-confirmation" },
+  { cartoon: "check-out", label: "See you next time", screen: "screen-checkout" },
+];
+const teamFlow = [
+  { cartoon: "dashboard",    label: "Dashboard",     screen: "screen-dashboard" },
+  { cartoon: "edit-profile", label: "Edit profile",  screen: "screen-profile" },
+  { cartoon: "export",       label: "Export record", screen: "screen-export" },
+];
+
+const useCases = [
+  { t: "Tutoring centers", icon: "book" },
+  { t: "Sunday schools", icon: "heart" },
+  { t: "Daycares", icon: "sun" },
+  { t: "After-school programs", icon: "clock" },
+  { t: "Music & art studios", icon: "music" },
+  { t: "Clubs & sports", icon: "whistle" },
+  { t: "Summer camps", icon: "tent" },
+  { t: "Community classes", icon: "users" },
+];
+
+const priceIncludes = [
+  "Everything included — check-in, dashboard & CSV export",
+  "Unlimited attendees and classes",
+  "Your data stays on your device — always private",
+  "Works offline, no accounts",
+  "Free updates",
+];
+
+const ICONS: Record<string, string> = {
+  book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h6v16H6a2 2 0 0 0-2 2z"/><path d="M20 5a2 2 0 0 0-2-2h-6v16h6a2 2 0 0 1 2 2z"/></svg>',
+  heart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.3-8.5C1 9 2.8 5.5 6.2 5.5c2 0 3.2 1.2 3.8 2.3.6-1.1 1.8-2.3 3.8-2.3 3.4 0 5.2 3.5 3.5 7C19 16.5 12 21 12 21z"/></svg>',
+  sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',
+  clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  music: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>',
+  whistle: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="13" r="6"/><path d="M15 11h6a2 2 0 0 1 0 4h-2"/><path d="M9 7V4h4"/></svg>',
+  tent: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 20h18z"/><path d="M12 3v17"/><path d="m9 20 3-4 3 4"/></svg>',
+  users: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 5.5a3 3 0 0 1 0 5.5M15 20a6 6 0 0 0-1.5-4"/></svg>',
+};
+const ucIcon = (k: string) => ICONS[k] || "";
+---
+<Layout
+  title="Matdo Check — Simple, reliable attendance check-in"
+  description="Matdo Check is a simple, reliable check-in and attendance app for tutoring centers, Sunday schools, and daycares. 30-day free trial, then a $59.99 one-time license. No subscription; data stays on your device."
+>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-top">
+      <div class="hero-copy">
+        <h1 class="hero-title">Matdo Check</h1>
+        <p class="hero-sub">Simple. Reliable. Easy setup. No subscription.</p>
+        <p class="hero-lede">The calm way to check attendees in and out — for tutoring centers, Sunday schools, and daycares. On the tablet you already have.</p>
+      </div>
+      <div class="hero-actions">
+        <StoreBadges class="hero-badges" vertical />
+      </div>
+    </div>
+    <div class="wrap">
+      <figure class="video-frame reveal">
+        <video
+          class="demo-video"
+          poster="/demo/matdo-check-demo-poster.jpg"
+          autoplay muted loop playsinline preload="auto"
+          aria-label="Short animated overview of Matdo Check: an attendee checks in, does their work, and checks out; then the instructor dashboard and one-tap CSV export.">
+          <source src="/demo/matdo-check-demo.webm" type="video/webm" />
+          <source src="/demo/matdo-check-demo.mp4" type="video/mp4" />
+          Your browser can't play embedded video — <a href="/demo/matdo-check-demo.mp4">watch it here</a>.
+        </video>
+      </figure>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS — flip cards -->
+  <section id="how" class="section-pad band-cream2">
+    <div class="wrap">
+      <div class="sec-head center reveal">
+        <span class="eyebrow">How it works</span>
+        <h2>One simple loop — for families and your team.</h2>
+        <p>Tap any card to flip it and see the real app.</p>
+      </div>
+
+      <div class="flow reveal">
+        <div class="flow-lane">
+          <span class="lane-tag family">The attendee's day</span>
+          <div class="flow-track">
+            {familyFlow.map((n, i) => (
+              <>
+                <button class="flip-card" aria-pressed="false" aria-label={`${n.label} — tap to see the app screen`}>
+                  <span class="fc-inner">
+                    <span class="fc-face fc-front">
+                      <img src={`/demo/cartoons/${n.cartoon}.svg`} alt="" width="240" height="190" />
+                      <span class="fc-label">{n.label}</span>
+                    </span>
+                    <span class="fc-face fc-back">
+                      <span class="fc-shot"><img src={`/demo/screens/${n.screen}.webp`} alt={n.label} width="1600" height="1000" loading="lazy" /></span>
+                    </span>
+                  </span>
+                </button>
+                {i < familyFlow.length - 1 && <span class="flow-arrow" aria-hidden="true">→</span>}
+              </>
+            ))}
+          </div>
+        </div>
+
+        <div class="flow-lane">
+          <span class="lane-tag team">Your team's tools</span>
+          <div class="flow-track">
+            {teamFlow.map((n, i) => (
+              <>
+                <button class="flip-card" aria-pressed="false" aria-label={`${n.label} — tap to see the app screen`}>
+                  <span class="fc-inner">
+                    <span class="fc-face fc-front">
+                      <img src={`/demo/cartoons/${n.cartoon}.svg`} alt="" width="240" height="190" />
+                      <span class="fc-label">{n.label}</span>
+                    </span>
+                    <span class="fc-face fc-back">
+                      <span class="fc-shot"><img src={`/demo/screens/${n.screen}.webp`} alt={n.label} width="1600" height="1000" loading="lazy" /></span>
+                    </span>
+                  </span>
+                </button>
+                {i < teamFlow.length - 1 && <span class="flow-arrow" aria-hidden="true">→</span>}
+              </>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USE CASES -->
+  <section class="section-pad">
+    <div class="wrap">
+      <div class="sec-head center reveal">
+        <span class="eyebrow">Where it's used</span>
+        <h2>Made for the places people gather to learn.</h2>
+      </div>
+      <div class="usecases reveal">
+        {useCases.map((u) => (
+          <div class="uc">
+            <span class="uc-ic" set:html={ucIcon(u.icon)} />
+            <span class="uc-t">{u.t}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="section-pad band-gold">
+    <div class="wrap">
+      <div class="sec-head center reveal">
+        <span class="eyebrow">Pricing</span>
+        <h2>One price. No surprises.</h2>
+        <p>Try it free for a month. If you love it, buy it once — it's yours to keep.</p>
+      </div>
+
+      <div class="price-card reveal">
+        <span class="trial-pill">30-day free trial</span>
+        <div class="price">
+          <span class="amt">$59.99</span>
+          <span class="per">one&#8209;time license</span>
+        </div>
+        <p class="price-sub">Then it's yours. No subscription, no renewals, ever.</p>
+        <ul class="price-list">
+          {priceIncludes.map((f) => (
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              {f}
+            </li>
+          ))}
+        </ul>
+        <StoreBadges class="price-badges" />
+        <p class="price-note">Start free — no card required. Coming soon to the App Store and Google Play.</p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  // Flip cards
+  document.querySelectorAll<HTMLButtonElement>(".flip-card").forEach((card) => {
+    card.addEventListener("click", () => {
+      const flipped = card.classList.toggle("flipped");
+      card.setAttribute("aria-pressed", String(flipped));
+    });
+  });
+
+  // Nudge the hero video to autoplay (muted) and pause when off-screen.
+  const heroVideo = document.querySelector<HTMLVideoElement>(".demo-video");
+  if (heroVideo) {
+    const play = () => heroVideo.play().catch(() => {});
+    play();
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(
+        (entries) => entries.forEach((e) => (e.isIntersecting ? play() : heroVideo.pause())),
+        { threshold: 0.25 },
+      ).observe(heroVideo);
+    }
+  }
+</script>
+
+<style>
+  /* ── Hero (title left, download badges stacked at right) ── */
+  .hero { padding: 140px 0 60px; }
+  .hero-top { display: flex; align-items: center; justify-content: space-between; gap: 48px; }
+  .hero-copy { text-align: left; }
+  .hero-actions { flex: none; }
+  /* stack the two download badges one on top of the other */
+  .hero-actions :global(.store-badges) { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 14px; }
+  .hero-title { font-size: clamp(3rem, 8vw, 5.5rem); line-height: 1; letter-spacing: -0.03em; }
+  .hero-sub { font-family: var(--font-display); font-size: clamp(1.25rem, 3vw, 1.9rem); color: var(--color-teal); font-weight: 500; margin-top: 0.6rem; }
+  .hero-lede { font-size: 1.15rem; color: #3d4b47; max-width: 38rem; margin-top: 1.1rem; }
+
+  .video-frame { margin: 2.6rem auto 0; max-width: 1000px; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid var(--color-line); background: var(--color-cream); }
+  .demo-video { display: block; width: 100%; height: auto; }
+
+  /* ── Flip-card flow ── */
+  .flow { max-width: 1060px; margin: 0 auto; display: grid; gap: 22px; }
+  .flow-lane { background: #fff; border: 1px solid var(--color-line); border-radius: var(--radius-lg); padding: 20px 20px 24px; box-shadow: var(--shadow-sm); }
+  .lane-tag { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.35rem 0.8rem; border-radius: 999px; margin-bottom: 14px; }
+  .lane-tag.family { color: var(--color-teal); background: rgb(79 209 197 / 0.16); }
+  .lane-tag.team { color: #a8843c; background: rgb(240 226 189 / 0.55); }
+  .flow-track { display: flex; align-items: center; gap: 6px; }
+
+  .flip-card { flex: 1; height: 250px; background: none; border: none; padding: 0; cursor: pointer; perspective: 1200px; }
+  .fc-inner { display: block; position: relative; width: 100%; height: 100%; transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); transform-style: preserve-3d; }
+  .flip-card.flipped .fc-inner { transform: rotateY(180deg); }
+  .fc-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: var(--radius); border: 2px solid var(--color-line); overflow: hidden; display: flex; flex-direction: column; align-items: center; }
+  .fc-front { background: var(--color-cream); justify-content: center; gap: 6px; padding: 10px; transition: border-color 0.2s, box-shadow 0.2s; }
+  .flip-card:hover .fc-front { border-color: var(--color-teal); box-shadow: 0 8px 22px rgb(31 111 99 / 0.12); }
+  .fc-front img { width: 82%; height: auto; }
+  .fc-label { font-family: var(--font-display); font-weight: 600; font-size: 1.08rem; color: var(--color-forest); }
+  .fc-back { background: #fff; transform: rotateY(180deg); border-color: var(--color-teal); justify-content: center; padding: 12px; }
+  .fc-shot { width: 100%; border-radius: 10px; overflow: hidden; border: 1px solid var(--color-line); box-shadow: var(--shadow-sm); background: var(--color-cream2); }
+  .fc-shot img { display: block; width: 100%; height: auto; }
+  .flow-arrow { flex: none; color: var(--color-sage); font-size: 1.4rem; font-weight: 700; }
+
+  /* ── Use cases ── */
+  .usecases { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .uc { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; background: var(--color-cream); border: 1px solid var(--color-line); border-radius: var(--radius); padding: 28px 14px; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .uc:hover { transform: translateY(-4px); box-shadow: var(--shadow-sm); }
+  .uc-ic { width: 44px; height: 44px; color: var(--color-teal); display: grid; place-items: center; }
+  .uc-ic :global(svg) { width: 32px; height: 32px; }
+  .uc-t { font-size: 0.95rem; font-weight: 600; color: var(--color-forest); line-height: 1.25; }
+
+  /* ── Pricing ── */
+  .price-card { max-width: 540px; margin: 0 auto; background: #fff; border: 1px solid var(--color-line); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); padding: 40px 40px 34px; text-align: center; position: relative; }
+  .trial-pill { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-teal); background: rgb(79 209 197 / 0.16); padding: 0.5rem 1rem; border-radius: 999px; }
+  .price { display: flex; align-items: baseline; justify-content: center; gap: 0.6rem; margin-top: 1.2rem; }
+  .price .amt { font-family: var(--font-display); font-weight: 600; font-size: 4rem; line-height: 1; color: var(--color-ink); letter-spacing: -0.02em; }
+  .price .per { font-size: 1rem; color: #8b968f; font-weight: 500; }
+  .price-sub { color: #4a5854; margin-top: 0.6rem; }
+  .price-list { list-style: none; padding: 0; margin: 1.8rem 0; display: grid; gap: 0.7rem; text-align: left; max-width: 22rem; margin-inline: auto; }
+  .price-list li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.98rem; color: var(--color-forest); }
+  .price-list li svg { color: var(--color-teal); flex: none; margin-top: 2px; }
+  .price-card :global(.price-badges) { justify-content: center; margin-top: 0.5rem; }
+  .price-note { font-size: 0.8rem; color: #8b968f; margin-top: 1.2rem; }
+
+  @media (max-width: 900px) {
+    .hero { padding: 116px 0 44px; }
+    .hero-top { flex-direction: column; align-items: flex-start; gap: 26px; }
+    .hero-actions { align-self: stretch; }
+    .usecases { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 620px) {
+    .flow-track { flex-direction: column; }
+    .flow-arrow { transform: rotate(90deg); }
+    .flip-card { width: 100%; height: 300px; }
+  }
+</style>

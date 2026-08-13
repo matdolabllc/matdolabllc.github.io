@@ -1,0 +1,157 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const EMAIL = "matdolabllc@gmail.com";
+---
+<Layout
+  title="Contact — Matdo"
+  description="Get in touch with Matdo. Ask about Matdo Check, or just say hello — matdolabllc@gmail.com."
+>
+  <section class="page-hero">
+    <div class="wrap contact-grid">
+      <!-- Left: intro + direct options -->
+      <div class="reveal">
+        <span class="eyebrow">Contact</span>
+        <h1>Let's talk.</h1>
+        <p class="lede">Contact us if you need any help.</p>
+
+        <div class="contact-cards">
+          <a class="c-card" href={`mailto:${EMAIL}`}>
+            <div class="c-ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <div class="c-t">Email us</div>
+              <div class="c-d">{EMAIL}</div>
+            </div>
+          </a>
+          <div class="c-card">
+            <div class="c-ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.5"/></svg>
+            </div>
+            <div>
+              <div class="c-t">Company Location</div>
+              <div class="c-d">Lafayette, Indiana</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: form -->
+      <div class="reveal">
+        <form id="contact-form" class="form" action="https://api.web3forms.com/submit" method="POST">
+          <!-- Free form handling via Web3Forms. To activate: create a free key at
+               https://web3forms.com using matdolabllc@gmail.com, then paste it below. -->
+          <input type="hidden" name="access_key" value="3ea37273-765a-46e2-b105-9638e0d45c11" />
+          <input type="hidden" name="subject" value="New inquiry from the Matdo website" />
+          <input type="hidden" name="from_name" value="Matdo website" />
+          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+          </div>
+          <div class="field">
+            <label for="org">Organization <span class="opt">(optional)</span></label>
+            <input id="org" name="organization" type="text" />
+          </div>
+          <div class="field">
+            <label for="interest">I'm interested in</label>
+            <select id="interest" name="interest">
+              <option>Matdo Check</option>
+              <option>Matdo Grade</option>
+              <option>Both</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send message</button>
+          <p class="form-status" id="form-status" role="status" hidden></p>
+          <p class="form-note">Messages go straight to matdolabllc@gmail.com. Free and serverless — powered by Web3Forms.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  // Submit to Web3Forms via fetch so the visitor stays on the page.
+  const form = document.getElementById("contact-form") as HTMLFormElement | null;
+  const status = document.getElementById("form-status");
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!status) return;
+    const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const original = btn?.textContent ?? "Send message";
+    status.hidden = true;
+    if (btn) { btn.disabled = true; btn.textContent = "Sending…"; }
+    try {
+      const res = await fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+      const json = await res.json().catch(() => ({}));
+      if (res.ok && json.success) {
+        form.reset();
+        status.className = "form-status ok";
+        status.textContent = "Thanks! Your message is on its way — we'll be in touch soon.";
+      } else {
+        throw new Error(json.message || "send-failed");
+      }
+    } catch {
+      status.className = "form-status err";
+      status.textContent = "Sorry, that didn't send. Please email matdolabllc@gmail.com directly.";
+    } finally {
+      status.hidden = false;
+      if (btn) { btn.disabled = false; btn.textContent = original; }
+    }
+  });
+</script>
+
+<style>
+  .hp { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; opacity: 0; }
+  .form-status { margin-top: 0.9rem; padding: 0.75rem 1rem; border-radius: 12px; font-size: 0.92rem; font-weight: 500; line-height: 1.45; }
+  .form-status.ok { background: rgb(79 209 197 / 0.15); color: var(--color-teal); }
+  .form-status.err { background: rgb(196 127 16 / 0.1); color: #a8843c; }
+</style>
+<style>
+  .page-hero { padding: 150px 0 100px; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+  .page-hero h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); margin: 1.1rem 0 1rem; }
+  .page-hero .lede { font-size: 1.15rem; color: #3d4b47; max-width: 30rem; margin-bottom: 2rem; }
+
+  .contact-cards { display: grid; gap: 1rem; max-width: 24rem; }
+  .c-card { display: flex; align-items: center; gap: 1rem; background: #fff; border: 1px solid var(--color-line); border-radius: var(--radius-sm); padding: 1rem 1.2rem; box-shadow: var(--shadow-sm); transition: transform 0.2s, box-shadow 0.2s; }
+  a.c-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .c-ic { width: 42px; height: 42px; flex: none; border-radius: 12px; background: rgb(79 209 197 / 0.16); color: var(--color-teal); display: grid; place-items: center; }
+  .c-ic svg { width: 22px; height: 22px; }
+  .c-t { font-weight: 600; color: var(--color-forest); }
+  .c-d { font-size: 0.92rem; color: #4a5854; }
+
+  .form { background: #fff; border: 1px solid var(--color-line); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow-md); }
+  .field { margin-bottom: 1.1rem; }
+  .field label { display: block; font-size: 0.88rem; font-weight: 600; color: var(--color-forest); margin-bottom: 0.4rem; }
+  .field .opt { font-weight: 400; color: #8b968f; }
+  .field input, .field select, .field textarea {
+    width: 100%; font: inherit; color: var(--color-ink);
+    background: var(--color-cream); border: 1px solid var(--color-line); border-radius: 12px;
+    padding: 0.7rem 0.9rem; transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .field textarea { resize: vertical; }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none; border-color: var(--color-teal2); box-shadow: 0 0 0 3px rgb(79 209 197 / 0.25); background: #fff;
+  }
+  .form-note { font-size: 0.78rem; color: #9aa39d; margin-top: 1rem; font-style: italic; line-height: 1.5; }
+
+  @media (max-width: 900px) {
+    .page-hero { padding: 120px 0 70px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+</style>

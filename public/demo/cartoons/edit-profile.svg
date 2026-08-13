@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 190" role="img" aria-label="Editing an attendee profile">
+  <circle cx="120" cy="96" r="80" fill="#4fd1c5" opacity="0.18"/>
+
+  <!-- profile card -->
+  <rect x="66" y="34" width="108" height="118" rx="14" fill="#faf8f1" stroke="#1d3b34" stroke-width="3.2"/>
+
+  <!-- avatar -->
+  <circle cx="120" cy="74" r="24" fill="#e6f7f4" stroke="#1d3b34" stroke-width="3"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="120" cy="68" r="9" fill="#E8C9A2"/>
+    <path d="M104 90 a16 16 0 0 1 32 0z" fill="#2f8f7f"/>
+    <path d="M111 66 a9 9 0 0 1 18 0 q-9 -6 -18 0z" fill="#2A3A36"/>
+  </g>
+
+  <!-- name lines -->
+  <rect x="90" y="110" width="60" height="9" rx="4.5" fill="#2f8f7f"/>
+  <rect x="100" y="126" width="40" height="7" rx="3.5" fill="#d7d3c4"/>
+
+  <!-- edit / pencil badge -->
+  <circle cx="160" cy="132" r="19" fill="#1f6f63" stroke="#faf8f1" stroke-width="3"/>
+  <g stroke="#faf8f1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M164 124 l5 5 -12 12 -6 1 1 -6z"/>
+    <path d="M161 127 l5 5"/>
+  </g>
+</svg>

@@ -1,0 +1,7 @@
+---
+interface Props { class?: string; }
+const { class: cls = "" } = Astro.props;
+---
+<a class={`brand ${cls}`} href="/" aria-label="Matdo — home">
+  <span class="mark">M</span> Matdo
+</a>

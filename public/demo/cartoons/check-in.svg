@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 190" role="img" aria-label="A child checking in on a tablet">
+  <circle cx="120" cy="96" r="80" fill="#4fd1c5" opacity="0.18"/>
+  <ellipse cx="120" cy="160" rx="86" ry="9" fill="#f3eede"/>
+
+  <!-- kiosk -->
+  <ellipse cx="170" cy="156" rx="26" ry="6" fill="#7c9a6f" opacity="0.55"/>
+  <rect x="165" y="112" width="9" height="46" rx="4.5" fill="#7c9a6f"/>
+  <rect x="140" y="60" width="60" height="60" rx="10" fill="#faf8f1" stroke="#1d3b34" stroke-width="3.2"/>
+  <rect x="147" y="67" width="46" height="46" rx="6" fill="#e6f7f4"/>
+  <path d="M156 91 l8 9 l17 -21" fill="none" stroke="#1f6f63" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- child -->
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <rect x="83" y="122" width="9" height="32" rx="4.5" fill="#1d3b34"/>
+    <rect x="97" y="122" width="9" height="32" rx="4.5" fill="#1d3b34"/>
+    <path d="M79 116 q0 -32 15 -32 q15 0 15 32 z" fill="#2f8f7f"/>
+    <path d="M83 102 L80 120" stroke="#2f8f7f" stroke-width="8"/>
+    <circle cx="80" cy="121" r="4.5" fill="#E8C9A2"/>
+    <path d="M105 100 L136 96" stroke="#E8C9A2" stroke-width="7"/>
+    <circle cx="138" cy="96" r="5" fill="#E8C9A2"/>
+    <circle cx="94" cy="72" r="14" fill="#E8C9A2"/>
+    <path d="M80 71 a14 14 0 0 1 28 0 q-14 -10 -28 0 z" fill="#2A3A36"/>
+    <circle cx="89" cy="72" r="1.6" fill="#1a2422"/>
+    <circle cx="98" cy="72" r="1.6" fill="#1a2422"/>
+    <path d="M89 78 q5 4 10 0" fill="none" stroke="#1a2422" stroke-width="2"/>
+  </g>
+</svg>

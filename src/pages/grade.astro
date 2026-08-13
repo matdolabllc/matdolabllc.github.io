@@ -1,0 +1,150 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Check from "../components/Check.astro";
+
+const steps = [
+  { n: "1", t: "Snap the worksheet", d: "Point the iPad at a stack of handwritten homework. Matdo Grade captures each page cleanly." },
+  { n: "2", t: "AI grades in seconds", d: "It reads the work, checks the answers, and marks each question — showing its reasoning as it goes." },
+  { n: "3", t: "You review & release", d: "Skim the results, adjust anything you disagree with, and share scores and feedback with a tap." },
+];
+
+const features = [
+  { t: "Scan handwriting", d: "Reads real student handwriting on paper worksheets — no special forms required." },
+  { t: "Instant AI grading", d: "Marks answers and totals scores in seconds, so a class set takes minutes, not evenings." },
+  { t: "You're always in control", d: "Every mark is reviewable. Override any answer and the app learns your preferences." },
+  { t: "Helpful feedback", d: "Generates short, encouraging notes you can edit before sending home." },
+  { t: "Progress over time", d: "See how each student and each topic is trending across the term." },
+  { t: "Private & on your terms", d: "Student work stays yours. Nothing is sold, and you control what's stored." },
+];
+---
+<Layout
+  title="Matdo Grade — AI homework grading on iPad, with you in control"
+  description="Matdo Grade is an iPad app that scans handwritten homework and grades it with AI in seconds — while the teacher reviews, overrides, and stays fully in control."
+>
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="wrap ph-grid">
+      <div>
+        <span class="eyebrow">Matdo Grade</span>
+        <h1>Homework, graded in <span class="accent-gold">seconds.</span></h1>
+        <p class="lede">An iPad app that scans handwritten homework and grades it with AI — while you review, adjust, and stay fully in control. Get your evenings back.</p>
+        <div class="hero-btns">
+          <a class="btn btn-primary" href="/contact">Request a demo</a>
+          <a class="btn btn-ghost" href="#how">See how it works</a>
+        </div>
+        <div class="pills">
+          <span class="pill"><Check width={16} /> Reads real handwriting</span>
+          <span class="pill"><Check width={16} /> You approve every mark</span>
+        </div>
+      </div>
+
+      <div class="ph-art">
+        <div class="mock" role="img" aria-label="iPad grading a math worksheet with an 18 out of 20 score">
+          <div class="mock-head">
+            <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
+            <span class="mock-title">Worksheet · Math</span>
+          </div>
+          <div class="worksheet">
+            <div class="score-badge">18/20</div>
+            <div style="position:relative"><div class="ws-line mid"></div><svg class="check-svg" style="top:-2px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div style="position:relative"><div class="ws-line short"></div><svg class="check-svg" style="top:-2px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div style="position:relative"><div class="ws-line"></div><svg class="check-svg" style="top:-2px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div style="position:relative"><div class="ws-line mid" style="margin-bottom:0"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="section-pad band-cream2">
+    <div class="wrap">
+      <div class="sec-head center reveal">
+        <span class="eyebrow">How it works</span>
+        <h2>From a stack of paper to graded — fast.</h2>
+      </div>
+      <div class="steps">
+        {steps.map((s) => (
+          <div class="step reveal">
+            <div class="step-n">{s.n}</div>
+            <h3>{s.t}</h3>
+            <p>{s.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section-pad">
+    <div class="wrap">
+      <div class="sec-head center reveal">
+        <span class="eyebrow">Features</span>
+        <h2>AI does the routine. You do the teaching.</h2>
+      </div>
+      <div class="feature-list">
+        {features.map((f) => (
+          <div class="fl-item reveal">
+            <span class="fl-ic"><Check /></span>
+            <div>
+              <h4>{f.t}</h4>
+              <p>{f.d}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTROL REASSURANCE -->
+  <section class="section-pad band-gold">
+    <div class="wrap">
+      <div class="quote-wrap reveal">
+        <span class="eyebrow">Human-in-control</span>
+        <p class="quote" style="margin-top:1rem">AI suggests. You decide. Nothing goes to a student until a teacher has seen it.</p>
+        <p class="placeholder-note">Our design principle for Matdo Grade.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-pad">
+    <div class="wrap">
+      <div class="cta reveal">
+        <h2>Try Matdo Grade with your class</h2>
+        <p>Bring an iPad and a stack of homework — we'll show you a full class graded before the demo's over.</p>
+        <a class="btn btn-cta" href="/contact">Request a demo →</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .accent-gold { color: #b08a3e; }
+  .page-hero { padding: 150px 0 80px; }
+  .ph-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
+  .page-hero h1 { font-size: clamp(2.4rem, 5vw, 3.8rem); margin: 1.1rem 0 1.2rem; }
+  .page-hero .lede { font-size: 1.15rem; color: #3d4b47; max-width: 34rem; margin-bottom: 1.8rem; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.6rem; }
+  .ph-art .mock { max-width: 420px; margin-left: auto; }
+
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  .step { background: #fff; border: 1px solid var(--color-line); border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow-sm); }
+  .step-n { width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, #c79a45, var(--color-sage)); color: #fff; font-family: var(--font-display); font-weight: 600; font-size: 1.2rem; display: grid; place-items: center; margin-bottom: 1rem; }
+  .step h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+  .step p { color: #4a5854; }
+
+  .feature-list { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 40px; }
+  .fl-item { display: flex; gap: 1rem; align-items: flex-start; }
+  .fl-ic { width: 40px; height: 40px; flex: none; border-radius: 12px; background: rgb(199 154 69 / 0.16); color: #a8843c; display: grid; place-items: center; }
+  .fl-item h4 { font-size: 1.12rem; margin-bottom: 0.3rem; }
+  .fl-item p { color: #4a5854; font-size: 0.96rem; }
+
+  @media (max-width: 900px) {
+    .page-hero { padding: 120px 0 56px; }
+    .ph-grid { grid-template-columns: 1fr; gap: 40px; }
+    .ph-art .mock { margin: 0 auto; }
+    .steps { grid-template-columns: 1fr; }
+    .feature-list { grid-template-columns: 1fr; }
+  }
+</style>

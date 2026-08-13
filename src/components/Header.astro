@@ -1,0 +1,109 @@
+---
+import Logo from "./Logo.astro";
+
+const nav = [
+  { label: "Home", href: "/" },
+  { label: "Matdo Check", href: "/check" },
+  { label: "Matdo Grade", href: "/grade", soon: true },
+  { label: "About", href: "/about" },
+];
+
+// Highlight the active top-level route
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+---
+<header id="site-header">
+  <div class="wrap nav">
+    <Logo />
+
+    <nav class="nav-links" aria-label="Primary">
+      {nav.map((i) => (
+        i.soon ? (
+          <span class="link soon" aria-disabled="true">{i.label}<span class="soon-tag">Soon</span></span>
+        ) : (
+          <a class="link" href={i.href} aria-current={path === i.href ? "page" : undefined}>{i.label}</a>
+        )
+      ))}
+    </nav>
+
+    <div class="nav-right">
+      <a class="btn btn-sage" href="/contact">Contact</a>
+      <button id="menu-toggle" class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="24" height="24">
+          <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="mobile-menu" hidden>
+    {nav.map((i) => (
+      i.soon
+        ? <span class="mm-soon" aria-disabled="true">{i.label}<span class="soon-tag">Soon</span></span>
+        : <a href={i.href}>{i.label}</a>
+    ))}
+    <a href="/contact" class="mm-contact">Contact</a>
+  </div>
+</header>
+
+<style>
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    transition: background 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+    padding: 14px 0;
+  }
+  header.scrolled {
+    background: rgb(250 248 241 / 0.82);
+    backdrop-filter: saturate(180%) blur(14px);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    box-shadow: 0 2px 20px rgb(29 59 52 / 0.07);
+    border-bottom: 1px solid var(--color-line);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .nav-links { display: flex; align-items: center; gap: 2rem; }
+  .nav-links a.link { font-weight: 500; font-size: 0.96rem; color: var(--color-ink); opacity: 0.85; transition: opacity 0.2s, color 0.2s; }
+  .nav-links a.link:hover { opacity: 1; color: var(--color-teal); }
+  .nav-links a.link[aria-current="page"] { opacity: 1; color: var(--color-teal); }
+  .nav-links .link.soon { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--color-ink); opacity: 0.45; cursor: default; }
+  .soon-tag { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #08130d; background: var(--color-mint); padding: 1px 6px; border-radius: 999px; }
+  .mm-soon { display: flex; align-items: center; gap: 0.5rem; padding: 0.7rem 0; font-weight: 500; color: var(--color-ink); opacity: 0.5; border-bottom: 1px solid var(--color-line); }
+  .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+  .menu-toggle { display: none; background: none; border: none; color: var(--color-forest); cursor: pointer; padding: 4px; }
+
+  .mobile-menu {
+    display: none; flex-direction: column; gap: 0.25rem;
+    padding: 0.5rem 24px 1.2rem;
+    background: rgb(250 248 241 / 0.96);
+    backdrop-filter: saturate(180%) blur(14px);
+    border-bottom: 1px solid var(--color-line);
+  }
+  .mobile-menu a { padding: 0.7rem 0; font-weight: 500; color: var(--color-ink); border-bottom: 1px solid var(--color-line); }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu .mm-contact { color: var(--color-teal); font-weight: 600; }
+
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .menu-toggle { display: inline-flex; }
+    .mobile-menu.open { display: flex; }
+  }
+</style>
+
+<script>
+  const header = document.getElementById("site-header");
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+
+  const onScroll = () => {
+    if (!header) return;
+    header.classList.toggle("scrolled", window.scrollY > 20);
+  };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  toggle?.addEventListener("click", () => {
+    if (!menu) return;
+    const open = menu.classList.toggle("open");
+    menu.hidden = !open;
+    toggle.setAttribute("aria-expanded", String(open));
+  });
+</script>

@@ -1,0 +1,52 @@
+---
+// App Store + Google Play badges. Inactive placeholders for now — when the apps
+// ship, swap each <span class="store-badge"> for an <a href="…"> and drop `is-soon`.
+// (Before launch, replace these with the official Apple/Google badge artwork.)
+interface Props { class?: string; dark?: boolean; vertical?: boolean; }
+const { class: cls = "", dark = false, vertical = false } = Astro.props;
+---
+<div class={`store-badges ${dark ? "on-dark" : ""} ${vertical ? "vertical" : ""} ${cls}`}>
+  <span class="store-badge is-soon" role="link" aria-disabled="true" aria-label="Download on the App Store — coming soon">
+    <svg class="sb-logo" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true">
+      <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+    </svg>
+    <span class="sb-text"><small>Download on the</small><strong>App Store</strong></span>
+  </span>
+
+  <span class="store-badge is-soon" role="link" aria-disabled="true" aria-label="Get it on Google Play — coming soon">
+    <svg class="sb-logo" viewBox="0 0 512 512" aria-hidden="true">
+      <path fill="#00d2ff" d="M63.9 34.7C58 41 54.6 50.6 54.6 63.1v385.8c0 12.5 3.4 22.1 9.5 28.3l1.3 1.2 216.1-216.1v-5.1L65.2 33.4z"/>
+      <path fill="#00e676" d="M352.9 328.6l-72-72v-5.1l72-72 1.6.9 85.3 48.5c24.4 13.8 24.4 36.5 0 50.4l-85.3 48.5z"/>
+      <path fill="#ff3a44" d="M354.5 327.7 280.9 254 63.9 471c8 8.5 21.3 9.6 36.3 1.1l254.3-144.4z"/>
+      <path fill="#ffc800" d="M354.5 180.3 100.2 35.9C85.2 27.4 71.9 28.5 63.9 37l217 217z"/>
+    </svg>
+    <span class="sb-text"><small>Get it on</small><strong>Google Play</strong></span>
+  </span>
+</div>
+
+<style>
+  .store-badges { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .store-badges.vertical { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 14px; }
+  .store-badge {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: #1a2422; color: #fff;
+    border: 1px solid rgba(255,255,255,.14); border-radius: 12px;
+    padding: 11px 20px; min-width: 190px;
+    position: relative;
+  }
+  .store-badge.is-soon { opacity: 0.85; cursor: not-allowed; }
+  .sb-logo { width: 24px; height: 27px; flex: none; }
+  .sb-text { display: flex; flex-direction: column; line-height: 1.12; text-align: left; }
+  .sb-text small { font-size: 0.66rem; font-weight: 500; letter-spacing: 0.02em; opacity: 0.9; }
+  .sb-text strong { font-family: var(--font-display); font-size: 1.16rem; font-weight: 600; }
+  /* "Soon" ribbon */
+  .store-badge.is-soon::after {
+    content: "Soon"; position: absolute; top: -9px; right: -8px;
+    font-family: var(--font-sans); font-size: 0.6rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: #08130d; background: var(--color-mint);
+    padding: 2px 8px; border-radius: 999px; box-shadow: var(--shadow-sm);
+  }
+  .on-dark .store-badge { background: #fff; color: var(--color-ink); border-color: rgba(0,0,0,.08); }
+  .on-dark .sb-logo { color: var(--color-ink); }
+</style>
