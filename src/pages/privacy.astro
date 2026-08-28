@@ -1,0 +1,577 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// LEGAL DOCUMENT — treat edits with care.
+//
+// The app-behaviour sections (5, 8, 9, 10) are the authoritative web version of
+// the in-app policy at matdo-check/App/Settings/PrivacyView.swift. If the app's
+// behaviour changes, change both: App Review compares the listing, the website,
+// and the binary, and a mismatch is a Guideline 5.1.1 problem.
+//
+// TODO (owner): POSTAL_ADDRESS is required for a complete GDPR/CCPA contact
+// clause. The address line is omitted from the rendered page while it is empty.
+const COMPANY = "Matdo Lab LLC";
+const EMAIL = "matdo@matdolab.com";
+const POSTAL_ADDRESS = "";
+const BUSINESS_LOCATION = "West Lafayette, Indiana, United States";
+
+const EFFECTIVE = "27 August 2026";
+const VERSION = "2.0";
+const SUPERSEDES = "30 July 2026";
+
+const toc = [
+  ["s1", "Introduction"],
+  ["s2", "Summary"],
+  ["s3", "Definitions"],
+  ["s4", "Our role and your role"],
+  ["s5", "Attendee Records: what the App stores, and where"],
+  ["s6", "Information we receive"],
+  ["s7", "Purchases and subscriptions"],
+  ["s8", "Optional iCloud Backup"],
+  ["s9", "Device-level iCloud backup"],
+  ["s10", "Access controls within the App"],
+  ["s11", "Children's information"],
+  ["s12", "How we use information"],
+  ["s13", "Legal bases for processing (EEA and UK)"],
+  ["s14", "Disclosure of information"],
+  ["s15", "International transfers"],
+  ["s16", "Retention"],
+  ["s17", "Security"],
+  ["s18", "Your rights"],
+  ["s19", "The Site"],
+  ["s20", "Changes to this Policy"],
+  ["s21", "Contact and complaints"],
+];
+
+const summary = [
+  "We do not receive, store, or have access to your attendance records. They stay on your iPad.",
+  "The App has no accounts, no analytics, no advertising, and no servers operated by us.",
+  "iCloud Backup is off unless you switch it on, and it writes to your own Apple Account, encrypted.",
+  "Apple processes all purchases. We never see payment details.",
+  "The only personal information we receive is what you send us — a contact-form message or an email.",
+];
+---
+
+<Layout
+  title="Privacy Policy — Matdo Check"
+  description="The Matdo Check privacy policy. Attendance records stay on your iPad; Matdo Lab LLC does not receive, store, or have access to them. Includes GDPR, UK GDPR, CCPA and COPPA disclosures."
+>
+  <!-- MASTHEAD -->
+  <section class="doc-head">
+    <div class="wrap doc-wrap">
+      <span class="eyebrow">Legal</span>
+      <h1>Privacy Policy</h1>
+      <p class="doc-sub">Matdo Check for iPad, and matdolab.com</p>
+
+      <dl class="doc-meta">
+        <div><dt>Effective</dt><dd><time datetime="2026-08-27">{EFFECTIVE}</time></dd></div>
+        <div><dt>Version</dt><dd>{VERSION}</dd></div>
+        <div><dt>Supersedes</dt><dd><time datetime="2026-07-30">{SUPERSEDES}</time></dd></div>
+        <div><dt>Publisher</dt><dd>{COMPANY}</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- CONTENTS -->
+  <section class="doc-body">
+    <div class="wrap doc-wrap">
+      <nav class="toc" aria-labelledby="toc-h">
+        <h2 id="toc-h">Contents</h2>
+        <ol>
+          {toc.map(([id, label]) => (
+            <li><a href={`#${id}`}>{label}</a></li>
+          ))}
+        </ol>
+      </nav>
+
+      <article class="doc">
+        <!-- 1 -->
+        <h2 id="s1">1. Introduction</h2>
+        <p>
+          This Privacy Policy (the <strong>“Policy”</strong>) explains how {COMPANY} (<strong>“Matdo”</strong>, <strong>“we”</strong>, <strong>“us”</strong>, <strong>“our”</strong>) handles personal information in connection with the Matdo Check application for iPad (the <strong>“App”</strong>) and the website at matdolab.com (the <strong>“Site”</strong>).
+        </p>
+        <p>
+          Matdo Check is designed so that the information it records never reaches us. Much of this Policy therefore describes information that stays under your control rather than information we hold. Sections 5 and 8 to 10 describe how the App handles data on your device; sections 6, 14 and 19 describe the limited categories of personal information we actually receive.
+        </p>
+        <p>
+          This Policy does not form part of any contract of sale. Downloads and purchases through the App Store are also governed by <a href="https://www.apple.com/legal/internet-services/itunes/" rel="noopener">Apple's applicable terms</a>.
+        </p>
+
+        <!-- 2 -->
+        <h2 id="s2">2. Summary</h2>
+        <div class="callout">
+          <p class="callout-label">Non-binding summary</p>
+          <ul>
+            {summary.map((s) => <li>{s}</li>)}
+          </ul>
+          <p class="callout-note">
+            This summary is provided for clarity in accordance with the transparency principle. It is not a substitute for the full Policy, and in the event of any inconsistency the numbered sections below prevail.
+          </p>
+        </div>
+
+        <!-- 3 -->
+        <h2 id="s3">3. Definitions</h2>
+        <dl class="defs">
+          <dt>Attendee Records</dt>
+          <dd>
+            The data a Center enters into or generates within the App: attendee names; optional telephone numbers, grade and student number; check-in and check-out times; and the audit log of instructor corrections and resets.
+          </dd>
+          <dt>Center</dt>
+          <dd>
+            The tutoring center, school, place of worship, club, camp, or other organisation that installs and operates the App on its own device.
+          </dd>
+          <dt>Device</dt>
+          <dd>The iPad or other Apple device on which the App is installed.</dd>
+          <dt>You</dt>
+          <dd>
+            The reader of this Policy: a Center operating the App, a member of its staff, or a visitor to the Site.
+          </dd>
+        </dl>
+
+        <!-- 4 -->
+        <h2 id="s4">4. Our role and your role</h2>
+        <p>
+          The App is licensed software that runs entirely on your Device. It is not a hosted service. We do not operate a backend, we do not maintain a database of Attendee Records, and we have no technical means of retrieving Attendee Records from a Device.
+        </p>
+        <p>
+          Accordingly, as between you and us:
+        </p>
+        <ul>
+          <li>
+            The Center determines which attendees are entered, for what purpose, and for how long records are kept. In the terminology of the EU and UK General Data Protection Regulation, <strong>the Center is the controller</strong> of Attendee Records.
+          </li>
+          <li>
+            We do not act as a processor of Attendee Records, because we never receive them and cannot access them. We supply software; we do not process data on the Center's behalf.
+          </li>
+          <li>
+            We are the controller only of the limited personal information we receive as described in section 6 — principally, information you choose to send us. A provider may act as an independent controller for information it collects directly.
+          </li>
+        </ul>
+        <p>
+          The Center remains responsible for meeting its own obligations to attendees and their parents or guardians, including any notice, consent, retention, and access requirements imposed by law, by its franchise or licensing agreements, or by its own policies.
+        </p>
+
+        <!-- 5 -->
+        <h2 id="s5">5. Attendee Records: what the App stores, and where</h2>
+        <p>
+          The App stores all Attendee Records in a single database inside the App's private storage area on the Device. There are no user accounts and no cloud service operated by us. With iCloud Backup switched off (section 8) and no purchase in progress (section 7), the Device may remain offline indefinitely and every check-in function continues to work.
+        </p>
+        <p>
+          The database is protected by the operating system's file protection, so its contents are encrypted at rest and unreadable until the Device has been unlocked at least once after starting up.
+        </p>
+        <p>
+          Deleting the App from the Device deletes the database and all local backups with it. Copies previously written to iCloud are addressed in sections 8 and 9.
+        </p>
+
+        <!-- 6 -->
+        <h2 id="s6">6. Information we receive</h2>
+        <p>
+          We receive <strong>no Attendee Records</strong>. The categories below describe the limited personal information handled by us or by service providers in connection with the App and Site.
+        </p>
+
+        <h3>6.1 Messages you send us</h3>
+        <p>
+          If you complete the contact form on the Site, we receive your name, email address, the organisation you enter (optional), your selected area of interest, and the content of your message. If you email us directly, we receive your email address and whatever the message contains.
+        </p>
+        <p>
+          Contact-form submissions are transmitted to Web3Forms, a third-party form-delivery service, before reaching our mailbox. Web3Forms also receives technical information needed to deliver and protect the form, such as the request's IP address and browser information, and may retain submission or log data under the settings and policies applicable to our account. See sections 14 to 16.
+        </p>
+
+        <h3>6.2 Reports provided to us by Apple</h3>
+        <p>
+          As an App Store developer we receive sales and download reports from Apple. These are aggregated and do not identify individual customers. We do not receive the names, email addresses, or payment details of purchasers.
+        </p>
+
+        <h3>6.3 Diagnostic information, if you have enabled it</h3>
+        <p>
+          If the holder of the Device has switched on Apple's <em>Share With App Developers</em> setting at the operating-system level, Apple may make crash logs, usage statistics, and performance diagnostics available to us. You can control this under Privacy &amp; Security, then Analytics &amp; Improvements, in the Device's Settings. We do not intentionally include Attendee Records in diagnostic reports.
+        </p>
+
+        <h3>6.4 Server logs for the Site</h3>
+        <p>
+          The Site is hosted by GitHub Pages. When you visit it, GitHub — not Matdo — logs and stores your IP address for security purposes and may process other standard request information under its own privacy statement. We do not receive GitHub's visitor logs. See section 14.
+        </p>
+
+        <!-- 7 -->
+        <h2 id="s7">7. Purchases and subscriptions</h2>
+        <p>
+          All purchases and subscriptions are processed by Apple through the App Store under Apple's own terms and <a href="https://www.apple.com/legal/privacy/" rel="noopener">privacy policy</a>. Payment details are never shown to us and never pass through the App.
+        </p>
+        <p>
+          To determine whether a licence is active, the App queries Apple's on-device App Store service. That query is not reported to us and carries no Attendee Records.
+        </p>
+
+        <!-- 8 -->
+        <h2 id="s8">8. Optional iCloud Backup</h2>
+        <p>
+          The App offers a daily copy of its database to iCloud, so that a lost, damaged, or replaced Device does not take the Center's roster and attendance history with it. <strong>This feature is off unless a member of staff switches it on</strong> in Settings, under Data.
+        </p>
+        <p>
+          When it is enabled, the operating system uploads the copy to the Center's own Apple Account, into the App's private iCloud container, which no other application can read. It is not sent to us, and we have no access to it.
+        </p>
+        <p>
+          Each copy is encrypted before it leaves the Device, using authenticated encryption. The encryption key is held by the Center's instructor PIN and by the recovery code shown when that PIN is set. We hold no copy of either secret. In consequence:
+        </p>
+        <ul>
+          <li>Reinstalling the App, on this or any other Device, cannot open a backup without the PIN or the recovery code.</li>
+          <li>If both the PIN and the recovery code are lost, those backups cannot be opened by anyone, including us.</li>
+        </ul>
+        <p>
+          The most recent seven copies are retained automatically, together with up to five copies that staff have named. Switching the feature off stops new copies being made; it does not delete copies already stored. To remove those, delete the App's iCloud data from the Device's Settings, under your Apple Account then iCloud.
+        </p>
+
+        <!-- 9 -->
+        <h2 id="s9">9. Device-level iCloud backup</h2>
+        <p>
+          Separately from section 8, if the Device backs itself up to iCloud, the App's database is included in that device backup under the Center's own Apple Account. This is a function of the operating system rather than of the App. It is managed in the Device's Settings, under your Apple Account, then iCloud, then Backups.
+        </p>
+
+        <!-- 10 -->
+        <h2 id="s10">10. Access controls within the App</h2>
+        <p>
+          The check-in screen is intended to be visible at a counter and displays attendee names during search and confirmation. Every other function — the roster, records, history, and corrections — is behind the instructor PIN, and the Settings area is additionally behind Face ID, Touch ID, or the Device passcode. Instructor screens relock automatically after two minutes without interaction.
+        </p>
+        <p>
+          The Center is responsible for choosing a PIN that is not easily guessed, for limiting who knows it, and for keeping the Device itself protected by a passcode.
+        </p>
+
+        <!-- 11 -->
+        <h2 id="s11">11. Children's information</h2>
+        <p>
+          Centers using the App commonly record the names of children. Because those records remain on the Center's own Device and, if backup is enabled, within the Center's own Apple Account, <strong>we do not collect, receive, or process personal information from or about children</strong>, and we have no ability to access it.
+        </p>
+        <p>
+          The App is not directed at children as its users and does not request any information from a child. An attendee checking in types only a name that a member of Center staff has already enrolled. The App contains no advertising, no analytics, no social features, and no mechanism by which a child could transmit information to us or to any third party.
+        </p>
+        <p>
+          Responsibility for obtaining any notice or consent required before a child's details are entered — whether under the Children's Online Privacy Protection Act, education-records legislation, applicable data protection law, or a franchise agreement — rests with the Center.
+        </p>
+
+        <!-- 12 -->
+        <h2 id="s12">12. How we use information</h2>
+        <p>The limited information described in section 6 is used only as follows:</p>
+        <ul>
+          <li><strong>Messages you send us</strong> — to respond to your enquiry and to provide support.</li>
+          <li><strong>Apple's aggregated reports</strong> — to understand sales volumes and to run our business.</li>
+          <li><strong>Diagnostic reports</strong>, where enabled — to identify and fix defects in the App.</li>
+          <li><strong>Site request logs</strong> — GitHub processes these to host, secure, and maintain GitHub Pages; we do not receive its visitor logs.</li>
+        </ul>
+        <p>
+          We do not use any of this information for advertising, for profiling, or for automated decision-making that produces legal or similarly significant effects. We do not sell personal information, and we do not share it for cross-context behavioural advertising.
+        </p>
+
+        <!-- 13 -->
+        <h2 id="s13">13. Legal bases for processing (EEA and UK)</h2>
+        <p>
+          If you are in the European Economic Area or the United Kingdom, we rely on the following legal bases under Article 6 of the GDPR and UK GDPR:
+        </p>
+        <ul>
+          <li>
+            <strong>Messages you send us</strong> — our legitimate interests in responding to enquiries and supporting customers, and, where your message concerns a purchase or prospective purchase, the performance of a contract or steps taken at your request.
+          </li>
+          <li>
+            <strong>Diagnostic reports</strong> — where those reports constitute personal information, our legitimate interests in maintaining the App's security, reliability, and performance. Apple makes them available only if the Device holder has enabled sharing with app developers.
+          </li>
+          <li>
+            <strong>Site request logs</strong> — GitHub determines its own legal bases for the visitor information it processes as the independent provider of GitHub Pages. See GitHub's privacy statement in section 14.
+          </li>
+        </ul>
+
+        <!-- 14 -->
+        <h2 id="s14">14. Disclosure of information</h2>
+        <p>
+          We do not sell personal information or disclose it for advertising purposes. Personal information may be handled by the following providers or recipients in the circumstances described:
+        </p>
+        <ul>
+          <li>
+            <strong>Web3Forms</strong> — receives and delivers contact-form submissions to us and performs abuse prevention. It processes the form fields and technical information described in section 6.1. Web3Forms describes its practices in its <a href="https://docs.web3forms.com/getting-started/faq" rel="noopener">privacy and GDPR information</a>.
+          </li>
+          <li>
+            <strong>GitHub, Inc.</strong> — hosts the Site through GitHub Pages and records visitor IP addresses for security, as described in section 6.4 and the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub Privacy Statement</a>.
+          </li>
+          <li>
+            <strong>Apple Inc.</strong> — distributes the App and processes all purchases. Apple acts as an independent controller in respect of your relationship with the App Store, under its own privacy policy.
+          </li>
+          <li>
+            <strong>Legal requirements</strong> — where disclosure is required by law, court order, or a lawful request from a public authority, or is necessary to establish, exercise, or defend legal claims.
+          </li>
+          <li>
+            <strong>Business transfer</strong> — in connection with a merger, acquisition, or sale of assets, in which case we will take reasonable steps to ensure the recipient honours this Policy.
+          </li>
+        </ul>
+        <p>
+          No Attendee Records are disclosed to any of the above, because we do not hold them.
+        </p>
+
+        <!-- 15 -->
+        <h2 id="s15">15. International transfers</h2>
+        <p>
+          We are established in the United States. The service providers named in section 14 may process information in the United States and other countries described in their notices. If you contact us from outside the United States, the information in your message will be transferred to and processed in the United States, where data protection law may differ from that of your own jurisdiction. Where applicable law requires a transfer mechanism for processing for which we are responsible, we will use one permitted by that law.
+        </p>
+        <p>
+          Attendee Records are not transferred internationally by us, because they are not transferred to us at all. Where iCloud Backup is enabled, storage locations are determined by Apple under the Center's own Apple Account.
+        </p>
+
+        <!-- 16 -->
+        <h2 id="s16">16. Retention</h2>
+        <ul>
+          <li>
+            <strong>Attendee Records</strong> — retained on the Device for as long as the Center chooses. We hold none and therefore retain none. Deleting the App deletes the database and its local backups; copies in iCloud persist until deleted as described in section 8.
+          </li>
+          <li>
+            <strong>Correspondence</strong> — retained for as long as reasonably necessary to handle your enquiry, provide support, maintain appropriate business records, and establish or defend legal claims, and then deleted or anonymised.
+          </li>
+          <li>
+            <strong>Provider-held information</strong> — diagnostic reports, contact-form delivery data, and Site request logs are retained under the settings and retention practices of Apple, Web3Forms, and GitHub respectively. The provider notices linked in section 14 contain further details.
+          </li>
+        </ul>
+
+        <!-- 17 -->
+        <h2 id="s17">17. Security</h2>
+        <p>
+          The App applies operating-system file protection to its database, requires a six-digit instructor PIN stored only as a slow, salted hash, enforces an escalating lockout after failed attempts, gates the Settings area behind device-owner authentication, and encrypts every copy written to iCloud with authenticated encryption, as described in section 8.
+        </p>
+        <p>
+          For information we ourselves hold, we apply measures appropriate to its limited nature and volume, including access controls on our mailbox.
+        </p>
+        <p>
+          No method of storage or transmission is completely secure. The security of Attendee Records depends substantially on measures within the Center's control — the Device passcode, who is told the instructor PIN, and where the recovery code is kept.
+        </p>
+
+        <!-- 18 -->
+        <h2 id="s18">18. Your rights</h2>
+
+        <h3>18.1 EEA and UK</h3>
+        <p>
+          Subject to the conditions and exemptions in applicable law, you have the right to request access to the personal information we hold about you; to have it corrected or erased; to restrict or object to its processing; to receive it in a portable form; and to withdraw consent where processing is based on consent. You also have the right to lodge a complaint with your supervisory authority, and in the United Kingdom with the Information Commissioner's Office.
+        </p>
+
+        <h3>18.2 California</h3>
+        <p>
+          Subject to the conditions and exemptions in the California Consumer Privacy Act as amended, California residents have the right to know what personal information we have collected, used, and disclosed; to request its deletion or correction; to opt out of the sale or sharing of personal information; to limit the use of sensitive personal information; and not to be discriminated against for exercising these rights.
+        </p>
+        <p>
+          <strong>We do not sell or share personal information</strong> as those terms are defined in that Act, and we do not use or disclose sensitive personal information for purposes requiring a right to limit.
+        </p>
+
+        <h3>18.3 Other jurisdictions</h3>
+        <p>
+          Residents of other US states with comprehensive privacy legislation have comparable rights of access, correction, deletion, portability, and opt-out. We honour such requests on the same basis as those described above.
+        </p>
+
+        <h3>18.4 Exercising your rights</h3>
+        <p>
+          Write to us at the address in section 21. We will verify your request by reference to the email address from which you contact us, and respond within the period required by applicable law. You may use an authorised agent where the law permits.
+        </p>
+        <p class="notice">
+          Please note the practical limit: the only personal information we hold about you is your correspondence with us. <strong>We cannot provide, correct, or delete Attendee Records, because we do not have them.</strong> A request concerning attendance records should be directed to the Center that operates the App. If you are unsure which Center that is, we will help you identify the right recipient where we can.
+        </p>
+
+        <!-- 19 -->
+        <h2 id="s19">19. The Site</h2>
+        <p>
+          The Site is a static website. Matdo sets no cookies, runs no analytics, and embeds no advertising technology, third-party trackers, or social widgets. Fonts and other assets are served from the Site itself.
+        </p>
+        <p>
+          The two exceptions are described above: standard server logging by our host (section 6.4), and delivery of contact-form submissions by Web3Forms (section 6.1). Matdo does not use either to profile visitors.
+        </p>
+
+        <!-- 20 -->
+        <h2 id="s20">20. Changes to this Policy</h2>
+        <p>
+          We may amend this Policy from time to time. The current version is always published at this address, with its effective date and version number shown at the top. Where a change materially affects your rights, we will take reasonable steps to bring it to your attention. The corresponding text shown inside the App is updated to match in the next release.
+        </p>
+        <p>
+          Changes apply from the effective date shown above. If a change requires your consent under applicable law, we will request it separately.
+        </p>
+
+        <!-- 21 -->
+        <h2 id="s21">21. Contact and complaints</h2>
+        <p>
+          The controller responsible for personal information received directly by Matdo, as described in sections 6.1 and 6.3, is {COMPANY}. Apple and GitHub act as independent controllers for the processing described in this Policy under their respective privacy notices.
+        </p>
+        <dl class="defs contact">
+          <dt>Email</dt>
+          <dd><a href={`mailto:${EMAIL}`}>{EMAIL}</a></dd>
+          <dt>Location</dt>
+          <dd>{BUSINESS_LOCATION}</dd>
+          {POSTAL_ADDRESS && (
+            <>
+              <dt>Post</dt>
+              <dd>{POSTAL_ADDRESS}</dd>
+            </>
+          )}
+        </dl>
+        <p>
+          We aim to resolve any concern directly. If you are in the EEA or the UK and remain dissatisfied, you may complain to your national supervisory authority; if you are in the United Kingdom, that is the Information Commissioner's Office.
+        </p>
+
+        <p class="colophon">
+          End of Policy · Version {VERSION} · Effective {EFFECTIVE} · {COMPANY}
+        </p>
+      </article>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ---- Masthead ---- */
+  .doc-head {
+    padding: 140px 0 44px;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .doc-wrap { max-width: 780px; }
+  .doc-head h1 {
+    font-size: clamp(2.1rem, 4.4vw, 3.1rem);
+    margin: 0.9rem 0 0.5rem;
+  }
+  .doc-sub { color: #55665f; font-size: 1.05rem; margin-bottom: 2rem; }
+
+  .doc-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 18px 24px;
+    margin: 0;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--color-line);
+  }
+  .doc-meta dt {
+    font-size: 0.7rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: #7d8d87;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .doc-meta dd { margin: 0; font-size: 0.98rem; color: var(--color-forest); font-weight: 500; }
+
+  /* ---- Body ---- */
+  .doc-body { padding: 56px 0 clamp(64px, 9vw, 110px); }
+
+  /* Contents */
+  .toc {
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-sm);
+    padding: 26px 30px 22px;
+    margin-bottom: 3.5rem;
+    background: #fff;
+  }
+  .toc h2 {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: #7d8d87;
+    margin: 0 0 1rem;
+    font-weight: 700;
+  }
+  .toc ol { margin: 0; padding-left: 1.4rem; columns: 2; column-gap: 40px; }
+  .toc li { margin-bottom: 0.42rem; break-inside: avoid; }
+  .toc a { color: #3d4b47; font-size: 0.94rem; line-height: 1.45; }
+  .toc a:hover { color: var(--color-teal); text-decoration: underline; }
+
+  /* Sections */
+  .doc h2 {
+    font-size: clamp(1.18rem, 2.1vw, 1.42rem);
+    color: var(--color-forest);
+    margin: 3rem 0 0.9rem;
+    scroll-margin-top: 112px;
+  }
+  .doc h3 {
+    font-family: var(--font-sans);
+    font-size: 1.01rem;
+    font-weight: 700;
+    color: var(--color-forest);
+    margin: 1.9rem 0 0.7rem;
+  }
+  .doc p, .doc li {
+    color: #3a4844;
+    font-size: 1.02rem;
+    line-height: 1.75;
+  }
+  .doc p { margin-bottom: 1rem; }
+  .doc ul { margin: 0 0 1.2rem; padding-left: 1.3rem; }
+  .doc ul li { margin-bottom: 0.65rem; }
+  .doc ul li::marker { color: var(--color-sage); }
+  .doc strong { color: var(--color-forest); font-weight: 600; }
+  .doc a { color: var(--color-teal); text-decoration: underline; }
+  .doc a:hover { color: var(--color-forest); }
+  .doc a, .toc a { text-underline-offset: 0.16em; }
+
+  /* Summary callout */
+  .callout {
+    border: 1px solid var(--color-line);
+    border-left: 3px solid var(--color-sage);
+    border-radius: var(--radius-sm);
+    background: #fbfaf6;
+    padding: 24px 28px 20px;
+    margin-bottom: 1.4rem;
+  }
+  .callout-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: #7d8d87;
+    font-weight: 700;
+    margin-bottom: 0.9rem;
+  }
+  .callout ul { margin-bottom: 1rem; }
+  .callout-note {
+    font-size: 0.9rem;
+    color: #6a7b76;
+    margin: 0;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--color-line);
+  }
+
+  /* Definition lists */
+  .defs { margin: 0 0 1.4rem; }
+  .defs dt {
+    font-weight: 700;
+    color: var(--color-forest);
+    margin-top: 1.05rem;
+    font-size: 1rem;
+  }
+  .defs dt:first-child { margin-top: 0; }
+  .defs dd {
+    margin: 0.3rem 0 0;
+    color: #3a4844;
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+  .contact dd { font-weight: 500; }
+
+  /* Practical-limit notice */
+  .notice {
+    border-left: 3px solid var(--color-gold);
+    background: #fdfbf3;
+    padding: 16px 20px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.99rem;
+  }
+
+  .colophon {
+    margin-top: 3.4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-line);
+    font-size: 0.86rem;
+    color: #7d8d87;
+    letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 700px) {
+    .doc-head { padding: 116px 0 36px; }
+    .toc ol { columns: 1; }
+    .toc { padding: 22px 22px 18px; }
+  }
+
+  @media print {
+    :global(#site-header), :global(footer) { display: none; }
+    .doc-head { padding-top: 0; }
+    .doc-body { padding-top: 24px; }
+    .toc { break-after: page; }
+    .doc h2 { break-after: avoid; }
+    .doc p, .doc li { font-size: 10.5pt; line-height: 1.55; }
+    .doc a { color: inherit; text-decoration: none; }
+  }
+</style>
