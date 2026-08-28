@@ -29,10 +29,45 @@ const useCases = [
 ];
 
 const priceIncludes = [
-  "Everything included — check-in, dashboard & CSV export",
+  "Check-in, dashboard & CSV export",
   "Unlimited attendees and classes",
   "Your data stays on your device — always private",
   "Works offline, no accounts",
+];
+
+const plans = [
+  {
+    name: "Free Trial",
+    amt: "$0",
+    per: "for 7 days",
+    sub: "No card required.",
+    badge: "",
+    featured: false,
+  },
+  {
+    name: "Monthly",
+    amt: "$2.99",
+    per: "per month",
+    sub: "Cancel anytime.",
+    badge: "",
+    featured: false,
+  },
+  {
+    name: "Yearly",
+    amt: "$24.99",
+    per: "per year",
+    sub: "Save 30% versus monthly.",
+    badge: "Best value",
+    featured: true,
+  },
+  {
+    name: "Lifetime",
+    amt: "$39.99",
+    per: "one‑time",
+    sub: "Pay once. Yours to keep, forever.",
+    badge: "",
+    featured: false,
+  },
 ];
 
 const ICONS: Record<string, string> = {
@@ -49,14 +84,14 @@ const ucIcon = (k: string) => ICONS[k] || "";
 ---
 <Layout
   title="Matdo Check — Simple, reliable attendance check-in"
-  description="Matdo Check is a simple, reliable check-in and attendance app for tutoring and enrichment centers, Sunday schools, clubs, and camps. 30-day free trial, then a $59.99 one-time license. No subscription; data stays on your device."
+  description="Matdo Check is a simple, reliable check-in and attendance app for tutoring and enrichment centers, Sunday schools, clubs, and camps. 7-day free trial, then $2.99/month, $24.99/year, or a $39.99 lifetime license. Data stays on your device."
 >
   <!-- HERO -->
   <section class="hero">
     <div class="wrap hero-top">
       <div class="hero-copy">
         <h1 class="hero-title">Matdo Check</h1>
-        <p class="hero-sub">Simple. Reliable. Easy setup. No subscription.</p>
+        <p class="hero-sub">Simple. Reliable. Easy setup.</p>
         <p class="hero-lede">The calm way to check attendees in and out — for tutoring and enrichment centers, Sunday schools, clubs, and camps. On the tablet you already have.</p>
       </div>
       <div class="hero-actions">
@@ -156,17 +191,26 @@ const ucIcon = (k: string) => ICONS[k] || "";
     <div class="wrap">
       <div class="sec-head center reveal">
         <span class="eyebrow">Pricing</span>
-        <h2>One price. No surprises.</h2>
-        <p>Try it free for a month. If you love it, buy it once — it's yours to keep.</p>
+        <h2>Simple pricing. Your choice.</h2>
+        <p>Start with a free week. Then pick the plan that fits — subscribe, or pay once and keep it forever.</p>
       </div>
 
-      <div class="price-card reveal">
-        <span class="trial-pill">30-day free trial</span>
-        <div class="price">
-          <span class="amt">$59.99</span>
-          <span class="per">one&#8209;time license</span>
-        </div>
-        <p class="price-sub">Then it's yours. No subscription, no renewals, ever.</p>
+      <div class="price-grid reveal">
+        {plans.map((p) => (
+          <div class={"price-card" + (p.featured ? " featured" : "")}>
+            {p.badge && <span class="plan-badge">{p.badge}</span>}
+            <h3 class="plan-name">{p.name}</h3>
+            <div class="price">
+              <span class="amt">{p.amt}</span>
+              <span class="per">{p.per}</span>
+            </div>
+            <p class="price-sub">{p.sub}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="price-includes reveal">
+        <p class="includes-head">Every plan includes</p>
         <ul class="price-list">
           {priceIncludes.map((f) => (
             <li>
@@ -176,7 +220,7 @@ const ucIcon = (k: string) => ICONS[k] || "";
           ))}
         </ul>
         <StoreBadges class="price-badges" />
-        <p class="price-note">Start free — no card required. Buy once on the App Store or Google Play (coming soon).</p>
+        <p class="price-note">Start free — no card required. Available on the App Store or Google Play (coming soon).</p>
       </div>
     </div>
   </section>
@@ -289,16 +333,22 @@ const ucIcon = (k: string) => ICONS[k] || "";
   .uc-t { font-size: 0.95rem; font-weight: 600; color: var(--color-forest); line-height: 1.25; }
 
   /* ── Pricing ── */
-  .price-card { max-width: 540px; margin: 0 auto; background: #fff; border: 1px solid var(--color-line); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); padding: 40px 40px 34px; text-align: center; position: relative; }
-  .trial-pill { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-teal); background: rgb(79 209 197 / 0.16); padding: 0.5rem 1rem; border-radius: 999px; }
-  .price { display: flex; align-items: baseline; justify-content: center; gap: 0.6rem; margin-top: 1.2rem; }
-  .price .amt { font-family: var(--font-display); font-weight: 600; font-size: 4rem; line-height: 1; color: var(--color-ink); letter-spacing: -0.02em; }
-  .price .per { font-size: 1rem; color: #8b968f; font-weight: 500; }
-  .price-sub { color: #4a5854; margin-top: 0.6rem; }
-  .price-list { list-style: none; padding: 0; margin: 1.8rem 0; display: grid; gap: 0.7rem; text-align: left; max-width: 22rem; margin-inline: auto; }
+  .trial-pill { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-teal); background: rgb(79 209 197 / 0.16); padding: 0.5rem 1rem; border-radius: 999px; margin-top: 1.2rem; }
+  .price-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; align-items: stretch; margin: 0 auto; }
+  .price-card { background: #fff; border: 1px solid var(--color-line); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); padding: 30px 22px 28px; text-align: center; position: relative; display: flex; flex-direction: column; }
+  .price-card.featured { border-color: var(--color-teal); box-shadow: 0 0 0 2px var(--color-teal), var(--shadow-lg); }
+  .plan-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; background: var(--color-teal); padding: 0.34rem 0.9rem; border-radius: 999px; }
+  .plan-name { font-size: 1.05rem; font-weight: 700; color: var(--color-forest); margin: 0; letter-spacing: 0.01em; }
+  .price { display: flex; align-items: baseline; justify-content: center; gap: 0.5rem; margin-top: 0.9rem; flex-wrap: wrap; }
+  .price .amt { font-family: var(--font-display); font-weight: 600; font-size: 2.5rem; line-height: 1; color: var(--color-ink); letter-spacing: -0.02em; }
+  .price .per { font-size: 0.95rem; color: #8b968f; font-weight: 500; }
+  .price-sub { color: #4a5854; margin-top: 0.7rem; font-size: 0.95rem; }
+  .price-includes { max-width: 540px; margin: 32px auto 0; text-align: center; }
+  .includes-head { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #8b968f; }
+  .price-list { list-style: none; padding: 0; margin: 1.2rem 0 1.8rem; display: grid; gap: 0.7rem; text-align: left; max-width: 22rem; margin-inline: auto; }
   .price-list li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.98rem; color: var(--color-forest); }
   .price-list li svg { color: var(--color-teal); flex: none; margin-top: 2px; }
-  .price-card :global(.price-badges) { justify-content: center; margin-top: 0.5rem; }
+  .price-includes :global(.price-badges) { justify-content: center; margin-top: 0.5rem; }
   .price-note { font-size: 0.8rem; color: #8b968f; margin-top: 1.2rem; }
   .price-note + .price-note { margin-top: 0.5rem; }
   .price-link { color: var(--color-teal); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
@@ -308,9 +358,11 @@ const ucIcon = (k: string) => ICONS[k] || "";
     .hero-top { flex-direction: column; align-items: flex-start; gap: 26px; }
     .hero-actions { align-self: stretch; }
     .usecases { grid-template-columns: repeat(2, 1fr); }
+    .price-grid { grid-template-columns: repeat(2, 1fr); gap: 22px; max-width: 620px; }
   }
   @media (max-width: 620px) {
     .tut-grid { grid-template-columns: repeat(2, 1fr); }
+    .price-grid { grid-template-columns: 1fr; max-width: 420px; gap: 26px; }
   }
   @media (max-width: 400px) {
     .tut-grid { grid-template-columns: 1fr; }

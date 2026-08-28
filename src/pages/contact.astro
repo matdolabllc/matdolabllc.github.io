@@ -1,11 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-const EMAIL = "matdolabllc@gmail.com";
+const EMAIL = "matdo@matdolab.com";
 ---
 <Layout
   title="Contact — Matdo"
-  description="Get in touch with Matdo. Ask about Matdo Check, or just say hello — matdolabllc@gmail.com."
+  description="Get in touch with Matdo. Ask about Matdo Check, or just say hello — matdo@matdolab.com."
 >
   <section class="page-hero">
     <div class="wrap contact-grid">
@@ -31,7 +31,7 @@ const EMAIL = "matdolabllc@gmail.com";
             </div>
             <div>
               <div class="c-t">Company Location</div>
-              <div class="c-d">Lafayette, Indiana</div>
+              <div class="c-d">West Lafayette, Indiana</div>
             </div>
           </div>
         </div>
@@ -41,7 +41,7 @@ const EMAIL = "matdolabllc@gmail.com";
       <div class="reveal">
         <form id="contact-form" class="form" action="https://api.web3forms.com/submit" method="POST">
           <!-- Free form handling via Web3Forms. To activate: create a free key at
-               https://web3forms.com using matdolabllc@gmail.com, then paste it below. -->
+               https://web3forms.com using matdo@matdolab.com, then paste it below. -->
           <input type="hidden" name="access_key" value="3ea37273-765a-46e2-b105-9638e0d45c11" />
           <input type="hidden" name="subject" value="New inquiry from the Matdo website" />
           <input type="hidden" name="from_name" value="Matdo website" />
@@ -73,7 +73,7 @@ const EMAIL = "matdolabllc@gmail.com";
           </div>
           <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send message</button>
           <p class="form-status" id="form-status" role="status" hidden></p>
-          <p class="form-note">Messages go straight to matdolabllc@gmail.com. Free and serverless — powered by Web3Forms.</p>
+          <p class="form-note">Messages go straight to matdo@matdolab.com.</p>
         </form>
       </div>
     </div>
@@ -107,7 +107,7 @@ const EMAIL = "matdolabllc@gmail.com";
       }
     } catch {
       status.className = "form-status err";
-      status.textContent = "Sorry, that didn't send. Please email matdolabllc@gmail.com directly.";
+      status.textContent = "Sorry, that didn't send. Please email matdo@matdolab.com directly.";
     } finally {
       status.hidden = false;
       if (btn) { btn.disabled = false; btn.textContent = original; }
