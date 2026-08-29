@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1254" height="1254" viewBox="0 0 1254 1254" role="img" aria-labelledby="title description">
+  <title id="title">Matdo Check logo</title>
+  <desc id="description">Smooth D1 logo with a sage M, forest-green D-shaped pocket and wordmark, and a deep-teal checkmark. The background is transparent.</desc>
+
+  <!-- Smooth centerline construction preserves the selected PNG's full-length M. -->
+  <path id="m-mark"
+        d="M383 467 V275
+           C383 218 422 188 472 188
+           C522 188 557 220 557 275
+           V345
+           C557 397 584 432 626 432
+           C668 432 695 397 695 345
+           V275
+           C695 220 730 188 781 188
+           C833 188 867 218 867 275
+           V467"
+        fill="none"
+        stroke="#AFC1B7"
+        stroke-width="68"
+        stroke-linecap="butt"
+        stroke-linejoin="round"/>
+
+  <!-- D-shaped pocket: two continuous cubic contours, with no pixel-traced steps. -->
+  <path id="d-pocket"
+        d="M350 511 H901 V705
+           C901 842 808 935 680 935
+           H571
+           C443 935 350 842 350 705
+           Z
+           M417 583 V701
+           C417 800 481 866 572 866
+           H679
+           C770 866 833 800 833 701
+           V583 Z"
+        fill="#18463C"
+        fill-rule="evenodd"
+        clip-rule="evenodd"/>
+
+  <!-- A rounded open polyline gives the check genuinely smooth caps and joins. -->
+  <path id="checkmark"
+        d="M527 727 L607 807 L768 646"
+        fill="none"
+        stroke="#2DB7A3"
+        stroke-width="57"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  <!-- Live vector type avoids the stair-stepped raster outline in the prior draft. -->
+  <text id="wordmark"
+        x="196"
+        y="1099"
+        fill="#18463C"
+        font-family="Segoe UI, Arial, Helvetica, sans-serif"
+        font-size="137"
+        font-weight="600"
+        transform="translate(-9.5 0) scale(1.0457 1)">Matdo Check</text>
+</svg>

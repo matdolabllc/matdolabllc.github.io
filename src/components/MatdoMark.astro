@@ -1,0 +1,44 @@
+---
+/* The Matdo mark on its own, cropped from /logos/matdo.svg. Inlined rather than
+   loaded as an image so the pocket can flip to cream on the dark footer.
+   Shared by Logo.astro (header/footer wordmark) and the home hero title. */
+interface Props { class?: string; height?: string; }
+const { class: cls = "", height = "34px" } = Astro.props;
+---
+<svg
+  class={`matdo-mark ${cls}`}
+  style={`height:${height}`}
+  viewBox="349 154 552 782"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path
+    d="M383 467 V275
+       C383 218 422 188 472 188
+       C522 188 557 220 557 275
+       V345
+       C557 397 584 432 626 432
+       C668 432 695 397 695 345
+       V275
+       C695 220 730 188 781 188
+       C833 188 867 218 867 275
+       V467"
+    fill="none" stroke="var(--logo-m, #AFC1B7)" stroke-width="68"
+    stroke-linecap="butt" stroke-linejoin="round" />
+  <path
+    d="M350 511 H901 V705
+       C901 842 808 935 680 935
+       H571
+       C443 935 350 842 350 705
+       Z
+       M417 583 V701
+       C417 800 481 866 572 866
+       H679
+       C770 866 833 800 833 701
+       V583 Z"
+    fill="var(--logo-pocket, #18463C)" fill-rule="evenodd" clip-rule="evenodd" />
+</svg>
+
+<style>
+  .matdo-mark { display: block; flex: none; width: auto; }
+</style>

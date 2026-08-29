@@ -23,6 +23,29 @@ import Layout from "../layouts/Layout.astro";
     </div>
   </section>
 
+  <!-- THE LOGO -->
+  <section class="section-pad band-cream2">
+    <div class="wrap logo-sec reveal">
+      <span class="eyebrow">The logo</span>
+      <h2>What does the logo mean?</h2>
+      <p>The Matdo logo is built from the letters <strong>M</strong> and <strong>D</strong>, stacked vertically into a mark that's simple, modern, and quietly playful. The upper M reads as two small hands reaching out; the lower D opens into a pocket. Together they suggest a little assistant, always ready with whatever tool the moment calls for. Recognize the pocket? It's a nod to a certain blue robot cat — and to the same promise: reach in, and the right thing is already there.</p>
+      <div class="logo-row">
+        <figure class="logo-card">
+          <img src="/logos/matdo.svg" alt="Matdo logo" width="140" height="140" loading="lazy" />
+          <figcaption>Matdo</figcaption>
+        </figure>
+        <figure class="logo-card">
+          <img src="/logos/matdo-check.svg" alt="Matdo Check logo" width="140" height="140" loading="lazy" />
+          <figcaption>Matdo Check</figcaption>
+        </figure>
+        <figure class="logo-card">
+          <img src="/logos/matdo-grade.svg" alt="Matdo Grade logo" width="140" height="140" loading="lazy" />
+          <figcaption>Matdo Grade</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
   <!-- THE NAME -->
   <section class="section-pad">
     <div class="wrap name-sec">
@@ -46,6 +69,21 @@ import Layout from "../layouts/Layout.astro";
   .page-hero { padding: 150px 0 60px; }
   .page-hero h1 { font-size: clamp(2.4rem, 5vw, 3.8rem); margin: 1rem 0 1.1rem; }
   .page-hero .lede { font-size: 1.18rem; color: #3d4b47; max-width: 40rem; }
+
+  /* The logo */
+  .logo-sec { max-width: 780px; margin: 0 auto; text-align: center; }
+  .logo-sec h2 { font-size: clamp(1.9rem, 3.6vw, 2.7rem); margin: 0.8rem 0 1rem; }
+  .logo-sec p { color: #3d4b47; font-size: 1.08rem; line-height: 1.7; text-align: left; }
+  .logo-sec strong { color: var(--color-forest); font-weight: 600; }
+  .logo-row { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; margin-top: 2.4rem; }
+  .logo-card {
+    background: #fff; border-radius: var(--radius-lg); padding: 28px 24px 20px;
+    box-shadow: var(--shadow-lg); display: flex; flex-direction: column; align-items: center;
+    gap: 12px; width: 200px; margin: 0; transition: transform 0.2s;
+  }
+  .logo-card:hover { transform: translateY(-6px); }
+  .logo-card img { width: 100px; height: 100px; }
+  .logo-card figcaption { font-family: var(--font-display); font-weight: 600; color: var(--color-forest); font-size: 1.05rem; }
 
   /* The name */
   .name-sec { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 56px; align-items: center; }

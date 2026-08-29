@@ -1,11 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#1f6f63"/>
-      <stop offset="1" stop-color="#7c9a6f"/>
-    </linearGradient>
-  </defs>
-  <rect width="64" height="64" rx="16" fill="url(#g)"/>
-  <text x="50%" y="52%" dominant-baseline="central" text-anchor="middle"
-        font-family="Georgia, 'Times New Roman', serif" font-size="38" font-weight="700" fill="#ffffff">M</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Matdo">
+  <rect width="64" height="64" rx="14" fill="#18463c"/>
+  <!-- Matdo mark from /logos/matdo.svg, cropped to the mark and scaled into the tile. -->
+  <g transform="translate(17.9 12) scale(0.05115) translate(-349 -154)">
+    <path d="M383 467 V275 C383 218 422 188 472 188 C522 188 557 220 557 275 V345 C557 397 584 432 626 432 C668 432 695 397 695 345 V275 C695 220 730 188 781 188 C833 188 867 218 867 275 V467"
+          fill="none" stroke="#afc1b7" stroke-width="68" stroke-linecap="butt" stroke-linejoin="round"/>
+    <path d="M350 511 H901 V705 C901 842 808 935 680 935 H571 C443 935 350 842 350 705 Z M417 583 V701 C417 800 481 866 572 866 H679 C770 866 833 800 833 701 V583 Z"
+          fill="#faf8f1" fill-rule="evenodd" clip-rule="evenodd"/>
+  </g>
 </svg>

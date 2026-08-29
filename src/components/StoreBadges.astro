@@ -1,6 +1,8 @@
 ---
 // App Store + Google Play badges. Inactive placeholders for now — when the apps
 // ship, swap each <span class="store-badge"> for an <a href="…"> and drop `is-soon`.
+// Google Play also carries `is-muted` (light gray, gray ribbon) because its
+// availability date is unknown; drop that class once Android is scheduled.
 // (Before launch, replace these with the official Apple/Google badge artwork.)
 interface Props { class?: string; dark?: boolean; vertical?: boolean; }
 const { class: cls = "", dark = false, vertical = false } = Astro.props;
@@ -13,12 +15,12 @@ const { class: cls = "", dark = false, vertical = false } = Astro.props;
     <span class="sb-text"><small>Download on the</small><strong>App Store</strong></span>
   </span>
 
-  <span class="store-badge is-soon" role="link" aria-disabled="true" aria-label="Get it on Google Play — coming soon">
+  <span class="store-badge is-soon is-muted" role="link" aria-disabled="true" aria-label="Get it on Google Play — not yet available">
     <svg class="sb-logo" viewBox="0 0 512 512" aria-hidden="true">
-      <path fill="#00d2ff" d="M63.9 34.7C58 41 54.6 50.6 54.6 63.1v385.8c0 12.5 3.4 22.1 9.5 28.3l1.3 1.2 216.1-216.1v-5.1L65.2 33.4z"/>
-      <path fill="#00e676" d="M352.9 328.6l-72-72v-5.1l72-72 1.6.9 85.3 48.5c24.4 13.8 24.4 36.5 0 50.4l-85.3 48.5z"/>
-      <path fill="#ff3a44" d="M354.5 327.7 280.9 254 63.9 471c8 8.5 21.3 9.6 36.3 1.1l254.3-144.4z"/>
-      <path fill="#ffc800" d="M354.5 180.3 100.2 35.9C85.2 27.4 71.9 28.5 63.9 37l217 217z"/>
+      <path fill="#c9cfcd" d="M63.9 34.7C58 41 54.6 50.6 54.6 63.1v385.8c0 12.5 3.4 22.1 9.5 28.3l1.3 1.2 216.1-216.1v-5.1L65.2 33.4z"/>
+      <path fill="#b4bcb9" d="M352.9 328.6l-72-72v-5.1l72-72 1.6.9 85.3 48.5c24.4 13.8 24.4 36.5 0 50.4l-85.3 48.5z"/>
+      <path fill="#a6afac" d="M354.5 327.7 280.9 254 63.9 471c8 8.5 21.3 9.6 36.3 1.1l254.3-144.4z"/>
+      <path fill="#d5dad8" d="M354.5 180.3 100.2 35.9C85.2 27.4 71.9 28.5 63.9 37l217 217z"/>
     </svg>
     <span class="sb-text"><small>Get it on</small><strong>Google Play</strong></span>
   </span>
@@ -35,6 +37,12 @@ const { class: cls = "", dark = false, vertical = false } = Astro.props;
     position: relative;
   }
   .store-badge.is-soon { opacity: 0.85; cursor: not-allowed; }
+  /* Google Play: availability unknown — rendered light gray, no ribbon. */
+  .store-badge.is-muted {
+    background: #eceeed; color: #79837f;
+    border-color: rgba(0,0,0,.07); cursor: not-allowed;
+  }
+  .store-badge.is-muted .sb-text small { opacity: 0.85; }
   .sb-logo { width: 24px; height: 27px; flex: none; }
   .sb-text { display: flex; flex-direction: column; line-height: 1.12; text-align: left; }
   .sb-text small { font-size: 0.66rem; font-weight: 500; letter-spacing: 0.02em; opacity: 0.9; }
@@ -47,6 +55,9 @@ const { class: cls = "", dark = false, vertical = false } = Astro.props;
     color: #08130d; background: var(--color-mint);
     padding: 2px 8px; border-radius: 999px; box-shadow: var(--shadow-sm);
   }
+  /* Gray ribbon to match the muted Google Play badge. */
+  .store-badge.is-muted::after { color: #5f6a66; background: #d7dbd9; box-shadow: none; }
   .on-dark .store-badge { background: #fff; color: var(--color-ink); border-color: rgba(0,0,0,.08); }
   .on-dark .sb-logo { color: var(--color-ink); }
+  .on-dark .store-badge.is-muted { background: rgba(255,255,255,.55); color: #79837f; }
 </style>

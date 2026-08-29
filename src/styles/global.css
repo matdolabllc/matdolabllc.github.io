@@ -105,12 +105,9 @@ button:focus-visible {
 
 /* ----- Brand wordmark ----- */
 .brand { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--font-display); font-weight: 600; font-size: 1.3rem; color: var(--color-forest); }
-.brand .mark {
-  width: 34px; height: 34px; border-radius: 11px; flex: none;
-  background: linear-gradient(135deg, var(--color-teal), var(--color-sage));
-  display: grid; place-items: center; color: #fff; font-size: 1.05rem;
-  box-shadow: 0 4px 12px rgb(31 111 99 / 0.3);
-}
+/* Logo mark colours — see Logo.astro. The footer flips the pocket to cream so
+   the D reads as an outline against the forest background. */
+:root { --logo-m: #afc1b7; --logo-pocket: #18463c; }
 
 /* ----- Pills ----- */
 .pills { display: flex; flex-wrap: wrap; gap: 0.7rem; }

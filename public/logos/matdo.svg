@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1254" height="1254" viewBox="0 0 1254 1254" role="img" aria-labelledby="title description">
+  <title id="title">Matdo company logo</title>
+  <desc id="description">The Matdo company master logo: a sage M above an empty forest-green D-shaped pocket, with the Matdo wordmark. The background is transparent.</desc>
+
+  <!-- Fixed Matdo M: identical geometry to the Matdo Check master. -->
+  <path id="m-mark"
+        d="M383 467 V275
+           C383 218 422 188 472 188
+           C522 188 557 220 557 275
+           V345
+           C557 397 584 432 626 432
+           C668 432 695 397 695 345
+           V275
+           C695 220 730 188 781 188
+           C833 188 867 218 867 275
+           V467"
+        fill="none"
+        stroke="#AFC1B7"
+        stroke-width="68"
+        stroke-linecap="butt"
+        stroke-linejoin="round"/>
+
+  <!-- Empty D-shaped pocket: the company's reusable product container. -->
+  <path id="d-pocket"
+        d="M350 511 H901 V705
+           C901 842 808 935 680 935
+           H571
+           C443 935 350 842 350 705
+           Z
+           M417 583 V701
+           C417 800 481 866 572 866
+           H679
+           C770 866 833 800 833 701
+           V583 Z"
+        fill="#18463C"
+        fill-rule="evenodd"
+        clip-rule="evenodd"/>
+
+  <text id="wordmark"
+        x="626"
+        y="1100"
+        text-anchor="middle"
+        fill="#18463C"
+        font-family="Segoe UI, Arial, Helvetica, sans-serif"
+        font-size="137"
+        font-weight="600">Matdo</text>
+</svg>

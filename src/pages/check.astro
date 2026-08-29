@@ -2,6 +2,11 @@
 import Layout from "../layouts/Layout.astro";
 import StoreBadges from "../components/StoreBadges.astro";
 
+// The tutorial clips keep the same filenames every time they're re-cut, so a
+// returning visitor would be served the previous recording from cache. Bump
+// this whenever the files under public/demo/tutorials/ are replaced.
+const TUTORIAL_VERSION = "2026082909";
+
 // Flip cards: front cartoon → back short how-to video of the real app.
 const familyFlow = [
   { cartoon: "check-in",  label: "Check in",       video: "check-in" },
@@ -90,6 +95,7 @@ const ucIcon = (k: string) => ICONS[k] || "";
   <section class="hero">
     <div class="wrap hero-top">
       <div class="hero-copy">
+        <img class="hero-mark" src="/logos/matdo-check-mark.png" width="552" height="782" alt="" />
         <h1 class="hero-title">Matdo Check</h1>
         <p class="hero-sub">Simple. Reliable. Easy setup.</p>
         <p class="hero-lede">The calm way to check attendees in and out — for tutoring and enrichment centers, Sunday schools, clubs, and camps. On the tablet you already have.</p>
@@ -102,12 +108,13 @@ const ucIcon = (k: string) => ICONS[k] || "";
       <figure class="video-frame reveal">
         <video
           class="demo-video"
-          poster="/demo/matdo-check-demo-poster.jpg"
-          autoplay muted loop playsinline preload="auto"
-          aria-label="Short animated overview of Matdo Check: an attendee checks in, does their work, and checks out; then the instructor dashboard and one-tap CSV export.">
-          <source src="/demo/matdo-check-demo.webm" type="video/webm" />
-          <source src="/demo/matdo-check-demo.mp4" type="video/mp4" />
-          Your browser can't play embedded video — <a href="/demo/matdo-check-demo.mp4">watch it here</a>.
+          poster="/demo/matdo-check-film-poster.jpg"
+          controls controlslist="nodownload"
+          autoplay muted playsinline preload="auto"
+          aria-label="Short film about Matdo Check: an attendee taps in, does the work, and taps out; then the live attendance dashboard, correcting a missed check-out, and one-tap CSV export.">
+          <source src="/demo/matdo-check-film.webm" type="video/webm" />
+          <source src="/demo/matdo-check-film.mp4" type="video/mp4" />
+          Your browser can't play embedded video — <a href="/demo/matdo-check-film.mp4">watch it here</a>.
         </video>
       </figure>
     </div>
@@ -157,13 +164,13 @@ const ucIcon = (k: string) => ICONS[k] || "";
   </section>
 
   <!-- Tutorial lightbox -->
-  <div id="tut-lb" class="tut-lb" hidden>
+  <div id="tut-lb" class="tut-lb" data-v={TUTORIAL_VERSION} hidden>
     <div class="tut-lb-scrim" data-close></div>
     <figure class="tut-lb-panel" role="dialog" aria-modal="true" aria-labelledby="tut-lb-title">
       <button class="tut-lb-close" data-close aria-label="Close tutorial">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" width="20" height="20"><path d="M18 6 6 18M6 6l12 12"/></svg>
       </button>
-      <video id="tut-lb-video" class="tut-lb-video" muted loop playsinline></video>
+      <video id="tut-lb-video" class="tut-lb-video" controls controlslist="nodownload" muted loop playsinline></video>
       <figcaption id="tut-lb-title" class="tut-lb-title"></figcaption>
     </figure>
   </div>
@@ -227,28 +234,42 @@ const ucIcon = (k: string) => ICONS[k] || "";
 </Layout>
 
 <script>
-  // Tutorial lightbox: tap a cartoon → big, slowed how-to video. Tap it (or the
-  // backdrop / ✕ / Esc) to close.
+  // Tutorial lightbox: tap a cartoon → big, slowed how-to video with its own
+  // controls. The backdrop / ✕ / Esc close it (the video itself doesn't, so the
+  // play/scrub bar stays usable).
   const RATE = 0.7; // play slower so it's easy to follow
   const lb = document.getElementById("tut-lb");
   const lbVideo = document.getElementById("tut-lb-video") as HTMLVideoElement | null;
   const lbTitle = document.getElementById("tut-lb-title");
 
+  let current = "";
+  const verParam = () => (lb && lb.dataset.v ? `?v=${lb.dataset.v}` : "");
+
   function keepRate() { if (lbVideo) lbVideo.playbackRate = RATE; }
+
+  // play() fired straight after load() gets aborted by the pending load, so also
+  // start once the data is actually there.
+  function playNow() {
+    if (!lbVideo || !lb || lb.hidden) return;
+    keepRate();
+    lbVideo.play().then(keepRate).catch(() => {});
+  }
 
   function openTut(video: string, title: string) {
     if (!lb || !lbVideo) return;
+    current = video;
+    lbVideo.removeAttribute("src");
     lbVideo.innerHTML = "";
-    const webm = document.createElement("source"); webm.src = `/demo/tutorials/${video}.webm`; webm.type = "video/webm";
-    const mp4 = document.createElement("source"); mp4.src = `/demo/tutorials/${video}.mp4`; mp4.type = "video/mp4";
+    const v = verParam();
+    const webm = document.createElement("source"); webm.src = `/demo/tutorials/${video}.webm${v}`; webm.type = "video/webm";
+    const mp4 = document.createElement("source"); mp4.src = `/demo/tutorials/${video}.mp4${v}`; mp4.type = "video/mp4";
     lbVideo.append(webm, mp4);
     if (lbTitle) lbTitle.textContent = title;
     lb.hidden = false;
     document.body.style.overflow = "hidden";
     lbVideo.load();
     lbVideo.currentTime = 0;
-    keepRate();
-    lbVideo.play().then(keepRate).catch(() => {});
+    playNow();
   }
 
   function closeTut() {
@@ -258,9 +279,21 @@ const ucIcon = (k: string) => ICONS[k] || "";
     document.body.style.overflow = "";
   }
 
-  lbVideo?.addEventListener("loadeddata", keepRate);
+  // A <source> list only falls back when the browser rejects the *type*. If it
+  // accepts the webm and then fails to decode it, playback dies silently — so
+  // catch that and retry on the mp4.
+  lbVideo?.addEventListener("error", () => {
+    if (!lbVideo || !current || lbVideo.dataset.fallback === current) return;
+    lbVideo.dataset.fallback = current;
+    lbVideo.innerHTML = "";
+    lbVideo.src = `/demo/tutorials/${current}.mp4${verParam()}`;
+    lbVideo.load();
+    playNow();
+  }, true);
+
+  lbVideo?.addEventListener("loadeddata", playNow);
+  lbVideo?.addEventListener("canplay", playNow);
   lbVideo?.addEventListener("play", keepRate);
-  lbVideo?.addEventListener("click", closeTut);
 
   document.querySelectorAll<HTMLButtonElement>(".tut-card").forEach((card) => {
     card.addEventListener("click", () => openTut(card.dataset.video || "", card.dataset.title || ""));
@@ -268,14 +301,44 @@ const ucIcon = (k: string) => ICONS[k] || "";
   lb?.querySelectorAll<HTMLElement>("[data-close]").forEach((el) => el.addEventListener("click", closeTut));
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && lb && !lb.hidden) closeTut(); });
 
-  // Nudge the hero video to autoplay (muted) and pause when off-screen.
+  // Nudge the hero video to autoplay (muted) and pause when off-screen — but
+  // once someone works the controls, their choice wins: we stop auto-resuming.
   const heroVideo = document.querySelector<HTMLVideoElement>(".demo-video");
   if (heroVideo) {
-    const play = () => heroVideo.play().catch(() => {});
+    let userPaused = false;
+    let auto = false;      // true while *we* are the ones pausing
+    let inView = true;
+
+    const play = () => {
+      if (userPaused || !inView || heroVideo.ended) return;
+      heroVideo.play().catch(() => {});
+    };
+    const autoPause = () => {
+      if (heroVideo.paused) return;
+      auto = true;
+      heroVideo.pause();
+    };
+
+    // "pause" lands a tick later than pause(), so the flag is cleared here — by
+    // the handler that consumes it — rather than straight after the call. A
+    // browser pausing us because the tab went to the background isn't a choice
+    // the visitor made either, so that doesn't count as a manual pause.
+    heroVideo.addEventListener("pause", () => {
+      if (auto) auto = false;
+      else if (!document.hidden) userPaused = true;
+    });
+    heroVideo.addEventListener("play", () => { userPaused = false; });
+    document.addEventListener("visibilitychange", () => { if (!document.hidden) play(); });
+
     play();
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(
-        (entries) => entries.forEach((e) => (e.isIntersecting ? play() : heroVideo.pause())),
+        (entries) =>
+          entries.forEach((e) => {
+            inView = e.isIntersecting;
+            if (inView) play();
+            else autoPause();
+          }),
         { threshold: 0.25 },
       ).observe(heroVideo);
     }
@@ -287,6 +350,8 @@ const ucIcon = (k: string) => ICONS[k] || "";
   .hero { padding: 140px 0 60px; }
   .hero-top { display: flex; align-items: center; justify-content: space-between; gap: 48px; }
   .hero-copy { text-align: left; }
+  /* Product mark sits above the title so the two together read as the lockup */
+  .hero-mark { display: block; height: 96px; width: auto; margin-bottom: 1.1rem; }
   .hero-actions { flex: none; }
   /* stack the two download badges one on top of the other */
   .hero-actions :global(.store-badges) { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 14px; }
@@ -317,7 +382,8 @@ const ucIcon = (k: string) => ICONS[k] || "";
   .tut-lb[hidden] { display: none; }
   .tut-lb-scrim { position: absolute; inset: 0; background: rgb(18 28 25 / 0.62); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); animation: lbFade 0.25s ease; }
   .tut-lb-panel { position: relative; z-index: 1; margin: 0; display: flex; flex-direction: column; align-items: center; gap: 14px; animation: lbPop 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
-  .tut-lb-video { display: block; width: min(760px, 92vw); height: auto; border-radius: 16px; box-shadow: 0 30px 80px rgb(0 0 0 / 0.4); border: 1px solid rgb(255 255 255 / 0.12); background: #0e1f1b; cursor: pointer; }
+  /* Tutorials are 4:3 iPad captures — cap by height too so the panel always fits the viewport */
+  .tut-lb-video { display: block; aspect-ratio: 4 / 3; width: min(760px, 92vw, 72vh * 4 / 3); height: auto; border-radius: 16px; box-shadow: 0 30px 80px rgb(0 0 0 / 0.4); border: 1px solid rgb(255 255 255 / 0.12); background: #0e1f1b; }
   .tut-lb-title { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem; color: #fff; text-align: center; }
   .tut-lb-close { position: absolute; top: -14px; right: -14px; width: 40px; height: 40px; border-radius: 50%; border: none; background: #fff; color: var(--color-ink); display: grid; place-items: center; cursor: pointer; box-shadow: var(--shadow-md); transition: transform 0.15s ease; }
   .tut-lb-close:hover { transform: scale(1.08); }
@@ -355,6 +421,7 @@ const ucIcon = (k: string) => ICONS[k] || "";
 
   @media (max-width: 900px) {
     .hero { padding: 116px 0 44px; }
+    .hero-mark { height: 74px; margin-bottom: 0.9rem; }
     .hero-top { flex-direction: column; align-items: flex-start; gap: 26px; }
     .hero-actions { align-self: stretch; }
     .usecases { grid-template-columns: repeat(2, 1fr); }

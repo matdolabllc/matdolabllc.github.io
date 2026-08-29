@@ -1,7 +1,11 @@
 ---
+import MatdoMark from "./MatdoMark.astro";
 interface Props { class?: string; }
 const { class: cls = "" } = Astro.props;
 ---
 <a class={`brand ${cls}`} href="/" aria-label="Matdo — home">
-  <span class="mark">M</span> Matdo
+  {/* The wordmark is set in the site's own face rather than the logo file's
+      live Segoe UI text. */}
+  <MatdoMark height="34px" />
+  Matdo
 </a>

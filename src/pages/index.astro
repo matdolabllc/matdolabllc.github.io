@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import MatdoMark from "../components/MatdoMark.astro";
 
 const features = [
   { t: "Simple", d: "Anyone can use it on day one. No training, no manual.", icon: "smile" },
@@ -25,8 +26,7 @@ const icon = (k: string) => ICONS[k] || "";
   <!-- HERO -->
   <section class="hero">
     <div class="wrap">
-      <p class="hero-eyebrow">Matdo</p>
-      <h1 class="hero-title">Less Admin. More Teaching.</h1>
+      <h1 class="hero-title"><span class="hero-logo"><MatdoMark height="1em" /></span>Less Admin. More Teaching.</h1>
       <p class="hero-sub">Simple, reliable, affordable tools for educators.</p>
     </div>
   </section>
@@ -35,34 +35,57 @@ const icon = (k: string) => ICONS[k] || "";
   <section class="section-pad apps-sec">
     <div class="wrap">
       <div class="apps">
-        <!-- Matdo Check (available) -->
-        <article class="app-card reveal">
-          <a class="app-shot" href="/check" aria-label="Explore Matdo Check">
-            <img src="/demo/screens/screen-home.webp" width="1600" height="1000" alt="Matdo Check — the check-in screen" />
-          </a>
-          <div class="app-meta">
-            <div>
-              <h3>Matdo Check</h3>
-              <p>Check-in &amp; attendance</p>
+        <!-- Matdo Check (available) — logo on the front, a peek at the app on the back -->
+        <a class="flip-card reveal" href="/check" aria-label="Matdo Check — check-in and attendance">
+          <div class="flip-inner">
+            <div class="flip-face flip-front">
+              <img class="flip-logo" src="/logos/matdo-check.png" width="1254" height="1254" alt="" />
+              <p class="flip-tag">Check-in &amp; attendance</p>
             </div>
-            <a class="app-link" href="/check">Explore →</a>
+            <div class="flip-face flip-back">
+              <div class="flip-shot">
+                <img src="/demo/screens/screen-home.webp" width="1600" height="1000" alt="" />
+              </div>
+              <div class="app-meta">
+                <div class="app-id">
+                  <img class="app-icon" src="/logos/matdo-check-mark.png" width="552" height="782" alt="" />
+                  <div>
+                    <h3>Matdo Check</h3>
+                    <p>Check-in &amp; attendance</p>
+                  </div>
+                </div>
+                <span class="app-link">Explore →</span>
+              </div>
+            </div>
           </div>
-        </article>
+        </a>
 
-        <!-- Matdo Grade (coming soon) -->
-        <article class="app-card reveal is-soon">
-          <div class="app-shot">
-            <img src="/demo/screens/screen-grade.webp" width="1600" height="1000" loading="lazy" alt="Matdo Grade — AI homework grading" />
-            <span class="soon-ribbon">Coming soon</span>
-          </div>
-          <div class="app-meta">
-            <div>
-              <h3>Matdo Grade</h3>
-              <p>AI homework grading</p>
+        <!-- Matdo Grade (coming soon) — flips like its sibling, but nothing to open yet -->
+        <div class="flip-card reveal is-soon">
+          <div class="flip-inner">
+            <div class="flip-face flip-front">
+              <img class="flip-logo" src="/logos/matdo-grade.png" width="1254" height="1254" loading="lazy" alt="Matdo Grade" />
+              <p class="flip-tag">AI homework grading</p>
+              <span class="soon-ribbon">Coming soon</span>
             </div>
-            <span class="app-link disabled" aria-disabled="true">Coming soon</span>
+            <div class="flip-face flip-back">
+              <div class="flip-shot">
+                <img src="/demo/screens/screen-grade.webp" width="1600" height="1000" loading="lazy" alt="Matdo Grade — AI homework grading" />
+                <span class="soon-ribbon">Coming soon</span>
+              </div>
+              <div class="app-meta">
+                <div class="app-id">
+                  <img class="app-icon" src="/logos/matdo-grade-mark.png" width="552" height="782" loading="lazy" alt="" />
+                  <div>
+                    <h3>Matdo Grade</h3>
+                    <p>AI homework grading</p>
+                  </div>
+                </div>
+                <span class="app-link disabled" aria-disabled="true">Coming soon</span>
+              </div>
+            </div>
           </div>
-        </article>
+        </div>
       </div>
     </div>
   </section>
@@ -97,28 +120,110 @@ const icon = (k: string) => ICONS[k] || "";
   </section>
 </Layout>
 
+<script>
+  // Touch devices never get a hover, so the front of each card would be all
+  // anyone ever sees. Flip them once as they scroll into view instead — a tap
+  // still just follows the link.
+  if (window.matchMedia("(hover: none)").matches && "IntersectionObserver" in window) {
+    const cards = document.querySelectorAll<HTMLElement>(".flip-card");
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          const el = e.target as HTMLElement;
+          io.unobserve(el);
+          window.setTimeout(() => el.classList.add("is-flipped"), 550);
+        }
+      },
+      { threshold: 0.45 },
+    );
+    cards.forEach((c) => io.observe(c));
+  }
+</script>
+
 <style>
   /* Hero */
   .hero { padding: 160px 0 40px; text-align: center; }
-  .hero-eyebrow { font-family: var(--font-sans); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--color-teal); }
-  .hero-title { font-size: clamp(2.2rem, 6vw, 4.4rem); line-height: 1.05; letter-spacing: -0.03em; margin-top: 0.8rem; }
+  .hero-title { font-size: clamp(2.2rem, 6vw, 4.4rem); line-height: 1.15; letter-spacing: -0.03em; }
+  /* The mark rides on the first line of the title; -0.12em drops it from the
+     text baseline onto the visual baseline of the pocket. */
+  .hero-logo { display: inline-block; vertical-align: -0.12em; margin-right: 0.3em; }
   .hero-sub { font-size: 1.2rem; color: #3d4b47; max-width: 40rem; margin: 1.2rem auto 0; }
 
-  /* Section 1 — apps */
+  /* Section 1 — apps: two flip cards, product logo out front */
   .apps-sec { padding-top: 3rem; }
   .apps { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; }
-  .app-card { background: #fff; border: 1px solid var(--color-line); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); transition: transform 0.3s ease, box-shadow 0.3s ease; }
-  .app-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-  .app-shot { display: block; position: relative; background: var(--color-cream2); border-bottom: 1px solid var(--color-line); }
-  .app-shot img { display: block; width: 100%; height: auto; }
-  .app-card.is-soon .app-shot img { filter: saturate(0.92); }
+
+  .flip-card { display: block; perspective: 1600px; }
+  .flip-inner {
+    position: relative;
+    aspect-ratio: 5 / 4;
+    transform-style: preserve-3d;
+    transition: transform 0.75s cubic-bezier(0.2, 0.72, 0.24, 1);
+  }
+  .flip-card:hover .flip-inner,
+  .flip-card:focus-visible .flip-inner,
+  .flip-card.is-flipped .flip-inner { transform: rotateY(180deg); }
+
+  .flip-face {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  .flip-card:hover .flip-face,
+  .flip-card:focus-visible .flip-face,
+  .flip-card.is-flipped .flip-face { box-shadow: var(--shadow-lg); }
+
+  /* Front — the product logo, centred. No padding on the face itself, so the
+     ribbon can anchor to the card's own corner. */
+  .flip-front { align-items: center; justify-content: center; text-align: center; background: radial-gradient(120% 90% at 50% 8%, #fff 0%, var(--color-cream) 100%); }
+  .flip-logo { display: block; width: min(66%, 300px); height: auto; }
+  .flip-tag { color: #4a5854; font-size: 1rem; padding: 0 8%; }
+  .is-soon .flip-logo { opacity: 0.78; }
+
+  /* Back — a look at the app itself */
+  .flip-back { transform: rotateY(180deg); }
+  .flip-shot { position: relative; flex: 1; min-height: 0; background: var(--color-cream2); border-bottom: 1px solid var(--color-line); }
+  .flip-shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
+  .is-soon .flip-shot img { filter: saturate(0.92); }
+
   .soon-ribbon { position: absolute; top: 16px; right: 16px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #08130d; background: var(--color-gold); padding: 6px 12px; border-radius: 999px; box-shadow: var(--shadow-sm); }
-  .app-meta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 22px 26px; }
-  .app-meta h3 { font-size: 1.5rem; }
-  .app-meta p { color: #4a5854; font-size: 0.98rem; margin-top: 2px; }
-  .app-link { font-weight: 600; color: var(--color-teal); white-space: nowrap; transition: gap 0.2s; }
-  .app-link:hover { text-decoration: underline; text-underline-offset: 3px; }
-  .app-link.disabled { color: #9aa39d; cursor: default; }
+  .app-meta { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 18px 24px; }
+  .app-id { display: flex; align-items: center; gap: 14px; }
+  .app-icon { flex: none; height: 46px; width: auto; }
+  .is-soon .app-icon { opacity: 0.65; }
+  .app-meta h3 { font-size: 1.4rem; }
+  .app-meta p { color: #4a5854; font-size: 0.95rem; margin-top: 2px; }
+  .app-link { font-weight: 600; color: var(--color-teal); white-space: nowrap; }
+  .flip-card:hover .app-link:not(.disabled) { text-decoration: underline; text-underline-offset: 3px; }
+  .app-link.disabled { color: #9aa39d; }
+
+  /* No hover to flip with: a card flips once as it scrolls into view (see the
+     script above), and a tap still goes straight to the product page. */
+  @media (hover: none) {
+    .flip-inner { transition-duration: 0.9s; }
+  }
+
+  /* Reduced motion: cross-fade the faces instead of spinning the card. */
+  @media (prefers-reduced-motion: reduce) {
+    .flip-inner { transition: none; transform: none !important; }
+    .flip-face { backface-visibility: visible; transition: opacity 0.25s linear; }
+    .flip-back { transform: none; opacity: 0; }
+    .flip-card:hover .flip-front,
+    .flip-card:focus-visible .flip-front,
+    .flip-card.is-flipped .flip-front { opacity: 0; }
+    .flip-card:hover .flip-back,
+    .flip-card:focus-visible .flip-back,
+    .flip-card.is-flipped .flip-back { opacity: 1; }
+  }
 
   /* Section 2 — why */
   .why { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
@@ -143,5 +248,15 @@ const icon = (k: string) => ICONS[k] || "";
   }
   @media (max-width: 520px) {
     .why { grid-template-columns: 1fr; }
+    /* A phone-width card is short, and the two faces share its height — so
+       trim the meta strip to one line and leave the screenshot some room. */
+    .flip-inner { aspect-ratio: 4 / 3; }
+    .flip-logo { width: min(54%, 190px); }
+    .flip-tag { font-size: 0.92rem; }
+    .app-meta { padding: 12px 18px; }
+    .app-icon { height: 34px; }
+    .app-meta h3 { font-size: 1.15rem; }
+    .app-meta p { display: none; }
+    .app-link { font-size: 0.92rem; }
   }
 </style>
