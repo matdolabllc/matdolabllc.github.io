@@ -1,0 +1,611 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// LEGAL DOCUMENT — treat edits with care.
+//
+// This page is the web version of the in-app Terms of Use at
+// matdo-check/App/Settings/PrivacyView.swift (struct TermsOfUseView). App Review
+// compares the listing, the website, and the binary; a mismatch is a Guideline
+// 5.1.1 problem. The in-app text is currently thinner than this page and dated
+// 30 July 2026 — bring it into line before submitting 1.0.
+//
+// These Terms SUPPLEMENT Apple's Standard EULA, which is the licence selected in
+// App Store Connect (App Information > License Agreement). They do not replace
+// it. Section 5 states the precedence and carries the Apple third-party
+// beneficiary clauses; do not reword it without re-reading Schedule 1 of the
+// Apple Developer Program Licence Agreement.
+//
+// TODO (owner): the commercial terms in sections 11-14 must match the SHIPPED
+// binary. As of writing, LicenseController is still single-product and its
+// paywall flag is off. Re-read section 11 against the built app before deploy.
+//
+// DECIDED (owner, 30 Aug 2026): GOVERNING_STATE is Indiana. Confirmed.
+//
+// DECIDED (owner, 30 Aug 2026): the section 19 cap is "greatest of trailing 12
+// months / total ever paid / $100". The $100 floor replaced $25, which was low
+// enough to be argued as a nominal (illusory) remedy — and did no work anyway,
+// since a Yearly subscriber pays $24.99. The "total ever paid" limb exists for
+// Lifetime buyers: under a trailing-12-months test alone their cap decayed to
+// the floor a year after purchase, which is both unintended and bad optics.
+// The consequential-loss exclusion in the FIRST paragraph of section 19 carries
+// far more weight than this number — do not trade it away.
+//
+// DECIDED (owner, 30 Aug 2026): POSTAL_ADDRESS stays empty on purpose. The only
+// address is residential and is not to be published; the registered address is
+// already discoverable via DUNS for anyone with a legitimate need. Section 24
+// omits the "Post" row entirely while this is empty, which is the intended
+// rendering — do not "fix" it by filling in the home address.
+const COMPANY = "Matdo Lab LLC";
+const EMAIL = "matdo@matdolab.com";
+const POSTAL_ADDRESS = "";
+const BUSINESS_LOCATION = "West Lafayette, Indiana, United States";
+const GOVERNING_STATE = "Indiana";
+
+const EFFECTIVE = "30 August 2026";
+const VERSION = "1.0";
+
+const toc = [
+  ["s1", "Introduction and acceptance"],
+  ["s2", "Summary"],
+  ["s3", "Definitions"],
+  ["s4", "What Matdo Check is"],
+  ["s5", "Apple's role, and which terms prevail"],
+  ["s6", "Licence"],
+  ["s7", "Your franchise or licensing agreement"],
+  ["s8", "Permitted use and restrictions"],
+  ["s9", "Your responsibilities"],
+  ["s10", "Attendee Records and privacy"],
+  ["s11", "The free trial"],
+  ["s12", "Subscriptions, renewal, and cancellation"],
+  ["s13", "The Lifetime purchase"],
+  ["s14", "Prices, taxes, and changes"],
+  ["s15", "Refunds"],
+  ["s16", "Availability, updates, and support"],
+  ["s17", "Intellectual property"],
+  ["s18", "Disclaimer of warranties"],
+  ["s19", "Limitation of liability"],
+  ["s20", "Indemnity"],
+  ["s21", "Term and termination"],
+  ["s22", "Governing law and disputes"],
+  ["s23", "Changes to these Terms"],
+  ["s24", "Contact"],
+];
+
+const summary = [
+  "Matdo Check is licensed software that runs on your own iPad. It is not a hosted service.",
+  "It is an independent product, not affiliated with, endorsed by, or connected to Kumon or any other franchise brand.",
+  "Checking that your use of the App complies with any franchise or licensing agreement is your responsibility, not ours.",
+  "Your attendance records stay on your device. We hold no copy and can restore nothing.",
+  "Apple processes every purchase, renewal, and refund. We never see payment details.",
+  "The App is provided as-is. It is an operational register, not a system of legal record.",
+];
+
+const tiers = [
+  ["Monthly", "$2.99 per month", "Auto-renewing subscription."],
+  ["Yearly", "$24.99 per year", "Auto-renewing subscription, in the same subscription group as Monthly."],
+  ["Lifetime", "$39.99 once", "A single purchase. No subscription and no expiry."],
+];
+---
+
+<Layout
+  title="Terms of Use — Matdo Check"
+  description="The Matdo Check terms of use. Licensed software that runs on your own iPad, sold through the App Store. Covers the licence, franchise responsibility, subscriptions and renewal, refunds, and the as-is warranty position."
+>
+  <!-- MASTHEAD -->
+  <section class="doc-head">
+    <div class="wrap doc-wrap">
+      <span class="eyebrow">Legal</span>
+      <h1>Terms of Use</h1>
+      <p class="doc-sub">Matdo Check for iPad</p>
+
+      <dl class="doc-meta">
+        <div><dt>Effective</dt><dd><time datetime="2026-08-30">{EFFECTIVE}</time></dd></div>
+        <div><dt>Version</dt><dd>{VERSION}</dd></div>
+        <div><dt>Publisher</dt><dd>{COMPANY}</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- CONTENTS -->
+  <section class="doc-body">
+    <div class="wrap doc-wrap">
+      <nav class="toc" aria-labelledby="toc-h">
+        <h2 id="toc-h">Contents</h2>
+        <ol>
+          {toc.map(([id, label]) => (
+            <li><a href={`#${id}`}>{label}</a></li>
+          ))}
+        </ol>
+      </nav>
+
+      <article class="doc">
+        <!-- 1 -->
+        <h2 id="s1">1. Introduction and acceptance</h2>
+        <p>
+          These Terms of Use (the <strong>“Terms”</strong>) govern your use of the Matdo Check application for iPad (the <strong>“App”</strong>), published by {COMPANY} (<strong>“Matdo”</strong>, <strong>“we”</strong>, <strong>“us”</strong>, <strong>“our”</strong>).
+        </p>
+        <p>
+          By downloading, installing, or using the App, you agree to these Terms. If you do not agree to them, do not use the App. If you are agreeing on behalf of a tutoring center, school, place of worship, club, camp, or other organisation, you confirm that you have authority to bind that organisation, and <strong>“you”</strong> means both you and it.
+        </p>
+        <p>
+          How the App handles personal information is described separately in our <a href="/privacy">Privacy Policy</a>, which forms part of these Terms.
+        </p>
+
+        <!-- 2 -->
+        <h2 id="s2">2. Summary</h2>
+        <div class="callout">
+          <p class="callout-label">Non-binding summary</p>
+          <ul>
+            {summary.map((s) => <li>{s}</li>)}
+          </ul>
+          <p class="callout-note">
+            This summary is provided for clarity. It is not a substitute for the full Terms, and in the event of any inconsistency the numbered sections below prevail.
+          </p>
+        </div>
+
+        <!-- 3 -->
+        <h2 id="s3">3. Definitions</h2>
+        <dl class="defs">
+          <dt>App</dt>
+          <dd>The Matdo Check application for iPad, including any update, patch, or new version we make available through the App Store.</dd>
+          <dt>Attendee Records</dt>
+          <dd>
+            The data a Center enters into or generates within the App: attendee names; optional telephone numbers, grade and student number; check-in and check-out times; and the audit log of instructor corrections and resets.
+          </dd>
+          <dt>Center</dt>
+          <dd>
+            The tutoring center, school, place of worship, club, camp, or other organisation that installs and operates the App on its own device.
+          </dd>
+          <dt>Device</dt>
+          <dd>The iPad on which the App is installed.</dd>
+          <dt>Licence</dt>
+          <dd>The right to use the App granted in section 6, whether under the free trial, a subscription, or the Lifetime purchase.</dd>
+          <dt>Apple</dt>
+          <dd>Apple Inc. and its subsidiaries, which distribute the App and process every purchase made through the App Store.</dd>
+        </dl>
+
+        <!-- 4 -->
+        <h2 id="s4">4. What Matdo Check is</h2>
+        <p>
+          Matdo Check is a local attendance register for learning centers. It records check-ins and check-outs on your Device, keeps a roster, and exports that record to CSV. That is the whole of what it does.
+        </p>
+        <p>
+          It is licensed software, not a hosted service. We operate no backend, we maintain no database of Attendee Records, and we have no technical means of retrieving Attendee Records from a Device.
+        </p>
+        <div class="notice">
+          <p>
+            <strong>Independence.</strong> Matdo Check is an independent product. It is not affiliated with, endorsed by, sponsored by, or connected to Kumon or any other franchise brand, and no such brand has reviewed or approved it. Any reference to a franchise brand on this Site or in the App is descriptive only, and every trade mark remains the property of its owner.
+          </p>
+        </div>
+
+        <!-- 5 -->
+        <h2 id="s5">5. Apple's role, and which terms prevail</h2>
+        <p>
+          The App is distributed through the App Store and licensed to you under <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" rel="noopener">Apple's Licensed Application End User Licence Agreement</a> (the <strong>“Apple EULA”</strong>).
+        </p>
+        <p>
+          <strong>These Terms supplement the Apple EULA; they do not replace it.</strong> Where a provision of these Terms conflicts with the Apple EULA, or with the App Store terms of service applicable to your purchase, those Apple terms prevail to the extent of the conflict, and the remainder of these Terms continues in force.
+        </p>
+        <p>These Terms are between you and us alone. Accordingly:</p>
+        <ul>
+          <li>Apple is not a party to these Terms and has no obligation to furnish maintenance or support for the App.</li>
+          <li>Apple gives no warranty in respect of the App. In the event of any failure of the App to conform to an applicable warranty, you may notify Apple, and Apple may refund the purchase price; to the maximum extent permitted by law, Apple has no other warranty obligation whatsoever in respect of the App.</li>
+          <li>We, not Apple, are responsible for addressing any claim relating to the App, including product liability claims, claims that the App fails to conform to a legal or regulatory requirement, and claims arising under consumer protection or similar legislation.</li>
+          <li>We, not Apple, are responsible for the investigation, defence, settlement, and discharge of any third-party claim that the App infringes that third party's intellectual property rights.</li>
+          <li>Apple and its subsidiaries are third-party beneficiaries of these Terms and may enforce them against you.</li>
+        </ul>
+
+        <!-- 6 -->
+        <h2 id="s6">6. Licence</h2>
+        <p>
+          Subject to these Terms and to a Licence being active, we grant you a personal, non-exclusive, non-transferable, revocable licence to install and use the App on Apple-branded devices that you own or control, as permitted by the App Store Usage Rules.
+        </p>
+        <p>
+          <strong>A Licence covers one Apple Account, not one Center.</strong> This follows from how Apple sells subscriptions and one-time purchases: a Center running the App on several Devices must sign them all in to the same Apple Account, or buy a Licence for each Apple Account it uses. Family Sharing is not enabled for the Lifetime purchase.
+        </p>
+        <p>
+          Nothing in this section transfers ownership of the App to you. What you acquire is a licence to use it.
+        </p>
+
+        <!-- 7 -->
+        <h2 id="s7">7. Your franchise or licensing agreement</h2>
+        <p>
+          Many Centers operate under a franchise, licensing, or affiliation agreement that governs which tools they may use and how attendee data must be handled.
+        </p>
+        <p>
+          <strong>Confirming that your use of the App complies with any such agreement is your responsibility, not ours.</strong> We do not review those agreements, we are not a party to them, and we make no representation that the App is permitted under any of them. If your agreement restricts third-party software, restricts where student data may be stored, or requires prior approval of tools, obtain that clearance before entering attendee details into the App.
+        </p>
+
+        <!-- 8 -->
+        <h2 id="s8">8. Permitted use and restrictions</h2>
+        <p>You may use the App to record and manage attendance for your own Center. You may not:</p>
+        <ul>
+          <li>copy, modify, translate, or create derivative works of the App, except as permitted by law that cannot be excluded by agreement;</li>
+          <li>reverse engineer, decompile, or disassemble the App, or attempt to derive its source code, except to the extent that applicable law expressly permits it despite this restriction;</li>
+          <li>rent, lease, lend, sell, sublicense, or otherwise transfer the App or your Licence, or make it available to any third party as a service;</li>
+          <li>circumvent, disable, or interfere with the instructor PIN, the device authentication gate, the audit log, or the licence check, or use the App with any tool designed to do so;</li>
+          <li>remove or obscure any proprietary notice in the App; or</li>
+          <li>use the App unlawfully, or to record information about a person where you lack a lawful basis to do so.</li>
+        </ul>
+
+        <!-- 9 -->
+        <h2 id="s9">9. Your responsibilities</h2>
+        <p>Because the App runs entirely on your Device, several things sit with you and cannot sit with us:</p>
+        <dl class="defs">
+          <dt>Backups</dt>
+          <dd>
+            Keeping the Device backed up — through the App's own iCloud Backup feature, an iCloud device backup, or a computer backup — is your responsibility. We hold no copy of your Attendee Records and can restore nothing.
+          </dd>
+          <dt>The instructor PIN and recovery code</dt>
+          <dd>
+            Choosing a PIN that is not easily guessed, limiting who knows it, and keeping the recovery code somewhere safe are your responsibility. The PIN and the recovery code are the keys to encrypted backups. <strong>If both are lost, those backups cannot be opened by anyone, including us.</strong>
+          </dd>
+          <dt>The Device itself</dt>
+          <dd>
+            Protecting the Device with a passcode, keeping its operating system current, and controlling physical access to a Device that stands on a counter are your responsibility.
+          </dd>
+          <dt>Accuracy of the record</dt>
+          <dd>
+            Attendance is recorded from what is entered on the Device. Reviewing and correcting the record is your responsibility; the App provides the audit log for exactly that purpose.
+          </dd>
+        </dl>
+
+        <!-- 10 -->
+        <h2 id="s10">10. Attendee Records and privacy</h2>
+        <p>
+          Attendee Records stay on your Device. They are not transmitted to us, and, unless you switch on the App's iCloud Backup feature, they are not transmitted anywhere at all. Where that feature is enabled, an encrypted copy is written to your own Apple Account, in the App's private iCloud container.
+        </p>
+        <p>
+          As between you and us, the Center is the controller of Attendee Records. You are responsible for meeting your own obligations to attendees and their parents or guardians, including any notice, consent, retention, and access requirements imposed by law, by a franchise agreement, or by your own policies.
+        </p>
+        <p>
+          Full detail is in the <a href="/privacy">Privacy Policy</a>.
+        </p>
+
+        <!-- 11 -->
+        <h2 id="s11">11. The free trial</h2>
+        <p>
+          Matdo Check is free to download and fully functional for <strong>seven days</strong>. No payment details are required to begin.
+        </p>
+        <p>
+          The trial period runs from the date the App was first downloaded to your Apple Account, as recorded by Apple. Deleting and reinstalling the App does not restart it, and neither does changing the Device's date.
+        </p>
+        <p>
+          Where a free period is offered as an introductory offer on a subscription, it is provided by Apple and is available <strong>once per subscription group per Apple Account</strong>. A customer who takes a free period on the Monthly plan and cancels is not offered a second one on the Yearly plan.
+        </p>
+        <p>
+          When the trial ends without a purchase, the check-in screen is replaced by a purchase screen. <strong>Locking does not delete or withhold your data.</strong> Your roster, attendance history, backups, and the CSV export all remain reachable, so a Center that decides not to buy can still retrieve its records.
+        </p>
+
+        <!-- 12 -->
+        <h2 id="s12">12. Subscriptions, renewal, and cancellation</h2>
+        <p>Matdo Check is offered on the following terms:</p>
+        <dl class="defs">
+          {tiers.map(([name, price, note]) => (
+            <>
+              <dt>{name} — {price}</dt>
+              <dd>{note}</dd>
+            </>
+          ))}
+        </dl>
+        <p>
+          Monthly and Yearly are <strong>auto-renewing subscriptions</strong>. Payment is charged to your Apple Account at confirmation of purchase. A subscription renews automatically unless it is cancelled at least 24 hours before the end of the current period, and your Apple Account is charged for renewal within 24 hours before the current period ends.
+        </p>
+        <p>
+          You can manage or cancel a subscription at any time in your Apple Account settings, under Subscriptions. Cancelling stops the next renewal; it does not end the period you have already paid for, and access continues until that period expires. Any unused portion of a free period is forfeited when a subscription is purchased.
+        </p>
+        <p>
+          Monthly and Yearly sit in one subscription group, so you can move between them without paying twice. Moving from Monthly to Yearly takes effect immediately and Apple applies a prorated credit. Moving from Yearly to Monthly takes effect at the next renewal date.
+        </p>
+
+        <!-- 13 -->
+        <h2 id="s13">13. The Lifetime purchase</h2>
+        <p>
+          The Lifetime option is a single purchase that unlocks the App on your Apple Account with no subscription and no expiry. It is restorable on any Device signed in to the same Apple Account, using <strong>Restore Purchase</strong> on the purchase screen or in Settings.
+        </p>
+        <p>
+          <strong>“Lifetime” means the lifetime of the product, not a guarantee of perpetual future development.</strong> It entitles you to the App as it stands and to updates we release for it, for as long as we publish it and Apple distributes it. It does not oblige us to publish the App indefinitely, to support future operating system versions without limit, or to include separately sold future products.
+        </p>
+        <p>
+          A Lifetime purchase takes precedence over any subscription on the same Apple Account, including one that has lapsed.
+        </p>
+
+        <!-- 14 -->
+        <h2 id="s14">14. Prices, taxes, and changes</h2>
+        <p>
+          Prices are shown in the App and on the App Store product page before purchase, in your local currency where Apple supports it. Prices stated in these Terms are in United States dollars and are indicative; <strong>the price shown by the App Store at the moment of purchase is the price that applies</strong>.
+        </p>
+        <p>
+          Prices are inclusive or exclusive of tax according to Apple's rules for your storefront. Apple collects and remits tax where it is required to do so.
+        </p>
+        <p>
+          We may change prices for new purchases at any time. For an existing auto-renewing subscription, a price increase does not take effect until Apple has given you notice in accordance with its rules and, where required, obtained your consent; if you do not consent, the subscription does not renew.
+        </p>
+
+        <!-- 15 -->
+        <h2 id="s15">15. Refunds</h2>
+        <p>
+          <strong>Apple processes every purchase, and Apple handles every refund.</strong> We cannot issue, approve, or decline a refund for an App Store purchase, and we never see your payment details.
+        </p>
+        <p>
+          To request one, use Apple's <a href="https://reportaproblem.apple.com" rel="noopener">Report a Problem</a> page, or contact Apple Support. Refunds are granted at Apple's discretion under its own policies and under any consumer rights you have that cannot be excluded by agreement.
+        </p>
+        <p>
+          If you believe the App is defective, please also write to us at <a href={`mailto:${EMAIL}`}>{EMAIL}</a>. We would rather fix the problem.
+        </p>
+
+        <!-- 16 -->
+        <h2 id="s16">16. Availability, updates, and support</h2>
+        <p>
+          We may release updates that add, change, or remove features. Whether an update installs automatically is governed by your Device settings. We may cease publishing the App, or cease supporting a particular operating system version, on reasonable notice where notice is practicable.
+        </p>
+        <p>
+          Support is provided by email at <a href={`mailto:${EMAIL}`}>{EMAIL}</a>. We aim to respond promptly, but these Terms do not commit us to a defined response time or service level. Apple has no obligation to furnish support for the App.
+        </p>
+
+        <!-- 17 -->
+        <h2 id="s17">17. Intellectual property</h2>
+        <p>
+          The App, its source code, design, interface, and the Matdo and Matdo Check names and logos are owned by {COMPANY} and protected by intellectual property law. These Terms grant you a licence to use the App and nothing more.
+        </p>
+        <p>
+          Your Attendee Records are yours. We claim no ownership of, and no licence to, anything you enter into the App.
+        </p>
+        <p>
+          If you send us feedback or a feature suggestion, we may use it without obligation or payment to you. Please do not send us anything you consider confidential.
+        </p>
+
+        <!-- 18 -->
+        <h2 id="s18">18. Disclaimer of warranties</h2>
+        <p>
+          <strong>The App is provided “as is” and “as available”, without warranties of any kind.</strong> To the maximum extent permitted by law, we disclaim all warranties, express or implied, including implied warranties of merchantability, fitness for a particular purpose, title, and non-infringement, and any warranty that the App will be uninterrupted, timely, secure, or error-free.
+        </p>
+        <div class="notice">
+          <p>
+            <strong>The App is an operational register, not a system of legal record.</strong> It is designed to run a front counter, and it should not be relied upon as the authoritative record in a custody dispute, a billing dispute, a regulatory inspection, or any legal proceeding. Keep whatever independent record your obligations require.
+          </p>
+        </div>
+        <p>
+          Some jurisdictions do not allow the exclusion of implied warranties, so some of the above may not apply to you. Nothing in these Terms excludes or limits a right you have under consumer protection law that cannot be excluded or limited by agreement.
+        </p>
+
+        <!-- 19 -->
+        <h2 id="s19">19. Limitation of liability</h2>
+        <p>
+          To the maximum extent permitted by law, {COMPANY} is not liable for any indirect, incidental, special, consequential, exemplary, or punitive damages, nor for lost profits, lost business, lost goodwill, <strong>lost or corrupted records, missed or mis-recorded attendance, or any decision made from the data</strong>, arising out of or relating to the App or these Terms, whether in contract, tort, or otherwise, and whether or not we were advised of the possibility.
+        </p>
+        <p>
+          To the maximum extent permitted by law, our total aggregate liability arising out of or relating to the App or these Terms is limited to <strong>the greatest of: the amounts you paid for the App in the twelve months preceding the event giving rise to the claim; the total amount you have paid for the App; or one hundred United States dollars</strong>.
+        </p>
+        <p>
+          These limits apply even if a remedy fails of its essential purpose. Nothing in this section limits liability for death or personal injury caused by negligence, for fraud or fraudulent misrepresentation, or for any other liability that cannot lawfully be limited. Some jurisdictions do not allow certain limitations, so some of the above may not apply to you.
+        </p>
+
+        <!-- 20 -->
+        <h2 id="s20">20. Indemnity</h2>
+        <p>
+          You agree to indemnify and hold harmless {COMPANY} against any claim, loss, or expense (including reasonable legal fees) arising out of your use of the App in breach of these Terms, your entry of attendee information without a lawful basis, or your use of the App in breach of a franchise, licensing, or similar agreement to which you are subject.
+        </p>
+
+        <!-- 21 -->
+        <h2 id="s21">21. Term and termination</h2>
+        <p>
+          These Terms apply from the moment you first use the App and continue until terminated.
+        </p>
+        <p>
+          You may terminate at any time by cancelling any subscription and deleting the App from your Devices. We may suspend or terminate your Licence if you materially breach these Terms, in particular section 8. Apple may terminate your licence under the Apple EULA on its own terms.
+        </p>
+        <p>
+          <strong>Deleting the App deletes its database and all local backups with it.</strong> Export anything you need to keep before you do. Copies previously written to iCloud persist until deleted from your Apple Account, as described in the <a href="/privacy">Privacy Policy</a>.
+        </p>
+        <p>
+          Sections 10, 15, and 17 to 22 survive termination.
+        </p>
+
+        <!-- 22 -->
+        <h2 id="s22">22. Governing law and disputes</h2>
+        <p>
+          These Terms are governed by the laws of the State of {GOVERNING_STATE}, United States, without regard to its conflict of laws rules, and the courts located in {GOVERNING_STATE} have jurisdiction over any dispute arising out of them.
+        </p>
+        <p>
+          If you are a consumer resident in the European Economic Area, the United Kingdom, or another jurisdiction whose law grants you the protection of your local courts and of mandatory local consumer law, nothing in this section deprives you of that protection.
+        </p>
+        <p>
+          Please write to us before commencing proceedings. Most problems are faster to fix than to litigate.
+        </p>
+
+        <!-- 23 -->
+        <h2 id="s23">23. Changes to these Terms</h2>
+        <p>
+          We may amend these Terms from time to time. The current version is always published at this address, with its effective date and version number shown at the top. Where a change materially affects your rights, we will take reasonable steps to bring it to your attention, and the text shown inside the App is updated to match in the next release.
+        </p>
+        <p>
+          Changes apply from the effective date shown above and do not apply retrospectively. Continuing to use the App after a change takes effect constitutes acceptance of it. If you do not accept a change, stop using the App and cancel any subscription.
+        </p>
+
+        <!-- 24 -->
+        <h2 id="s24">24. Contact</h2>
+        <dl class="defs contact">
+          <dt>Email</dt>
+          <dd><a href={`mailto:${EMAIL}`}>{EMAIL}</a></dd>
+          <dt>Location</dt>
+          <dd>{BUSINESS_LOCATION}</dd>
+          {POSTAL_ADDRESS && (
+            <>
+              <dt>Post</dt>
+              <dd>{POSTAL_ADDRESS}</dd>
+            </>
+          )}
+        </dl>
+
+        <p class="colophon">
+          End of Terms · Version {VERSION} · Effective {EFFECTIVE} · {COMPANY}
+        </p>
+      </article>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ---- Masthead ---- */
+  .doc-head {
+    padding: 140px 0 44px;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .doc-wrap { max-width: 780px; }
+  .doc-head h1 {
+    font-size: clamp(2.1rem, 4.4vw, 3.1rem);
+    margin: 0.9rem 0 0.5rem;
+  }
+  .doc-sub { color: #55665f; font-size: 1.05rem; margin-bottom: 2rem; }
+
+  .doc-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 18px 24px;
+    margin: 0;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--color-line);
+  }
+  .doc-meta dt {
+    font-size: 0.7rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: #7d8d87;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .doc-meta dd { margin: 0; font-size: 0.98rem; color: var(--color-forest); font-weight: 500; }
+
+  /* ---- Body ---- */
+  .doc-body { padding: 56px 0 clamp(64px, 9vw, 110px); }
+
+  /* Contents */
+  .toc {
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-sm);
+    padding: 26px 30px 22px;
+    margin-bottom: 3.5rem;
+    background: #fff;
+  }
+  .toc h2 {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: #7d8d87;
+    margin: 0 0 1rem;
+    font-weight: 700;
+  }
+  .toc ol { margin: 0; padding-left: 1.4rem; columns: 2; column-gap: 40px; }
+  .toc li { margin-bottom: 0.42rem; break-inside: avoid; }
+  .toc a { color: #3d4b47; font-size: 0.94rem; line-height: 1.45; }
+  .toc a:hover { color: var(--color-teal); text-decoration: underline; }
+
+  /* Sections */
+  .doc h2 {
+    font-size: clamp(1.18rem, 2.1vw, 1.42rem);
+    color: var(--color-forest);
+    margin: 3rem 0 0.9rem;
+    scroll-margin-top: 112px;
+  }
+  .doc h3 {
+    font-family: var(--font-sans);
+    font-size: 1.01rem;
+    font-weight: 700;
+    color: var(--color-forest);
+    margin: 1.9rem 0 0.7rem;
+  }
+  .doc p, .doc li {
+    color: #3a4844;
+    font-size: 1.02rem;
+    line-height: 1.75;
+  }
+  .doc p { margin-bottom: 1rem; }
+  .doc ul { margin: 0 0 1.2rem; padding-left: 1.3rem; }
+  .doc ul li { margin-bottom: 0.65rem; }
+  .doc ul li::marker { color: var(--color-sage); }
+  .doc strong { color: var(--color-forest); font-weight: 600; }
+  .doc a { color: var(--color-teal); text-decoration: underline; }
+  .doc a:hover { color: var(--color-forest); }
+  .doc a, .toc a { text-underline-offset: 0.16em; }
+
+  /* Summary callout */
+  .callout {
+    border: 1px solid var(--color-line);
+    border-left: 3px solid var(--color-sage);
+    border-radius: var(--radius-sm);
+    background: #fbfaf6;
+    padding: 24px 28px 20px;
+    margin-bottom: 1.4rem;
+  }
+  .callout-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: #7d8d87;
+    font-weight: 700;
+    margin-bottom: 0.9rem;
+  }
+  .callout ul { margin-bottom: 1rem; }
+  .callout-note {
+    font-size: 0.9rem;
+    color: #6a7b76;
+    margin: 0;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--color-line);
+  }
+
+  /* Definition lists */
+  .defs { margin: 0 0 1.4rem; }
+  .defs dt {
+    font-weight: 700;
+    color: var(--color-forest);
+    margin-top: 1.05rem;
+    font-size: 1rem;
+  }
+  .defs dt:first-child { margin-top: 0; }
+  .defs dd {
+    margin: 0.3rem 0 0;
+    color: #3a4844;
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+  .contact dd { font-weight: 500; }
+
+  /* Emphasised notice */
+  .notice {
+    border-left: 3px solid var(--color-gold);
+    background: #fdfbf3;
+    padding: 16px 20px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.99rem;
+    margin-bottom: 1.2rem;
+  }
+  .notice p:last-child { margin-bottom: 0; }
+
+  .colophon {
+    margin-top: 3.4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-line);
+    font-size: 0.86rem;
+    color: #7d8d87;
+    letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 700px) {
+    .doc-head { padding: 116px 0 36px; }
+    .toc ol { columns: 1; }
+    .toc { padding: 22px 22px 18px; }
+  }
+
+  @media print {
+    :global(#site-header), :global(footer) { display: none; }
+    .doc-head { padding-top: 0; }
+    .doc-body { padding-top: 24px; }
+    .toc { break-after: page; }
+    .doc h2 { break-after: avoid; }
+    .doc p, .doc li { font-size: 10.5pt; line-height: 1.55; }
+    .doc a { color: inherit; text-decoration: none; }
+  }
+</style>

@@ -8,8 +8,10 @@ import Layout from "../layouts/Layout.astro";
 // behaviour changes, change both: App Review compares the listing, the website,
 // and the binary, and a mismatch is a Guideline 5.1.1 problem.
 //
-// TODO (owner): POSTAL_ADDRESS is required for a complete GDPR/CCPA contact
-// clause. The address line is omitted from the rendered page while it is empty.
+// DECIDED (owner, 30 Aug 2026): POSTAL_ADDRESS stays empty on purpose — the
+// only address is residential and is not to be published (it is already on file
+// with DUNS). Email is the contact channel for GDPR/CCPA requests. The address
+// line is omitted from the rendered page while this is empty, by design.
 const COMPANY = "Matdo Lab LLC";
 const EMAIL = "matdo@matdolab.com";
 const POSTAL_ADDRESS = "";
