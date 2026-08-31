@@ -1,0 +1,103 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// Support page — this is the URL given to App Store Connect as the app's
+// Support URL, so it must stay reachable at /support and must name a real
+// contact channel. Keep the answers in sync with the shipped app: the pricing
+// below mirrors src/pages/check.astro, and the data claims mirror
+// src/pages/privacy.astro.
+const EMAIL = "matdo@matdolab.com";
+
+const faqs = [
+  {
+    q: "How do I use a feature in Matdo Check?",
+    a: 'Every task — check in, add attendees, import or export a CSV, set a PIN — has a short how-to video on the <a href="/check#how">Matdo Check page</a>.',
+  },
+  {
+    q: "Where is my attendance data stored?",
+    a: 'On your iPad. We do not receive, store, or have access to it. See the <a href="/privacy">Privacy Policy</a> for details.',
+  },
+  {
+    q: "How do I manage or cancel my subscription?",
+    a: "Apple handles all purchases. On your iPad, open Settings, tap your name, then Subscriptions, and choose Matdo Check. Refunds are requested from Apple at reportaproblem.apple.com.",
+  },
+  {
+    q: "I lost my iPad, or I am setting up a new one.",
+    a: "Turn on iCloud Backup inside the app before you switch devices; it writes to your own Apple Account. Purchases restore with Restore Purchases in the app, using the same Apple Account.",
+  },
+  {
+    q: "Something is broken, or I have an idea.",
+    a: "Email us. Tell us what you were doing and what happened — we read every message.",
+  },
+];
+---
+
+<Layout
+  title="Support — Matdo"
+  description="Get help with Matdo Check. Email matdo@matdolab.com — we usually reply within one business day."
+>
+  <section class="page-hero">
+    <div class="wrap sup-wrap">
+      <span class="eyebrow">Support</span>
+      <h1>We're here to help.</h1>
+      <p class="lede">
+        Email us and a person will read it. We usually reply within one business day.
+      </p>
+
+      <a class="c-card" href={`mailto:${EMAIL}`}>
+        <div class="c-ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="c-t">Email support</div>
+          <div class="c-d">{EMAIL}</div>
+        </div>
+      </a>
+
+      <p class="alt">
+        Prefer a form? Use the <a href="/contact">contact page</a>.
+      </p>
+
+      <h2 class="faq-h">Common questions</h2>
+      <dl class="faq">
+        {faqs.map((f) => (
+          <div class="faq-item">
+            <dt>{f.q}</dt>
+            <dd set:html={f.a} />
+          </div>
+        ))}
+      </dl>
+
+      <p class="alt">
+        <a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Use</a>
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero { padding: 150px 0 100px; }
+  .sup-wrap { max-width: 46rem; }
+  .page-hero h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); margin: 1.1rem 0 1rem; }
+  .page-hero .lede { font-size: 1.15rem; color: #3d4b47; margin-bottom: 2rem; }
+
+  .c-card { display: flex; align-items: center; gap: 1rem; max-width: 24rem; background: #fff; border: 1px solid var(--color-line); border-radius: var(--radius-sm); padding: 1rem 1.2rem; box-shadow: var(--shadow-sm); transition: transform 0.2s, box-shadow 0.2s; }
+  a.c-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .c-ic { width: 42px; height: 42px; flex: none; border-radius: 12px; background: rgb(79 209 197 / 0.16); color: var(--color-teal); display: grid; place-items: center; }
+  .c-ic svg { width: 22px; height: 22px; }
+  .c-t { font-weight: 600; color: var(--color-forest); }
+  .c-d { font-size: 0.92rem; color: #4a5854; }
+
+  .alt { margin-top: 1.2rem; font-size: 0.95rem; color: #4a5854; }
+  .alt a { color: var(--color-teal); font-weight: 600; }
+
+  .faq-h { font-size: clamp(1.5rem, 3vw, 2rem); margin: 3.5rem 0 1.5rem; }
+  .faq { margin: 0; }
+  .faq-item { border-top: 1px solid var(--color-line); padding: 1.3rem 0; }
+  .faq-item:last-child { border-bottom: 1px solid var(--color-line); }
+  .faq dt { font-weight: 600; color: var(--color-forest); margin-bottom: 0.45rem; }
+  .faq dd { margin: 0; color: #4a5854; line-height: 1.65; }
+  .faq dd :global(a) { color: var(--color-teal); font-weight: 600; }
+
+  @media (max-width: 900px) { .page-hero { padding: 120px 0 70px; } }
+</style>
