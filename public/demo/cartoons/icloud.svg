@@ -1,0 +1,18 @@
+<svg viewBox="0 0 240 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="An iPad sending an encrypted copy to iCloud">
+  <g transform="translate(120 95) scale(1.15) translate(-120 -95)">
+  <circle cx="120" cy="94" r="80" fill="#f0e2bd" opacity="0.5"/>
+  <ellipse cx="120" cy="164" rx="86" ry="9" fill="#f3eede"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
+  <rect x="66" y="92" width="108" height="81" rx="6" fill="#1d3b34"/>
+  <rect x="69" y="95" width="102" height="75" rx="4" fill="#faf8f1"/>
+  <rect x="80" y="106" width="80" height="7" rx="3.5" fill="#e4e0d2"/>
+  <rect x="80" y="118" width="58" height="7" rx="3.5" fill="#e4e0d2"/>
+  <rect x="80" y="130" width="68" height="7" rx="3.5" fill="#e4e0d2"/>
+  <g>
+  <path d="M92 60 h56 a20 20 0 0 0 -3 -39 a30 30 0 0 0 -56 7 a18 18 0 0 0 3 32 z"
+  fill="#faf8f1" stroke="#1d3b34" stroke-width="3"/>
+  </g>
+  <path d="M120 86 V66" fill="none" stroke="#4fd1c5" stroke-width="4" stroke-dasharray="6 6"/>
+  <path d="M113 73 l7 -8 7 8" fill="none" stroke="#4fd1c5" stroke-width="4"/></g>
+  </g>
+  </svg>

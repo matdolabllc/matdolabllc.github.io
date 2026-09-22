@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:15.493 --> 00:00:20.906
+First, what your sheet needs to look like.
+
+2
+00:00:20.906 --> 00:00:26.911
+Three columns: Last name, First name, Phone.
+
+3
+00:00:26.911 --> 00:00:33.141
+The phone column is optional — a blank cell is fine.
+
+4
+00:00:33.141 --> 00:00:45.467
+No other columns, one attendee per row. Save it as .csv or .xlsx.
+
+5
+00:00:45.467 --> 00:00:49.275
+Everything an instructor does starts from the kiosk.
+
+6
+00:00:49.275 --> 00:00:56.564
+Tap Instructor, in the row under the two big buttons.
+
+7
+00:00:56.564 --> 00:00:59.756
+The panel is behind your instructor PIN.
+
+8
+00:00:59.756 --> 00:01:03.980
+Face ID is the shortcut — the PIN is what actually opens it.
+
+9
+00:01:03.980 --> 00:01:10.002
+Type your six digits.
+
+10
+00:01:10.002 --> 00:01:15.390
+Then tap Unlock.
+
+11
+00:01:15.390 --> 00:01:20.972
+This is the Instructor Panel. Five tabs across the top.
+
+12
+00:01:20.972 --> 00:01:26.750
+Open the Upload tab.
+
+13
+00:01:26.750 --> 00:01:33.848
+The app shows the same three columns, so you can check as you go.
+
+14
+00:01:33.848 --> 00:01:40.284
+Existing attendees are matched and merged, never duplicated.
+
+15
+00:01:40.284 --> 00:01:47.089
+Tap Choose File and pick your sheet.
+
+16
+00:01:47.089 --> 00:01:54.967
+The summary says what was added and what was already there.

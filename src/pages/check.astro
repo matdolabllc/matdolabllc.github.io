@@ -6,21 +6,35 @@ import { APP_STORE_URL } from "../consts";
 // The tutorial clips keep the same filenames every time they're re-cut, so a
 // returning visitor would be served the previous recording from cache. Bump
 // this whenever the files under public/demo/tutorials/ are replaced.
-const TUTORIAL_VERSION = "2026082909";
+const TUTORIAL_VERSION = "2026092202";
 
-// Flip cards: front cartoon → back short how-to video of the real app.
+// Flip cards: front cartoon → back how-to video of the real app.
+//
+// Each clip now opens with its own title sequence — the Matdo Check mark, the
+// slogan, the tutorial's name, and the problem it answers — so the poster frame
+// (`/demo/tutorials/<video>.jpg`) is a title card rather than a frame of iPad.
+const setupFlow = [
+  { cartoon: "first-run",   label: "Set up a new iPad",  video: "first-run" },
+  { cartoon: "pin",         label: "Set PIN",            video: "set-pin" },
+  { cartoon: "icloud",      label: "Back up to iCloud",  video: "icloud-backup" },
+  { cartoon: "switch-ipad", label: "Move to a new iPad", video: "switch-ipad" },
+];
 const familyFlow = [
-  { cartoon: "check-in",  label: "Check in",       video: "check-in" },
-  { cartoon: "check-out", label: "Check out",      video: "check-out" },
-  { cartoon: "reset",     label: "Reset check-in", video: "reset" },
+  { cartoon: "check-in",      label: "Check in",              video: "check-in" },
+  { cartoon: "check-out",     label: "Check out",             video: "check-out" },
+  { cartoon: "check-out-all", label: "Close up for the day",  video: "check-out-all" },
+  { cartoon: "reset",         label: "Reset check-in",        video: "reset" },
 ];
 const teamFlow = [
-  { cartoon: "add-names",    label: "Add attendees",     video: "add-name" },
-  { cartoon: "edit-profile", label: "Edit profile",      video: "edit-profile" },
-  { cartoon: "upload",       label: "Import CSV",        video: "upload" },
-  { cartoon: "export",       label: "Export CSV",        video: "export-csv" },
-  { cartoon: "enroll",       label: "Enroll & unenroll", video: "enroll-unenroll" },
-  { cartoon: "pin",          label: "Set PIN",           video: "set-pin" },
+  { cartoon: "add-names",    label: "Add attendees",       video: "add-name" },
+  { cartoon: "upload",       label: "Import CSV",          video: "upload" },
+  { cartoon: "edit-profile", label: "Edit profile",        video: "edit-profile" },
+  { cartoon: "enroll",       label: "Enroll & unenroll",   video: "enroll-unenroll" },
+  { cartoon: "fix-time",     label: "Fix a time",          video: "fix-time" },
+  { cartoon: "another-day",  label: "Look at another day", video: "another-day" },
+  { cartoon: "export",       label: "Export CSV",          video: "export-csv" },
+  { cartoon: "audit-log",    label: "The override log",    video: "audit-log" },
+  { cartoon: "backups",      label: "Name a backup",       video: "backups" },
 ];
 
 const useCases = [
@@ -127,10 +141,25 @@ const ucIcon = (k: string) => ICONS[k] || "";
       <div class="sec-head center reveal">
         <span class="eyebrow">Quick tutorials</span>
         <h2>Tap a card to watch how it's done.</h2>
-        <p>Each one opens a short, slowed-down how-to from the real app.</p>
+        <p>Each one is a step-by-step walk-through of the real app, captioned throughout.</p>
       </div>
 
       <div class="flow reveal">
+        <div class="flow-lane">
+          <span class="lane-tag setup">Getting started</span>
+          <div class="tut-grid">
+            {setupFlow.map((n) => (
+              <button class="tut-card" data-video={n.video} data-title={n.label} aria-label={`Watch how to: ${n.label}`}>
+                <span class="tut-art">
+                  <img src={`/demo/cartoons/${n.cartoon}.svg`} alt="" width="240" height="190" />
+                  <span class="tut-play" aria-hidden="true">▶</span>
+                </span>
+                <span class="tut-label">{n.label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div class="flow-lane">
           <span class="lane-tag family">At the front desk</span>
           <div class="tut-grid">
@@ -235,10 +264,14 @@ const ucIcon = (k: string) => ICONS[k] || "";
 </Layout>
 
 <script>
-  // Tutorial lightbox: tap a cartoon → big, slowed how-to video with its own
-  // controls. The backdrop / ✕ / Esc close it (the video itself doesn't, so the
-  // play/scrub bar stays usable).
-  const RATE = 0.7; // play slower so it's easy to follow
+  // Tutorial lightbox: tap a cartoon → the how-to video, with its own controls.
+  // The backdrop / ✕ / Esc close it (the video itself doesn't, so the play/scrub
+  // bar stays usable).
+  //
+  // **Played at 1x.** These used to run at 0.7x because the old clips moved
+  // faster than anyone could follow. The current set is captioned step by step
+  // and already paced for normal speed — slowing it by a further 30% turned a
+  // 93-second walk-through into a two-and-a-quarter-minute slideshow.
   const lb = document.getElementById("tut-lb");
   const lbVideo = document.getElementById("tut-lb-video") as HTMLVideoElement | null;
   const lbTitle = document.getElementById("tut-lb-title");
@@ -246,14 +279,11 @@ const ucIcon = (k: string) => ICONS[k] || "";
   let current = "";
   const verParam = () => (lb && lb.dataset.v ? `?v=${lb.dataset.v}` : "");
 
-  function keepRate() { if (lbVideo) lbVideo.playbackRate = RATE; }
-
   // play() fired straight after load() gets aborted by the pending load, so also
   // start once the data is actually there.
   function playNow() {
     if (!lbVideo || !lb || lb.hidden) return;
-    keepRate();
-    lbVideo.play().then(keepRate).catch(() => {});
+    lbVideo.play().catch(() => {});
   }
 
   function openTut(video: string, title: string) {
@@ -265,6 +295,24 @@ const ucIcon = (k: string) => ICONS[k] || "";
     const webm = document.createElement("source"); webm.src = `/demo/tutorials/${video}.webm${v}`; webm.type = "video/webm";
     const mp4 = document.createElement("source"); mp4.src = `/demo/tutorials/${video}.mp4${v}`; mp4.type = "video/mp4";
     lbVideo.append(webm, mp4);
+
+    // The caption track. Deliberately NOT `default`: the captions are burnt
+    // into the picture — the band is part of the composition, and a lightbox
+    // that autoplays has nowhere sensible to turn a track on — so switching
+    // this one on as well would show every line twice. It is here because it is
+    // what makes those words reachable by a screen reader and by a search
+    // engine, and it is one click away in the player's own captions menu.
+    const vtt = document.createElement("track");
+    vtt.kind = "captions";
+    vtt.srclang = "en";
+    vtt.label = "English";
+    vtt.src = `/demo/tutorials/${video}.vtt${v}`;
+    lbVideo.append(vtt);
+
+    // The title card the clip opens on, so the panel is never a black rectangle
+    // while the video loads.
+    lbVideo.poster = `/demo/tutorials/${video}.jpg${v}`;
+
     if (lbTitle) lbTitle.textContent = title;
     lb.hidden = false;
     document.body.style.overflow = "hidden";
@@ -286,7 +334,16 @@ const ucIcon = (k: string) => ICONS[k] || "";
   lbVideo?.addEventListener("error", () => {
     if (!lbVideo || !current || lbVideo.dataset.fallback === current) return;
     lbVideo.dataset.fallback = current;
+    // Clearing the children drops the caption track along with the <source>
+    // list, so it goes back on afterwards — the fallback path must not be the
+    // one that quietly loses the captions.
     lbVideo.innerHTML = "";
+    const vtt = document.createElement("track");
+    vtt.kind = "captions";
+    vtt.srclang = "en";
+    vtt.label = "English";
+    vtt.src = `/demo/tutorials/${current}.vtt${verParam()}`;
+    lbVideo.append(vtt);
     lbVideo.src = `/demo/tutorials/${current}.mp4${verParam()}`;
     lbVideo.load();
     playNow();
@@ -294,7 +351,6 @@ const ucIcon = (k: string) => ICONS[k] || "";
 
   lbVideo?.addEventListener("loadeddata", playNow);
   lbVideo?.addEventListener("canplay", playNow);
-  lbVideo?.addEventListener("play", keepRate);
 
   document.querySelectorAll<HTMLButtonElement>(".tut-card").forEach((card) => {
     card.addEventListener("click", () => openTut(card.dataset.video || "", card.dataset.title || ""));
@@ -367,6 +423,7 @@ const ucIcon = (k: string) => ICONS[k] || "";
   .flow { max-width: 1060px; margin: 0 auto; display: grid; gap: 22px; }
   .flow-lane { background: #fff; border: 1px solid var(--color-line); border-radius: var(--radius-lg); padding: 20px 20px 24px; box-shadow: var(--shadow-sm); }
   .lane-tag { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.35rem 0.8rem; border-radius: 999px; margin-bottom: 14px; }
+  .lane-tag.setup { color: var(--color-forest); background: rgb(29 59 52 / 0.10); }
   .lane-tag.family { color: var(--color-teal); background: rgb(79 209 197 / 0.16); }
   .lane-tag.team { color: #a8843c; background: rgb(240 226 189 / 0.55); }
   .tut-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }

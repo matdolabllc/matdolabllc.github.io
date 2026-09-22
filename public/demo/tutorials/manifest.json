@@ -1,0 +1,124 @@
+{
+  "generated": "2026-09-22T20:29:06.172Z",
+  "clips": [
+    {
+      "file": "check-in",
+      "title": "Check in",
+      "seconds": 57.7,
+      "steps": 7,
+      "poster": 5.66
+    },
+    {
+      "file": "check-out",
+      "title": "Check out",
+      "seconds": 50.066667,
+      "steps": 6,
+      "poster": 5.66
+    },
+    {
+      "file": "reset",
+      "title": "Reset check-in",
+      "seconds": 75.366667,
+      "steps": 10,
+      "poster": 5.67
+    },
+    {
+      "file": "add-name",
+      "title": "Add attendees",
+      "seconds": 95.433333,
+      "steps": 14,
+      "poster": 5.67
+    },
+    {
+      "file": "edit-profile",
+      "title": "Edit profile",
+      "seconds": 92.433333,
+      "steps": 14,
+      "poster": 5.65
+    },
+    {
+      "file": "upload",
+      "title": "Import CSV",
+      "seconds": 114.966667,
+      "steps": 16,
+      "poster": 5.67
+    },
+    {
+      "file": "export-csv",
+      "title": "Export CSV",
+      "seconds": 117.366667,
+      "steps": 17,
+      "poster": 5.67
+    },
+    {
+      "file": "enroll-unenroll",
+      "title": "Enroll & unenroll",
+      "seconds": 96.966667,
+      "steps": 14,
+      "poster": 5.66
+    },
+    {
+      "file": "set-pin",
+      "title": "Set PIN",
+      "seconds": 71.533333,
+      "steps": 9,
+      "poster": 5.66
+    },
+    {
+      "file": "first-run",
+      "title": "Set up a new iPad",
+      "seconds": 112.8,
+      "steps": 15,
+      "poster": 5.67
+    },
+    {
+      "file": "fix-time",
+      "title": "Fix a time",
+      "seconds": 96.933333,
+      "steps": 14,
+      "poster": 5.66
+    },
+    {
+      "file": "another-day",
+      "title": "Look at another day",
+      "seconds": 96.866667,
+      "steps": 14,
+      "poster": 5.66
+    },
+    {
+      "file": "audit-log",
+      "title": "The override log",
+      "seconds": 84.6,
+      "steps": 12,
+      "poster": 5.66
+    },
+    {
+      "file": "check-out-all",
+      "title": "Close up for the day",
+      "seconds": 104.966667,
+      "steps": 15,
+      "poster": 5.66
+    },
+    {
+      "file": "icloud-backup",
+      "title": "Back up to iCloud",
+      "seconds": 78.466667,
+      "steps": 9,
+      "poster": 5.66
+    },
+    {
+      "file": "switch-ipad",
+      "title": "Move to a new iPad",
+      "seconds": 108.366667,
+      "steps": 13,
+      "poster": 5.66
+    },
+    {
+      "file": "backups",
+      "title": "Backups & iCloud",
+      "seconds": 76.6,
+      "steps": 9,
+      "poster": 5.66
+    }
+  ]
+}

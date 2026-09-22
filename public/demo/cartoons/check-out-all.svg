@@ -1,0 +1,28 @@
+<svg viewBox="0 0 240 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A roster of people still in class at closing time">
+  <g transform="translate(120 95) scale(1.15) translate(-120 -95)">
+  <circle cx="120" cy="94" r="80" fill="#f0e2bd" opacity="0.5"/>
+  <ellipse cx="120" cy="164" rx="86" ry="9" fill="#f3eede"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
+  <rect x="46" y="52" width="116" height="100" rx="9" fill="#faf8f1" stroke="#1d3b34" stroke-width="3"/>
+  <circle cx="68" cy="74" r="7" fill="#cfe9e2"/>
+  <rect x="82" y="70" width="42" height="7" rx="3.5" fill="#e4e0d2"/>
+  <rect x="130" y="70" width="22" height="7" rx="3.5" fill="#f5d9a8"/>
+  <circle cx="68" cy="94" r="7" fill="#cfe9e2"/>
+  <rect x="82" y="90" width="42" height="7" rx="3.5" fill="#e4e0d2"/>
+  <rect x="130" y="90" width="22" height="7" rx="3.5" fill="#f5d9a8"/>
+  <circle cx="68" cy="114" r="7" fill="#cfe9e2"/>
+  <rect x="82" y="110" width="42" height="7" rx="3.5" fill="#e4e0d2"/>
+  <rect x="130" y="110" width="22" height="7" rx="3.5" fill="#f5d9a8"/>
+  <circle cx="68" cy="134" r="7" fill="#cfe9e2"/>
+  <rect x="82" y="130" width="42" height="7" rx="3.5" fill="#e4e0d2"/>
+  <rect x="130" y="130" width="22" height="7" rx="3.5" fill="#f5d9a8"/>
+  <g>
+  <circle cx="186" cy="62" r="20" fill="#1d3b34"/>
+  <path d="M186 52 V62 l7 5" fill="none" stroke="#faf8f1" stroke-width="3.2"/>
+  </g>
+  <g>
+  <path d="M186 132 L172 120" stroke="#E8C9A2" stroke-width="9"/>
+  <circle cx="170" cy="119" r="6.5" fill="#E8C9A2"/>
+  </g></g>
+  </g>
+  </svg>

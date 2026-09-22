@@ -1,0 +1,26 @@
+<svg viewBox="0 0 240 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="An old iPad and a new one, with a cloud between them">
+  <g transform="translate(120 95) scale(1.15) translate(-120 -95)">
+  <circle cx="120" cy="94" r="80" fill="#f0e2bd" opacity="0.5"/>
+  <ellipse cx="120" cy="164" rx="86" ry="9" fill="#f3eede"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
+  <g opacity="0.55">
+  <rect x="34" y="78" width="76" height="57" rx="6" fill="#1d3b34"/>
+  <rect x="37" y="81" width="70" height="51" rx="4" fill="#faf8f1"/>
+  <rect x="46" y="90" width="52" height="6" rx="3" fill="#e4e0d2"/>
+  <rect x="46" y="100" width="36" height="6" rx="3" fill="#e4e0d2"/>
+  </g>
+  <path d="M60 148 l-10 -10 10 -10" fill="none" stroke="#c9553d" stroke-width="3.4"/>
+  <rect x="132" y="74" width="84" height="63" rx="6" fill="#1d3b34"/>
+  <rect x="135" y="77" width="78" height="57" rx="4" fill="#faf8f1"/>
+  <rect x="146" y="88" width="56" height="7" rx="3.5" fill="#cfe9e2"/>
+  <rect x="146" y="100" width="40" height="7" rx="3.5" fill="#e4e0d2"/>
+  <rect x="146" y="112" width="48" height="7" rx="3.5" fill="#e4e0d2"/>
+  <g>
+  <path d="M92 44 h50 a18 18 0 0 0 -3 -34 a27 27 0 0 0 -50 6 a16 16 0 0 0 3 28 z"
+  fill="#faf8f1" stroke="#1d3b34" stroke-width="2.8"/>
+  </g>
+  <path d="M78 62 q-8 20 6 30" fill="none" stroke="#4fd1c5" stroke-width="3.6" stroke-dasharray="6 5"/>
+  <path d="M150 62 q10 20 -4 28" fill="none" stroke="#4fd1c5" stroke-width="3.6" stroke-dasharray="6 5"/>
+  <path d="M140 92 l8 -4 1 9z" fill="#4fd1c5"/></g>
+  </g>
+  </svg>

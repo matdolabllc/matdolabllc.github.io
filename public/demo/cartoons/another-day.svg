@@ -1,0 +1,17 @@
+<svg viewBox="0 0 240 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A calendar with one day circled">
+  <g transform="translate(120 95) scale(1.15) translate(-120 -95)">
+  <circle cx="120" cy="94" r="80" fill="#f0e2bd" opacity="0.5"/>
+  <ellipse cx="120" cy="164" rx="86" ry="9" fill="#f3eede"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
+  <rect x="62" y="48" width="116" height="104" rx="9" fill="#faf8f1" stroke="#1d3b34" stroke-width="3"/>
+  <rect x="62" y="48" width="116" height="24" rx="9" fill="#1f6f63"/>
+  <rect x="62" y="64" width="116" height="8" fill="#1f6f63"/>
+  <rect x="82" y="38" width="8" height="20" rx="4" fill="#1d3b34"/>
+  <rect x="150" y="38" width="8" height="20" rx="4" fill="#1d3b34"/>
+  <circle cx="78" cy="88" r="4.4" fill="#dcd8ca"/><circle cx="99" cy="88" r="4.4" fill="#dcd8ca"/><circle cx="120" cy="88" r="4.4" fill="#dcd8ca"/><circle cx="141" cy="88" r="4.4" fill="#dcd8ca"/><circle cx="162" cy="88" r="4.4" fill="#dcd8ca"/><circle cx="78" cy="106" r="4.4" fill="#dcd8ca"/><circle cx="99" cy="106" r="4.4" fill="#dcd8ca"/><circle cx="120" cy="106" r="4.4" fill="#dcd8ca"/><circle cx="141" cy="106" r="4.4" fill="#dcd8ca"/><circle cx="162" cy="106" r="4.4" fill="#dcd8ca"/><circle cx="78" cy="124" r="4.4" fill="#dcd8ca"/><circle cx="99" cy="124" r="4.4" fill="#dcd8ca"/><circle cx="120" cy="124" r="4.4" fill="#dcd8ca"/><circle cx="141" cy="124" r="4.4" fill="#dcd8ca"/><circle cx="162" cy="124" r="4.4" fill="#dcd8ca"/><circle cx="78" cy="142" r="4.4" fill="#dcd8ca"/><circle cx="99" cy="142" r="4.4" fill="#dcd8ca"/><circle cx="120" cy="142" r="4.4" fill="#dcd8ca"/><circle cx="141" cy="142" r="4.4" fill="#dcd8ca"/><circle cx="162" cy="142" r="4.4" fill="#dcd8ca"/>
+  <g>
+  <circle cx="120" cy="106" r="11" fill="none" stroke="#4fd1c5" stroke-width="3.4"/>
+  <circle cx="120" cy="106" r="4.4" fill="#1f6f63"/>
+  </g></g>
+  </g>
+  </svg>
