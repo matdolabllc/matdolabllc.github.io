@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import StoreBadges from "../components/StoreBadges.astro";
+import { APP_STORE_URL } from "../consts";
 
 // The tutorial clips keep the same filenames every time they're re-cut, so a
 // returning visitor would be served the previous recording from cache. Bump
@@ -227,7 +228,7 @@ const ucIcon = (k: string) => ICONS[k] || "";
           ))}
         </ul>
         <StoreBadges class="price-badges" />
-        <p class="price-note">Start free — no card required. Available on the App Store or Google Play (coming soon).</p>
+        <p class="price-note">Start free — no card required. <a href={APP_STORE_URL} rel="noopener">Download Matdo Check on the App Store</a>; Google Play coming soon.</p>
       </div>
     </div>
   </section>
@@ -416,6 +417,7 @@ const ucIcon = (k: string) => ICONS[k] || "";
   .price-list li svg { color: var(--color-teal); flex: none; margin-top: 2px; }
   .price-includes :global(.price-badges) { justify-content: center; margin-top: 0.5rem; }
   .price-note { font-size: 0.8rem; color: #8b968f; margin-top: 1.2rem; }
+  .price-note a { color: var(--color-forest); text-decoration: underline; text-underline-offset: 2px; }
   .price-note + .price-note { margin-top: 0.5rem; }
   .price-link { color: var(--color-teal); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
 
