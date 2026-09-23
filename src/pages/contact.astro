@@ -40,9 +40,11 @@ const EMAIL = "matdo@matdolab.com";
       <!-- Right: form -->
       <div class="reveal">
         <form id="contact-form" class="form" action="https://api.web3forms.com/submit" method="POST">
-          <!-- Free form handling via Web3Forms. To activate: create a free key at
-               https://web3forms.com using matdo@matdolab.com, then paste it below. -->
-          <input type="hidden" name="access_key" value="3ea37273-765a-46e2-b105-9638e0d45c11" />
+          <!-- Free form handling via Web3Forms, delivering to matdo@matdolab.com.
+               The access key is public by design: it identifies the destination
+               inbox from client-side HTML and grants nothing else. The honeypot
+               below and Web3Forms' own abuse prevention are what keep it quiet. -->
+          <input type="hidden" name="access_key" value="aac24234-7244-496f-9c86-fca2aa15ddb4" />
           <input type="hidden" name="subject" value="New inquiry from the Matdo website" />
           <input type="hidden" name="from_name" value="Matdo website" />
           <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
