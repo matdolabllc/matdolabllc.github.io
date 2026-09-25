@@ -41,8 +41,8 @@ const POSTAL_ADDRESS = "";
 const BUSINESS_LOCATION = "West Lafayette, Indiana, United States";
 const GOVERNING_STATE = "Indiana";
 
-const EFFECTIVE = "30 August 2026";
-const VERSION = "1.0";
+const EFFECTIVE = "25 September 2026";
+const VERSION = "1.1";
 
 const toc = [
   ["s1", "Introduction and acceptance"],
@@ -99,7 +99,7 @@ const tiers = [
       <p class="doc-sub">Matdo Check for iPad</p>
 
       <dl class="doc-meta">
-        <div><dt>Effective</dt><dd><time datetime="2026-08-30">{EFFECTIVE}</time></dd></div>
+        <div><dt>Effective</dt><dd><time datetime="2026-09-25">{EFFECTIVE}</time></dd></div>
         <div><dt>Version</dt><dd>{VERSION}</dd></div>
         <div><dt>Publisher</dt><dd>{COMPANY}</dd></div>
       </dl>
@@ -234,11 +234,15 @@ const tiers = [
         <dl class="defs">
           <dt>Backups</dt>
           <dd>
-            Keeping the Device backed up — through the App's own iCloud Backup feature, an iCloud device backup, or a computer backup — is your responsibility. We hold no copy of your Attendee Records and can restore nothing.
+            Keeping the Device backed up — through the App's Automatic Backup to iCloud, an iCloud device backup, or a computer backup — is your responsibility. We hold no copy of your Attendee Records and can restore nothing.
           </dd>
-          <dt>The instructor PIN and recovery code</dt>
+          <dt>The instructor PIN</dt>
           <dd>
-            Choosing a PIN that is not easily guessed, limiting who knows it, and keeping the recovery code somewhere safe are your responsibility. The PIN and the recovery code are the keys to encrypted backups. <strong>If both are lost, those backups cannot be opened by anyone, including us.</strong>
+            Choosing a PIN that is not easily guessed, limiting who knows it, and remembering it are your responsibility. A forgotten PIN can be replaced on the Device with Face ID, Touch ID, or the Device passcode. Backups made by version 1.0 of the App were locked with the PIN and a recovery code; keep that recovery code if you may need those backups. <strong>If both are lost, those backups cannot be opened by anyone, including us.</strong>
+          </dd>
+          <dt>Your Apple Account</dt>
+          <dd>
+            Keeping the Apple Account used for iCloud secure is your responsibility too: anyone signed in to it can restore the App's backups and open the monthly spreadsheets.
           </dd>
           <dt>The Device itself</dt>
           <dd>
@@ -253,7 +257,7 @@ const tiers = [
         <!-- 10 -->
         <h2 id="s10">10. Attendee Records and privacy</h2>
         <p>
-          Attendee Records stay on your Device. They are not transmitted to us, and, unless you switch on the App's iCloud Backup feature, they are not transmitted anywhere at all. Where that feature is enabled, an encrypted copy is written to your own Apple Account, in the App's private iCloud container.
+          Attendee Records stay on your Device and are not transmitted to us. Unless you switch off the App's Automatic Backup to iCloud, a daily copy of the database and a spreadsheet for each month are also written to your own Apple Account: the copy to the App's private iCloud container, the spreadsheets to your iCloud Drive. The App does not encrypt either. With that feature off, Attendee Records are not transmitted anywhere at all.
         </p>
         <p>
           As between you and us, the Center is the controller of Attendee Records. You are responsible for meeting your own obligations to attendees and their parents or guardians, including any notice, consent, retention, and access requirements imposed by law, by a franchise agreement, or by your own policies.
@@ -396,7 +400,7 @@ const tiers = [
           You may terminate at any time by cancelling any subscription and deleting the App from your Devices. We may suspend or terminate your Licence if you materially breach these Terms, in particular section 8. Apple may terminate your licence under the Apple EULA on its own terms.
         </p>
         <p>
-          <strong>Deleting the App deletes its database and all local backups with it.</strong> Export anything you need to keep before you do. Copies previously written to iCloud persist until deleted from your Apple Account, as described in the <a href="/privacy">Privacy Policy</a>.
+          <strong>Deleting the App deletes its database, all local backups, and the spreadsheets kept on the Device with it.</strong> Export anything you need to keep before you do. Copies previously written to iCloud, including the monthly spreadsheets in iCloud Drive, persist until deleted from your Apple Account, as described in the <a href="/privacy">Privacy Policy</a>.
         </p>
         <p>
           Sections 10, 15, and 17 to 22 survive termination.
