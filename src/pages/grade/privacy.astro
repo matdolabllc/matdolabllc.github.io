@@ -1,0 +1,285 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+// GENERATED from matdo-grade/MatdoGrade/LegalViews.swift by
+// matdo-grade/tools/legal_to_web.py. Do not edit here: change the Swift file
+// and rerun the script, so the website and the binary never disagree.
+---
+
+<Layout
+  title="Privacy Policy — Matdo Grade"
+  description="The Matdo Grade privacy policy. Pages are relayed to Google&#x27;s Gemini model to be graded and are not kept by Matdo Lab; the only record held is an identifier, a unit balance and purchase status."
+>
+  <section class="doc-head">
+    <div class="wrap doc-wrap">
+      <span class="eyebrow">Legal</span>
+      <h1>Privacy Policy</h1>
+      <p class="doc-sub">Matdo Grade for iPhone and iPad</p>
+
+      <dl class="doc-meta">
+        <div><dt>Effective</dt><dd><time datetime="2026-09-27">27 September 2026</time></dd></div>
+        <div><dt>Publisher</dt><dd>Matdo Lab LLC</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="doc-body">
+    <div class="wrap doc-wrap">
+      <nav class="toc" aria-labelledby="toc-h">
+        <h2 id="toc-h">Contents</h2>
+        <ol>
+          <li><a href="#s1">In short</a></li>
+          <li><a href="#s2">What leaves your device when you tap Grade</a></li>
+          <li><a href="#s3">We relay the page; we do not keep it</a></li>
+          <li><a href="#s4">Google's part in it</a></li>
+          <li><a href="#s5">What we do receive, and why</a></li>
+          <li><a href="#s6">Server logs</a></li>
+          <li><a href="#s7">What stays on your device</a></li>
+          <li><a href="#s8">iCloud and device backups</a></li>
+          <li><a href="#s9">When you export or share a page</a></li>
+          <li><a href="#s10">Student work is yours</a></li>
+          <li><a href="#s11">No tracking</a></li>
+          <li><a href="#s12">How long anything is kept</a></li>
+          <li><a href="#s13">Where processing happens</a></li>
+          <li><a href="#s14">Security</a></li>
+          <li><a href="#s15">Your rights</a></li>
+          <li><a href="#s16">Changes to this policy</a></li>
+          <li><a href="#s17">Contact</a></li>
+        </ol>
+      </nav>
+
+      <article class="doc">
+        <h2 id="s1">In short</h2>
+        <p>To grade a page, Matdo Grade has to send it off the device. That is how the grading works, and there is no on-device version of it. The page travels over an encrypted connection to our grading service, which passes it to Google's Gemini model on Google Cloud and hands the reply back to your iPhone or iPad.</p>
+        <p>We keep no copy of it: not the photograph, the handwriting, the grade or the feedback. The marked page is saved on your device. We have no accounts, we ask for no name or email, and we run no analytics or advertising.</p>
+        <p>What we do keep is a small billing record: an identifier, a unit balance and the state of any purchase, so that grading can be paid for. It holds no name, no email address and no student work.</p>
+        <h2 id="s2">What leaves your device when you tap Grade</h2>
+        <p>One thing goes out: the grading request. It contains the captured page images, the grading instructions the app builds, the output level you picked (Brief or Detailed), which pages you tagged as context pages, whether it is a regrade, and — in Essay Mode — the rubric you wrote. Nothing else on the device is read or sent: not your photo library, not your contacts, not your location, not the app's other saved grades.</p>
+        <p>The request also carries the identifiers described under "What we do receive, and why", so that it can be counted against the right balance.</p>
+        <p>Whatever is written on the page goes with it. If a student's name is at the top of the sheet, that name is part of the image. The section "Student work is yours" below sets out who decides whether that is appropriate.</p>
+        <p>Before the first page is sent, the app asks your permission, and nothing leaves the device until you tap Allow. You can withdraw it in Settings → Grading Data; after that, nothing is sent until you allow it again.</p>
+        <h2 id="s3">We relay the page; we do not keep it</h2>
+        <p>Our grading service is a relay. It reads the request only to count its pages and set a length limit for the reply, forwards it to Google, and reads the reply only to work out what to charge — which pages were marked, and whether the reply was cut off — before returning it to your device. It writes no image, answer, grade or feedback to storage, and it keeps none of them in memory once the reply is sent.</p>
+        <p>There is no way for us to look up what a page said, because nothing we operate writes it down.</p>
+        <h2 id="s4">Google's part in it</h2>
+        <p>Our service runs on Google Cloud, and Google provides the parts of it that touch your data: Vertex AI, which runs the Gemini model that reads the handwriting and produces the grade; Cloud Run, which hosts our service; Firestore, which holds the billing record; and Firebase App Check, which confirms that a request came from a genuine copy of the app. Google acts as our service provider and handles this data under Google Cloud's terms (<a href="https://cloud.google.com/terms/service-terms" rel="noopener">cloud.google.com/terms/service-terms</a>), not under the terms of a consumer Google account. You need no Google account of your own.</p>
+        <p>Under those terms Google does not use the content of our requests to train or improve its models. To keep the service fast, Google may hold a request and its reply in memory for up to 24 hours, and it may keep a record of a request for a limited time to detect abuse of its services. Neither is available to us.</p>
+        <p>We do not use student work to train any model, our own or anyone else's. If that ever changes we will ask for your consent first, and this policy will say so before it happens.</p>
+        <h2 id="s5">What we do receive, and why</h2>
+        <p>A few small things, all about paying for grading rather than about the student:</p>
+        <p>A grading identifier. A random identifier generated on your device the first time the app runs and kept in the device's Keychain. It is not your Apple Account, not your device's serial number, and not an advertising identifier. It survives deleting and reinstalling the app, so that a balance you have paid for is not lost with a reinstall.</p>
+        <p>An App Store transaction identifier. Apple's signed identifier for your download of the app, sent where iOS makes it available. It is the same on every device signed in to your Apple Account, so when it is present your balance and subscription are counted against it and follow you between your iPhone and iPad. It also means the free grant is given once rather than once per reinstall.</p>
+        <p>An App Check token. A short-lived token, issued by Firebase App Check after Apple's App Attest service confirms the request came from a genuine copy of the app on a real device. It identifies the app, not you, and our service uses it only to turn away requests that did not come from the app.</p>
+        <p>A unit balance. How many units have been spent and from which balance, any top-up units, and when a subscription allowance next resets.</p>
+        <p>Purchase status. When you subscribe or buy a top-up, the App Store's signed record of that transaction is sent to our service, which keeps the product, the transaction identifier, the expiry date and whether it was refunded. Apple handles the payment; we never see a card number, a billing address or your name.</p>
+        <h2 id="s6">Server logs</h2>
+        <p>For each request, our service logs a single line: the time, a shortened form of the identifier, the number of pages, how many units were charged and why, the output level, whether it was a regrade, how much model capacity it used and what that cost us, and whether it succeeded. Google Cloud separately records the standard details of each request made to the service — the time, the connecting IP address, the app's version as sent in its user agent, and the result.</p>
+        <p>Neither log contains the content of a request or a reply. We use them to bill correctly, to keep the service secure, to troubleshoot, and — in aggregate — to see how often grades are redone, which tells us whether grading quality needs to improve.</p>
+        <h2 id="s7">What stays on your device</h2>
+        <p>Everything you can see in the app is stored in the app's own private storage, which no other app can read:</p>
+        <ul>
+          <li>Saved grades, under Previous Grading: the scanned page images, the marks drawn on them, the answers, the worked solutions and the essay feedback. These are never added to your photo library.</li>
+          <li>Your rubric, and your settings.</li>
+          <li>The Debug Log, which records timings, page counts and error text, never a student's work, and is cleared when the app closes.</li>
+        </ul>
+        <p>Settings shows how much space saved grades take. You can delete any of them from Previous Grading, and deleting the app removes all of it at once. The grading identifier in the Keychain is the one thing that outlives the app.</p>
+        <h2 id="s8">iCloud and device backups</h2>
+        <p>Matdo Grade has no iCloud feature of its own and writes nothing to iCloud itself. But saved grades live in the app's documents folder, so if your device backs itself up to iCloud or to a computer, they are included in that backup, inside your own Apple Account or on your own computer, not ours. Manage this in the device's Settings under your name → iCloud → iCloud Backup.</p>
+        <h2 id="s9">When you export or share a page</h2>
+        <p>Exporting a marked page hands an image to the share sheet, and where it goes from there is your choice: Mail, Messages, Files, a printer, another app. Once it leaves the share sheet it is governed by whatever you sent it to, not by this policy. A marked page carries a student's handwriting and often their name, so it deserves the same care as the paper original.</p>
+        <h2 id="s10">Student work is yours</h2>
+        <p>Matdo Grade is a tool for teachers, tutors and parents, and the work it grades is usually a child's. As between you and us, you (or the school or centre you work for) decide what work is graded and are responsible for having a lawful basis for it, including any notice or consent that your school's policies, your local law or a parent agreement requires. We process the pages only to return the grade you asked for, on your instruction, and for no purpose of our own.</p>
+        <p>The app is not directed to children and is not intended to be used by them. We do not knowingly collect personal information directly from a child.</p>
+        <h2 id="s11">No tracking</h2>
+        <p>No analytics, no crash reporting, no advertising, no advertising identifier, no cross-app or cross-site tracking, and no profiling. The only third-party code in the app is Firebase App Check, described above. Apart from our grading service, App Check and the App Store, the app contacts nothing.</p>
+        <p>If you have turned on Apple's Share With App Developers setting, Apple may pass us crash reports and usage statistics. You control that in the device's Settings under Privacy &amp; Security → Analytics &amp; Improvements.</p>
+        <p>We do not sell personal information, and we do not share it for cross-context behavioural advertising, under the California Consumer Privacy Act or any comparable law.</p>
+        <h2 id="s12">How long anything is kept</h2>
+        <p>Page images and grading replies: not kept by us at all. Google's short-term handling is described under "Google's part in it".</p>
+        <p>The billing record (identifier, balance and purchase status): kept for as long as it is needed to honour your balance and any subscription. Top-up units never expire, so a record holding them is kept until they are spent. We delete it on request, which forfeits any units left in it.</p>
+        <p>Server logs: kept for 30 days, then deleted.</p>
+        <p>Saved grades on your device: kept until you delete them or delete the app. We cannot delete them for you, and we cannot recover them once they are gone.</p>
+        <h2 id="s13">Where processing happens</h2>
+        <p>Our grading service and the billing record are hosted by Google Cloud in the United States. The Gemini model is reached through Google's global endpoint, so a request may be answered in any country where Google runs that service. If you are using the app outside the United States, a grading request crosses a border to be answered. You should know that before grading work that your school's rules keep within a region.</p>
+        <h2 id="s14">Security</h2>
+        <p>Every request to our service and on to Google travels over TLS. Our service signs in to Google with its own server identity. No Google credential is present in the app, so none can be extracted from a device, and App Check turns away requests that do not come from the app. Saved grades sit in the app's sandbox, protected by the device's own encryption whenever it is locked with a passcode. We strongly recommend a passcode, since a marked page is student information.</p>
+        <p>No system is perfect, and we do not claim ours is. What we can say is that the material most worth protecting, the pages themselves, is not stored by us at all.</p>
+        <h2 id="s15">Your rights</h2>
+        <p>Where your local law gives you rights over personal information — access, correction, deletion, portability, objection, or a complaint to a regulator — write to <a href="mailto:matdo@matdolab.com">matdo@matdolab.com</a> and we will honour them. Where the EU or UK GDPR applies, we process the billing record to perform our contract with you, and the server logs in our legitimate interest in running a secure, correctly billed service.</p>
+        <p>In practice there is very little to exercise them against. We hold no account for you and no copy of any student's work. What we hold is the billing record and 30 days of logs. Because the record holds no name or email address, we cannot find it by who you are; write to us and we will work out with you which record is yours before deleting it. Everything else is on your device, where you can delete it yourself at any time.</p>
+        <h2 id="s16">Changes to this policy</h2>
+        <p>If the app's handling of information changes, this page changes with it in the same release, and the effective date at the bottom moves. Where a change materially affects you, we will bring it to your attention rather than relying on you to re-read the page. The current version is also published at <a href="https://matdolab.com/grade/privacy">matdolab.com/grade/privacy</a>.</p>
+        <h2 id="s17">Contact</h2>
+        <p>Matdo Lab LLC<br /><a href="mailto:matdo@matdolab.com">matdo@matdolab.com</a><br />West Lafayette, Indiana, United States</p>
+
+        <p class="colophon">
+          End of Privacy Policy · Effective 27 September 2026 · Matdo Lab LLC
+        </p>
+      </article>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ---- Masthead ---- */
+  .doc-head {
+    padding: 140px 0 44px;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .doc-wrap { max-width: 780px; }
+  .doc-head h1 {
+    font-size: clamp(2.1rem, 4.4vw, 3.1rem);
+    margin: 0.9rem 0 0.5rem;
+  }
+  .doc-sub { color: #55665f; font-size: 1.05rem; margin-bottom: 2rem; }
+
+  .doc-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 18px 24px;
+    margin: 0;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--color-line);
+  }
+  .doc-meta dt {
+    font-size: 0.7rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: #7d8d87;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .doc-meta dd { margin: 0; font-size: 0.98rem; color: var(--color-forest); font-weight: 500; }
+
+  /* ---- Body ---- */
+  .doc-body { padding: 56px 0 clamp(64px, 9vw, 110px); }
+
+  /* Contents */
+  .toc {
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-sm);
+    padding: 26px 30px 22px;
+    margin-bottom: 3.5rem;
+    background: #fff;
+  }
+  .toc h2 {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: #7d8d87;
+    margin: 0 0 1rem;
+    font-weight: 700;
+  }
+  .toc ol { margin: 0; padding-left: 1.4rem; columns: 2; column-gap: 40px; }
+  .toc li { margin-bottom: 0.42rem; break-inside: avoid; }
+  .toc a { color: #3d4b47; font-size: 0.94rem; line-height: 1.45; }
+  .toc a:hover { color: var(--color-teal); text-decoration: underline; }
+
+  /* Sections */
+  .doc h2 {
+    font-size: clamp(1.18rem, 2.1vw, 1.42rem);
+    color: var(--color-forest);
+    margin: 3rem 0 0.9rem;
+    scroll-margin-top: 112px;
+  }
+  .doc h3 {
+    font-family: var(--font-sans);
+    font-size: 1.01rem;
+    font-weight: 700;
+    color: var(--color-forest);
+    margin: 1.9rem 0 0.7rem;
+  }
+  .doc p, .doc li {
+    color: #3a4844;
+    font-size: 1.02rem;
+    line-height: 1.75;
+  }
+  .doc p { margin-bottom: 1rem; }
+  .doc ul { margin: 0 0 1.2rem; padding-left: 1.3rem; }
+  .doc ul li { margin-bottom: 0.65rem; }
+  .doc ul li::marker { color: var(--color-sage); }
+  .doc strong { color: var(--color-forest); font-weight: 600; }
+  .doc a { color: var(--color-teal); text-decoration: underline; }
+  .doc a:hover { color: var(--color-forest); }
+  .doc a, .toc a { text-underline-offset: 0.16em; }
+
+  /* Summary callout */
+  .callout {
+    border: 1px solid var(--color-line);
+    border-left: 3px solid var(--color-sage);
+    border-radius: var(--radius-sm);
+    background: #fbfaf6;
+    padding: 24px 28px 20px;
+    margin-bottom: 1.4rem;
+  }
+  .callout-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: #7d8d87;
+    font-weight: 700;
+    margin-bottom: 0.9rem;
+  }
+  .callout ul { margin-bottom: 1rem; }
+  .callout-note {
+    font-size: 0.9rem;
+    color: #6a7b76;
+    margin: 0;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--color-line);
+  }
+
+  /* Definition lists */
+  .defs { margin: 0 0 1.4rem; }
+  .defs dt {
+    font-weight: 700;
+    color: var(--color-forest);
+    margin-top: 1.05rem;
+    font-size: 1rem;
+  }
+  .defs dt:first-child { margin-top: 0; }
+  .defs dd {
+    margin: 0.3rem 0 0;
+    color: #3a4844;
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+  .contact dd { font-weight: 500; }
+
+  /* Emphasised notice */
+  .notice {
+    border-left: 3px solid var(--color-gold);
+    background: #fdfbf3;
+    padding: 16px 20px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.99rem;
+    margin-bottom: 1.2rem;
+  }
+  .notice p:last-child { margin-bottom: 0; }
+
+  .colophon {
+    margin-top: 3.4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-line);
+    font-size: 0.86rem;
+    color: #7d8d87;
+    letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 700px) {
+    .doc-head { padding: 116px 0 36px; }
+    .toc ol { columns: 1; }
+    .toc { padding: 22px 22px 18px; }
+  }
+
+  @media print {
+    :global(#site-header), :global(footer) { display: none; }
+    .doc-head { padding-top: 0; }
+    .doc-body { padding-top: 24px; }
+    .toc { break-after: page; }
+    .doc h2 { break-after: avoid; }
+    .doc p, .doc li { font-size: 10.5pt; line-height: 1.55; }
+    .doc a { color: inherit; text-decoration: none; }
+  }
+</style>

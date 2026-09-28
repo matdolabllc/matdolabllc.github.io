@@ -1,0 +1,116 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+// Matdo Grade support — the URL given to App Store Connect as Matdo Grade's
+// Support URL, so it must stay reachable at /grade/support and must name a real
+// contact channel. The answers mirror the shipped app and its legal pages
+// (/grade/privacy and /grade/terms, generated from
+// matdo-grade/MatdoGrade/LegalViews.swift); change them together.
+const EMAIL = "matdo@matdolab.com";
+
+const faqs = [
+  {
+    q: "How do I grade a page?",
+    a: "Tap <strong>Grade</strong>, line the page up inside the dashed guide, and press the shutter. For a worksheet that runs over several pages, turn on <strong>Multi-page</strong> and capture them one after another; a reading passage the student did not write on can be tagged <strong>Context Page</strong> so it is read but not graded. For an essay, switch to Essay mode and edit the rubric first.",
+  },
+  {
+    q: "What is the difference between Brief and Detailed?",
+    a: "Both grade the same way. <strong>Brief</strong> gives each mark, the student's answer beside the correct one, and a one-line working check. <strong>Detailed</strong> adds a worked solution and the step where the student's working went wrong. A marked page costs 10 units at Brief and 30 at Detailed; a context page costs 5. A grade that comes back empty or cut off costs nothing.",
+  },
+  {
+    q: "What does it cost?",
+    a: 'New users get a one-time grant of free units. After that, grading needs a monthly plan — Lite, Plus, Pro or Max — or a top-up that never expires. Each plan\'s allowance resets on the first of the month (UTC). The details are in the <a href="/grade/terms#s12">Terms of Use</a>.',
+  },
+  {
+    q: "Does Matdo keep my students' work?",
+    a: 'No. A page is sent through our grading service to Google\'s Gemini model to be graded, and we keep no copy of the page or the grade. The marked page is saved only on your iPhone or iPad. See the <a href="/grade/privacy">Privacy Policy</a> for exactly what we do receive.',
+  },
+  {
+    q: "A mark looks wrong.",
+    a: "AI grading makes mistakes, which is why every mark is yours to check. Open the question in the detail drawer to see what the model read, or tap <strong>Regrade</strong> to grade the page again (a regrade is charged as a new grade). If a page keeps coming back wrong, email us and tell us which question — please don't attach student work.",
+  },
+  {
+    q: "How do I manage or cancel my subscription?",
+    a: "In the app, open Settings and tap Cancel Subscription, which opens Apple\'s subscription page, where you can also change plan. Or, on your device, open Settings, tap your name, then Subscriptions, and choose Matdo Grade. Refunds are requested from Apple at reportaproblem.apple.com.",
+  },
+  {
+    q: "I have a new iPhone or iPad.",
+    a: "Install Matdo Grade and sign in with the same Apple Account. Your plan and unit balance follow your Apple Account; if they don't appear, tap Restore Purchases. Saved grades live on the old device and move only with a device backup or a device-to-device transfer.",
+  },
+  {
+    q: "Something is broken, or I have an idea.",
+    a: "Email us. Tell us what you were doing and what happened — we read every message.",
+  },
+];
+---
+
+<Layout
+  title="Support — Matdo Grade"
+  description="Get help with Matdo Grade. Email matdo@matdolab.com — we usually reply within one business day."
+>
+  <section class="page-hero">
+    <div class="wrap sup-wrap">
+      <span class="eyebrow">Matdo Grade support</span>
+      <h1>We're here to help.</h1>
+      <p class="lede">
+        Email us and a person will read it. We usually reply within one business day.
+      </p>
+
+      <a class="c-card" href={`mailto:${EMAIL}`}>
+        <div class="c-ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="c-t">Email support</div>
+          <div class="c-d">{EMAIL}</div>
+        </div>
+      </a>
+
+      <p class="alt">
+        Prefer a form? Use the <a href="/contact">contact page</a>.
+      </p>
+
+      <h2 class="faq-h">Common questions</h2>
+      <dl class="faq">
+        {faqs.map((f) => (
+          <div class="faq-item">
+            <dt>{f.q}</dt>
+            <dd set:html={f.a} />
+          </div>
+        ))}
+      </dl>
+
+      <p class="alt">
+        <a href="/grade/privacy">Privacy Policy</a> · <a href="/grade/terms">Terms of Use</a>
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero { padding: 150px 0 100px; }
+  .sup-wrap { max-width: 46rem; }
+  .page-hero h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); margin: 1.1rem 0 1rem; }
+  .page-hero .lede { font-size: 1.15rem; color: #3d4b47; margin-bottom: 2rem; }
+
+  .c-card { display: flex; align-items: center; gap: 1rem; max-width: 24rem; background: #fff; border: 1px solid var(--color-line); border-radius: var(--radius-sm); padding: 1rem 1.2rem; box-shadow: var(--shadow-sm); transition: transform 0.2s, box-shadow 0.2s; }
+  a.c-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .c-ic { width: 42px; height: 42px; flex: none; border-radius: 12px; background: rgb(79 209 197 / 0.16); color: var(--color-teal); display: grid; place-items: center; }
+  .c-ic svg { width: 22px; height: 22px; }
+  .c-t { font-weight: 600; color: var(--color-forest); }
+  .c-d { font-size: 0.92rem; color: #4a5854; }
+
+  .alt { margin-top: 1.2rem; font-size: 0.95rem; color: #4a5854; }
+  .alt a { color: var(--color-teal); font-weight: 600; }
+
+  .faq-h { font-size: clamp(1.5rem, 3vw, 2rem); margin: 3.5rem 0 1.5rem; }
+  .faq { margin: 0; }
+  .faq-item { border-top: 1px solid var(--color-line); padding: 1.3rem 0; }
+  .faq-item:last-child { border-bottom: 1px solid var(--color-line); }
+  .faq dt { font-weight: 600; color: var(--color-forest); margin-bottom: 0.45rem; }
+  .faq dd { margin: 0; color: #4a5854; line-height: 1.65; }
+  .faq dd :global(a) { color: var(--color-teal); font-weight: 600; }
+  .faq dd :global(strong) { color: var(--color-forest); font-weight: 600; }
+
+  @media (max-width: 900px) { .page-hero { padding: 120px 0 70px; } }
+</style>
