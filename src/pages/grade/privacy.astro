@@ -17,7 +17,7 @@ import Layout from "../../layouts/Layout.astro";
       <p class="doc-sub">Matdo Grade for iPhone and iPad</p>
 
       <dl class="doc-meta">
-        <div><dt>Effective</dt><dd><time datetime="2026-09-27">27 September 2026</time></dd></div>
+        <div><dt>Effective</dt><dd><time datetime="2026-09-28">28 September 2026</time></dd></div>
         <div><dt>Publisher</dt><dd>Matdo Lab LLC</dd></div>
       </dl>
     </div>
@@ -33,7 +33,7 @@ import Layout from "../../layouts/Layout.astro";
           <li><a href="#s3">We relay the page; we do not keep it</a></li>
           <li><a href="#s4">Google's part in it</a></li>
           <li><a href="#s5">What we do receive, and why</a></li>
-          <li><a href="#s6">Server logs</a></li>
+          <li><a href="#s6">Usage records and server logs</a></li>
           <li><a href="#s7">What stays on your device</a></li>
           <li><a href="#s8">iCloud and device backups</a></li>
           <li><a href="#s9">When you export or share a page</a></li>
@@ -52,7 +52,7 @@ import Layout from "../../layouts/Layout.astro";
         <h2 id="s1">In short</h2>
         <p>To grade a page, Matdo Grade has to send it off the device. That is how the grading works, and there is no on-device version of it. The page travels over an encrypted connection to our grading service, which passes it to Google's Gemini model on Google Cloud and hands the reply back to your iPhone or iPad.</p>
         <p>We keep no copy of it: not the photograph, the handwriting, the grade or the feedback. The marked page is saved on your device. We have no accounts, we ask for no name or email, and we run no analytics or advertising.</p>
-        <p>What we do keep is a small billing record: an identifier, a unit balance and the state of any purchase, so that grading can be paid for. It holds no name, no email address and no student work.</p>
+        <p>What we do keep is a small billing record (an identifier, a unit balance and the state of any purchase) and a usage record for each grade: counts, timings and error codes, so that grading can be paid for and problems found. Neither holds a name, an email address or any student work.</p>
         <h2 id="s2">What leaves your device when you tap Grade</h2>
         <p>One thing goes out: the grading request. It contains the captured page images, the grading instructions the app builds, the output level you picked (Brief or Detailed), which pages you tagged as context pages, whether it is a regrade, and — in Essay Mode — the rubric you wrote. Nothing else on the device is read or sent: not your photo library, not your contacts, not your location, not the app's other saved grades.</p>
         <p>The request also carries the identifiers described under "What we do receive, and why", so that it can be counted against the right balance.</p>
@@ -72,9 +72,11 @@ import Layout from "../../layouts/Layout.astro";
         <p>An App Check token. A short-lived token, issued by Firebase App Check after Apple's App Attest service confirms the request came from a genuine copy of the app on a real device. It identifies the app, not you, and our service uses it only to turn away requests that did not come from the app.</p>
         <p>A unit balance. How many units have been spent and from which balance, any top-up units, and when a subscription allowance next resets.</p>
         <p>Purchase status. When you subscribe or buy a top-up, the App Store's signed record of that transaction is sent to our service, which keeps the product, the transaction identifier, the expiry date and whether it was refunded. Apple handles the payment; we never see a card number, a billing address or your name.</p>
-        <h2 id="s6">Server logs</h2>
-        <p>For each request, our service logs a single line: the time, a shortened form of the identifier, the number of pages, how many units were charged and why, the output level, whether it was a regrade, how much model capacity it used and what that cost us, and whether it succeeded. Google Cloud separately records the standard details of each request made to the service — the time, the connecting IP address, the app's version as sent in its user agent, and the result.</p>
-        <p>Neither log contains the content of a request or a reply. We use them to bill correctly, to keep the service secure, to troubleshoot, and — in aggregate — to see how often grades are redone, which tells us whether grading quality needs to improve.</p>
+        <h2 id="s6">Usage records and server logs</h2>
+        <p>For each grade, our service keeps a usage record: the time, the identifier, the number of pages, the mode (worksheet or essay) and output level, whether it was a regrade, how many units were charged and why, how much model capacity it used and what that cost us, how long it took, and whether it succeeded or why it failed.</p>
+        <p>The app adds a few details of its own, sent with each request: its version, your iOS version, and the kind of device (for example "iPad14,3", which names a model, not your device). It also reports what our service cannot see: a step that failed before a grade arrived, as an error code and timing; how many marks it could place on the page; and when the plans screen was opened or a plan tapped.</p>
+        <p>Our service also logs a line for each request, and Google Cloud separately records the standard details of each request made to the service: the time, the connecting IP address, the app's version as sent in its user agent, and the result.</p>
+        <p>None of these contain the content of a request or a reply: no page, answer, grade, feedback, rubric or error message text. We use them to bill correctly, to keep the service secure, to find and fix problems, to see how often grades are redone or fail, and, in aggregate, to plan pricing and capacity.</p>
         <h2 id="s7">What stays on your device</h2>
         <p>Everything you can see in the app is stored in the app's own private storage, which no other app can read:</p>
         <ul>
@@ -91,12 +93,13 @@ import Layout from "../../layouts/Layout.astro";
         <p>Matdo Grade is a tool for teachers, tutors and parents, and the work it grades is usually a child's. As between you and us, you (or the school or centre you work for) decide what work is graded and are responsible for having a lawful basis for it, including any notice or consent that your school's policies, your local law or a parent agreement requires. We process the pages only to return the grade you asked for, on your instruction, and for no purpose of our own.</p>
         <p>The app is not directed to children and is not intended to be used by them. We do not knowingly collect personal information directly from a child.</p>
         <h2 id="s11">No tracking</h2>
-        <p>No analytics, no crash reporting, no advertising, no advertising identifier, no cross-app or cross-site tracking, and no profiling. The only third-party code in the app is Firebase App Check, described above. Apart from our grading service, App Check and the App Store, the app contacts nothing.</p>
+        <p>No third-party analytics, no crash-reporting service, no advertising, no advertising identifier, no cross-app or cross-site tracking, and no profiling. The usage records described above are our own, and are never shared with anyone for advertising. The only third-party code in the app is Firebase App Check, described above. Apart from our grading service, App Check and the App Store, the app contacts nothing.</p>
         <p>If you have turned on Apple's Share With App Developers setting, Apple may pass us crash reports and usage statistics. You control that in the device's Settings under Privacy &amp; Security → Analytics &amp; Improvements.</p>
         <p>We do not sell personal information, and we do not share it for cross-context behavioural advertising, under the California Consumer Privacy Act or any comparable law.</p>
         <h2 id="s12">How long anything is kept</h2>
         <p>Page images and grading replies: not kept by us at all. Google's short-term handling is described under "Google's part in it".</p>
-        <p>The billing record (identifier, balance and purchase status): kept for as long as it is needed to honour your balance and any subscription. Top-up units never expire, so a record holding them is kept until they are spent. We delete it on request, which forfeits any units left in it.</p>
+        <p>The billing record (identifier, balance and purchase status): kept for as long as it is needed to honour your balance and any subscription. Top-up units never expire, so a record holding them is kept until they are spent. We delete it, and the usage records under its identifier, on request; deleting the billing record forfeits any units left in it.</p>
+        <p>Usage records: kept for 12 months, then deleted.</p>
         <p>Server logs: kept for 30 days, then deleted.</p>
         <p>Saved grades on your device: kept until you delete them or delete the app. We cannot delete them for you, and we cannot recover them once they are gone.</p>
         <h2 id="s13">Where processing happens</h2>
@@ -106,14 +109,14 @@ import Layout from "../../layouts/Layout.astro";
         <p>No system is perfect, and we do not claim ours is. What we can say is that the material most worth protecting, the pages themselves, is not stored by us at all.</p>
         <h2 id="s15">Your rights</h2>
         <p>Where your local law gives you rights over personal information — access, correction, deletion, portability, objection, or a complaint to a regulator — write to <a href="mailto:matdo@matdolab.com">matdo@matdolab.com</a> and we will honour them. Where the EU or UK GDPR applies, we process the billing record to perform our contract with you, and the server logs in our legitimate interest in running a secure, correctly billed service.</p>
-        <p>In practice there is very little to exercise them against. We hold no account for you and no copy of any student's work. What we hold is the billing record and 30 days of logs. Because the record holds no name or email address, we cannot find it by who you are; write to us and we will work out with you which record is yours before deleting it. Everything else is on your device, where you can delete it yourself at any time.</p>
+        <p>In practice there is very little to exercise them against. We hold no account for you and no copy of any student's work. What we hold is the billing record, 12 months of usage records and 30 days of logs. Because the record holds no name or email address, we cannot find it by who you are; write to us and we will work out with you which record is yours before deleting it. Everything else is on your device, where you can delete it yourself at any time.</p>
         <h2 id="s16">Changes to this policy</h2>
         <p>If the app's handling of information changes, this page changes with it in the same release, and the effective date at the bottom moves. Where a change materially affects you, we will bring it to your attention rather than relying on you to re-read the page. The current version is also published at <a href="https://matdolab.com/grade/privacy">matdolab.com/grade/privacy</a>.</p>
         <h2 id="s17">Contact</h2>
         <p>Matdo Lab LLC<br /><a href="mailto:matdo@matdolab.com">matdo@matdolab.com</a><br />West Lafayette, Indiana, United States</p>
 
         <p class="colophon">
-          End of Privacy Policy · Effective 27 September 2026 · Matdo Lab LLC
+          End of Privacy Policy · Effective 28 September 2026 · Matdo Lab LLC
         </p>
       </article>
     </div>
