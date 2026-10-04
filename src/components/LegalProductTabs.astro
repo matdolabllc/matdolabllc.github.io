@@ -1,7 +1,7 @@
 ---
 interface Props {
   product: "check" | "grade";
-  document: "privacy" | "terms";
+  document: "privacy" | "terms" | "support";
 }
 
 const { product, document } = Astro.props;
@@ -11,7 +11,7 @@ const products = [
 ];
 ---
 
-<nav class="legal-product-tabs" aria-label={`Product ${document === "privacy" ? "privacy policies" : "terms of use"}`}>
+<nav class="legal-product-tabs" aria-label={`Product ${document === "privacy" ? "privacy policies" : document === "terms" ? "terms of use" : "support"}`}>
   {products.map(({ id, label, href }) => (
     <a href={href} aria-current={product === id ? "page" : undefined}>{label}</a>
   ))}

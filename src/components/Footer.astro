@@ -4,9 +4,9 @@ const year = 2026;
 
 // Keep support and legal links aligned with the current product.
 const isGrade = /^\/grade(\/|$)/.test(Astro.url.pathname)
-  || /^\/(privacy|terms)\/grade\/?$/.test(Astro.url.pathname);
+  || /^\/(privacy|terms|support)\/grade\/?$/.test(Astro.url.pathname);
 const product = isGrade ? "grade" : "check";
-const support = isGrade ? "/grade/support" : "/support";
+const support = `/support/${product}`;
 ---
 <footer>
   <div class="wrap">
