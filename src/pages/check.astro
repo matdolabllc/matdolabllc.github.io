@@ -8,6 +8,7 @@ import { APP_STORE_URL } from "../consts";
 // returning visitor would be served the previous recording from cache. Bump
 // this whenever the files under public/demo/tutorials/ are replaced.
 const TUTORIAL_VERSION = "2026092202";
+const FILM_VERSION = "20261004-narrated-v1";
 
 // Illustrated cards open the existing how-to videos of the real app.
 //
@@ -107,13 +108,14 @@ const plans = [
 <figure slot="video" class="video-frame reveal">
         <video
           class="demo-video"
-          poster="/demo/matdo-check-film-poster.jpg"
+          poster={`/demo/matdo-check-film-poster.jpg?v=${FILM_VERSION}`}
           controls controlslist="nodownload"
           autoplay muted playsinline preload="auto"
           aria-label="Short film about Matdo Check: students arrive at a tutoring center, one checks in by name at the counter, works through the afternoon and checks out again; then the instructor answers four questions on her own panel — the class list, the change log, adding students, and exporting the year to CSV — and the film closes on privacy, pricing, and the App Store.">
-          <source src="/demo/matdo-check-film.webm" type="video/webm" />
-          <source src="/demo/matdo-check-film.mp4" type="video/mp4" />
-          Your browser can't play embedded video — <a href="/demo/matdo-check-film.mp4">watch it here</a>.
+          <source src={`/demo/matdo-check-film.webm?v=${FILM_VERSION}`} type="video/webm" />
+          <source src={`/demo/matdo-check-film.mp4?v=${FILM_VERSION}`} type="video/mp4" />
+          <track kind="captions" src={`/demo/matdo-check-film.vtt?v=${FILM_VERSION}`} srclang="en" label="English" />
+          Your browser can't play embedded video — <a href={`/demo/matdo-check-film.mp4?v=${FILM_VERSION}`}>watch it here</a>.
         </video>
       </figure>
 </ProductHero>
