@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 190" role="img" aria-label="Three pages of homework fanned out, graded together as one">
+  <circle cx="120" cy="94" r="80" fill="#f0e2bd" opacity="0.5"/>
+  <ellipse cx="120" cy="164" rx="86" ry="9" fill="#f3eede"/>
+
+  <defs>
+    <g id="pg">
+      <rect x="-32" y="-41" width="64" height="82" rx="5" fill="#faf8f1" stroke="#1d3b34" stroke-width="2.8"/>
+      <rect x="-12" y="-47" width="24" height="11" rx="5.5" fill="#E8A62E" stroke="#1d3b34" stroke-width="2.2"/>
+      <rect x="-12" y="-22" width="40" height="5" rx="2.5" fill="#e4e0d2"/>
+      <rect x="-12" y="-6" width="32" height="5" rx="2.5" fill="#e4e0d2"/>
+      <rect x="-12" y="10" width="38" height="5" rx="2.5" fill="#e4e0d2"/>
+      <rect x="-12" y="26" width="26" height="5" rx="2.5" fill="#e4e0d2"/>
+    </g>
+    <path id="ok" d="M-4 0 l3 3 l5.6 -6.6" fill="none" stroke="#638C6D" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="no" d="M-3 -3 l6 6 M3 -3 l-6 6" fill="none" stroke="#F24E1E" stroke-width="2.8" stroke-linecap="round"/>
+  </defs>
+
+  <!-- page 3 -->
+  <g transform="translate(156 92) rotate(13)">
+    <use href="#pg"/>
+    <circle cx="-5" cy="-41.5" r="1.7" fill="#1d3b34"/><circle cx="0" cy="-41.5" r="1.7" fill="#1d3b34"/><circle cx="5" cy="-41.5" r="1.7" fill="#1d3b34"/>
+    <use href="#ok" x="-21" y="-19"/><use href="#ok" x="-21" y="-3"/><use href="#ok" x="-21" y="13"/><use href="#ok" x="-21" y="29"/>
+  </g>
+  <!-- page 2 -->
+  <g transform="translate(120 86)">
+    <use href="#pg"/>
+    <circle cx="-2.6" cy="-41.5" r="1.7" fill="#1d3b34"/><circle cx="2.6" cy="-41.5" r="1.7" fill="#1d3b34"/>
+    <use href="#ok" x="-21" y="-19"/><use href="#no" x="-21" y="-3"/><use href="#ok" x="-21" y="13"/><use href="#ok" x="-21" y="29"/>
+  </g>
+  <!-- page 1 -->
+  <g transform="translate(84 96) rotate(-13)">
+    <use href="#pg"/>
+    <circle cx="0" cy="-41.5" r="1.7" fill="#1d3b34"/>
+    <use href="#ok" x="-21" y="-19"/><use href="#ok" x="-21" y="-3"/><use href="#no" x="-21" y="13"/><use href="#ok" x="-21" y="29"/>
+  </g>
+
+  <!-- one grade for the lot -->
+  <circle cx="186" cy="146" r="19" fill="#1f6f63" stroke="#faf8f1" stroke-width="3"/>
+  <path d="M178 146.5 l5.4 5.4 l10 -11.8" fill="none" stroke="#faf8f1" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

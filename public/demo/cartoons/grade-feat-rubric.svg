@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 190" role="img" aria-label="An essay with notes beside its paragraphs, and a rubric with criteria switched on and a custom one being written">
+  <circle cx="120" cy="94" r="80" fill="#f0e2bd" opacity="0.5"/>
+  <ellipse cx="120" cy="164" rx="88" ry="9" fill="#f3eede"/>
+
+  <!-- the essay -->
+  <rect x="24" y="34" width="88" height="118" rx="7" fill="#faf8f1" stroke="#1d3b34" stroke-width="3"/>
+  <rect x="50" y="43" width="40" height="6" rx="3" fill="#1d3b34"/>
+  <g fill="#d7d3c4">
+    <rect x="52" y="57" width="48" height="3.6" rx="1.8"/><rect x="46" y="64" width="54" height="3.6" rx="1.8"/>
+    <rect x="46" y="71" width="52" height="3.6" rx="1.8"/><rect x="46" y="78" width="30" height="3.6" rx="1.8"/>
+    <rect x="52" y="90" width="48" height="3.6" rx="1.8"/><rect x="46" y="97" width="54" height="3.6" rx="1.8"/>
+    <rect x="46" y="104" width="50" height="3.6" rx="1.8"/><rect x="46" y="111" width="54" height="3.6" rx="1.8"/>
+    <rect x="46" y="118" width="24" height="3.6" rx="1.8"/>
+    <rect x="52" y="130" width="48" height="3.6" rx="1.8"/><rect x="46" y="137" width="40" height="3.6" rx="1.8"/>
+  </g>
+  <!-- margin notes: a strong paragraph, a slip on one line -->
+  <g>
+    <circle cx="36" cy="68" r="7" fill="#fff" stroke="#3c3c43" stroke-opacity="0.3" stroke-width="1"/>
+    <path transform="translate(31.6 63.6) scale(0.37)" d="M2 10h4v11H2zM8 10l4-8c1.7 0 3 1.3 3 3v4h5.5c1.1 0 2 1 1.8 2.1l-1.6 8.5c-.2.9-1 1.4-1.9 1.4H8z" fill="#638C6D"/>
+    <circle cx="36" cy="106" r="7" fill="#fff" stroke="#3c3c43" stroke-opacity="0.3" stroke-width="1"/>
+    <path d="M36 102 v4.6" stroke="#FFB039" stroke-width="2.6" stroke-linecap="round"/>
+    <circle cx="36" cy="109.8" r="1.4" fill="#FFB039"/>
+    <path d="M48 116 q3 2.4 6 0 t6 0 t6 0" fill="none" stroke="#FFB039" stroke-width="1.6" stroke-linecap="round"/>
+  </g>
+
+  <!-- the rubric -->
+  <rect x="120" y="40" width="98" height="118" rx="10" fill="#fff" stroke="#1d3b34" stroke-width="3"/>
+  <rect x="150" y="33" width="38" height="12" rx="6" fill="#E8A62E" stroke="#1d3b34" stroke-width="2.4"/>
+  <g>
+    <rect x="128" y="57" width="17" height="10" rx="5" fill="#638C6D"/><circle cx="140" cy="62" r="3.6" fill="#fff"/>
+    <rect x="150" y="59.5" width="28" height="5" rx="2.5" fill="#d7d3c4"/>
+    <rect x="184" y="57" width="26" height="10" rx="5" fill="#638C6D"/>
+
+    <rect x="128" y="76" width="17" height="10" rx="5" fill="#638C6D"/><circle cx="140" cy="81" r="3.6" fill="#fff"/>
+    <rect x="150" y="78.5" width="22" height="5" rx="2.5" fill="#d7d3c4"/>
+    <rect x="184" y="76" width="26" height="10" rx="5" fill="#FFB039"/>
+
+    <rect x="128" y="95" width="17" height="10" rx="5" fill="#638C6D"/><circle cx="140" cy="100" r="3.6" fill="#fff"/>
+    <rect x="150" y="97.5" width="26" height="5" rx="2.5" fill="#d7d3c4"/>
+    <rect x="184" y="95" width="26" height="10" rx="5" fill="#F24E1E"/>
+  </g>
+  <!-- your own criteria, being written -->
+  <rect x="128" y="114" width="82" height="34" rx="7" fill="#eef7f4" stroke="#2f8f7f" stroke-width="2" stroke-dasharray="4 3"/>
+  <path d="M136 131 h8 M140 127 v8" stroke="#2f8f7f" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M150 128 q3 -3 6 0 t6 0 t6 0 t6 0" fill="none" stroke="#1f6f63" stroke-width="2" stroke-linecap="round"/>
+  <rect x="150" y="136" width="20" height="3.6" rx="1.8" fill="#9fcfc4"/>
+
+  <!-- pencil -->
+  <g stroke-linecap="round">
+    <path d="M216 162 L188 134" stroke="#E8A62E" stroke-width="8"/>
+    <path d="M216 162 L212 158" stroke="#F24E1E" stroke-width="8" opacity="0.8"/>
+    <path d="M187 133 L182 128" stroke="#E8C9A2" stroke-width="6"/>
+    <path d="M182.5 128.5 L180 126" stroke="#1d3b34" stroke-width="3.6"/>
+  </g>
+</svg>

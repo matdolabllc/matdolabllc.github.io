@@ -1,0 +1,852 @@
+---
+/**
+ * "See it grade": a row of page thumbnails; picking one opens the scan beside
+ * the same page as Matdo Grade marked it. Multi-page samples get a page strip.
+ * Samples live in src/data/gradedSamples.ts; mark positions come from
+ * src/lib/gradeMarks.ts, ported from the app.
+ */
+import { samples } from "../data/gradedSamples";
+import { markPaths, placeEssayNotes, placeMarks } from "../lib/gradeMarks";
+
+// Both panes are the same 3 : 4 frame, so switching samples or pages never
+// makes the section jump; each page is fitted inside it at its own shape.
+const FRAME = 3 / 4;
+// The sample open when the page loads.
+const DEFAULT_SAMPLE = "sprint";
+const MARKS_START = 0.15; // seconds after a page appears
+const MARK_STEP = 0.09;
+
+const prepared = samples.map((s) => ({
+  ...s,
+  tally: s.rows && {
+    right: s.rows.filter((r) => r.result === "correct").length,
+    wrong: s.rows.filter((r) => r.result === "incorrect").length,
+  },
+  score: s.rows
+    ? `${s.rows.filter((r) => r.result === "correct").length} / ${s.rows.length} correct`
+    : `${s.essay?.rubric.filter((c) => c.result === "Met").length ?? 0} met · ${s.essay?.rubric.filter((c) => c.result === "Partly met").length ?? 0} partly met`,
+  pages: s.pages.map((p) => {
+    const { width: W, height: H } = p;
+    const ratio = W / H;
+    const fit = ratio < FRAME ? { w: (ratio / FRAME) * 100, h: 100 } : { w: 100, h: (FRAME / ratio) * 100 };
+
+    const marks = p.marks ?? [];
+    const placed = placeMarks(marks.map((m) => m.box), W, H);
+
+    const notes = p.essayNotes ?? [];
+    const spots = placeEssayNotes(notes.map((n) => n.box), W, H);
+    const rank = spots.map((q, i) => ({ i, y: q.y })).sort((a, b) => a.y - b.y).map((r) => r.i);
+    const badges = notes.map((n, i) => {
+      const q = spots[i];
+      const bw = ((1.7 * q.size) / W) * 100;
+      const left = (q.x / W) * 100;
+      return { ...n, left, top: (q.y / H) * 100, bw, popLeft: left + bw / 2 + 1.5, delay: MARKS_START + rank.indexOf(i) * 0.05 };
+    });
+    return { ...p, fit, marks, placed, badges };
+  }),
+}));
+
+const fitStyle = (fit: { w: number; h: number }) => `width:${fit.w.toFixed(2)}%;height:${fit.h.toFixed(2)}%`;
+
+const icons = {
+  bang: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9.6" y="2.5" width="4.8" height="13" rx="2.4"/><circle cx="12" cy="20" r="2.5"/></svg>',
+  thumb: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 10h4v11H2zM8 10l4-8c1.7 0 3 1.3 3 3v4h5.5c1.1 0 2 1 1.8 2.1l-1.6 8.5c-.2.9-1 1.4-1.9 1.4H8z"/></svg>',
+  list: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4" width="19" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M10 9h8M10 12h8M10 15h8"/><circle cx="6.6" cy="9" r="1.1" fill="currentColor"/><circle cx="6.6" cy="12" r="1.1" fill="currentColor"/><circle cx="6.6" cy="15" r="1.1" fill="currentColor"/></svg>',
+  check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" d="M4 12.5l5 5L20 6"/></svg>',
+  cross: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg>',
+  prev: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M15 5l-7 7 7 7"/></svg>',
+  next: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>',
+  right: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg>',
+};
+---
+
+<section id="samples" class="section-pad gs-section">
+  <div class="wrap">
+    <hr class="gs-rule" />
+    <div class="sec-head center reveal">
+      <h2>Example</h2>
+    </div>
+
+    <div class="gs reveal" data-gs>
+      <ul class="gs-thumbs">
+        {prepared.map((s) => (
+          <li>
+            <button type="button" class="gs-thumb" aria-pressed={s.id === DEFAULT_SAMPLE ? "true" : "false"} aria-controls="gs-viewer" data-open={s.id}>
+              <span class={`gs-thumb-img ${s.pages.length > 1 ? "stack" : ""}`}>
+                <img src={s.pages[0].src} width={s.pages[0].width} height={s.pages[0].height} alt="" loading="lazy" decoding="async" />
+                {s.pages.length > 1 && <span class="gs-count">{s.pages.length} pages</span>}
+              </span>
+              <span class="gs-thumb-label">{s.label}</span>
+              <span class="gs-sr">: {s.title}. Show it graded.</span>
+            </button>
+          </li>
+        ))}
+      </ul>
+
+      <div id="gs-viewer" class="gs-viewer" tabindex="-1" aria-label="Graded sample">
+        {prepared.map((s) => (
+          <div class="gs-sample" data-sample={s.id} data-detail="false" hidden={s.id !== DEFAULT_SAMPLE}>
+            <div class="gs-panes">
+              <figure class="gs-pane">
+                <figcaption>Scan</figcaption>
+                <div class="gs-frame">
+                  {s.pages.map((p, k) => (
+                    <div class="gs-page" data-page={k} hidden={k !== 0} style={fitStyle(p.fit)}>
+                      <img src={p.src} width={p.width} height={p.height} alt={s.pages.length > 1 ? `${s.alt} Page ${k + 1}.` : s.alt} loading="lazy" decoding="async" />
+                    </div>
+                  ))}
+                </div>
+              </figure>
+
+              <figure class="gs-pane graded">
+                <figcaption>Graded by Matdo Grade</figcaption>
+                <div class="gs-card">
+                  <div class="gs-card-inner">
+                    <div class="gs-frame gs-face gs-front">
+                      {s.pages.map((p, k) => (
+                        <div class="gs-page" data-page={k} hidden={k !== 0} style={fitStyle(p.fit)}>
+                          <img src={p.src} width={p.width} height={p.height} alt="" loading="lazy" decoding="async" />
+
+                          {p.marks.length > 0 && (
+                            <svg class="gs-marks" viewBox={`0 0 ${p.width} ${p.height}`} aria-hidden="true">
+                              {p.marks.map((m, i) => {
+                                const q = p.placed[i];
+                                return (
+                                  <g class={`gs-mark ${m.result}`} data-q={m.n} style={`--i:${i}`} transform={`translate(${q.x.toFixed(1)} ${q.y.toFixed(1)})`}>
+                                    <circle class="gs-halo" r={(q.size * 0.75).toFixed(1)} />
+                                    {markPaths(m.result, q.size).map((d, j) => (
+                                      <path d={d} pathLength="1" stroke-width={(q.size * 0.17).toFixed(1)} class={j ? "second" : undefined} />
+                                    ))}
+                                  </g>
+                                );
+                              })}
+                            </svg>
+                          )}
+
+
+                          {p.badges.map((n, bi) => (
+                            <>
+                              <button
+                                type="button"
+                                data-note={bi}
+                                class={`gs-badge ${n.kind === "paragraph" && n.isStrong ? "strong" : ""}`}
+                                aria-expanded="false"
+                                aria-label={n.kind === "spelling" ? `${n.issue}: ${n.from}, should be ${n.to}` : `Paragraph ${n.index} note`}
+                                style={`left:${n.left.toFixed(2)}%;top:${n.top.toFixed(2)}%;--bw:${n.bw.toFixed(2)}%;--d:${n.delay.toFixed(2)}s`}
+                                set:html={n.kind === "paragraph" && n.isStrong ? icons.thumb : icons.bang}
+                              />
+                              <span class="gs-pop" role="tooltip" style={`left:${n.popLeft.toFixed(2)}%;top:${n.top.toFixed(2)}%;--pl:${n.popLeft.toFixed(2)}%`}>
+                                {n.kind === "spelling" ? (
+                                  <><strong>{n.issue}</strong><s>{n.from}</s> → <b>{n.to}</b></>
+                                ) : (
+                                  <><strong>Paragraph {n.index}</strong>{n.comment}</>
+                                )}
+                              </span>
+                            </>
+                          ))}
+
+                          {p.context && <span class="gs-context">Read as context · not marked</span>}
+                          {p.unmarked && <span class="gs-unmarked">{p.unmarked}</span>}
+                        </div>
+                      ))}
+                      <button type="button" class="gs-show" aria-expanded="false" aria-controls={`gs-detail-${s.id}`} data-detail-open>
+                        <Fragment set:html={icons.list} />Show Detail
+                      </button>
+                    </div>
+
+                    <div class="gs-frame gs-face gs-back" id={`gs-detail-${s.id}`} inert>
+                      <div class="gs-back-bg" aria-hidden="true"></div>
+                      <div class="gs-back-scroll">
+                        <button type="button" class="gs-back-head" data-detail-close aria-label="Grading details. Show the graded page again.">
+                          <span class="gs-back-title">{s.essay ? "Essay Details" : `Grading Details (${s.mode} mode)`}</span>
+                          <span class="gs-back-tip">Tap the card to see the page again</span>
+                        </button>
+                        {s.rows && s.tally && (
+                          <>
+                            <div class="gs-tally">
+                              <span class="gs-tchip ok"><Fragment set:html={icons.check} />{s.tally.right}</span>
+                              <span class="gs-tchip bad"><Fragment set:html={icons.cross} />{s.tally.wrong}</span>
+                              <span class="gs-tcount">{s.rows.length} question{s.rows.length === 1 ? "" : "s"}</span>
+                            </div>
+                            <div class="gs-dt-head" aria-hidden="true"><span>#</span><span></span><span>Student’s answer</span><span>Correct answer</span><span></span></div>
+                            <ul class="gs-rows">
+                              {s.rows.map((r) => {
+                                const steps = r.steps ?? [];
+                                const mistakes = r.mistakes ?? [];
+                                const suspect = new Set(mistakes.map((m) => m.step - 1));
+                                const more = Boolean(r.explanation || steps.length || mistakes.length || r.unmarked);
+                                const answer = (v: string, cls: string) => r.unit === "$"
+                                  ? <><span class="u">$</span><span class={cls}>{v}</span></>
+                                  : <><span class={cls}>{v}</span>{r.unit && <span class="u"> {r.unit}</span>}</>;
+                                return (
+                                  <li class={`gs-row ${r.result}`}>
+                                    <button type="button" class="gs-row-main" aria-expanded={more ? "false" : undefined} disabled={!more}>
+                                      <span class="gs-row-n">{r.n}</span>
+                                      <span class="gs-row-r" set:html={r.result === "correct" ? icons.check : icons.cross} />
+                                      <span class="gs-row-a">{answer(r.student, r.result === "correct" ? "v ok" : "v bad")}</span>
+                                      <span class="gs-row-c">{answer(r.correct, "v ok")}</span>
+                                      <span class="gs-row-d">{more && <><span class="lbl">Details</span><Fragment set:html={icons.right} /></>}</span>
+                                    </button>
+                                    {more && (
+                                      <div class="gs-row-more" hidden>
+                                        {r.explanation && <p class="gs-expl">{r.explanation}</p>}
+                                        {(steps.length > 0 || mistakes.length > 0) && (
+                                          <div class="gs-panels">
+                                            <section class="gs-panel ok">
+                                              <h5>Correct steps</h5>
+                                              {steps.length > 0 ? (
+                                                <ol class="gs-steps">
+                                                  {steps.map((st, i) => (
+                                                    <li class={suspect.has(i) ? "suspect" : undefined}>
+                                                      <span class="gs-step-n">{i + 1}</span>
+                                                      <span class="gs-step-b">
+                                                        <span>{st.text}</span>
+                                                        {st.math && <span class="gs-math">{st.math}</span>}
+                                                      </span>
+                                                    </li>
+                                                  ))}
+                                                </ol>
+                                              ) : <p class="gs-none">This question needs no working.</p>}
+                                            </section>
+                                            <section class="gs-panel bad">
+                                              <h5>{mistakes.length > 1 ? "Possible mistakes" : "Possible mistake"}</h5>
+                                              {mistakes.length > 0 ? (
+                                                <>
+                                                  {mistakes.map((m) => (
+                                                    <div class="gs-mist">
+                                                      <b>{m.step >= 1 && m.step <= steps.length ? `At step ${m.step}` : "Overall"}</b>
+                                                      <span>{m.detail}</span>
+                                                    </div>
+                                                  ))}
+                                                  <p class="gs-guess">A best guess from what is written on the page.</p>
+                                                </>
+                                              ) : (
+                                                <p class="gs-none">{r.result === "correct" ? "Nothing to flag — the answer is correct." : "No steps are identified."}</p>
+                                              )}
+                                            </section>
+                                          </div>
+                                        )}
+                                        {r.unmarked && <p class="gs-row-unmarked">⚠ Not marked on the page — its position on the sheet couldn’t be identified</p>}
+                                      </div>
+                                    )}
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          </>
+                        )}
+
+                        {s.essay && (
+                          <div class="gs-essay">
+                            <p class="gs-assessed"><span>Assessed against</span>{s.essay.rubric.map((c) => c.title).join(" · ")}</p>
+                            <h5>Summary</h5>
+                            <p>{s.essay.summary}</p>
+                            <h5>Rubric</h5>
+                            <ul class="gs-rubric">
+                              {s.essay.rubric.map((c) => (
+                                <li>
+                                  <span>{c.title}{c.detail && <small>{c.detail}</small>}</span>
+                                  <span class={`gs-verdict ${c.result === "Met" ? "met" : c.result === "Partly met" ? "partly" : "no"}`}>{c.result}</span>
+                                </li>
+                              ))}
+                            </ul>
+                            <h5>Paragraph by paragraph</h5>
+                            {s.pages[0].badges.map((n, bi) => n.kind === "paragraph" && (
+                              <button type="button" class="gs-para" data-note={bi} data-page="0">
+                                <strong>Paragraph {n.index}</strong>{n.comment}
+                              </button>
+                            ))}
+                            <h5>Spelling and grammar</h5>
+                            <ul class="gs-spell">
+                              {s.pages[0].badges.map((n, bi) => n.kind === "spelling" && (
+                                <li><button type="button" data-note={bi} data-page="0"><span><s>{n.from}</s> → <b>{n.to}</b></span><small>{n.issue}</small></button></li>
+                              ))}
+                            </ul>
+                            <h5>Overall</h5>
+                            <p class="gs-overall">{s.essay.comment}</p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </figure>
+              {s.pages.length > 1 && (
+                <>
+                  <button type="button" class="gs-nav prev" data-step="-1" aria-label="Previous page" disabled set:html={icons.prev} />
+                  <button type="button" class="gs-nav next" data-step="1" aria-label="Next page" set:html={icons.next} />
+                </>
+              )}
+            </div>
+
+            {s.pages.length > 1 && (
+              <nav class="gs-pager" aria-label="Pages">
+                {s.pages.map((p, k) => (
+                  <button type="button" class="gs-pg" data-go={k} aria-current={k === 0 ? "page" : undefined}>
+                    <img src={p.src} width={p.width} height={p.height} alt="" loading="lazy" decoding="async" />
+                    <span>Page {k + 1}{p.context ? " · context" : ""}</span>
+                  </button>
+                ))}
+              </nav>
+            )}
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-gs]");
+  const viewer = root?.querySelector<HTMLElement>("#gs-viewer");
+  if (root && viewer) {
+    const thumbs = Array.from(root.querySelectorAll<HTMLButtonElement>("[data-open]"));
+    const samples = Array.from(viewer.querySelectorAll<HTMLElement>(".gs-sample"));
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    const closeNotes = () =>
+      viewer.querySelectorAll('.gs-badge[aria-expanded="true"]').forEach((b) => b.setAttribute("aria-expanded", "false"));
+
+    // Show page k of a sample in both panes, and (re)play the marks on it.
+    const showPage = (sample: HTMLElement, k: number) => {
+      closeNotes();
+      setDetail(sample, false);
+      const pages = sample.querySelectorAll(".gs-front .gs-page").length;
+      sample.querySelector<HTMLButtonElement>(".gs-nav.prev")?.toggleAttribute("disabled", k <= 0);
+      sample.querySelector<HTMLButtonElement>(".gs-nav.next")?.toggleAttribute("disabled", k >= pages - 1);
+      sample.querySelectorAll<HTMLElement>(".gs-page").forEach((page) => {
+        page.hidden = Number(page.dataset.page) !== k;
+        page.classList.remove("on");
+      });
+      sample.querySelectorAll<HTMLElement>(".gs-pg").forEach((b) =>
+        Number(b.dataset.go) === k ? b.setAttribute("aria-current", "page") : b.removeAttribute("aria-current"),
+      );
+      // Only the latest request plays, so quick page or sample switches never
+      // leave a hidden page half-animated.
+      const ticket = ++showTicket;
+      const graded = sample.querySelector<HTMLElement>(`.graded .gs-page[data-page="${k}"]`);
+      if (graded) {
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          if (ticket === showTicket) graded.classList.add("on");
+        }));
+      }
+    };
+    let showTicket = 0;
+
+    const currentPage = (sample: HTMLElement) =>
+      Number(sample.querySelector<HTMLElement>(".graded .gs-page:not([hidden])")?.dataset.page ?? 0);
+
+    // Turn back to the page and bring a question's mark (or an essay note) into focus.
+    const point = (sample: HTMLElement, page: number, q: string | undefined, note: string | undefined, scroll: boolean) => {
+      const wasFlipped = sample.dataset.detail === "true";
+      if (currentPage(sample) !== page) showPage(sample, page);
+      else setDetail(sample, false);
+      const graded = sample.querySelector<HTMLElement>(`.graded .gs-page[data-page="${page}"]`);
+      if (!graded) return;
+      const target =
+        q !== undefined
+          ? graded.querySelector<Element>(`.gs-mark[data-q="${q}"]`)
+          : graded.querySelector<HTMLElement>(`.gs-badge[data-note="${note}"]`);
+      if (!target) return;
+      if (note !== undefined) {
+        closeNotes();
+        target.setAttribute("aria-expanded", "true");
+      }
+      target.classList.remove("ping");
+      const turn = wasFlipped && !reduced.matches ? 650 : 0;
+      setTimeout(() => requestAnimationFrame(() => target.classList.add("ping")), turn);
+      if (scroll) {
+        const pane = graded.closest<HTMLElement>(".gs-pane")!.getBoundingClientRect();
+        if (pane.top < 80 || pane.bottom > window.innerHeight) {
+          graded.closest(".gs-pane")!.scrollIntoView({ behavior: reduced.matches ? "auto" : "smooth", block: "center" });
+        }
+      }
+    };
+
+    // Turn the graded page over to its Grading Details, or back.
+    const setDetail = (sample: HTMLElement, show: boolean, moveFocus = false) => {
+      if ((sample.dataset.detail === "true") === show) return;
+      const front = sample.querySelector<HTMLElement>(".gs-front")!;
+      const back = sample.querySelector<HTMLElement>(".gs-back")!;
+      const openBtn = sample.querySelector<HTMLElement>("[data-detail-open]")!;
+      sample.dataset.detail = String(show);
+      openBtn.setAttribute("aria-expanded", String(show));
+      front.inert = show;
+      back.inert = !show;
+      if (show) {
+        closeNotes();
+        back.querySelector<HTMLElement>(".gs-back-scroll")!.scrollTop = 0;
+      }
+      if (moveFocus) (show ? sample.querySelector<HTMLElement>("[data-detail-close]")! : openBtn).focus({ preventScroll: true });
+    };
+
+    const open = (id: string) => {
+      thumbs.forEach((t) => t.setAttribute("aria-pressed", String(t.dataset.open === id)));
+      samples.forEach((s) => setDetail(s, false));
+      samples.forEach((s) => (s.hidden = s.dataset.sample !== id));
+      const sample = samples.find((s) => s.dataset.sample === id)!;
+      showPage(sample, 0);
+      const top = viewer.getBoundingClientRect().top;
+      if (top > window.innerHeight * 0.6 || top < 0) {
+        viewer.scrollIntoView({ behavior: reduced.matches ? "auto" : "smooth", block: "start" });
+      }
+    };
+
+    thumbs.forEach((t) => t.addEventListener("click", () => open(t.dataset.open!)));
+
+    // One sample is open from the start; its marks draw in the first time the
+    // section comes into view rather than unseen at page load.
+    const first = samples.find((s) => !s.hidden);
+    if (first) {
+      const play = () => {
+        if (!first.hidden && !first.querySelector(".graded .gs-page.on")) showPage(first, 0);
+      };
+      if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver((entries) => {
+          if (!entries.some((e) => e.isIntersecting)) return;
+          io.disconnect();
+          play();
+        }, { threshold: 0.3 });
+        io.observe(viewer);
+      } else {
+        play();
+      }
+    }
+
+    samples.forEach((sample) => {
+      sample.querySelectorAll<HTMLButtonElement>(".gs-pg").forEach((b) =>
+        b.addEventListener("click", () => showPage(sample, Number(b.dataset.go))),
+      );
+
+      // The graded page is the toggle: a click shows the details, a click on the
+      // details shows the page again. Margin notes and the rows keep their own clicks.
+      sample.querySelector(".gs-front")!.addEventListener("click", (e) => {
+        if ((e.target as Element).closest(".gs-badge, .gs-pop")) return;
+        setDetail(sample, true, e.detail === 0);
+      });
+      sample.querySelector(".gs-back")!.addEventListener("click", (e) => {
+        const target = e.target as Element;
+        if (target.closest(".gs-row")) return; // rows open and close; they never flip the card
+        const hit = target.closest("button, a");
+        if (hit && !hit.matches("[data-detail-close]")) return;
+        if (window.getSelection()?.toString()) return; // selecting text is not a click
+        setDetail(sample, false, e.detail === 0);
+      });
+
+      // A row opens to the app's two panels: correct steps, and the possible mistake.
+      sample.querySelectorAll<HTMLButtonElement>(".gs-row-main").forEach((row) =>
+        row.addEventListener("click", () => {
+          const more = row.nextElementSibling as HTMLElement | null;
+          if (!more) return;
+          const opening = row.getAttribute("aria-expanded") !== "true";
+          row.setAttribute("aria-expanded", String(opening));
+          more.hidden = !opening;
+        }),
+      );
+      // Multi-page: the arrows step through the pages.
+      sample.querySelectorAll<HTMLButtonElement>(".gs-nav").forEach((b) =>
+        b.addEventListener("click", () => {
+          const pages = sample.querySelectorAll(".gs-front .gs-page").length;
+          const k = Math.min(pages - 1, Math.max(0, currentPage(sample) + Number(b.dataset.step)));
+          showPage(sample, k);
+        }),
+      );
+      // Essay notes in the sheet open the same note on the page.
+      sample.querySelectorAll<HTMLButtonElement>(".gs-back [data-note]").forEach((b) =>
+        b.addEventListener("click", () => point(sample, Number(b.dataset.page), undefined, b.dataset.note, true)),
+      );
+      sample.querySelectorAll<HTMLButtonElement>(".gs-page .gs-badge").forEach((badge) =>
+        badge.addEventListener("click", () => {
+          const wasOpen = badge.getAttribute("aria-expanded") === "true";
+          closeNotes();
+          badge.setAttribute("aria-expanded", String(!wasOpen));
+        }),
+      );
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key !== "Escape") return;
+      closeNotes();
+      const flipped = samples.find((s) => !s.hidden && s.dataset.detail === "true");
+      if (flipped) setDetail(flipped, false, true);
+    });
+  }
+</script>
+
+<style>
+  /* Sits right under the hero: a hairline instead of a band of empty space. */
+  .gs-section { padding-top: 0; }
+  .gs-rule { border: 0; border-top: 1px solid var(--color-line); margin: 0 0 clamp(28px, 4vw, 44px); }
+  .gs-section .sec-head { margin-bottom: clamp(1.4rem, 3vw, 2rem); }
+  .gs-section .sec-head h2 { margin: 0; }
+
+  .gs { max-width: 1120px; margin: 0 auto; }
+  .gs-sr { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* ----- Thumbnails ----- */
+  .gs-thumbs {
+    list-style: none; margin: 0; padding: 6px 4px 14px;
+    display: flex; justify-content: center; gap: clamp(14px, 2.4vw, 28px);
+  }
+  .gs-thumb {
+    position: relative; /* keeps the hidden label inside the scrolling row */
+    display: flex; flex-direction: column; align-items: center; gap: 0.7rem;
+    width: clamp(108px, 13vw, 150px); padding: 0; border: 0; background: none; cursor: pointer;
+    font: inherit; color: var(--color-forest);
+  }
+  .gs-thumb-img {
+    position: relative; display: block; width: 100%; aspect-ratio: 3 / 4;
+    border-radius: 14px; background: #fff;
+    box-shadow: var(--shadow-sm), 0 0 0 1px var(--color-line);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .gs-thumb-img img {
+    position: absolute; inset: 0; z-index: 1; display: block; width: 100%; height: 100%;
+    object-fit: cover; object-position: top; border-radius: 14px;
+  }
+  /* Multi-page: the stacked-card look the app's history uses. */
+  .gs-thumb-img.stack::before,
+  .gs-thumb-img.stack::after {
+    content: ""; position: absolute; inset: 0; border-radius: 14px; background: #fff;
+    box-shadow: var(--shadow-sm), 0 0 0 1px var(--color-line);
+  }
+  .gs-thumb-img.stack::before { transform: translate(10px, -8px) rotate(4deg); }
+  .gs-thumb-img.stack::after { transform: translate(5px, -4px) rotate(2deg); }
+  .gs-count {
+    position: absolute; z-index: 2; right: 8px; bottom: 8px;
+    font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.55rem; border-radius: 999px;
+    background: var(--color-forest); color: #fff;
+  }
+  .gs-thumb-label { font-size: 0.9rem; font-weight: 600; line-height: 1.3; text-align: center; text-wrap: balance; }
+  .gs-thumb:hover .gs-thumb-img { transform: translateY(-4px); box-shadow: var(--shadow-md), 0 0 0 1px var(--color-line); }
+  .gs-thumb[aria-pressed="true"] .gs-thumb-img { transform: translateY(-4px); box-shadow: var(--shadow-md), 0 0 0 3px var(--color-teal); }
+  .gs-thumb[aria-pressed="true"] .gs-thumb-label { color: var(--color-teal); }
+  .gs-thumb:focus-visible { outline: none; }
+  .gs-thumb:focus-visible .gs-thumb-img { box-shadow: 0 0 0 3px var(--color-mint); }
+
+
+  /* ----- Viewer ----- */
+  .gs-viewer { margin-top: 2.6rem; scroll-margin-top: 96px; }
+  .gs-viewer:focus { outline: none; }
+  .gs-sample[hidden], .gs-page[hidden] { display: none; }
+
+  /* Capped so both panes and the page strip fit on a laptop screen. */
+  .gs-panes { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2.6vw, 32px); max-width: 900px; margin: 0 auto; }
+  .gs-pane { margin: 0; }
+  .gs-pane figcaption {
+    margin-bottom: 0.6rem; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #6b7772;
+  }
+  .gs-pane.graded figcaption { color: #4b6d53; }
+  .gs-frame {
+    position: relative; aspect-ratio: 3 / 4;
+    display: grid; place-items: center;
+    background: #fff; border: 1px solid var(--color-line); border-radius: var(--radius);
+    box-shadow: var(--shadow-md); overflow: hidden;
+  }
+  .gs-pane.graded .gs-frame { box-shadow: var(--shadow-md), 0 0 0 2px rgb(99 140 109 / 0.35); }
+  .gs-page { position: relative; }
+  .gs-page img { display: block; width: 100%; height: 100%; }
+
+  /* ----- Worksheet marks: the app's sage ✓ and coral ✗, drawn in one by one ----- */
+  .gs-marks { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .gs-mark path { fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .gs-mark.correct path { stroke: #638c6d; }
+  .gs-mark.incorrect path { stroke: #f24e1e; }
+  .gs-page.on .gs-mark path {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.32s ease-out;
+    transition-delay: calc(0.15s + var(--i) * 0.09s);
+  }
+  .gs-page.on .gs-mark path.second { transition-delay: calc(0.27s + var(--i) * 0.09s); }
+
+
+  /* ----- Essay margin badges, as the app draws them ----- */
+  .gs-badge {
+    position: absolute; width: var(--bw); aspect-ratio: 1; padding: 0;
+    translate: -50% -50%; scale: 0;
+    display: grid; place-items: center;
+    background: rgb(255 255 255 / 0.92); border: 1px solid rgb(60 60 67 / 0.3); border-radius: 50%;
+    box-shadow: 0 2px 6px rgb(29 59 52 / 0.14);
+    color: #ffb039; cursor: pointer;
+  }
+  .gs-badge.strong { color: #638c6d; }
+  .gs-badge :global(svg) { width: 62%; height: 62%; fill: currentColor; }
+  .gs-page.on .gs-badge {
+    scale: 1;
+    transition: scale 0.32s cubic-bezier(0.3, 1.5, 0.5, 1), box-shadow 0.2s, border-color 0.2s;
+    transition-delay: var(--d), 0s, 0s;
+  }
+  .gs-badge:hover, .gs-badge[aria-expanded="true"] { border-color: #ffb039; box-shadow: 0 0 0 3px rgb(255 176 57 / 0.32); }
+  .gs-pop {
+    position: absolute; z-index: 3; width: min(250px, calc(97% - var(--pl))); translate: 0 -50%;
+    padding: 8px 11px 9px;
+    background: #fff; border: 1px solid rgb(255 176 57 / 0.55); border-left: 3px solid #ffb039;
+    border-radius: 10px; box-shadow: 0 10px 24px rgb(29 59 52 / 0.18);
+    font-size: 12.5px; line-height: 1.4; color: var(--color-ink);
+    opacity: 0; visibility: hidden; transition: opacity 0.15s, visibility 0.15s; pointer-events: none;
+  }
+  .gs-pop strong { display: block; margin-bottom: 2px; font-size: 11.5px; color: #9a6a12; }
+  .gs-pop s { color: #8b968f; }
+  .gs-pop b { color: var(--color-forest); }
+  .gs-badge[aria-expanded="true"] + .gs-pop, .gs-badge:focus-visible + .gs-pop { opacity: 1; visibility: visible; }
+  @media (hover: hover) { .gs-badge:hover + .gs-pop { opacity: 1; visibility: visible; } }
+
+  /* Multi-page: pages the grader read but did not mark. */
+  .gs-context {
+    position: absolute; left: 50%; top: 3%; translate: -50% 0;
+    font-size: 0.78rem; font-weight: 700; white-space: nowrap;
+    padding: 0.4rem 0.85rem; border-radius: 999px;
+    background: rgb(29 59 52 / 0.88); color: #fff; box-shadow: var(--shadow-sm);
+  }
+
+  /* Same wording and colour as the app's warning strip. */
+  .gs-unmarked {
+    position: absolute; left: 4%; right: 4%; top: 3%;
+    font-size: 0.78rem; font-weight: 600; text-align: center;
+    padding: 0.45rem 0.8rem; border-radius: 10px;
+    background: #fdf1dc; color: #9a6a12; border: 1px solid rgb(255 176 57 / 0.5); box-shadow: var(--shadow-sm);
+  }
+
+  /* ----- Previous / next page, beside the panes ----- */
+  .gs-panes { position: relative; }
+  .gs-nav {
+    position: absolute; top: calc(50% + 0.9rem); translate: 0 -50%; z-index: 6;
+    display: grid; place-items: center; width: 46px; height: 46px; padding: 0; border-radius: 50%;
+    border: 1px solid var(--color-line); background: #fff; color: var(--color-forest); cursor: pointer;
+    box-shadow: var(--shadow-md); transition: background 0.2s, transform 0.2s, opacity 0.2s;
+  }
+  .gs-nav :global(svg) { width: 22px; height: 22px; }
+  .gs-nav.prev { left: -66px; }
+  .gs-nav.next { right: -66px; }
+  .gs-nav:hover:not(:disabled) { background: var(--color-cream2); }
+  .gs-nav:disabled { opacity: 0.3; cursor: default; box-shadow: none; }
+  @media (max-width: 1080px) {
+    /* No room beside the panes: ride on the outer edges of the pages instead. */
+    .gs-nav { width: 40px; height: 40px; background: rgb(255 255 255 / 0.9); }
+    .gs-nav.prev { left: 6px; }
+    .gs-nav.next { right: 6px; }
+  }
+
+  /* ----- Page strip for multi-page samples ----- */
+  .gs-pager { display: flex; justify-content: center; gap: 0.8rem; margin-top: 1.4rem; flex-wrap: wrap; }
+  .gs-pg {
+    display: flex; flex-direction: column; align-items: center; gap: 0.35rem;
+    padding: 0; border: 0; background: none; cursor: pointer; font: inherit; font-size: 0.78rem; font-weight: 600; color: #6b7772;
+  }
+  .gs-pg img {
+    width: 56px; height: 72px; object-fit: cover; object-position: top; border-radius: 8px;
+    box-shadow: 0 0 0 1px var(--color-line); transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .gs-pg:hover img { transform: translateY(-2px); }
+  .gs-pg[aria-current="page"] { color: var(--color-teal); }
+  .gs-pg[aria-current="page"] img { box-shadow: 0 0 0 2px var(--color-teal); }
+
+  /* ----- The graded page is a card: Show Detail turns it over ----- */
+  .gs-card { position: relative; aspect-ratio: 3 / 4; perspective: 2000px; }
+  .gs-card-inner {
+    position: absolute; inset: 0; transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(0.2, 0.75, 0.2, 1);
+  }
+  .gs-sample[data-detail="true"] .gs-card-inner { transform: rotateY(180deg); }
+  .gs-face { position: absolute; inset: 0; aspect-ratio: auto; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+  .gs-back { display: block; transform: rotateY(180deg); }
+  /* backface-visibility alone is not enough: the frosted button gets its own
+     compositing layer and showed through the details, mirrored. With this
+     easing the card is edge-on after ~0.1 s of its 0.7 s turn, so the face
+     turning away is hidden at 0.1 s and the face turning in shows at once.
+     The button goes the instant a flip starts and comes back only once the
+     page is facing the viewer again. */
+  .gs-front, .gs-back { transition: visibility 0s linear 0.1s; }
+  .gs-sample[data-detail="false"] .gs-back,
+  .gs-sample[data-detail="true"] .gs-front { visibility: hidden; }
+  .gs-sample[data-detail="false"] .gs-front,
+  .gs-sample[data-detail="true"] .gs-back { transition-delay: 0s; }
+  .gs-sample[data-detail="true"] .gs-show { visibility: hidden; transition: visibility 0s; }
+
+  /* The whole page is clickable; it lightens a touch under the pointer. */
+  .gs-front, .gs-back { cursor: pointer; }
+  .gs-front::after {
+    content: ""; position: absolute; inset: 0; z-index: 4; pointer-events: none;
+    background: rgb(255 255 255 / 0); transition: background 0.2s;
+  }
+  @media (hover: hover) { .gs-front:hover::after { background: rgb(255 255 255 / 0.14); } }
+  .gs-show {
+    position: absolute; z-index: 5; left: 50%; top: 50%; translate: -50% -50%;
+    display: inline-flex; align-items: center; gap: 0.65rem;
+    padding: 1rem 1.9rem; border-radius: 999px; cursor: pointer;
+    font: inherit; font-size: 1.12rem; font-weight: 650; white-space: nowrap;
+    color: #fff; background: rgb(29 59 52 / 0.62);
+    border: 1px solid rgb(255 255 255 / 0.4);
+    -webkit-backdrop-filter: blur(8px) saturate(1.4); backdrop-filter: blur(8px) saturate(1.4);
+    box-shadow: 0 14px 34px rgb(29 59 52 / 0.3);
+    visibility: visible;
+    transition: background 0.2s, scale 0.2s, visibility 0s linear 0.15s;
+  }
+  .gs-show :global(svg) { width: 22px; height: 22px; }
+  @media (hover: hover) { .gs-front:hover .gs-show { background: rgb(29 59 52 / 0.8); scale: 1.04; } }
+
+  /* Back: the app's Grading Details sheet — pale ground, graph-paper grid, the
+     Matdo mark as a faint watermark (DetailTheme.quiet / DetailBackdrop). */
+  .gs-back-bg {
+    position: absolute; inset: 0; background-color: #f7f7f9;
+    background-image:
+      linear-gradient(rgb(74 85 104 / 0.07) 0.5px, transparent 0.5px),
+      linear-gradient(90deg, rgb(74 85 104 / 0.07) 0.5px, transparent 0.5px);
+    background-size: 26px 26px;
+  }
+  .gs-back-bg::after {
+    content: ""; position: absolute; right: 14px; bottom: 16px; width: 38%; aspect-ratio: 1;
+    background: url(/logos/matdo-grade-mark.png) bottom right / contain no-repeat; opacity: 0.06;
+  }
+  .gs-back-scroll {
+    position: absolute; inset: 0; overflow-y: auto; overscroll-behavior: contain;
+    padding: 0 12px 16px; container-type: inline-size;
+  }
+  /* Looks like the sheet's title bar; it is a button only so keyboards can turn the card back. */
+  .gs-back-head {
+    position: sticky; top: 0; z-index: 1;
+    display: flex; flex-direction: column; align-items: center; gap: 0.1rem;
+    width: calc(100% + 24px); margin: 0 -12px; padding: 0.8rem 12px 0.65rem;
+    border: 0; border-bottom: 1px solid rgb(0 0 0 / 0.06); border-radius: 0;
+    background: rgb(247 247 249 / 0.94); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    font: inherit; cursor: pointer;
+  }
+  .gs-back-title { font-weight: 600; font-size: 0.98rem; color: #1d1d1f; }
+  .gs-back-tip { font-size: 0.72rem; color: #8e8e93; }
+  .gs-back .gs-essay { position: relative; padding-top: 0.6rem; }
+
+  /* ----- Pointing at a mark from the detail sheet ----- */
+  .gs-halo { opacity: 0; transform-box: fill-box; transform-origin: center; }
+  .gs-mark.correct .gs-halo { fill: rgb(99 140 109 / 0.45); }
+  .gs-mark.incorrect .gs-halo { fill: rgb(242 78 30 / 0.4); }
+  .gs-mark.ping .gs-halo { animation: gs-ping 0.9s ease-out 2; }
+  .gs-badge.ping { animation: gs-ring 0.9s ease-out 2; }
+  @keyframes gs-ping { from { opacity: 1; transform: scale(0.5); } to { opacity: 0; transform: scale(1.9); } }
+  @keyframes gs-ring { from { box-shadow: 0 0 0 0 rgb(255 176 57 / 0.7); } to { box-shadow: 0 0 0 16px rgb(255 176 57 / 0); } }
+
+  /* ----- The sheet's list, after GradeDetailView ----- */
+  .gs-tally { position: relative; display: flex; align-items: center; gap: 6px; margin: 0.8rem 0 0.4rem; }
+  .gs-tchip {
+    display: inline-flex; align-items: center; gap: 4px; padding: 4px 9px; border-radius: 999px;
+    font-size: 0.86rem; font-weight: 600; font-variant-numeric: tabular-nums;
+  }
+  .gs-tchip :global(svg) { width: 13px; height: 13px; }
+  .gs-tchip.ok { color: #638c6d; background: rgb(99 140 109 / 0.12); }
+  .gs-tchip.bad { color: #f24e1e; background: rgb(242 78 30 / 0.12); }
+  .gs-tcount { margin-left: auto; font-size: 0.76rem; color: #8e8e93; }
+
+  .gs-dt-head, .gs-row-main {
+    display: grid; grid-template-columns: 1.7rem 1.1rem minmax(0, 1fr) minmax(0, 1fr) auto;
+    column-gap: 8px; align-items: center;
+  }
+  .gs-dt-head {
+    position: relative; padding: 0.5rem 12px 0.35rem;
+    font-size: 0.66rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #8e8e93;
+  }
+  .gs-rows { position: relative; list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .gs-row { background: #fff; border: 1px solid rgb(0 0 0 / 0.1); border-radius: 12px; overflow: hidden; }
+  .gs-row-main {
+    width: 100%; padding: 0.7rem 12px; border: 0; background: none; text-align: left;
+    font: inherit; color: #1d1d1f; cursor: pointer;
+  }
+  .gs-row.incorrect .gs-row-main { background: rgb(242 78 30 / 0.09); }
+  .gs-row-main:disabled { cursor: default; }
+  .gs-row-n { font-size: 0.86rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .gs-row-r { display: grid; place-items: center; width: 1.1rem; height: 1.1rem; }
+  .gs-row-r :global(svg) { width: 15px; height: 15px; }
+  .gs-row.correct .gs-row-r { color: #638c6d; }
+  .gs-row.incorrect .gs-row-r { color: #f24e1e; }
+  .gs-row-a, .gs-row-c { font-size: 0.93rem; font-weight: 500; overflow-wrap: anywhere; }
+  .gs-row-a .v.ok, .gs-row-c .v.ok { color: #638c6d; }
+  .gs-row-a .v.bad { color: #f24e1e; }
+  .gs-row .u { color: #1d1d1f; }
+  .gs-row-d { display: inline-flex; align-items: center; gap: 3px; font-size: 0.74rem; font-weight: 600; color: #1d1d1f; }
+  .gs-row-d :global(svg) { width: 12px; height: 12px; transition: transform 0.2s; }
+  .gs-row-main[aria-expanded="true"] .gs-row-d :global(svg) { transform: rotate(90deg); }
+  @container (max-width: 330px) { .gs-row-d .lbl { display: none; } }
+
+  .gs-row-more { padding: 0.75rem 12px 0.85rem; border-top: 1px solid rgb(0 0 0 / 0.08); }
+  .gs-row-more[hidden] { display: none; }
+  .gs-expl { margin: 0 0 0.7rem; font-size: 0.88rem; line-height: 1.45; color: #1d1d1f; }
+  /* How it should be done on the left, what seems to have happened on the right. */
+  .gs-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: stretch; }
+  @container (max-width: 340px) { .gs-panels { grid-template-columns: 1fr; } } /* stacks on a phone, as the app does */
+  .gs-panel { padding: 8px; border-radius: 10px; background: #f4f4f7; min-width: 0; }
+  .gs-panel h5 {
+    margin: 0 0 6px; font-family: var(--font-sans); font-size: 0.64rem; font-weight: 600;
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .gs-panel.ok h5 { color: #638c6d; }
+  .gs-panel.bad h5 { color: #f24e1e; }
+  .gs-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+  .gs-steps li { position: relative; display: flex; gap: 7px; padding: 5px 6px; border-radius: 8px; }
+  .gs-steps li.suspect { background: rgb(242 78 30 / 0.07); }
+  .gs-steps li.suspect::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; border-radius: 8px 0 0 8px; background: #f24e1e; }
+  .gs-step-n {
+    flex: none; display: grid; place-items: center; width: 18px; height: 18px; border-radius: 50%;
+    font-size: 0.66rem; font-weight: 700; color: #6e6e73; background: rgb(60 60 67 / 0.12);
+  }
+  .gs-steps li.suspect .gs-step-n { color: #fff; background: #f24e1e; }
+  .gs-step-b { display: grid; gap: 3px; min-width: 0; font-size: 0.78rem; line-height: 1.4; color: #1d1d1f; }
+  .gs-math { font-family: "Times New Roman", Georgia, serif; font-size: 0.92rem; line-height: 1.35; overflow-wrap: anywhere; }
+  .gs-mist { display: grid; gap: 2px; margin-bottom: 8px; font-size: 0.78rem; line-height: 1.4; color: #1d1d1f; }
+  .gs-mist b { font-size: 0.74rem; color: #f24e1e; }
+  .gs-guess, .gs-none { margin: 0; font-size: 0.68rem; color: #8e8e93; }
+  .gs-none { font-size: 0.74rem; }
+  .gs-row-unmarked { margin: 0.6rem 0 0; font-size: 0.76rem; color: #c98a14; }
+
+  .gs-essay h5 {
+    margin: 1rem 0 0.45rem; font-family: var(--font-sans); font-size: 0.74rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; color: #6b7772;
+  }
+
+  /* Essay detail, in the order of the app's essay sheet. */
+  .gs-essay > p { color: #3d4b47; }
+  .gs-assessed { font-size: 0.92rem; }
+  .gs-assessed span { display: block; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #6b7772; }
+  .gs-rubric, .gs-spell { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.45rem; }
+  .gs-rubric li {
+    display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    padding: 0.55rem 0.85rem; border: 1px solid var(--color-line); border-radius: 12px; font-size: 0.94rem;
+  }
+  .gs-rubric small, .gs-spell small { display: block; font-size: 0.8rem; color: #6b7772; }
+  .gs-verdict { font-size: 0.8rem; font-weight: 700; padding: 0.2rem 0.65rem; border-radius: 999px; white-space: nowrap; }
+  .gs-verdict.met { background: rgb(99 140 109 / 0.16); color: #4b6d53; }
+  .gs-verdict.partly { background: rgb(255 176 57 / 0.2); color: #8a5c0c; }
+  .gs-verdict.no { background: rgb(242 78 30 / 0.12); color: #c23a12; }
+  .gs-para, .gs-spell button {
+    display: block; width: 100%; text-align: left; cursor: pointer; font: inherit; color: var(--color-ink);
+    padding: 0.6rem 0.85rem; border: 1px solid var(--color-line); border-left: 3px solid #ffb039; border-radius: 12px; background: #fff;
+  }
+  .gs-para { font-size: 0.93rem; line-height: 1.5; }
+  .gs-para strong { display: block; margin-bottom: 0.2rem; color: #9a6a12; }
+  .gs-spell { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  .gs-spell button { font-size: 0.93rem; }
+  .gs-spell s { color: #8b968f; }
+  .gs-spell b { color: var(--color-forest); }
+  .gs-para:hover, .gs-spell button:hover { background: var(--color-cream); }
+  .gs-overall { font-family: var(--font-display); font-style: italic; font-size: 1.05rem; line-height: 1.5; color: var(--color-forest); }
+
+
+  @media (max-width: 760px) {
+    /* Thumbnails scroll sideways; panes stack, scan first. */
+    .gs-thumbs { justify-content: flex-start; overflow-x: auto; scroll-snap-type: x mandatory; padding: 10px 4px 16px; margin: 0 -24px; padding-inline: 24px; }
+    .gs-thumbs li { scroll-snap-align: start; flex: none; }
+    .gs-thumb { width: 104px; }
+    .gs-panes { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gs-mark path, .gs-page.on .gs-mark path { stroke-dashoffset: 0; transition: none; }
+    .gs-badge, .gs-page.on .gs-badge { scale: 1; transition: none; }
+    .gs-thumb-img { transition: none; }
+    .gs-card-inner, .gs-sample[data-detail="true"] .gs-card-inner { transform: none; transition: none; }
+    .gs-back { transform: none; opacity: 0; }
+    .gs-face { transition: opacity 0.2s; }
+    .gs-sample[data-detail="true"] .gs-front { opacity: 0; }
+    .gs-sample[data-detail="true"] .gs-back { opacity: 1; }
+    .gs-mark.ping .gs-halo { animation: none; opacity: 0.6; transform: scale(1.3); }
+    .gs-badge.ping { animation: none; }
+  }
+</style>

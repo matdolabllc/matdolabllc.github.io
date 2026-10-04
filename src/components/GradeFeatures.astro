@@ -1,0 +1,219 @@
+---
+/**
+ * "Features" on /grade: one flip card per feature. The front is a cartoon
+ * and the feature's name; a tap turns the card over to the caption.
+ *
+ * The cartoons are public/demo/cartoons/grade-feat-*.svg, drawn in the Check
+ * page cartoons' 240 × 190 frame and palette, with Matdo Grade's amber and the
+ * app's own ✓ / ✗ colours. Every caption describes what the app does today.
+ */
+const features = [
+  {
+    cartoon: "grade-feat-steps",
+    kicker: "Grading level",
+    title: "Brief grading and detailed grading",
+    caption:
+      "Brief marks every answer and shows the correct one beside it. Detailed adds a worked solution, step by step, and points to the step where your child’s working went wrong.",
+  },
+  {
+    cartoon: "grade-feat-pages",
+    kicker: "Multi-page",
+    title: "Supports multiple-page homework",
+    caption:
+      "Photograph a whole assignment, page after page. The pages are graded together, so a problem that runs onto the next page stays in one piece.",
+  },
+  {
+    cartoon: "grade-feat-reading",
+    kicker: "Reading comprehension",
+    title: "Reads the article and grades the answers",
+    caption:
+      "Tag the reading passage as a Context Page. Matdo Grade reads it to check the comprehension answers, and leaves the passage itself unmarked.",
+  },
+  {
+    cartoon: "grade-feat-one-step",
+    kicker: "All-in-one",
+    title: "iPad/iPhone scan and grade",
+    caption:
+      "Point the iPad or iPhone, tap Grade, press the shutter. The marks appear on the photo, with no uploading and no separate scanner app.",
+  },
+  {
+    cartoon: "grade-feat-subjects",
+    kicker: "Many subjects",
+    title: "Math, English, science, and more",
+    caption:
+      "From arithmetic and competition math to college calculus, reading and essays to science, on printed worksheets or lined paper, in your child’s own handwriting.",
+  },
+  {
+    cartoon: "grade-feat-rubric",
+    kicker: "Essay mode",
+    title: "Standard + user-defined rubrics",
+    caption:
+      "Start from the standard rubric (clerical, grammar, composition) and add criteria of your own. Each comes back Met, Partly or Not yet, with a note beside every paragraph.",
+  },
+];
+
+const turn =
+  '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>';
+---
+<section id="features" class="section-pad band-cream2">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">Features</span>
+      <h2>Your AI grading assistant</h2>
+      <p>Made by parents and teachers, made for parents and teachers.</p>
+    </div>
+
+    <div class="gf-grid reveal">
+      {features.map((f) => (
+        <button type="button" class="gf-card" aria-pressed="false" aria-label={`${f.kicker}: ${f.title}`} aria-describedby={`gf-${f.cartoon}`}>
+          <span class="gf-inner">
+            <span class="gf-face gf-front" aria-hidden="true">
+              <img src={`/demo/cartoons/${f.cartoon}.svg`} alt="" width="240" height="190" loading="lazy" />
+              <span class="gf-kicker">{f.kicker}</span>
+              <span class="gf-title">{f.title}</span>
+              <span class="gf-hint"><Fragment set:html={turn} />Tap to read</span>
+            </span>
+            <span class="gf-face gf-back" aria-hidden="true">
+              <span class="gf-kicker">{f.kicker}</span>
+              <span class="gf-title">{f.title}</span>
+              <span class="gf-caption" id={`gf-${f.cartoon}`}>{f.caption}</span>
+              <span class="gf-hint"><Fragment set:html={turn} />Tap to flip back</span>
+            </span>
+          </span>
+        </button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  // A tap turns a card over, and back. The caption is the button's description
+  // either way, so a screen reader gets it without the flip.
+  document.querySelectorAll<HTMLButtonElement>(".gf-card").forEach((card) =>
+    card.addEventListener("click", () =>
+      card.setAttribute("aria-pressed", String(card.getAttribute("aria-pressed") !== "true")),
+    ),
+  );
+</script>
+
+<style>
+  .gf-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+
+  .gf-card {
+    all: unset;
+    display: block;
+    cursor: pointer;
+    perspective: 1600px;
+    border-radius: var(--radius);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Both faces share one grid cell, so a card is as tall as its taller face. */
+  .gf-inner {
+    display: grid;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(0.2, 0.75, 0.2, 1);
+  }
+  .gf-card[aria-pressed="true"] .gf-inner { transform: rotateY(180deg); }
+  @media (hover: hover) {
+    .gf-card:hover .gf-inner { transform: translateY(-4px); }
+    .gf-card[aria-pressed="true"]:hover .gf-inner { transform: rotateY(180deg) translateY(-4px); }
+    .gf-card:hover .gf-front { border-color: var(--color-teal); box-shadow: 0 10px 26px rgb(31 111 99 / 0.14); }
+  }
+
+  .gf-face {
+    grid-area: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    /* backface-visibility alone can let a face show through mid-turn (see
+       GradedSamples): the face turning away is hidden once the card is
+       edge-on, and the face turning in shows at once. */
+    transition: visibility 0s linear 0.1s, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .gf-card[aria-pressed="false"] .gf-back,
+  .gf-card[aria-pressed="true"] .gf-front { visibility: hidden; }
+  .gf-card[aria-pressed="false"] .gf-front,
+  .gf-card[aria-pressed="true"] .gf-back { transition-delay: 0s, 0s, 0s; }
+  .gf-card:focus-visible .gf-face { outline: 3px solid var(--color-mint); outline-offset: 3px; }
+
+  .gf-front {
+    align-items: center;
+    gap: 4px;
+    padding: 16px 20px 20px;
+    text-align: center;
+    background: var(--color-cream);
+    border: 2px solid var(--color-line);
+  }
+  .gf-front img { display: block; width: 82%; height: auto; margin-bottom: 8px; }
+
+  .gf-back {
+    gap: 10px;
+    padding: 28px 26px 22px;
+    transform: rotateY(180deg);
+    color: var(--color-cream);
+    background:
+      radial-gradient(120% 70% at 100% 0%, rgb(232 166 46 / 0.2), transparent 60%),
+      var(--color-forest);
+    border: 2px solid var(--color-forest);
+  }
+
+  .gf-kicker {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-teal);
+  }
+  /* Centres the caption in the space above the hint. */
+  .gf-back .gf-kicker { margin-top: auto; color: #e8a62e; }
+
+  .gf-title {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--color-forest);
+    text-wrap: balance;
+  }
+  .gf-back .gf-title { font-size: 1.45rem; color: var(--color-cream); }
+
+  .gf-caption { font-size: 1.02rem; line-height: 1.6; color: rgb(250 248 241 / 0.86); }
+
+  .gf-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-teal);
+  }
+  .gf-back .gf-hint { color: rgb(250 248 241 / 0.6); }
+  .gf-hint :global(svg) { width: 14px; height: 14px; }
+
+  @media (max-width: 900px) {
+    .gf-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  }
+  @media (max-width: 600px) {
+    .gf-grid { grid-template-columns: minmax(0, 1fr); max-width: 420px; margin: 0 auto; }
+  }
+
+  /* No turning for people who asked for less motion: the faces cross-fade. */
+  @media (prefers-reduced-motion: reduce) {
+    .gf-inner,
+    .gf-card:hover .gf-inner,
+    .gf-card[aria-pressed="true"] .gf-inner,
+    .gf-card[aria-pressed="true"]:hover .gf-inner { transform: none; transition: none; }
+    .gf-back { transform: none; }
+    .gf-face { transition: opacity 0.2s, visibility 0s linear 0.2s; }
+    .gf-card[aria-pressed="false"] .gf-back,
+    .gf-card[aria-pressed="true"] .gf-front { opacity: 0; }
+    .gf-card[aria-pressed="false"] .gf-front,
+    .gf-card[aria-pressed="true"] .gf-back { transition-delay: 0s; }
+  }
+</style>

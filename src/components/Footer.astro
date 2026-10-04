@@ -1,6 +1,12 @@
 ---
 import Logo from "./Logo.astro";
 const year = 2026;
+
+// Matdo Grade has its own Support, Privacy Policy and Terms of Use, at /grade/…;
+// the ones at the root are Matdo Check's. On a Matdo Grade page the footer links
+// to Grade's. Read from the URL rather than a prop, so the generated legal pages
+// (tools/legal_to_web.py in matdo-grade) need nothing passed in.
+const legal = /^\/grade(\/|$)/.test(Astro.url.pathname) ? "/grade" : "";
 ---
 <footer>
   <div class="wrap">
@@ -18,9 +24,9 @@ const year = 2026;
         <h5>Company</h5>
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
-        <a href="/support">Support</a>
-        <a href="/privacy">Privacy</a>
-        <a href="/terms">Terms</a>
+        <a href={`${legal}/support`}>Support</a>
+        <a href={`${legal}/privacy`}>Privacy</a>
+        <a href={`${legal}/terms`}>Terms</a>
       </div>
     </div>
     <div class="foot-bottom">

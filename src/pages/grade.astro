@@ -1,21 +1,21 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Check from "../components/Check.astro";
+import GradedSamples from "../components/GradedSamples.astro";
+import GradeFeatures from "../components/GradeFeatures.astro";
+import AppStoreSoon from "../components/AppStoreSoon.astro";
 
-const steps = [
-  { n: "1", t: "Snap the worksheet", d: "Point the iPad at a stack of handwritten homework. Matdo Grade captures each page cleanly." },
-  { n: "2", t: "AI grades in seconds", d: "It reads the work, checks the answers, and marks each question — showing its reasoning as it goes." },
-  { n: "3", t: "You review & release", d: "Skim the results, adjust anything you disagree with, and share scores and feedback with a tap." },
+// Matches the app (Plan.swift, MatdoGrade.storekit) and the server's free grant
+// (server/src/lib/plans.js). Page counts are quoted at Brief, 10 units for a
+// typical page. Detailed is deliberately not quoted: the server bills it at a
+// flat 30 today, and PRICING_PROPOSAL.md's token bands would make it 10–30 by
+// page. A page the grader only reads costs 5.
+const plans = [
+  { name: "Lite", price: "$4.99", units: 750, for: "Parents helping one child" },
+  { name: "Plus", price: "$9.99", units: 2000, for: "Tutoring several children" },
+  { name: "Pro", price: "$19.99", units: 4500, for: "Teacher" },
+  { name: "Max", price: "$39.99", units: 10000, for: "Busy Teacher" },
 ];
-
-const features = [
-  { t: "Scan handwriting", d: "Reads real student handwriting on paper worksheets — no special forms required." },
-  { t: "Instant AI grading", d: "Marks answers and totals scores in seconds, so a class set takes minutes, not evenings." },
-  { t: "You're always in control", d: "Every mark is reviewable. Override any answer and the app learns your preferences." },
-  { t: "Helpful feedback", d: "Generates short, encouraging notes you can edit before sending home." },
-  { t: "Progress over time", d: "See how each student and each topic is trending across the term." },
-  { t: "Private & on your terms", d: "Student work stays yours. Nothing is sold, and you control what's stored." },
-];
+const fmt = (n: number) => n.toLocaleString("en-US");
 ---
 <Layout
   title="Matdo Grade — AI homework grading on iPad, with you in control"
@@ -24,19 +24,12 @@ const features = [
   <!-- HERO -->
   <section class="page-hero">
     <div class="wrap ph-grid">
+      <AppStoreSoon class="hero-store" />
       <div>
         <img class="hero-mark" src="/logos/matdo-grade-mark.png" width="552" height="782" alt="" />
-        <span class="eyebrow">Matdo Grade</span>
-        <h1>Homework, graded in <span class="accent-gold">seconds.</span></h1>
-        <p class="lede">An iPad app that scans handwritten homework and grades it with AI — while you review, adjust, and stay fully in control. Get your evenings back.</p>
-        <div class="hero-btns">
-          <a class="btn btn-primary" href="/contact">Request a demo</a>
-          <a class="btn btn-ghost" href="#how">See how it works</a>
-        </div>
-        <div class="pills">
-          <span class="pill"><Check width={16} /> Reads real handwriting</span>
-          <span class="pill"><Check width={16} /> You approve every mark</span>
-        </div>
+        <h1 class="hero-title">Matdo Grade</h1>
+        <p class="hero-sub">iPad/iPhone grading for handwritten homework</p>
+        <p class="lede">Use AI to help your children and students by scanning their handwritten homework and providing instant feedback.</p>
       </div>
 
       <div class="ph-art">
@@ -57,97 +50,93 @@ const features = [
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
-  <section id="how" class="section-pad band-cream2">
+  <!-- SEE IT GRADE -->
+  <GradedSamples />
+
+  <!-- FEATURES — tap a card to read its caption -->
+  <GradeFeatures />
+
+  <!-- PRICING -->
+  <section id="pricing" class="section-pad pricing">
     <div class="wrap">
       <div class="sec-head center reveal">
-        <span class="eyebrow">How it works</span>
-        <h2>From a stack of paper to graded — fast.</h2>
+        <h2>Pricing</h2>
+        <p class="pr-soon">Coming soon to the App Store for iPad and iPhone.</p>
       </div>
-      <div class="steps">
-        {steps.map((s) => (
-          <div class="step reveal">
-            <div class="step-n">{s.n}</div>
-            <h3>{s.t}</h3>
-            <p>{s.d}</p>
+
+      <div class="pr-grid reveal">
+        <div class="pr-card free">
+          <h3>Free</h3>
+          <p class="pr-price">$0</p>
+          <p class="pr-units"><b>100</b> units, one time</p>
+          <p class="pr-pages">About 10 pages of Brief grading</p>
+          <p class="pr-for">Free trial</p>
+        </div>
+        {plans.map((p) => (
+          <div class="pr-card">
+            <h3>{p.name}</h3>
+            <p class="pr-price">{p.price}<span>/ month</span></p>
+            <p class="pr-units"><b>{fmt(p.units)}</b> units a month</p>
+            <p class="pr-pages">About {fmt(p.units / 10)} pages of Brief grading</p>
+            <p class="pr-for">{p.for}</p>
           </div>
         ))}
       </div>
-    </div>
-  </section>
 
-  <!-- FEATURES -->
-  <section class="section-pad">
-    <div class="wrap">
-      <div class="sec-head center reveal">
-        <span class="eyebrow">Features</span>
-        <h2>AI does the routine. You do the teaching.</h2>
-      </div>
-      <div class="feature-list">
-        {features.map((f) => (
-          <div class="fl-item reveal">
-            <span class="fl-ic"><Check /></span>
-            <div>
-              <h4>{f.t}</h4>
-              <p>{f.d}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTROL REASSURANCE -->
-  <section class="section-pad band-gold">
-    <div class="wrap">
-      <div class="quote-wrap reveal">
-        <span class="eyebrow">Human-in-control</span>
-        <p class="quote" style="margin-top:1rem">AI suggests. You decide. Nothing goes to a student until a teacher has seen it.</p>
-        <p class="placeholder-note">Our design principle for Matdo Grade.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="section-pad">
-    <div class="wrap">
-      <div class="cta reveal">
-        <h2>Try Matdo Grade with your class</h2>
-        <p>Bring an iPad and a stack of homework — we'll show you a full class graded before the demo's over.</p>
-        <a class="btn btn-cta" href="/contact">Request a demo →</a>
+      <div class="pr-more reveal">
+        <p><b>Top-Up:</b> 1,000 extra units for $6.99, never expire.</p>
+        <p class="pr-fine">Prices in US dollars — the App Store shows your local price. Plans renew monthly and can be cancelled anytime in your Apple account settings.</p>
+        <AppStoreSoon class="pr-badge" />
       </div>
     </div>
   </section>
 </Layout>
 
 <style>
-  .accent-gold { color: #b08a3e; }
-  .page-hero { padding: 150px 0 80px; }
+  .page-hero { padding: 150px 0 clamp(28px, 4vw, 44px); }
   .hero-mark { display: block; height: 88px; width: auto; margin-bottom: 1.1rem; }
-  .ph-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
-  .page-hero h1 { font-size: clamp(2.4rem, 5vw, 3.8rem); margin: 1.1rem 0 1.2rem; }
-  .page-hero .lede { font-size: 1.15rem; color: #3d4b47; max-width: 34rem; margin-bottom: 1.8rem; }
-  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.6rem; }
+  .ph-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 56px; align-items: center; }
+  .ph-grid > * { min-width: 0; }
+  .page-hero .wrap { position: relative; }
+  /* Top right of the page, level with the Matdo Grade mark. */
+  .page-hero :global(.hero-store) { position: absolute; top: 0; right: 24px; z-index: 2; }
+
+  .pr-soon { margin-top: 0.4rem; }
+  .pr-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+  .pr-card {
+    display: flex; flex-direction: column; gap: 0.35rem;
+    padding: 22px 20px; background: #fff; border: 1px solid var(--color-line);
+    border-radius: var(--radius); box-shadow: var(--shadow-sm);
+  }
+  .pr-card.free { background: var(--color-cream2); box-shadow: none; }
+  .pr-card h3 { font-size: 1.25rem; }
+  .pr-price { margin: 0.2rem 0 0.3rem; font-family: var(--font-display); font-size: 2rem; font-weight: 600; line-height: 1.1; color: var(--color-forest); }
+  .pr-price span { margin-left: 0.25rem; font-family: var(--font-sans); font-size: 0.85rem; font-weight: 500; color: #6b7772; }
+  .pr-units { margin: 0; font-size: 0.95rem; color: var(--color-ink); }
+  .pr-pages { margin: 0; font-size: 0.84rem; line-height: 1.4; color: #4a5854; }
+  .pr-for { margin: auto 0 0; padding-top: 0.8rem; border-top: 1px solid var(--color-line); font-size: 0.84rem; font-weight: 600; color: var(--color-teal); }
+  .pr-more { max-width: 46rem; margin: 2.2rem auto 0; text-align: center; color: #4a5854; }
+  .pr-more p { margin: 0.35rem 0; }
+  .pr-more b { color: var(--color-forest); }
+  .pr-more .pr-fine { font-size: 0.82rem; color: #8b968f; }
+  .pr-more :global(.pr-badge) { margin-top: 1.4rem; }
+  @media (max-width: 1080px) { .pr-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 640px) {
+    .pr-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .pr-card { padding: 18px 16px; }
+    .pr-price { font-size: 1.6rem; }
+  }
+  /* Title and subtitle set as on the Matdo Check page, the subtitle in Grade's gold. */
+  .hero-title { font-size: clamp(3rem, 8vw, 5.5rem); line-height: 1; letter-spacing: -0.03em; }
+  .hero-sub { font-family: var(--font-display); font-size: clamp(1.25rem, 3vw, 1.9rem); color: #b08a3e; font-weight: 500; line-height: 1.25; margin: 0.6rem 0 0; }
+  .page-hero .lede { font-size: 1.15rem; color: #3d4b47; max-width: 34rem; margin: 1.1rem 0 0; }
   .ph-art .mock { max-width: 420px; margin-left: auto; }
 
-  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
-  .step { background: #fff; border: 1px solid var(--color-line); border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow-sm); }
-  .step-n { width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, #c79a45, var(--color-sage)); color: #fff; font-family: var(--font-display); font-weight: 600; font-size: 1.2rem; display: grid; place-items: center; margin-bottom: 1rem; }
-  .step h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
-  .step p { color: #4a5854; }
-
-  .feature-list { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 40px; }
-  .fl-item { display: flex; gap: 1rem; align-items: flex-start; }
-  .fl-ic { width: 40px; height: 40px; flex: none; border-radius: 12px; background: rgb(199 154 69 / 0.16); color: #a8843c; display: grid; place-items: center; }
-  .fl-item h4 { font-size: 1.12rem; margin-bottom: 0.3rem; }
-  .fl-item p { color: #4a5854; font-size: 0.96rem; }
 
   @media (max-width: 900px) {
-    .page-hero { padding: 120px 0 56px; }
+    .page-hero { padding: 120px 0 28px; }
     .hero-mark { height: 70px; margin-bottom: 0.9rem; }
     .ph-grid { grid-template-columns: 1fr; gap: 40px; }
     .ph-art .mock { margin: 0 auto; }
-    .steps { grid-template-columns: 1fr; }
-    .feature-list { grid-template-columns: 1fr; }
   }
 </style>

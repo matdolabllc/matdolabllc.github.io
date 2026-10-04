@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 190" role="img" aria-label="Math, science, reading, writing and calculus, all graded on one iPad">
+  <circle cx="120" cy="94" r="80" fill="#4fd1c5" opacity="0.18"/>
+  <ellipse cx="120" cy="164" rx="86" ry="9" fill="#f3eede"/>
+
+  <g stroke="#2f8f7f" stroke-width="2.4" stroke-dasharray="3 5" stroke-linecap="round" opacity="0.6">
+    <path d="M64 74 L96 96"/><path d="M120 55 V82"/><path d="M176 74 L144 96"/>
+    <path d="M62 124 L84 118"/><path d="M178 124 L156 118"/>
+  </g>
+
+  <!-- iPad -->
+  <rect x="84" y="84" width="72" height="54" rx="7" fill="#1d3b34"/>
+  <rect x="88" y="88" width="64" height="46" rx="4" fill="#faf8f1"/>
+  <circle cx="120" cy="111" r="13" fill="#638C6D" opacity="0.16"/>
+  <path d="M113 111.5 l4.6 4.6 l9 -10.4" fill="none" stroke="#638C6D" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <!-- math -->
+    <circle cx="52" cy="64" r="19" fill="#faf8f1" stroke="#1d3b34" stroke-width="2.6"/>
+    <path d="M41 58 h10 M46 53 v10" stroke="#1f6f63" stroke-width="3"/>
+    <path d="M53 70 h11" stroke="#E8A62E" stroke-width="3"/>
+    <circle cx="58.5" cy="65.5" r="1.8" fill="#E8A62E"/>
+    <circle cx="58.5" cy="74.5" r="1.8" fill="#E8A62E"/>
+
+    <!-- science -->
+    <circle cx="120" cy="36" r="19" fill="#faf8f1" stroke="#1d3b34" stroke-width="2.6"/>
+    <path d="M115.5 25 v9 l-8 13 q-1.4 3 2 3 h21 q3.4 0 2 -3 l-8 -13 v-9" fill="#faf8f1" stroke="#1d3b34" stroke-width="2.2"/>
+    <path d="M111 42 h18 l3.3 5.4 q1.2 2.6 -1.6 2.6 h-21.4 q-2.8 0 -1.6 -2.6 z" fill="#4fd1c5"/>
+    <path d="M113 25 h14" stroke="#1d3b34" stroke-width="2.2"/>
+    <circle cx="117" cy="46" r="1.4" fill="#faf8f1"/><circle cx="123" cy="44.5" r="1.1" fill="#faf8f1"/>
+
+    <!-- reading -->
+    <circle cx="188" cy="64" r="19" fill="#faf8f1" stroke="#1d3b34" stroke-width="2.6"/>
+    <path d="M176 58 q6 -4 12 0 q6 -4 12 0 v13 q-6 -4 -12 0 q-6 -4 -12 0 z" fill="#cfe9e2" stroke="#1d3b34" stroke-width="2.2"/>
+    <path d="M188 58 v13" stroke="#1d3b34" stroke-width="2"/>
+
+    <!-- writing -->
+    <circle cx="46" cy="128" r="19" fill="#faf8f1" stroke="#1d3b34" stroke-width="2.6"/>
+    <path d="M34 135 q3 -5 6 0 t6 0 t6 0" fill="none" stroke="#2A3A36" stroke-width="2"/>
+    <path d="M44 129 L56 117" stroke="#E8A62E" stroke-width="5"/>
+    <path d="M43.5 129.5 L41 132" stroke="#1d3b34" stroke-width="4"/>
+
+    <!-- calculus -->
+    <circle cx="194" cy="128" r="19" fill="#faf8f1" stroke="#1d3b34" stroke-width="2.6"/>
+    <path d="M200 115 q-4 -2.6 -5.6 2.4 l-3.8 19.2 q-1.4 5 -5.6 2.4" fill="none" stroke="#1f6f63" stroke-width="3"/>
+  </g>
+</svg>

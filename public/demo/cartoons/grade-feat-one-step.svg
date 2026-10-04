@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 190" role="img" aria-label="A finger presses the iPad shutter and the page in the viewfinder is already marked">
+  <circle cx="120" cy="94" r="80" fill="#f0e2bd" opacity="0.5"/>
+  <ellipse cx="120" cy="164" rx="86" ry="9" fill="#f3eede"/>
+
+  <!-- iPad in camera mode -->
+  <rect x="24" y="40" width="176" height="114" rx="11" fill="#1d3b34"/>
+  <rect x="29" y="45" width="166" height="104" rx="7" fill="#2A3A36"/>
+  <path d="M162 45 h26 a7 7 0 0 1 7 7 v90 a7 7 0 0 1 -7 7 h-26 z" fill="#1a2422"/>
+
+  <!-- the page in view, already marked -->
+  <g transform="rotate(-4 96 97)">
+    <rect x="61" y="53" width="70" height="88" rx="3" fill="#faf8f1"/>
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.8">
+      <path d="M67 69 l3 3 l5.6 -6.6" stroke="#638C6D"/>
+      <path d="M67 89 l3 3 l5.6 -6.6" stroke="#638C6D"/>
+      <path d="M68 106 l6 6 M74 106 l-6 6" stroke="#F24E1E"/>
+      <path d="M67 129 l3 3 l5.6 -6.6" stroke="#638C6D"/>
+    </g>
+    <rect x="82" y="67" width="40" height="5" rx="2.5" fill="#d7d3c4"/>
+    <rect x="82" y="87" width="30" height="5" rx="2.5" fill="#d7d3c4"/>
+    <rect x="82" y="107" width="36" height="5" rx="2.5" fill="#d7d3c4"/>
+    <rect x="82" y="127" width="26" height="5" rx="2.5" fill="#d7d3c4"/>
+  </g>
+  <path d="M54 60 v-10 h10 M128 50 h10 v10 M138 134 v10 h-10 M64 144 h-10 v-10" fill="none" stroke="#E8A62E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- shutter, being pressed -->
+  <circle cx="178.5" cy="97" r="15" fill="none" stroke="#E8A62E" stroke-width="2" opacity="0.55"/>
+  <circle cx="178.5" cy="97" r="11" fill="#faf8f1"/>
+  <circle cx="178.5" cy="97" r="8.4" fill="none" stroke="#1a2422" stroke-width="1.4"/>
+  <path d="M164 74 a24 24 0 0 1 30 -2 M196 122 a24 24 0 0 1 -30 2" fill="none" stroke="#E8A62E" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M226 178 L192 112" stroke="#E8C9A2" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="189" cy="106" r="7" fill="#E8C9A2"/>
+  <path d="M187 103 L183 99" stroke="#E8C9A2" stroke-width="5.4" stroke-linecap="round"/>
+
+  <!-- in one go -->
+  <circle cx="34" cy="44" r="17" fill="#E8A62E" stroke="#faf8f1" stroke-width="3"/>
+  <path d="M37 33 l-9 13 h6 l-3 10 l10 -14 h-6 z" fill="#faf8f1" stroke="#faf8f1" stroke-width="1" stroke-linejoin="round"/>
+</svg>
