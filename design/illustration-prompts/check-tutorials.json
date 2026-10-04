@@ -1,0 +1,90 @@
+{
+  "tool": "Built-in image_gen",
+  "styleReferences": [
+    "demo/grade/features/grade-feat-one-step.webp",
+    "demo/grade/features/grade-feat-subjects.webp"
+  ],
+  "basePrompt": "Use case: illustration-story. Asset type: square tutorial-card illustration for Matdo Check's website. Create ONE polished illustration, closely matching the provided Matdo Grade reference images in painterly style, palette, scale and composition. Soft hand-painted gouache texture, subtle dimensional shading, confident forest-green contours, rounded friendly objects, premium educational editorial still life. Cream #faf8ed background covering the entire square, a soft pale sage circular wash behind the central scene, a few dark green botanical leaves framing the subject and restrained warm ochre-gold highlights. Center composition occupying 75-85% of the square with all objects fully visible and generous cream margins. Forest green #1d3b34, teal #1f6f63, sage #7c9a6f, muted gold accents. No lettering, words, numbers, logos, watermark, borders or card frame. This is an illustration of a concept, not a literal app screenshot. Reference images are STYLE REFERENCES ONLY; create the following unique subject: ",
+  "illustrations": [
+    {
+      "id": "first-run",
+      "subject": "A forest-green tablet on a small wooden reception counter, displaying a simple welcome screen with one large green checkmark and three subtle setup dots. A gold-tipped pencil rests beside it.",
+      "output": "public/demo/check/tutorials/first-run.webp"
+    },
+    {
+      "id": "pin",
+      "subject": "A sturdy forest-green padlock with a warm gold keyhole, next to a small cream tablet PIN panel displaying exactly four dark green dots. Make the lock the hero.",
+      "output": "public/demo/check/tutorials/pin.webp"
+    },
+    {
+      "id": "icloud",
+      "subject": "A forest-green tablet with a small attendance list, beneath a soft cream cloud with a sage upward arrow. Two small gold spark accents suggest a completed private backup.",
+      "output": "public/demo/check/tutorials/icloud.webp"
+    },
+    {
+      "id": "switch-ipad",
+      "subject": "Two forest-green tablets, one slightly smaller behind on the left, one in front on the right, each with a cream attendance list, connected by a curved sage transfer arrow.",
+      "output": "public/demo/check/tutorials/switch-ipad.webp"
+    },
+    {
+      "id": "check-in",
+      "subject": "A cheerful school-age child with a sage backpack reaching to tap a forest-green tablet on a modest reception counter. A green checkmark on the tablet signifies arrival. Natural friendly face and believable hands.",
+      "output": "public/demo/check/tutorials/check-in.webp"
+    },
+    {
+      "id": "check-out",
+      "subject": "A cheerful school-age child with a muted gold backpack leaving the reception desk, waving goodbye. A forest-green tablet on the counter displays a simple cream clock and a rightward arrow. Compact readable scene.",
+      "output": "public/demo/check/tutorials/check-out.webp"
+    },
+    {
+      "id": "check-out-all",
+      "subject": "A cream attendance clipboard with three checked rows and a small forest-green tablet beside it; a warm gold setting sun peeks from behind. A tidy closing-time still life.",
+      "output": "public/demo/check/tutorials/check-out-all.webp"
+    },
+    {
+      "id": "reset",
+      "subject": "A forest-green tablet displaying a cream attendance list, surrounded by one broad sage circular reset arrow. A small gold clock beside it. Simple readable shapes.",
+      "output": "public/demo/check/tutorials/reset.webp"
+    },
+    {
+      "id": "add-names",
+      "subject": "A cream roster clipboard with three illustrated circular avatar portraits and short abstract line entries. A large sage plus badge at its lower right and a gold-tipped pencil beside it.",
+      "output": "public/demo/check/tutorials/add-names.webp"
+    },
+    {
+      "id": "upload",
+      "subject": "A cream spreadsheet page with a neat sage grid of cells, moving toward a forest-green tablet by a broad sage inward arrow. A small gold paperclip. Clear import direction.",
+      "output": "public/demo/check/tutorials/upload.webp"
+    },
+    {
+      "id": "edit-profile",
+      "subject": "A forest-green framed cream profile card with one large friendly circular avatar portrait, simple abstract detail lines, and a gold pencil resting diagonally in front.",
+      "output": "public/demo/check/tutorials/edit-profile.webp"
+    },
+    {
+      "id": "enroll",
+      "subject": "Two small cream class roster cards with friendly avatar portraits, a sage check badge on one and a muted gold minus badge on the other, a forest-green open book below.",
+      "output": "public/demo/check/tutorials/enroll.webp"
+    },
+    {
+      "id": "fix-time",
+      "subject": "A large cream-faced forest-green analog clock showing about three o'clock, with a gold pencil adjusting its hands and a small attendance slip beside it.",
+      "output": "public/demo/check/tutorials/fix-time.webp"
+    },
+    {
+      "id": "another-day",
+      "subject": "A cream desk calendar with forest-green binding, simple blank sage date squares and a gold circle around one day. Two small sage browsing arrows beside the calendar.",
+      "output": "public/demo/check/tutorials/another-day.webp"
+    },
+    {
+      "id": "export",
+      "subject": "A forest-green tablet with a cream attendance list, a cream spreadsheet sheet with a sage cell grid emerging toward the right, and a clear sage outward arrow. Small gold paperclip.",
+      "output": "public/demo/check/tutorials/export.webp"
+    },
+    {
+      "id": "audit-log",
+      "subject": "A cream spiral notebook with three abstract short timeline entries, sage check marks and a gold magnifying glass inspecting one entry. Forest-green cover, no readable writing.",
+      "output": "public/demo/check/tutorials/audit-log.webp"
+    }
+  ]
+}

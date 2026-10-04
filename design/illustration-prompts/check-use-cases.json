@@ -1,0 +1,50 @@
+{
+  "tool": "Built-in image_gen",
+  "styleReferences": [
+    "demo/grade/subjects/essay.webp",
+    "demo/grade/features/grade-feat-subjects.webp"
+  ],
+  "basePrompt": "Use case: illustration-story. Asset type: square illustrated audience card for the Matdo Check website's 'Where it's used' section. Create ONE polished drawing closely matching the provided Matdo Grade reference images in painterly style, palette and scale. Reference images are STYLE REFERENCES ONLY. Soft hand-painted gouache texture, subtle dimensional shading, confident forest-green contours, rounded friendly objects, premium educational editorial still life. Solid warm cream #faf8ed background across the full square, a soft pale sage circular wash behind the central subject, restrained ochre-gold accents and two or three small dark-green botanical leaves framing the vignette. Central composition fills 75-85% of the square, objects fully visible with generous cream margins. Colors forest green #1d3b34, teal #1f6f63, sage #7c9a6f and muted gold. No text, words, letters, numbers, logos, watermark, borders or card frame. Keep object shapes clear at small sizes. Subject: ",
+  "illustrations": [
+    {
+      "id": "tutoring",
+      "subject": "An open cream textbook with a forest-green cover, a small cream practice worksheet with a few sage checkmarks, and a warm gold pencil. A compact inviting learning still life.",
+      "output": "public/demo/check/use-cases/tutoring.webp"
+    },
+    {
+      "id": "test-prep",
+      "subject": "A forest-green analog study timer, a cream practice question sheet with sage multiple-choice circles and a green checkmark, and three small cream flashcards. No numbers or lettering.",
+      "output": "public/demo/check/use-cases/test-prep.webp"
+    },
+    {
+      "id": "sunday-school",
+      "subject": "An open cream Bible with a dark forest-green cover and a warm gold ribbon bookmark, with a simple small upright wooden cross behind it. Gentle, welcoming Sunday school still life; no writing.",
+      "output": "public/demo/check/use-cases/sunday-school.webp"
+    },
+    {
+      "id": "after-school",
+      "subject": "A soft sage school backpack with forest-green trim, a small ochre-gold lunchbox, three colored pencils and a cream-faced forest-green clock. Compact balanced after-school learning scene.",
+      "output": "public/demo/check/use-cases/after-school.webp"
+    },
+    {
+      "id": "music-art",
+      "subject": "A small warm gold-brown violin with a forest-green bow beside a cream painter's palette with sage, green and ochre paint dabs and two wooden paintbrushes. Elegant balanced music and art studio still life.",
+      "output": "public/demo/check/use-cases/music-art.webp"
+    },
+    {
+      "id": "clubs-sports",
+      "subject": "A cream-and-forest-green soccer ball, a small gold whistle on a sage cord, and a simple forest-green pennant. Friendly school club and sports still life.",
+      "output": "public/demo/check/use-cases/clubs-sports.webp"
+    },
+    {
+      "id": "summer-camp",
+      "subject": "A small sage canvas camping tent with forest-green seams, a warm gold lantern and a rolled cream sleeping mat, with two stylized forest-green pine trees behind. Inviting daytime summer-camp vignette.",
+      "output": "public/demo/check/use-cases/summer-camp.webp"
+    },
+    {
+      "id": "homeschool",
+      "subject": "A low round light-wood table with two open cream books and a forest-green notebook, surrounded by three small sage and green chairs, with a pot of gold pencils. A welcoming shared learning table representing a homeschool co-op. No people or lettering.",
+      "output": "public/demo/check/use-cases/homeschool.webp"
+    }
+  ]
+}
