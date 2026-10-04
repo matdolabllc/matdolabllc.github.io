@@ -1,0 +1,644 @@
+{
+  "browser": "Codex Chromium viewport emulation",
+  "real_devices_tested": [],
+  "console_errors": [],
+  "checks": [
+    {
+      "test": "fresh-mobile",
+      "viewport": [
+        390,
+        844
+      ],
+      "overflow": false,
+      "variant": "mobile",
+      "source": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.webm?v=20261004-mobile-v1",
+      "poster": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile-poster.jpg?v=20261004-mobile-v1",
+      "caption": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.vtt?v=20261004-mobile-v1",
+      "captionMode": "showing",
+      "activeCaptions": [
+        "We don't store your homework."
+      ],
+      "fallback": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.mp4?v=20261004-mobile-v1",
+      "time": 46,
+      "duration": 60.008,
+      "paused": true,
+      "muted": true,
+      "volume": 1,
+      "error": null,
+      "fullscreen": false,
+      "size": [
+        720,
+        900
+      ],
+      "playerCount": 1,
+      "rectangle": {
+        "width": 333.3333435058594,
+        "height": 416.66668701171875,
+        "top": 440.625,
+        "left": 20.666667938232422
+      },
+      "heroHeight": 897.9583740234375,
+      "resource_urls": [
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile-poster.jpg?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.webm?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.vtt?v=20261004-mobile-v1"
+      ]
+    },
+    {
+      "test": "phone-width",
+      "viewport": [
+        320,
+        844
+      ],
+      "overflow": false,
+      "variant": "mobile",
+      "source": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.webm?v=20261004-mobile-v1",
+      "poster": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile-poster.jpg?v=20261004-mobile-v1",
+      "caption": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.vtt?v=20261004-mobile-v1",
+      "captionMode": "showing",
+      "activeCaptions": [
+        "Help them understand, so they can do the\nwork themselves."
+      ],
+      "fallback": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.mp4?v=20261004-mobile-v1",
+      "time": 28,
+      "duration": 60.008,
+      "paused": true,
+      "muted": true,
+      "volume": 1,
+      "error": null,
+      "fullscreen": false,
+      "size": [
+        720,
+        900
+      ],
+      "playerCount": 1,
+      "rectangle": {
+        "width": 263.3333435058594,
+        "height": 329.16668701171875,
+        "top": 440.625,
+        "left": 20.666667938232422
+      },
+      "heroHeight": 810.4583740234375,
+      "resource_urls": [
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile-poster.jpg?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.webm?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.vtt?v=20261004-mobile-v1"
+      ]
+    },
+    {
+      "test": "phone-width",
+      "viewport": [
+        360,
+        844
+      ],
+      "overflow": false,
+      "variant": "mobile",
+      "source": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.webm?v=20261004-mobile-v1",
+      "poster": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile-poster.jpg?v=20261004-mobile-v1",
+      "caption": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.vtt?v=20261004-mobile-v1",
+      "captionMode": "showing",
+      "activeCaptions": [
+        "Help them understand, so they can do the\nwork themselves."
+      ],
+      "fallback": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.mp4?v=20261004-mobile-v1",
+      "time": 28,
+      "duration": 60.008,
+      "paused": true,
+      "muted": true,
+      "volume": 1,
+      "error": null,
+      "fullscreen": false,
+      "size": [
+        720,
+        900
+      ],
+      "playerCount": 1,
+      "rectangle": {
+        "width": 303.3333435058594,
+        "height": 379.16668701171875,
+        "top": 440.625,
+        "left": 20.666667938232422
+      },
+      "heroHeight": 860.4583740234375,
+      "resource_urls": [
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile-poster.jpg?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.webm?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.vtt?v=20261004-mobile-v1"
+      ]
+    },
+    {
+      "test": "phone-width",
+      "viewport": [
+        390,
+        844
+      ],
+      "overflow": false,
+      "variant": "mobile",
+      "source": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.webm?v=20261004-mobile-v1",
+      "poster": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile-poster.jpg?v=20261004-mobile-v1",
+      "caption": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.vtt?v=20261004-mobile-v1",
+      "captionMode": "showing",
+      "activeCaptions": [
+        "Help them understand, so they can do the\nwork themselves."
+      ],
+      "fallback": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.mp4?v=20261004-mobile-v1",
+      "time": 28,
+      "duration": 60.008,
+      "paused": true,
+      "muted": true,
+      "volume": 1,
+      "error": null,
+      "fullscreen": false,
+      "size": [
+        720,
+        900
+      ],
+      "playerCount": 1,
+      "rectangle": {
+        "width": 333.3333435058594,
+        "height": 416.66668701171875,
+        "top": 440.625,
+        "left": 20.666667938232422
+      },
+      "heroHeight": 897.9583740234375,
+      "resource_urls": [
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile-poster.jpg?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.webm?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.vtt?v=20261004-mobile-v1"
+      ]
+    },
+    {
+      "test": "phone-width",
+      "viewport": [
+        430,
+        844
+      ],
+      "overflow": false,
+      "variant": "mobile",
+      "source": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.webm?v=20261004-mobile-v1",
+      "poster": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile-poster.jpg?v=20261004-mobile-v1",
+      "caption": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.vtt?v=20261004-mobile-v1",
+      "captionMode": "showing",
+      "activeCaptions": [
+        "Help them understand, so they can do the\nwork themselves."
+      ],
+      "fallback": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.mp4?v=20261004-mobile-v1",
+      "time": 28,
+      "duration": 60.008,
+      "paused": true,
+      "muted": true,
+      "volume": 1,
+      "error": null,
+      "fullscreen": false,
+      "size": [
+        720,
+        900
+      ],
+      "playerCount": 1,
+      "rectangle": {
+        "width": 373.3333435058594,
+        "height": 466.66668701171875,
+        "top": 443.3229217529297,
+        "left": 20.666667938232422
+      },
+      "heroHeight": 950.65625,
+      "resource_urls": [
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile-poster.jpg?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.webm?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.vtt?v=20261004-mobile-v1"
+      ]
+    },
+    {
+      "test": "fullscreen-rotation-defers-swap",
+      "viewport": [
+        844,
+        390
+      ],
+      "overflow": false,
+      "variant": "mobile",
+      "source": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.webm?v=20261004-mobile-v1",
+      "poster": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile-poster.jpg?v=20261004-mobile-v1",
+      "caption": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.vtt?v=20261004-mobile-v1",
+      "captionMode": "showing",
+      "activeCaptions": [
+        "Help them understand, so they can do the\nwork themselves."
+      ],
+      "fallback": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.mp4?v=20261004-mobile-v1",
+      "time": 28,
+      "duration": 60.008,
+      "paused": true,
+      "muted": true,
+      "volume": 1,
+      "error": null,
+      "fullscreen": true,
+      "size": [
+        720,
+        900
+      ],
+      "playerCount": 1,
+      "rectangle": {
+        "width": 844,
+        "height": 390,
+        "top": 0,
+        "left": 0
+      },
+      "heroHeight": 718.9271240234375,
+      "resource_urls": [
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile-poster.jpg?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.webm?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.vtt?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-poster.jpg?v=20261004-v4",
+        "http://127.0.0.1:4321/demo/matdo-grade-film.webm?v=20261004-v4",
+        "http://127.0.0.1:4321/demo/matdo-grade-film.vtt?v=20261004-v4"
+      ]
+    },
+    {
+      "test": "fullscreen-exit-applies-landscape",
+      "viewport": [
+        844,
+        390
+      ],
+      "overflow": false,
+      "variant": "desktop",
+      "source": "http://127.0.0.1:4321/demo/matdo-grade-film.webm?v=20261004-v4",
+      "poster": "http://127.0.0.1:4321/demo/matdo-grade-film-poster.jpg?v=20261004-v4",
+      "caption": "http://127.0.0.1:4321/demo/matdo-grade-film.vtt?v=20261004-v4",
+      "captionMode": "showing",
+      "activeCaptions": [
+        "Help them understand, so they can do the\nwork themselves."
+      ],
+      "fallback": "http://127.0.0.1:4321/demo/matdo-grade-film.mp4?v=20261004-v4",
+      "time": 28,
+      "duration": 60.008,
+      "paused": true,
+      "muted": true,
+      "volume": 1,
+      "error": null,
+      "fullscreen": false,
+      "size": [
+        1280,
+        720
+      ],
+      "playerCount": 1,
+      "rectangle": {
+        "width": 779.3333740234375,
+        "height": 438.375,
+        "top": 674.2604370117188,
+        "left": 24.666667938232422
+      },
+      "heroHeight": 1157.3021240234375,
+      "resource_urls": [
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile-poster.jpg?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.webm?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.vtt?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-poster.jpg?v=20261004-v4",
+        "http://127.0.0.1:4321/demo/matdo-grade-film.webm?v=20261004-v4",
+        "http://127.0.0.1:4321/demo/matdo-grade-film.vtt?v=20261004-v4"
+      ]
+    },
+    {
+      "test": "desktop-1024-fresh",
+      "viewport": [
+        1024,
+        1000
+      ],
+      "overflow": false,
+      "variant": "desktop",
+      "source": "http://127.0.0.1:4321/demo/matdo-grade-film.webm?v=20261004-v4",
+      "poster": "http://127.0.0.1:4321/demo/matdo-grade-film-poster.jpg?v=20261004-v4",
+      "caption": "http://127.0.0.1:4321/demo/matdo-grade-film.vtt?v=20261004-v4",
+      "captionMode": "disabled",
+      "activeCaptions": [],
+      "fallback": "http://127.0.0.1:4321/demo/matdo-grade-film.mp4?v=20261004-v4",
+      "time": 10.278076,
+      "duration": 60.008,
+      "paused": false,
+      "muted": true,
+      "volume": 1,
+      "error": null,
+      "fullscreen": false,
+      "size": [
+        1280,
+        720
+      ],
+      "playerCount": 1,
+      "rectangle": {
+        "width": 959.3333740234375,
+        "height": 539.625,
+        "top": 542.2604370117188,
+        "left": 24.666667938232422
+      },
+      "heroHeight": 1142.5521240234375,
+      "resource_urls": [
+        "http://127.0.0.1:4321/demo/matdo-grade-film-poster.jpg?v=20261004-v4",
+        "http://127.0.0.1:4321/demo/matdo-grade-film.webm?v=20261004-v4"
+      ]
+    },
+    {
+      "test": "desktop-1440-geometry-after-rotation",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "overflow": false,
+      "variant": "desktop",
+      "source": "http://127.0.0.1:4321/demo/matdo-grade-film.webm?v=20261004-v4",
+      "poster": "http://127.0.0.1:4321/demo/matdo-grade-film-poster.jpg?v=20261004-v4",
+      "caption": "http://127.0.0.1:4321/demo/matdo-grade-film.vtt?v=20261004-v4",
+      "captionMode": "disabled",
+      "activeCaptions": [],
+      "fallback": "http://127.0.0.1:4321/demo/matdo-grade-film.mp4?v=20261004-v4",
+      "time": 31.657367,
+      "duration": 60.008,
+      "paused": false,
+      "muted": true,
+      "volume": 1,
+      "error": null,
+      "fullscreen": false,
+      "size": [
+        1280,
+        720
+      ],
+      "playerCount": 1,
+      "rectangle": {
+        "width": 998.6666870117188,
+        "height": 561.75,
+        "top": 542.2604370117188,
+        "left": 213
+      },
+      "heroHeight": 1164.6771240234375,
+      "resource_urls": [
+        "http://127.0.0.1:4321/demo/matdo-grade-film-poster.jpg?v=20261004-v4",
+        "http://127.0.0.1:4321/demo/matdo-grade-film.webm?v=20261004-v4",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile-poster.jpg?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.webm?v=20261004-mobile-v1"
+      ]
+    },
+    {
+      "test": "desktop-to-phone-paused-position-caption",
+      "viewport": [
+        390,
+        844
+      ],
+      "overflow": false,
+      "variant": "mobile",
+      "source": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.webm?v=20261004-mobile-v1",
+      "poster": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile-poster.jpg?v=20261004-mobile-v1",
+      "caption": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.vtt?v=20261004-mobile-v1",
+      "captionMode": "showing",
+      "activeCaptions": [
+        "Help them understand, so they can do the\nwork themselves."
+      ],
+      "fallback": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.mp4?v=20261004-mobile-v1",
+      "time": 28,
+      "duration": 60.008,
+      "paused": true,
+      "muted": true,
+      "volume": 1,
+      "error": null,
+      "fullscreen": false,
+      "size": [
+        720,
+        900
+      ],
+      "playerCount": 1,
+      "rectangle": {
+        "width": 333.3333435058594,
+        "height": 416.66668701171875,
+        "top": 440.625,
+        "left": 20.666667938232422
+      },
+      "heroHeight": 897.9583740234375,
+      "resource_urls": [
+        "http://127.0.0.1:4321/demo/matdo-grade-film-poster.jpg?v=20261004-v4",
+        "http://127.0.0.1:4321/demo/matdo-grade-film.webm?v=20261004-v4",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile-poster.jpg?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.webm?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.vtt?v=20261004-mobile-v1"
+      ]
+    },
+    {
+      "test": "playing-rotation",
+      "viewport": [
+        844,
+        390
+      ],
+      "overflow": false,
+      "variant": "desktop",
+      "source": "http://127.0.0.1:4321/demo/matdo-grade-film.webm?v=20261004-v4",
+      "poster": "http://127.0.0.1:4321/demo/matdo-grade-film-poster.jpg?v=20261004-v4",
+      "caption": "http://127.0.0.1:4321/demo/matdo-grade-film.vtt?v=20261004-v4",
+      "captionMode": "showing",
+      "activeCaptions": [
+        "Science."
+      ],
+      "fallback": "http://127.0.0.1:4321/demo/matdo-grade-film.mp4?v=20261004-v4",
+      "time": 40.240285,
+      "duration": 60.008,
+      "paused": false,
+      "muted": true,
+      "volume": 1,
+      "error": null,
+      "fullscreen": false,
+      "size": [
+        1280,
+        720
+      ],
+      "playerCount": 1,
+      "rectangle": {
+        "width": 779.3333740234375,
+        "height": 438.375,
+        "top": 674.2604370117188,
+        "left": 24.666667938232422
+      },
+      "heroHeight": 1157.3021240234375,
+      "resource_urls": [
+        "http://127.0.0.1:4321/demo/matdo-grade-film-poster.jpg?v=20261004-v4",
+        "http://127.0.0.1:4321/demo/matdo-grade-film.webm?v=20261004-v4",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile-poster.jpg?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.webm?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.vtt?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film.vtt?v=20261004-v4"
+      ]
+    },
+    {
+      "test": "playing-rotation-pause-return",
+      "viewport": [
+        390,
+        844
+      ],
+      "overflow": false,
+      "variant": "mobile",
+      "source": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.webm?v=20261004-mobile-v1",
+      "poster": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile-poster.jpg?v=20261004-mobile-v1",
+      "caption": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.vtt?v=20261004-mobile-v1",
+      "captionMode": "showing",
+      "activeCaptions": [
+        "Science."
+      ],
+      "fallback": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.mp4?v=20261004-mobile-v1",
+      "time": 40.880557,
+      "duration": 60.008,
+      "paused": true,
+      "muted": true,
+      "volume": 1,
+      "error": null,
+      "fullscreen": false,
+      "size": [
+        720,
+        900
+      ],
+      "playerCount": 1,
+      "rectangle": {
+        "width": 333.3333435058594,
+        "height": 416.66668701171875,
+        "top": 440.625,
+        "left": 20.666667938232422
+      },
+      "heroHeight": 897.9583740234375,
+      "resource_urls": [
+        "http://127.0.0.1:4321/demo/matdo-grade-film-poster.jpg?v=20261004-v4",
+        "http://127.0.0.1:4321/demo/matdo-grade-film.webm?v=20261004-v4",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile-poster.jpg?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.webm?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.vtt?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film.vtt?v=20261004-v4"
+      ]
+    },
+    {
+      "test": "final-media-320-captions",
+      "viewport": [
+        320,
+        844
+      ],
+      "overflow": false,
+      "variant": "mobile",
+      "source": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.webm?v=20261004-mobile-v1",
+      "poster": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile-poster.jpg?v=20261004-mobile-v1",
+      "caption": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.vtt?v=20261004-mobile-v1",
+      "captionMode": "showing",
+      "activeCaptions": [
+        "Help them understand, so they can do the\nwork themselves."
+      ],
+      "fallback": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.mp4?v=20261004-mobile-v1",
+      "time": 28,
+      "duration": 60.008,
+      "paused": true,
+      "muted": true,
+      "volume": 1,
+      "error": null,
+      "fullscreen": false,
+      "size": [
+        720,
+        900
+      ],
+      "playerCount": 1,
+      "rectangle": {
+        "width": 263.3333435058594,
+        "height": 329.16668701171875,
+        "top": 440.625,
+        "left": 20.666667938232422
+      },
+      "heroHeight": 810.4583740234375,
+      "resource_urls": [
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile-poster.jpg?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.webm?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.vtt?v=20261004-mobile-v1"
+      ]
+    },
+    {
+      "test": "completed-media-320-captions",
+      "viewport": [
+        320,
+        844
+      ],
+      "overflow": false,
+      "variant": "mobile",
+      "source": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.webm?v=20261004-mobile-v1",
+      "poster": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile-poster.jpg?v=20261004-mobile-v1",
+      "caption": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.vtt?v=20261004-mobile-v1",
+      "captionMode": "showing",
+      "activeCaptions": [
+        "Help them understand, so they can do the work themselves."
+      ],
+      "fallback": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.mp4?v=20261004-mobile-v1",
+      "time": 28,
+      "duration": 60.008,
+      "paused": true,
+      "muted": true,
+      "volume": 1,
+      "error": null,
+      "fullscreen": false,
+      "size": [
+        720,
+        900
+      ],
+      "playerCount": 1,
+      "rectangle": {
+        "width": 263.3333435058594,
+        "height": 329.16668701171875,
+        "top": 440.62501525878906,
+        "left": 20.666667938232422
+      },
+      "heroHeight": 810.4583740234375,
+      "resource_urls": [
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile-poster.jpg?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.webm?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.vtt?v=20261004-mobile-v1"
+      ]
+    },
+    {
+      "test": "completed-media-390-privacy-caption",
+      "viewport": [
+        390,
+        844
+      ],
+      "overflow": false,
+      "variant": "mobile",
+      "source": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.webm?v=20261004-mobile-v1",
+      "poster": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile-poster.jpg?v=20261004-mobile-v1",
+      "caption": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.vtt?v=20261004-mobile-v1",
+      "captionMode": "showing",
+      "activeCaptions": [
+        "We don't store your homework."
+      ],
+      "fallback": "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.mp4?v=20261004-mobile-v1",
+      "time": 46,
+      "duration": 60.008,
+      "paused": true,
+      "muted": true,
+      "volume": 1,
+      "error": null,
+      "fullscreen": false,
+      "size": [
+        720,
+        900
+      ],
+      "playerCount": 1,
+      "rectangle": {
+        "width": 333.3333435058594,
+        "height": 416.66668701171875,
+        "top": 440.62501525878906,
+        "left": 20.666667938232422
+      },
+      "heroHeight": 897.9583740234375,
+      "resource_urls": [
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile-poster.jpg?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.webm?v=20261004-mobile-v1",
+        "http://127.0.0.1:4321/demo/matdo-grade-film-mobile.vtt?v=20261004-mobile-v1"
+      ]
+    },
+    {
+      "test": "native-inline-pause-and-keyboard-seek",
+      "viewport": [
+        390,
+        844
+      ],
+      "height": 416.6666870117187,
+      "paused": true,
+      "time": 24.23648,
+      "variant": "mobile",
+      "width": 333.3333435058594
+    }
+  ]
+}

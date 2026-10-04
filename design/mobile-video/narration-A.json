@@ -1,0 +1,191 @@
+{
+  "voice": "A / Kokoro af_heart",
+  "speed": 0.94,
+  "pronunciation": "MAT-doh",
+  "license": "Apache-2.0 model/presets; MIT inference library",
+  "model_sha256": "f3a290d384fbb27966d462905c71a46cef9e5fd00516b40df32a0b4afe77ac96",
+  "preset_sha256": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+  "duration": 60,
+  "word_count": 74,
+  "cues": [
+    {
+      "start": 0.4,
+      "end": 5.145333333333333,
+      "latest_end": 6.85,
+      "text": "No answer key? Checking homework can mean solving every problem yourself.",
+      "phonemes": "nˈoʊ ˈænsɚ kˈiː? tʃˈɛkɪŋ hˈoʊmwɜːk kæn mˈiːn sˈɑːlvɪŋ ˈɛvɹi pɹˈɑːbləm jɔːɹsˈɛlf."
+    },
+    {
+      "start": 7.4,
+      "end": 11.603333333333333,
+      "latest_end": 17.3,
+      "text": "With Matdo Grade, take a photo to see which answers need another look.",
+      "phonemes": "wɪð mˈætdoʊ ɡɹˈeɪd, tˈeɪk ɐ fˈoʊɾoʊ tə sˈiː wˌɪtʃ ˈænsɚz nˈiːd ɐnˈʌðɚ lˈʊk."
+    },
+    {
+      "start": 18.3,
+      "end": 21.991333333333333,
+      "latest_end": 25.7,
+      "text": "See the correct answer, and understand where the student went wrong.",
+      "phonemes": "sˈiː ðə kɚɹˈɛkt ˈænsɚ, ænd ˌʌndɚstˈænd wˌɛɹ ðə stˈuːdənt wɛnt ɹˈɔŋ."
+    },
+    {
+      "start": 26.4,
+      "end": 29.76995833333333,
+      "latest_end": 31.65,
+      "text": "Help them understand, so they can do the work themselves.",
+      "phonemes": "hˈɛlp ðˌɛm ˌʌndɚstˈænd, sˌoʊ ðeɪ kæn dˈuː ðə wˈɜːk ðɛmsˈɛlvz."
+    },
+    {
+      "start": 32.35,
+      "end": 34.196666666666665,
+      "latest_end": 35.65,
+      "text": "More time for what matters.",
+      "phonemes": "mˈɔːɹ tˈaɪm fɔːɹ wʌt mˈæɾɚz."
+    },
+    {
+      "start": 36.16,
+      "end": 36.864,
+      "latest_end": 37.75,
+      "text": "Math.",
+      "phonemes": "mˈæθ."
+    },
+    {
+      "start": 38.16,
+      "end": 38.75749999999999,
+      "latest_end": 39.75,
+      "text": "English.",
+      "phonemes": "ˈɪŋɡlɪʃ."
+    },
+    {
+      "start": 40.16,
+      "end": 40.88999999999999,
+      "latest_end": 41.75,
+      "text": "Science.",
+      "phonemes": "sˈaɪəns."
+    },
+    {
+      "start": 42.16,
+      "end": 43.172374999999995,
+      "latest_end": 43.75,
+      "text": "Essays.",
+      "phonemes": "ˈɛseɪz."
+    },
+    {
+      "start": 44.25,
+      "end": 47.153333333333336,
+      "latest_end": 48.8,
+      "text": "Saved on your device. We don't store your homework.",
+      "phonemes": "sˈeɪvd ˌɔn jʊɹ dɪvˈaɪs. wiː dˈoʊnt stˈɔːɹ jʊɹ hˈoʊmwɜːk."
+    },
+    {
+      "start": 49.25,
+      "end": 51.397333333333336,
+      "latest_end": 52.75,
+      "text": "Free trial. Try it tonight.",
+      "phonemes": "fɹˈiː tɹˈaɪəl. tɹˈaɪ ɪt tənˈaɪt."
+    },
+    {
+      "start": 53.4,
+      "end": 56.42666666666666,
+      "latest_end": 59.1,
+      "text": "Matdo Grade. For parents. By parents.",
+      "phonemes": "mˈætdoʊ ɡɹˈeɪd. fɔːɹ pˈɛɹənts. baɪ pˈɛɹənts."
+    }
+  ],
+  "subtitles": [
+    {
+      "start": 0.5690000000000001,
+      "end": 1.968,
+      "text": "No answer key?"
+    },
+    {
+      "start": 1.9689999999999999,
+      "end": 5.085333333333334,
+      "text": "Checking homework can mean solving every problem yourself."
+    },
+    {
+      "start": 7.494000000000001,
+      "end": 11.573333333333332,
+      "text": "With Matdo Grade, take a photo to see which answers need another look."
+    },
+    {
+      "start": 18.444,
+      "end": 21.961333333333336,
+      "text": "See the correct answer, and understand where the student went wrong."
+    },
+    {
+      "start": 26.519,
+      "end": 29.72,
+      "text": "Help them understand, so they can do the work themselves."
+    },
+    {
+      "start": 32.494,
+      "end": 34.17666666666666,
+      "text": "More time for what matters."
+    },
+    {
+      "start": 36.16,
+      "end": 36.864,
+      "text": "Math."
+    },
+    {
+      "start": 38.16,
+      "end": 38.75749999999999,
+      "text": "English."
+    },
+    {
+      "start": 40.16,
+      "end": 40.88999999999999,
+      "text": "Science."
+    },
+    {
+      "start": 42.16,
+      "end": 43.172374999999995,
+      "text": "Essays."
+    },
+    {
+      "start": 44.394,
+      "end": 45.793,
+      "text": "Saved on your device."
+    },
+    {
+      "start": 45.794,
+      "end": 47.14333333333333,
+      "text": "We don't store your homework."
+    },
+    {
+      "start": 49.415333333333336,
+      "end": 50.23533333333333,
+      "text": "Free trial."
+    },
+    {
+      "start": 50.340333333333334,
+      "end": 51.39733333333333,
+      "text": "Try it tonight."
+    },
+    {
+      "start": 53.568999999999996,
+      "end": 54.614,
+      "text": "Matdo Grade."
+    },
+    {
+      "start": 54.674,
+      "end": 55.518,
+      "text": "For parents."
+    },
+    {
+      "start": 55.519,
+      "end": 56.38666666666666,
+      "text": "By parents."
+    }
+  ],
+  "subject_timing": "Each subject is spoken as its card joins the row at 36, 38, 40 and 42 seconds.",
+  "music_gain": {
+    "outside_voice": 0.72,
+    "during_voice": 0.25,
+    "attack_seconds": 0.2,
+    "release_seconds": 0.55
+  },
+  "video_picture": "Portrait picture composed from original artwork; original scene timing preserved."
+}

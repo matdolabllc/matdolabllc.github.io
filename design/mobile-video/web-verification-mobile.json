@@ -1,0 +1,18 @@
+{
+  "matdo-grade-film-mobile.mp4": {
+    "bytes": 3020714,
+    "duration": 60.0,
+    "resolution": "720x900",
+    "video_codec": "h264",
+    "audio_codec": "aac",
+    "decode_errors": 0
+  },
+  "matdo-grade-film-mobile.webm": {
+    "bytes": 2592447,
+    "duration": 60.008,
+    "resolution": "720x900",
+    "video_codec": "vp9",
+    "audio_codec": "opus",
+    "decode_errors": 0
+  }
+}

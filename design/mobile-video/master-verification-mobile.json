@@ -1,0 +1,30 @@
+{
+  "master": {
+    "duration": 60,
+    "resolution": "1080x1350",
+    "fps": 30,
+    "frames": 1800,
+    "audio_sample_rate": 48000,
+    "decode_errors": 0,
+    "bytes": 13567478
+  },
+  "audio": {
+    "integrated_lufs": "-14.11",
+    "true_peak_db": "-1.37"
+  },
+  "fast_start": {
+    "matdo-grade-film-mobile-master.mp4": true,
+    "matdo-grade-film-mobile.mp4": true
+  },
+  "preserved_desktop": {
+    "matdo-grade-film.mp4": true,
+    "matdo-grade-film.webm": true,
+    "matdo-grade-film-poster.jpg": true,
+    "matdo-grade-film.vtt": true,
+    "ProductHero.astro": true
+  },
+  "captions": {
+    "cue_count": 17,
+    "within_film_and_non_overlapping": true
+  }
+}

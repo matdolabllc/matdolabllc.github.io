@@ -1,0 +1,229 @@
+{
+  "duration": 60,
+  "width": 1080,
+  "height": 1350,
+  "fps": 30,
+  "beats": [
+    {
+      "id": "request",
+      "file": "F01.png",
+      "start": 0,
+      "end": 4,
+      "copy": [
+        "6:45 PM.",
+        "A school night."
+      ],
+      "crop": [
+        190,
+        0,
+        1230,
+        782
+      ]
+    },
+    {
+      "id": "puzzled",
+      "file": "F02-v2.png",
+      "start": 4,
+      "end": 7,
+      "copy": [
+        "No answer key."
+      ],
+      "crop": [
+        250,
+        0,
+        1120,
+        782
+      ]
+    },
+    {
+      "id": "capture",
+      "file": "F03-v2.png",
+      "start": 7,
+      "end": 12,
+      "copy": [
+        "Point your phone.",
+        "Press the shutter."
+      ],
+      "crop": [
+        270,
+        0,
+        1060,
+        782
+      ]
+    },
+    {
+      "id": "marks",
+      "file": "F04.png",
+      "start": 12,
+      "end": 18,
+      "copy": [
+        "See what needs",
+        "another look."
+      ]
+    },
+    {
+      "id": "explanation",
+      "file": "F05.png",
+      "start": 18,
+      "end": 26,
+      "copy": [
+        "See where the",
+        "mistake happened."
+      ]
+    },
+    {
+      "id": "help",
+      "file": "F06.png",
+      "start": 26,
+      "end": 32,
+      "copy": [
+        "So you can help",
+        "them understand."
+      ],
+      "crop": [
+        260,
+        0,
+        1100,
+        782
+      ]
+    },
+    {
+      "id": "dinner",
+      "file": "F07-v2.png",
+      "start": 32,
+      "end": 36,
+      "copy": [
+        "More time for",
+        "what matters."
+      ],
+      "crop": [
+        270,
+        0,
+        1090,
+        782
+      ]
+    },
+    {
+      "id": "subjects",
+      "file": "F07A-subjects.png",
+      "start": 36,
+      "end": 44,
+      "copy": [
+        "More than math."
+      ]
+    },
+    {
+      "id": "privacy",
+      "file": "F08.png",
+      "start": 44,
+      "end": 49,
+      "copy": [
+        "Saved on your device.",
+        "Matdo Lab does not store homework.",
+        "Google processes grading."
+      ]
+    },
+    {
+      "id": "offer",
+      "file": "F09-v3.png",
+      "start": 49,
+      "end": 53,
+      "copy": [
+        "Free Trial",
+        "Paid plans for more grading.",
+        "Try it tonight."
+      ]
+    },
+    {
+      "id": "ending",
+      "file": "F10-v4.png",
+      "start": 53,
+      "end": 60,
+      "copy": [
+        "Matdo Grade",
+        "For Parents.",
+        "By Parents.",
+        "matdolab.com/grade"
+      ]
+    }
+  ],
+  "safe_area": {
+    "main_copy_bottom_pixels": 1056,
+    "caption_and_control_reserve_pixels": 294,
+    "main_text_minimum_pixels": 65
+  },
+  "subjects": "Cumulative two-column row order: Math, English, Science, Essays, at 36,38,40,42s.",
+  "privacy": "Device storage; Matdo Lab does not store homework; Google processes grading. Matches privacy/grade sections 3,4,7.",
+  "assets": [
+    {
+      "key": "request",
+      "path": "anchor-frames/direction-a/F01.png",
+      "sha256": "80d000f180be38bde66b60cc6cf5f58df92b2ff636c5fd518abe0b6bfae62ecd"
+    },
+    {
+      "key": "puzzled",
+      "path": "anchor-frames/direction-a/F02-v2.png",
+      "sha256": "fb17b072716714a67a1742ab61fbc400ada21594eab04e6c26abb3e27a67c1c5"
+    },
+    {
+      "key": "capture",
+      "path": "anchor-frames/direction-a/F03-v2.png",
+      "sha256": "3c085262dffb8595a3a59d4e344f72b4e6f2d4cf3aab1bdd096ca0030d1ac319"
+    },
+    {
+      "key": "marks",
+      "path": "anchor-frames/direction-a/F04.png",
+      "sha256": "5818f95119ca8aec15f6173c218b1d52748021c30998c86764f31ed38c1f61e6"
+    },
+    {
+      "key": "explanation",
+      "path": "anchor-frames/direction-a/F05.png",
+      "sha256": "5b0113106f4db9e0edff94e80c1b1cbd5cd5c4b3d1ef48a18fb7b8400e6c555c"
+    },
+    {
+      "key": "help",
+      "path": "anchor-frames/direction-a/F06.png",
+      "sha256": "2797e6ba32bfedaca8da47724483c902721d4ac04244f9a35aa9f50cee409bae"
+    },
+    {
+      "key": "dinner",
+      "path": "anchor-frames/direction-a/F07-v2.png",
+      "sha256": "358a10df58759023cf3589a2349edfdc7a9d5ad109413b95e2b7e2937cc22050"
+    },
+    {
+      "key": "subjects",
+      "path": "anchor-frames/direction-a/F07A-subjects.png",
+      "sha256": "10ea062e3f1c7de1e8dc0562095cf7f7f29b82a130329aee32ea49e8b79a8f6b"
+    },
+    {
+      "key": "privacy",
+      "path": "anchor-frames/direction-a/F08.png",
+      "sha256": "281c7160eb0b417585d80954a909e94c1f1b30e53b05178c880a0ff275d24f1d"
+    },
+    {
+      "key": "offer",
+      "path": "anchor-frames/direction-a/F09-v3.png",
+      "sha256": "d6819e21cc2fbd80d5eb7d278d0352eae889b4a910c06a7a448494d787693301"
+    },
+    {
+      "key": "ending",
+      "path": "anchor-frames/direction-a/F10-v4.png",
+      "sha256": "b1d6c8c011f69e31e3c593d1f5f7173875b82de9c23ffd063c0cc23d6cb08ba3"
+    },
+    {
+      "key": "mark",
+      "path": "../MatdoGrade/Assets.xcassets/MatdoMark.imageset/MatdoMark@3x.png",
+      "sha256": "4e447231e030d0ff3cfde7fcd823161cd26c8854a487515e78f520a7ff5d138f"
+    },
+    {
+      "key": "kitchen",
+      "path": "build/film/source/clean-plates/F09.png",
+      "sha256": "5191775e2a1ec652755043b61fb056a7eda971e6a211ca146ff68e2f3892c46d"
+    },
+    {
+      "key": "marksScreen",
+      "path": "assets/screens/marks.png",
+      "sha256": "6ffecc308a56db77806a131f48571cc73c743660e33a035b8d51b51381f06642"
+    }
+  ]
+}
