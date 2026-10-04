@@ -1,7 +1,7 @@
 ---
 const subjects = [
   { id: "math", label: "Math" },
-  { id: "english", label: "English" },
+  { id: "essay", label: "Essay" },
   { id: "reading", label: "Reading Comprehension" },
   { id: "social-studies", label: "Social Studies" },
   { id: "chemistry", label: "Chemistry" },
@@ -25,9 +25,13 @@ const subjects = [
 </section>
 <style>
   .subjects-section { padding-top: 0; scroll-margin-top: 110px; }
-  .subjects-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; list-style: none; padding: 0; margin: 0; }
-  .subject-card { background: #faf8ed; border: 3px solid var(--color-forest); border-radius: 22px; overflow: hidden; text-align: center; box-shadow: var(--shadow-sm); }
+  .subjects-grid { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: clamp(3px, 1vw, 12px); list-style: none; padding: 0; margin: 0; }
+  .subject-card { min-width: 0; background: #faf8ed; border: 2px solid var(--color-forest); border-radius: 12px; overflow: hidden; text-align: center; box-shadow: var(--shadow-sm); }
   .subject-card img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
-  .subject-card h3 { display: flex; align-items: center; justify-content: center; min-height: 3em; padding: 0 12px 18px; font-size: clamp(1.2rem, 2.2vw, 1.85rem); line-height: 1.15; color: var(--color-forest); }
-  @media (max-width: 700px) { .subjects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; } }
+  .subject-card h3 { display: flex; align-items: center; justify-content: center; min-height: 3.8em; padding: 0 4px 8px; font-size: clamp(0.45rem, 1.25vw, 1rem); line-height: 1.15; overflow-wrap: anywhere; color: var(--color-forest); }
+  @media (max-width: 600px) {
+    .subjects-section .wrap { padding-inline: 10px; }
+    .subject-card { border-width: 1px; border-radius: 5px; box-shadow: none; }
+    .subject-card h3 { min-height: 4.5em; padding: 0 1px 4px; }
+  }
 </style>
