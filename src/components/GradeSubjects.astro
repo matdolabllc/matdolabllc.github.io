@@ -1,0 +1,37 @@
+---
+const subjects = [
+  { id: "math", label: "Math" },
+  { id: "essay", label: "Essay" },
+  { id: "reading", label: "Reading" },
+  { id: "social-studies", label: "Social Studies" },
+  { id: "chemistry", label: "Chemistry" },
+  { id: "physics", label: "Physics" },
+  { id: "biology", label: "Biology" },
+  { id: "history", label: "History" },
+];
+---
+<section id="subjects" class="section-pad subjects-section" aria-labelledby="subjects-title">
+  <div class="wrap">
+    <div class="sec-head center reveal"><h2 id="subjects-title">Subjects</h2></div>
+    <ul class="subjects-grid">
+      {subjects.map((s) => (
+        <li class="subject-card reveal">
+          <img src={`/demo/grade/subjects/${s.id}.webp`} width="512" height="512" alt="" loading="lazy" decoding="async" />
+          <h3>{s.label}</h3>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+<style>
+  .subjects-section { padding-top: 0; scroll-margin-top: 110px; }
+  .subjects-grid { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: clamp(3px, 1vw, 12px); list-style: none; padding: 0; margin: 0; }
+  .subject-card { min-width: 0; background: #faf8ed; border: 2px solid var(--color-forest); border-radius: 12px; overflow: hidden; text-align: center; box-shadow: var(--shadow-sm); }
+  .subject-card img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
+  .subject-card h3 { display: flex; align-items: center; justify-content: center; min-height: 3.8em; padding: 0 4px 8px; font-size: clamp(0.45rem, 1.25vw, 1rem); line-height: 1.15; overflow-wrap: anywhere; color: var(--color-forest); }
+  @media (max-width: 600px) {
+    .subjects-section .wrap { padding-inline: 10px; }
+    .subject-card { border-width: 1px; border-radius: 5px; box-shadow: none; }
+    .subject-card h3 { min-height: 4.5em; padding: 0 1px 4px; }
+  }
+</style>

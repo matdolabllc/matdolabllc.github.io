@@ -1,5 +1,6 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import LegalProductTabs from "../../components/LegalProductTabs.astro";
+import Layout from "../../layouts/Layout.astro";
 
 // LEGAL DOCUMENT — treat edits with care.
 //
@@ -93,6 +94,7 @@ const tiers = [
   <!-- MASTHEAD -->
   <section class="doc-head">
     <div class="wrap doc-wrap">
+      <LegalProductTabs product="check" document="terms" />
       <span class="eyebrow">Legal</span>
       <h1>Terms of Use</h1>
       <p class="doc-sub">Matdo Check for iPad</p>
@@ -126,7 +128,7 @@ const tiers = [
           By downloading, installing, or using the App, you agree to these Terms. If you do not agree to them, do not use the App. If you are agreeing on behalf of a tutoring center, school, place of worship, club, camp, or other organisation, you confirm that you have authority to bind that organisation, and <strong>“you”</strong> means both you and it.
         </p>
         <p>
-          How the App handles personal information is described separately in our <a href="/privacy">Privacy Policy</a>, which forms part of these Terms.
+          How the App handles personal information is described separately in our <a href="/privacy/check">Privacy Policy</a>, which forms part of these Terms.
         </p>
 
         <!-- 2 -->
@@ -261,7 +263,7 @@ const tiers = [
           As between you and us, the Center is the controller of Attendee Records. You are responsible for meeting your own obligations to attendees and their parents or guardians, including any notice, consent, retention, and access requirements imposed by law, by a franchise agreement, or by your own policies.
         </p>
         <p>
-          Full detail is in the <a href="/privacy">Privacy Policy</a>.
+          Full detail is in the <a href="/privacy/check">Privacy Policy</a>.
         </p>
 
         <!-- 11 -->
@@ -398,7 +400,7 @@ const tiers = [
           You may terminate at any time by cancelling any subscription and deleting the App from your Devices. We may suspend or terminate your Licence if you materially breach these Terms, in particular section 8. Apple may terminate your licence under the Apple EULA on its own terms.
         </p>
         <p>
-          <strong>Deleting the App deletes its database, all local backups, and the spreadsheets kept on the Device with it.</strong> Export anything you need to keep before you do. Copies previously written to iCloud, including the monthly spreadsheets in iCloud Drive, persist until deleted from your Apple Account, as described in the <a href="/privacy">Privacy Policy</a>.
+          <strong>Deleting the App deletes its database, all local backups, and the spreadsheets kept on the Device with it.</strong> Export anything you need to keep before you do. Copies previously written to iCloud, including the monthly spreadsheets in iCloud Drive, persist until deleted from your Apple Account, as described in the <a href="/privacy/check">Privacy Policy</a>.
         </p>
         <p>
           Sections 10, 15, and 17 to 22 survive termination.

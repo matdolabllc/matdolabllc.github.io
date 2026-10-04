@@ -1,11 +1,12 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import LegalProductTabs from "../../components/LegalProductTabs.astro";
+import Layout from "../../layouts/Layout.astro";
 
 // Support page — this is the URL given to App Store Connect as the app's
 // Support URL, so it must stay reachable at /support and must name a real
 // contact channel. Keep the answers in sync with the shipped app: the pricing
 // below mirrors src/pages/check.astro, and the data claims mirror
-// src/pages/privacy.astro.
+// src/pages/privacy/check.astro.
 const EMAIL = "matdo@matdolab.com";
 
 const faqs = [
@@ -15,7 +16,7 @@ const faqs = [
   },
   {
     q: "Where is my attendance data stored?",
-    a: 'On your iPad. With Automatic Backup to iCloud on, which is the default, a daily backup and a spreadsheet for each month also go to your own Apple Account in iCloud. We do not receive, store, or have access to any of it. See the <a href="/privacy">Privacy Policy</a> for details.',
+    a: 'On your iPad. With Automatic Backup to iCloud on, which is the default, a daily backup and a spreadsheet for each month also go to your own Apple Account in iCloud. We do not receive, store, or have access to any of it. See the <a href="/privacy/check">Privacy Policy</a> for details.',
   },
   {
     q: "How do I manage or cancel my subscription?",
@@ -37,12 +38,13 @@ const faqs = [
 ---
 
 <Layout
-  title="Support — Matdo"
+  title="Support — Matdo Check"
   description="Get help with Matdo Check. Email matdo@matdolab.com — we usually reply within one business day."
 >
   <section class="page-hero">
     <div class="wrap sup-wrap">
-      <span class="eyebrow">Support</span>
+      <LegalProductTabs product="check" document="support" />
+      <span class="eyebrow">Matdo Check support</span>
       <h1>We're here to help.</h1>
       <p class="lede">
         Email us and a person will read it. We usually reply within one business day.
@@ -73,7 +75,7 @@ const faqs = [
       </dl>
 
       <p class="alt">
-        <a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Use</a>
+        <a href="/privacy/check">Privacy Policy</a> · <a href="/terms/check">Terms of Use</a>
       </p>
     </div>
   </section>

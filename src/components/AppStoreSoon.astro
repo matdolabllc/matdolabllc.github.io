@@ -1,9 +1,5 @@
 ---
-// "Download on the App Store" for Matdo Grade, which is not out yet: rendered
-// as a non-link with a "Coming soon" ribbon. When the app ships, pass its
-// App Store URL as `href` and the badge becomes a real link without the ribbon.
-// (Same look as StoreBadges.astro; swap for Apple's official badge artwork
-// when we have it.)
+// Grade download badge: inactive until an App Store URL is supplied.
 interface Props { href?: string; class?: string; }
 const { href, class: cls = "" } = Astro.props;
 const Tag = href ? "a" : "span";
@@ -12,7 +8,8 @@ const Tag = href ? "a" : "span";
   class={`asb ${href ? "" : "soon"} ${cls}`}
   href={href}
   rel={href ? "noopener" : undefined}
-  aria-label={href ? "Download Matdo Grade on the App Store" : "Matdo Grade on the App Store — coming soon"}
+  aria-label={href ? "Download Matdo Grade on the App Store" : "Matdo Grade on the App Store — not yet available"}
+  aria-disabled={href ? undefined : "true"}
   role={href ? undefined : "img"}
 >
   <svg class="asb-logo" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true">
@@ -30,12 +27,8 @@ const Tag = href ? "a" : "span";
   }
   a.asb { transition: transform 0.2s, box-shadow 0.2s; }
   a.asb:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
-  .asb.soon { cursor: default; }
-  .asb.soon::after {
-    content: "Coming soon"; position: absolute; top: -10px; right: -10px;
-    font-family: var(--font-sans); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
-    color: #08130d; background: var(--color-mint); padding: 3px 8px; border-radius: 999px; box-shadow: var(--shadow-sm);
-  }
+  .asb.soon { cursor: default; opacity: 0.55; }
+
   .asb-logo { width: 24px; height: 27px; flex: none; }
   .asb-text { display: flex; flex-direction: column; line-height: 1.12; text-align: left; }
   .asb-text small { font-size: 0.66rem; font-weight: 500; letter-spacing: 0.02em; opacity: 0.9; }

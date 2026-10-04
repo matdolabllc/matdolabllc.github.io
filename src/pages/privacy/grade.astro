@@ -1,0 +1,298 @@
+---
+import LegalProductTabs from "../../components/LegalProductTabs.astro";
+import Layout from "../../layouts/Layout.astro";
+
+// GENERATED from matdo-grade/MatdoGrade/LegalViews.swift by
+// matdo-grade/tools/legal_to_web.py. Do not edit here: change the Swift file
+// and rerun the script, so the website and the binary never disagree.
+---
+
+<Layout
+  title="Privacy Policy — Matdo Grade"
+  description="The Matdo Grade privacy policy. Pages are relayed to Google&#x27;s Gemini model to be graded. Matdo Lab does not save grading content on its server; it keeps balance, purchase, usage and support records as described in this policy."
+>
+  <section class="doc-head">
+    <div class="wrap doc-wrap">
+      <LegalProductTabs product="grade" document="privacy" />
+      <span class="eyebrow">Legal</span>
+      <h1>Privacy Policy</h1>
+      <p class="doc-sub">Matdo Grade for iPhone and iPad</p>
+
+      <dl class="doc-meta">
+        <div><dt>Effective</dt><dd><time datetime="2026-10-04">4 October 2026</time></dd></div>
+        <div><dt>Publisher</dt><dd>Matdo Lab LLC</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="doc-body">
+    <div class="wrap doc-wrap">
+      <nav class="toc" aria-labelledby="toc-h">
+        <h2 id="toc-h">Contents</h2>
+        <ol>
+          <li><a href="#s1">About this policy</a></li>
+          <li><a href="#s2">Information sent for grading</a></li>
+          <li><a href="#s3">How we handle grading content</a></li>
+          <li><a href="#s4">Google's role</a></li>
+          <li><a href="#s5">Identifiers, balances and purchases</a></li>
+          <li><a href="#s6">Usage information and logs</a></li>
+          <li><a href="#s7">Information stored on your device</a></li>
+          <li><a href="#s8">Device backups</a></li>
+          <li><a href="#s9">Exporting and sharing</a></li>
+          <li><a href="#s10">Student information and age restrictions</a></li>
+          <li><a href="#s11">Advertising, tracking and other disclosures</a></li>
+          <li><a href="#s12">How long information is kept</a></li>
+          <li><a href="#s13">Where information is processed</a></li>
+          <li><a href="#s14">Security</a></li>
+          <li><a href="#s15">Your choices and privacy rights</a></li>
+          <li><a href="#s16">Changes to this policy</a></li>
+          <li><a href="#s17">Contact</a></li>
+        </ol>
+      </nav>
+
+      <article class="doc">
+        <h2 id="s1">About this policy</h2>
+        <p>Matdo Grade is published by Matdo Lab LLC ("we", "us"). This policy explains how we handle information when you use the app on an iPhone or iPad.</p>
+        <p>Grading uses Google's Gemini model. With your permission, we send the pages you choose through our server to Google and return the results to your device. Our server does not save page images, rubrics, answers, grades or feedback. Google's handling of this content is explained below.</p>
+        <p>You do not need to create an account or give us your name or email address to use the app. We keep identifiers, purchase and balance records, and usage information to run the service. We do not sell personal information or use it for advertising.</p>
+        <h2 id="s2">Information sent for grading</h2>
+        <p>A grading request includes your captured page images, the app's grading instructions, your chosen output level (Brief or Detailed), which pages you marked as context, and whether you are requesting a regrade. In Essay Mode, it also includes your rubric. Identifiers and technical details accompany the request, as described below.</p>
+        <p>Anything visible on a page is included in the image, including names and other personal information. Remove identifying details that are not needed for grading before you capture the page. The app does not access your contacts, location or photo library, or upload your other saved grades as part of a request.</p>
+        <p>The app asks for permission before sending your first grading request. You can withdraw that permission in Settings → Grading Data. This stops future grading uploads until you allow them again; it does not undo processing that has already taken place. Balance checks, purchase verification, security checks and usage reporting are separate from this permission.</p>
+        <h2 id="s3">How we handle grading content</h2>
+        <p>Our server receives your request, checks its page count and grading limits, and forwards it to Google. It processes the response to calculate any unit charge and returns the result to your device.</p>
+        <p>We process this content temporarily to complete the request. We do not save it in our server storage or include it in our usage records or request logs. We therefore cannot retrieve a past page or grading result for you. Saved results are held on your device.</p>
+        <h2 id="s4">Google's role</h2>
+        <p>We use Google Cloud to host our grading service, store balance and usage records, and provide security checks. Grading is performed by Gemini through Vertex AI. Google handles this information as our service provider under Google Cloud's terms: <a href="https://cloud.google.com/terms/service-terms" rel="noopener">cloud.google.com/terms/service-terms</a>. You do not need a Google account. Google's data-processing commitments are described at <a href="https://cloud.google.com/terms/data-processing-addendum" rel="noopener">cloud.google.com/terms/data-processing-addendum</a>. We require service providers that handle personal information for us to protect it at least as carefully as this policy requires, including confidentiality, security and limited use.</p>
+        <p>We do not use student work to train AI models or authorize Google to do so. Google's terms prohibit it from using our content to train or fine-tune AI models without our permission or instruction. We would update this policy and ask for your consent before changing this practice.</p>
+        <p>Google may cache request content and responses in memory for up to 24 hours to improve performance. Under Google's standard abuse-monitoring rules, prompts flagged for suspected misuse may be kept for up to 90 days and reviewed by authorized Google staff. These rules may differ where an applicable agreement or approved exception provides otherwise. These provider retention practices are separate from our server's handling of grading content and do not authorize model training.</p>
+        <h2 id="s5">Identifiers, balances and purchases</h2>
+        <p>We receive the following information to manage your grading balance and verify requests:</p>
+        <ul>
+          <li><strong>Grading identifier</strong>: a random identifier created by the app and stored in your device's Keychain. It can remain after the app is deleted and reinstalled. It is not an advertising identifier or your device's serial number.</li>
+          <li><strong>App Store identifier</strong>: Apple's signed identifier for your app download, when available. It lets us link your balance and subscription across devices using the same Apple Account and avoid issuing repeated free grants. It does not give us your Apple Account email or password.</li>
+          <li><strong>Security token</strong>: a short-lived Firebase App Check token, using Apple's App Attest service, to help verify that requests come from a genuine app installation.</li>
+          <li><strong>Balance information</strong>: units used, remaining allowances and top-ups, and subscription reset dates.</li>
+          <li><strong>Purchase information</strong>: signed App Store transaction details, including the product, transaction identifier, expiration date and refund status. Apple processes payments; it does not send us your card number, billing address or name through these transactions.</li>
+        </ul>
+        <p>These identifiers can link records to the same user or installation, even though the records do not include a name or email address.</p>
+        <p>App Check sends app and device attestation material to Google and Apple's App Attest service to verify the installation. Firebase explains its handling of App Check data at <a href="https://firebase.google.com/support/privacy" rel="noopener">firebase.google.com/support/privacy</a>.</p>
+        <p>If you contact us, we also receive your email address and the information you include. We use it to answer your question or handle your request. Please avoid sending student work or sensitive information unless it is needed to resolve the issue.</p>
+        <h2 id="s6">Usage information and logs</h2>
+        <p>We record information about grading requests, including the time, user or installation identifiers, page counts, grading mode, output level, regrade status, unit charges, model usage and cost, processing time, and success or error codes.</p>
+        <p>The app also sends its version and build, iOS version, device model and installation channel (such as TestFlight or the App Store). It reports error codes and timings, counts of marks placed or questions left unmarked, and when the plans screen is opened or a plan is tapped.</p>
+        <p>Google Cloud's request logs include the request time, IP address, user agent and response status. Our own request logs contain operational details such as identifiers, page counts and charges.</p>
+        <p>These records do not include page images, answers, grades, feedback, rubrics or the text of grading responses. We use them to calculate charges, protect the service, fix problems and understand usage. We use combined usage statistics to plan pricing and capacity.</p>
+        <h2 id="s7">Information stored on your device</h2>
+        <p>The app stores captured pages and grading results in its private storage. This includes page images, annotations, answers, worked solutions and essay feedback. Your rubric and settings are also stored locally. The app does not automatically add captured or marked pages to your photo library.</p>
+        <p>You can delete saved work in Previous Grading. Deleting the app removes its local files and settings, but may leave the grading identifier in the Keychain. Deleting local files does not delete our server records or copies in a device backup.</p>
+        <p>The app's Debug Log holds diagnostic details and error text in memory during an app session. It is not automatically uploaded to us. Review it before sharing it for support, because error text may include details from a failed response.</p>
+        <h2 id="s8">Device backups</h2>
+        <p>Matdo Grade does not provide its own iCloud syncing service. Your saved work may be included in an iCloud or computer backup, depending on your device's backup settings.</p>
+        <p>Those backups are controlled by you and the backup provider. We cannot access or delete them. You can manage iCloud backups in your device's Settings under your name → iCloud → iCloud Backup.</p>
+        <h2 id="s9">Exporting and sharing</h2>
+        <p>When you export a marked page, the app passes it to the system share sheet. You choose where to send it, such as Mail, Messages, Files, a printer or another app.</p>
+        <p>The recipient or service then handles that copy under its own policies. Check the page for student names and other personal information before sharing it.</p>
+        <h2 id="s10">Student information and age restrictions</h2>
+        <p>Matdo Grade is for adult teachers, tutors and parents aged 18 or older. People under 18 must not use the grading service. An adult may submit a child's work if they have the authority and permissions described below. We handle any personal information in that work as described in this policy.</p>
+        <p>You or your organization decide which work to submit. Before uploading it, make sure you have authority to share it with us and Google, and meet any applicable school policies, notice requirements and consent requirements. Permission in the app does not replace a school's approval or any legally required permission from a parent or student.</p>
+        <p>We process submitted work to provide the grading you request. This policy is not a school data-processing agreement and does not, by itself, establish compliance with FERPA or other student privacy laws. If your organization requires an agreement or restrictions on where student information is processed, contact us before submitting work.</p>
+        <p>We do not knowingly collect personal information directly from children using the app. Contact <a href="mailto:matdo@matdolab.com">matdo@matdolab.com</a> if you believe a child has provided information directly so we can investigate and address it.</p>
+        <h2 id="s11">Advertising, tracking and other disclosures</h2>
+        <p>We do not run advertisements, use advertising identifiers, track you across other companies' apps or websites, or sell personal information. We do not share personal information for cross-context behavioral advertising.</p>
+        <p>We use our own usage reporting described above. The app does not include a third-party analytics or crash-reporting SDK; it uses Firebase App Check for security. If you enable Apple's Share With App Developers setting, Apple may provide us with crash reports and usage statistics. You can change that setting under Privacy &amp; Security → Analytics &amp; Improvements.</p>
+        <p>We share information with Google and Apple as needed for the services described in this policy. We may also disclose information we hold when required by law or a valid legal request, or when reasonably necessary to investigate misuse or protect legal rights and the security of the service.</p>
+        <h2 id="s12">How long information is kept</h2>
+        <p>We do not save grading content on our server. Google's temporary caching and abuse monitoring are described under "Google's role".</p>
+        <p>We keep identifiers, balances and purchase records for as long as needed to maintain your balance and subscription. Top-up units do not expire, so a record with unused top-up units may remain until they are spent or you request deletion.</p>
+        <p>Usage records are scheduled for automatic deletion after 365 days. Server request logs have a 30-day retention period. Automatic deletion may take additional time to complete.</p>
+        <p>If you request deletion, we will delete the associated balance and usage records, subject to any legal requirement to retain particular information. We will explain any such exception. Deleting your balance record removes access to remaining units. It does not cancel an Apple subscription; subscriptions must be canceled through Apple.</p>
+        <p>We keep support correspondence as needed to handle your inquiry and any related dispute or legal obligation. Saved work on your device remains until you delete it or delete the app. Backups and exported copies must be managed separately.</p>
+        <h2 id="s13">Where information is processed</h2>
+        <p>Our grading service and balance and usage records are hosted on Google Cloud in the United States. Gemini uses Google's global endpoint, which does not guarantee processing in a particular country or region.</p>
+        <p>If you use the app outside the United States, your information may be transferred to and processed in other countries. Their privacy laws may differ from those where you live. Contact us for information about the arrangements that apply to these transfers. If your school or organization requires information to stay within a particular region, confirm those requirements can be met before uploading work.</p>
+        <h2 id="s14">Security</h2>
+        <p>Connections between the app, our server and Google's grading service are encrypted using TLS. Our server uses its own credentials to access Vertex AI, and Firebase App Check helps verify app requests. Saved work uses the protections provided by iOS for the app's private storage.</p>
+        <p>Use a device passcode and keep your device software up to date to help protect saved student work. No storage or transmission method is completely secure, so we cannot guarantee absolute security.</p>
+        <h2 id="s15">Your choices and privacy rights</h2>
+        <p>You can withdraw permission for future grading uploads in Settings → Grading Data, delete saved work in Previous Grading, and manage backups and shared copies through the relevant service.</p>
+        <p>Depending on the law that applies, you may have rights to access, correct, delete or receive a copy of personal information, restrict its use, or object to certain processing. You may also complain to your local privacy regulator. Contact <a href="mailto:matdo@matdolab.com">matdo@matdolab.com</a> to make a request. We will respond within the time required by applicable law.</p>
+        <p>We may need information to verify your request and locate the right records. Our balance and usage records are linked to identifiers rather than your name or email, so we cannot find them by name alone. We will help you identify the relevant record. We cannot retrieve student work that we do not store or delete files from your device remotely.</p>
+        <p>Where the EU or UK GDPR applies, we rely on performance of our contract for balance and purchase processing, and legitimate interests in securing, maintaining and improving the service for operational logs and usage records. Student work is processed to provide the grading requested by you or your organization; the party responsible for that work must establish the appropriate legal basis. When processing depends on consent, you may withdraw it without affecting processing that was lawful before withdrawal.</p>
+        <h2 id="s16">Changes to this policy</h2>
+        <p>We will update this policy when our information practices change and revise the effective date shown above. We will give notice of material changes and seek renewed permission where required.</p>
+        <p>The current policy is available in the app and at <a href="https://matdolab.com/privacy/grade">matdolab.com/privacy/grade</a>.</p>
+        <h2 id="s17">Contact</h2>
+        <p>Matdo Lab LLC<br /><a href="mailto:matdo@matdolab.com">matdo@matdolab.com</a><br />West Lafayette, Indiana, United States</p>
+
+        <p class="colophon">
+          End of Privacy Policy · Effective 4 October 2026 · Matdo Lab LLC
+        </p>
+      </article>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ---- Masthead ---- */
+  .doc-head {
+    padding: 140px 0 44px;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .doc-wrap { max-width: 780px; }
+  .doc-head h1 {
+    font-size: clamp(2.1rem, 4.4vw, 3.1rem);
+    margin: 0.9rem 0 0.5rem;
+  }
+  .doc-sub { color: #55665f; font-size: 1.05rem; margin-bottom: 2rem; }
+
+  .doc-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 18px 24px;
+    margin: 0;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--color-line);
+  }
+  .doc-meta dt {
+    font-size: 0.7rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: #7d8d87;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .doc-meta dd { margin: 0; font-size: 0.98rem; color: var(--color-forest); font-weight: 500; }
+
+  /* ---- Body ---- */
+  .doc-body { padding: 56px 0 clamp(64px, 9vw, 110px); }
+
+  /* Contents */
+  .toc {
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-sm);
+    padding: 26px 30px 22px;
+    margin-bottom: 3.5rem;
+    background: #fff;
+  }
+  .toc h2 {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: #7d8d87;
+    margin: 0 0 1rem;
+    font-weight: 700;
+  }
+  .toc ol { margin: 0; padding-left: 1.4rem; columns: 2; column-gap: 40px; }
+  .toc li { margin-bottom: 0.42rem; break-inside: avoid; }
+  .toc a { color: #3d4b47; font-size: 0.94rem; line-height: 1.45; }
+  .toc a:hover { color: var(--color-teal); text-decoration: underline; }
+
+  /* Sections */
+  .doc h2 {
+    font-size: clamp(1.18rem, 2.1vw, 1.42rem);
+    color: var(--color-forest);
+    margin: 3rem 0 0.9rem;
+    scroll-margin-top: 112px;
+  }
+  .doc h3 {
+    font-family: var(--font-sans);
+    font-size: 1.01rem;
+    font-weight: 700;
+    color: var(--color-forest);
+    margin: 1.9rem 0 0.7rem;
+  }
+  .doc p, .doc li {
+    color: #3a4844;
+    font-size: 1.02rem;
+    line-height: 1.75;
+  }
+  .doc p { margin-bottom: 1rem; }
+  .doc ul { margin: 0 0 1.2rem; padding-left: 1.3rem; }
+  .doc ul li { margin-bottom: 0.65rem; }
+  .doc ul li::marker { color: var(--color-sage); }
+  .doc strong { color: var(--color-forest); font-weight: 600; }
+  .doc a { color: var(--color-teal); text-decoration: underline; }
+  .doc a:hover { color: var(--color-forest); }
+  .doc a, .toc a { text-underline-offset: 0.16em; }
+
+  /* Summary callout */
+  .callout {
+    border: 1px solid var(--color-line);
+    border-left: 3px solid var(--color-sage);
+    border-radius: var(--radius-sm);
+    background: #fbfaf6;
+    padding: 24px 28px 20px;
+    margin-bottom: 1.4rem;
+  }
+  .callout-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: #7d8d87;
+    font-weight: 700;
+    margin-bottom: 0.9rem;
+  }
+  .callout ul { margin-bottom: 1rem; }
+  .callout-note {
+    font-size: 0.9rem;
+    color: #6a7b76;
+    margin: 0;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--color-line);
+  }
+
+  /* Definition lists */
+  .defs { margin: 0 0 1.4rem; }
+  .defs dt {
+    font-weight: 700;
+    color: var(--color-forest);
+    margin-top: 1.05rem;
+    font-size: 1rem;
+  }
+  .defs dt:first-child { margin-top: 0; }
+  .defs dd {
+    margin: 0.3rem 0 0;
+    color: #3a4844;
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+  .contact dd { font-weight: 500; }
+
+  /* Emphasised notice */
+  .notice {
+    border-left: 3px solid var(--color-gold);
+    background: #fdfbf3;
+    padding: 16px 20px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.99rem;
+    margin-bottom: 1.2rem;
+  }
+  .notice p:last-child { margin-bottom: 0; }
+
+  .colophon {
+    margin-top: 3.4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-line);
+    font-size: 0.86rem;
+    color: #7d8d87;
+    letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 700px) {
+    .doc-head { padding: 116px 0 36px; }
+    .toc ol { columns: 1; }
+    .toc { padding: 22px 22px 18px; }
+  }
+
+  @media print {
+    :global(#site-header), :global(footer) { display: none; }
+    .doc-head { padding-top: 0; }
+    .doc-body { padding-top: 24px; }
+    .toc { break-after: page; }
+    .doc h2 { break-after: avoid; }
+    .doc p, .doc li { font-size: 10.5pt; line-height: 1.55; }
+    .doc a { color: inherit; text-decoration: none; }
+  }
+</style>

@@ -3,52 +3,51 @@
  * "Features" on /grade: one flip card per feature. The front is a cartoon
  * and the feature's name; a tap turns the card over to the caption.
  *
- * The cartoons are public/demo/cartoons/grade-feat-*.svg, drawn in the Check
- * page cartoons' 240 × 190 frame and palette, with Matdo Grade's amber and the
- * app's own ✓ / ✗ colours. Every caption describes what the app does today.
+ * Illustrations match the subject cards' cream, green and gold palette.
+ * Every caption describes what the app does today.
  */
 const features = [
   {
     cartoon: "grade-feat-steps",
-    kicker: "Grading level",
-    title: "Brief grading and detailed grading",
+    kicker: "Grading",
+    title: "Step-by-step",
     caption:
-      "Brief marks every answer and shows the correct one beside it. Detailed adds a worked solution, step by step, and points to the step where your child’s working went wrong.",
+      "Check answers quickly, or see a full worked solution. Find the step where a mistake happened.",
   },
   {
     cartoon: "grade-feat-pages",
     kicker: "Multi-page",
-    title: "Supports multiple-page homework",
+    title: "Whole assignments",
     caption:
-      "Photograph a whole assignment, page after page. The pages are graded together, so a problem that runs onto the next page stays in one piece.",
+      "Scan several pages and grade them together—even when a question continues on the next page.",
   },
   {
     cartoon: "grade-feat-reading",
-    kicker: "Reading comprehension",
-    title: "Reads the article and grades the answers",
+    kicker: "Comprehension",
+    title: "Reading help",
     caption:
-      "Tag the reading passage as a Context Page. Matdo Grade reads it to check the comprehension answers, and leaves the passage itself unmarked.",
+      "Add the passage and the questions. The app uses the passage to check answers without marking the passage itself.",
   },
   {
     cartoon: "grade-feat-one-step",
-    kicker: "All-in-one",
-    title: "iPad/iPhone scan and grade",
+    kicker: "iPad & iPhone",
+    title: "Scan & grade",
     caption:
-      "Point the iPad or iPhone, tap Grade, press the shutter. The marks appear on the photo, with no uploading and no separate scanner app.",
+      "Take a photo of the homework. See marks on the page, all in one app.",
   },
   {
     cartoon: "grade-feat-subjects",
-    kicker: "Many subjects",
-    title: "Math, English, science, and more",
+    kicker: "Subjects",
+    title: "Many subjects",
     caption:
-      "From arithmetic and competition math to college calculus, reading and essays to science, on printed worksheets or lined paper, in your child’s own handwriting.",
+      "Check handwritten math, science, reading, and essays—from everyday homework to advanced problems.",
   },
   {
     cartoon: "grade-feat-rubric",
-    kicker: "Essay mode",
-    title: "Standard + user-defined rubrics",
+    kicker: "Writing",
+    title: "Essay feedback",
     caption:
-      "Start from the standard rubric (clerical, grammar, composition) and add criteria of your own. Each comes back Met, Partly or Not yet, with a note beside every paragraph.",
+      "Get feedback on grammar and writing, paragraph by paragraph. Use the standard rubric or add your own criteria.",
   },
 ];
 
@@ -60,7 +59,7 @@ const turn =
     <div class="sec-head center reveal">
       <span class="eyebrow">Features</span>
       <h2>Your AI grading assistant</h2>
-      <p>Made by parents and teachers, made for parents and teachers.</p>
+      <p>Scan homework. Understand mistakes. Help learning move forward.</p>
     </div>
 
     <div class="gf-grid reveal">
@@ -68,7 +67,7 @@ const turn =
         <button type="button" class="gf-card" aria-pressed="false" aria-label={`${f.kicker}: ${f.title}`} aria-describedby={`gf-${f.cartoon}`}>
           <span class="gf-inner">
             <span class="gf-face gf-front" aria-hidden="true">
-              <img src={`/demo/cartoons/${f.cartoon}.svg`} alt="" width="240" height="190" loading="lazy" />
+              <img src={`/demo/grade/features/${f.cartoon}.webp`} alt="" width="512" height="512" loading="lazy" decoding="async" />
               <span class="gf-kicker">{f.kicker}</span>
               <span class="gf-title">{f.title}</span>
               <span class="gf-hint"><Fragment set:html={turn} />Tap to read</span>
@@ -146,9 +145,9 @@ const turn =
     padding: 16px 20px 20px;
     text-align: center;
     background: var(--color-cream);
-    border: 2px solid var(--color-line);
+    border: 2px solid var(--color-forest);
   }
-  .gf-front img { display: block; width: 82%; height: auto; margin-bottom: 8px; }
+  .gf-front img { display: block; width: min(78%, 220px); height: auto; aspect-ratio: 1; margin-bottom: 8px; border-radius: 12px; }
 
   .gf-back {
     gap: 10px;

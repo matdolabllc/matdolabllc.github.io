@@ -1,5 +1,6 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import LegalProductTabs from "../../components/LegalProductTabs.astro";
+import Layout from "../../layouts/Layout.astro";
 
 // LEGAL DOCUMENT — treat edits with care.
 //
@@ -60,6 +61,7 @@ const summary = [
   <!-- MASTHEAD -->
   <section class="doc-head">
     <div class="wrap doc-wrap">
+      <LegalProductTabs product="check" document="privacy" />
       <span class="eyebrow">Legal</span>
       <h1>Privacy Policy</h1>
       <p class="doc-sub">Matdo Check for iPad, and matdolab.com</p>

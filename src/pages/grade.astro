@@ -1,8 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import ProductHero from "../components/ProductHero.astro";
+import AppStoreSoon from "../components/AppStoreSoon.astro";
+import GradeSubjects from "../components/GradeSubjects.astro";
 import GradedSamples from "../components/GradedSamples.astro";
 import GradeFeatures from "../components/GradeFeatures.astro";
-import AppStoreSoon from "../components/AppStoreSoon.astro";
 
 // Matches the app (Plan.swift, MatdoGrade.storekit) and the server's free grant
 // (server/src/lib/plans.js). Page counts are quoted at Brief, 10 units for a
@@ -22,33 +24,21 @@ const fmt = (n: number) => n.toLocaleString("en-US");
   description="Matdo Grade is an iPad app that scans handwritten homework and grades it with AI in seconds — while the teacher reviews, overrides, and stays fully in control."
 >
   <!-- HERO -->
-  <section class="page-hero">
-    <div class="wrap ph-grid">
-      <AppStoreSoon class="hero-store" />
-      <div>
-        <img class="hero-mark" src="/logos/matdo-grade-mark.png" width="552" height="782" alt="" />
-        <h1 class="hero-title">Matdo Grade</h1>
-        <p class="hero-sub">iPad/iPhone grading for handwritten homework</p>
-        <p class="lede">Use AI to help your children and students by scanning their handwritten homework and providing instant feedback.</p>
-      </div>
+<ProductHero name="Matdo Grade" mark="/logos/matdo-grade-mark.png" subtitle="For parents. By Parents." description="Scan homework. Spot mistakes. Help them learn." accent="#b08a3e">
+<AppStoreSoon slot="downloads" />
+<figure slot="video" class="video-frame reveal">
+        <video class="demo-video" controls autoplay muted loop playsinline preload="metadata"
+          width="1280" height="720" poster="/demo/matdo-grade-film-poster.jpg?v=20261004-v4"
+          aria-label="Matdo Grade introduction film">
+          <source src="/demo/matdo-grade-film.webm?v=20261004-v4" type="video/webm" />
+          <source src="/demo/matdo-grade-film.mp4?v=20261004-v4" type="video/mp4" />
+          <track kind="captions" src="/demo/matdo-grade-film.vtt?v=20261004-v4" srclang="en" label="English" />
+          Your browser can't play embedded video — <a href="/demo/matdo-grade-film.mp4?v=20261004-v4">watch it here</a>.
+        </video>
+      </figure>
+</ProductHero>
 
-      <div class="ph-art">
-        <div class="mock" role="img" aria-label="iPad grading a math worksheet with an 18 out of 20 score">
-          <div class="mock-head">
-            <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
-            <span class="mock-title">Worksheet · Math</span>
-          </div>
-          <div class="worksheet">
-            <div class="score-badge">18/20</div>
-            <div style="position:relative"><div class="ws-line mid"></div><svg class="check-svg" style="top:-2px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div style="position:relative"><div class="ws-line short"></div><svg class="check-svg" style="top:-2px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div style="position:relative"><div class="ws-line"></div><svg class="check-svg" style="top:-2px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div style="position:relative"><div class="ws-line mid" style="margin-bottom:0"></div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <GradeSubjects />
 
   <!-- SEE IT GRADE -->
   <GradedSamples />
@@ -61,7 +51,7 @@ const fmt = (n: number) => n.toLocaleString("en-US");
     <div class="wrap">
       <div class="sec-head center reveal">
         <h2>Pricing</h2>
-        <p class="pr-soon">Coming soon to the App Store for iPad and iPhone.</p>
+        <p class="pr-soon">For iPad and iPhone.</p>
       </div>
 
       <div class="pr-grid reveal">
@@ -85,21 +75,13 @@ const fmt = (n: number) => n.toLocaleString("en-US");
 
       <div class="pr-more reveal">
         <p><b>Top-Up:</b> 1,000 extra units for $6.99, never expire.</p>
-        <p class="pr-fine">Prices in US dollars — the App Store shows your local price. Plans renew monthly and can be cancelled anytime in your Apple account settings.</p>
-        <AppStoreSoon class="pr-badge" />
       </div>
     </div>
   </section>
 </Layout>
 
 <style>
-  .page-hero { padding: 150px 0 clamp(28px, 4vw, 44px); }
-  .hero-mark { display: block; height: 88px; width: auto; margin-bottom: 1.1rem; }
-  .ph-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 56px; align-items: center; }
-  .ph-grid > * { min-width: 0; }
-  .page-hero .wrap { position: relative; }
-  /* Top right of the page, level with the Matdo Grade mark. */
-  .page-hero :global(.hero-store) { position: absolute; top: 0; right: 24px; z-index: 2; }
+
 
   .pr-soon { margin-top: 0.4rem; }
   .pr-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
@@ -126,17 +108,8 @@ const fmt = (n: number) => n.toLocaleString("en-US");
     .pr-card { padding: 18px 16px; }
     .pr-price { font-size: 1.6rem; }
   }
-  /* Title and subtitle set as on the Matdo Check page, the subtitle in Grade's gold. */
-  .hero-title { font-size: clamp(3rem, 8vw, 5.5rem); line-height: 1; letter-spacing: -0.03em; }
-  .hero-sub { font-family: var(--font-display); font-size: clamp(1.25rem, 3vw, 1.9rem); color: #b08a3e; font-weight: 500; line-height: 1.25; margin: 0.6rem 0 0; }
-  .page-hero .lede { font-size: 1.15rem; color: #3d4b47; max-width: 34rem; margin: 1.1rem 0 0; }
-  .ph-art .mock { max-width: 420px; margin-left: auto; }
 
 
-  @media (max-width: 900px) {
-    .page-hero { padding: 120px 0 28px; }
-    .hero-mark { height: 70px; margin-bottom: 0.9rem; }
-    .ph-grid { grid-template-columns: 1fr; gap: 40px; }
-    .ph-art .mock { margin: 0 auto; }
-  }
+
+
 </style>
