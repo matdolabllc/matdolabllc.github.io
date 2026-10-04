@@ -4,7 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 // Matdo Grade support — the URL given to App Store Connect as Matdo Grade's
 // Support URL, so it must stay reachable at /grade/support and must name a real
 // contact channel. The answers mirror the shipped app and its legal pages
-// (/grade/privacy and /grade/terms, generated from
+// (/privacy/grade and /terms/grade, generated from
 // matdo-grade/MatdoGrade/LegalViews.swift); change them together.
 const EMAIL = "matdo@matdolab.com";
 
@@ -19,11 +19,11 @@ const faqs = [
   },
   {
     q: "What does it cost?",
-    a: 'New users get a one-time grant of free units. After that, grading needs a monthly plan — Lite, Plus, Pro or Max — or a top-up that never expires. Each plan\'s allowance resets on the first of the month (UTC). The details are in the <a href="/grade/terms#s12">Terms of Use</a>.',
+    a: 'New users get a one-time grant of free units. After that, grading needs a monthly plan — Lite, Plus, Pro or Max — or a top-up that never expires. Each plan\'s allowance resets on the first of the month (UTC). The details are in the <a href="/terms/grade#s12">Terms of Use</a>.',
   },
   {
     q: "Does Matdo keep my students' work?",
-    a: 'No. A page is sent through our grading service to Google\'s Gemini model to be graded, and we keep no copy of the page or the grade. The marked page is saved only on your iPhone or iPad. See the <a href="/grade/privacy">Privacy Policy</a> for exactly what we do receive.',
+    a: 'No. A page is sent through our grading service to Google\'s Gemini model to be graded, and we keep no copy of the page or the grade. The marked page is saved only on your iPhone or iPad. See the <a href="/privacy/grade">Privacy Policy</a> for exactly what we do receive.',
   },
   {
     q: "A mark looks wrong.",
@@ -81,7 +81,7 @@ const faqs = [
       </dl>
 
       <p class="alt">
-        <a href="/grade/privacy">Privacy Policy</a> · <a href="/grade/terms">Terms of Use</a>
+        <a href="/privacy/grade">Privacy Policy</a> · <a href="/terms/grade">Terms of Use</a>
       </p>
     </div>
   </section>
