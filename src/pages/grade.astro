@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import ProductHero from "../components/ProductHero.astro";
 import AppStoreSoon from "../components/AppStoreSoon.astro";
 import GradeSubjects from "../components/GradeSubjects.astro";
 import GradedSamples from "../components/GradedSamples.astro";
@@ -23,22 +24,9 @@ const fmt = (n: number) => n.toLocaleString("en-US");
   description="Matdo Grade is an iPad app that scans handwritten homework and grades it with AI in seconds — while the teacher reviews, overrides, and stays fully in control."
 >
   <!-- HERO -->
-  <section class="page-hero">
-    <div class="wrap ph-grid">
-      <div>
-        <img class="hero-mark" src="/logos/matdo-grade-mark.png" width="552" height="782" alt="" />
-        <h1 class="hero-title">Matdo Grade</h1>
-        <p class="hero-sub">For parents, tutors, teachers</p>
-        <p class="lede">Scan homework. Spot mistakes. Help them learn.</p>
-      </div>
-
-      <div class="hero-actions"><AppStoreSoon /></div>
-    </div>
-  </section>
-
-  <section class="film-section" aria-label="Matdo Grade introduction video">
-    <div class="wrap">
-      <figure class="video-frame reveal">
+<ProductHero name="Matdo Grade" mark="/logos/matdo-grade-mark.png" subtitle="For parents, tutors, teachers" description="Scan homework. Spot mistakes. Help them learn." accent="#b08a3e">
+<AppStoreSoon slot="downloads" />
+<figure slot="video" class="video-frame reveal">
         <video class="demo-video" controls autoplay muted loop playsinline preload="auto"
           width="1280" height="720" poster="/demo/matdo-grade-film-poster.jpg"
           aria-label="Matdo Grade introduction film">
@@ -47,8 +35,7 @@ const fmt = (n: number) => n.toLocaleString("en-US");
           Your browser can't play embedded video — <a href="/demo/matdo-grade-film.mp4">watch it here</a>.
         </video>
       </figure>
-    </div>
-  </section>
+</ProductHero>
 
   <GradeSubjects />
 
@@ -94,16 +81,7 @@ const fmt = (n: number) => n.toLocaleString("en-US");
 </Layout>
 
 <style>
-  .film-section { padding: 24px 0 clamp(40px, 6vw, 72px); }
-  .video-frame { margin: 2rem auto 0; max-width: 1000px; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid var(--color-line); background: var(--color-cream); }
-  .demo-video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; }
-  .page-hero { padding: 150px 0 clamp(28px, 4vw, 44px); }
-  .hero-mark { display: block; height: 88px; width: auto; margin-bottom: 1.1rem; }
-  .ph-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 56px; align-items: center; }
-  .ph-grid > * { min-width: 0; }
-  .page-hero .wrap { position: relative; }
-  /* Top right of the page, level with the Matdo Grade mark. */
-  .page-hero :global(.hero-store) { position: absolute; top: 0; right: 24px; z-index: 2; }
+
 
   .pr-soon { margin-top: 0.4rem; }
   .pr-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
@@ -130,17 +108,8 @@ const fmt = (n: number) => n.toLocaleString("en-US");
     .pr-card { padding: 18px 16px; }
     .pr-price { font-size: 1.6rem; }
   }
-  /* Title and subtitle set as on the Matdo Check page, the subtitle in Grade's gold. */
-  .hero-title { font-size: clamp(3rem, 8vw, 5.5rem); line-height: 1; letter-spacing: -0.03em; }
-  .hero-sub { font-family: var(--font-display); font-size: clamp(1.25rem, 3vw, 1.9rem); color: #b08a3e; font-weight: 500; line-height: 1.25; margin: 0.6rem 0 0; }
-  .page-hero .lede { font-size: 1.15rem; color: #3d4b47; max-width: 34rem; margin: 1.1rem 0 0; }
-  .hero-actions { align-self: start; justify-self: end; padding-top: 100px; }
 
 
-  @media (max-width: 900px) {
-    .page-hero { padding: 120px 0 28px; }
-    .hero-mark { height: 70px; margin-bottom: 0.9rem; }
-    .ph-grid { grid-template-columns: 1fr; gap: 40px; }
-    .hero-actions { justify-self: start; padding-top: 0; }
-  }
+
+
 </style>

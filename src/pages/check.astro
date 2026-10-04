@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import ProductHero from "../components/ProductHero.astro";
 import StoreBadges from "../components/StoreBadges.astro";
 import { APP_STORE_URL } from "../consts";
 
@@ -107,20 +108,9 @@ const ucIcon = (k: string) => ICONS[k] || "";
   description="Matdo Check is a simple, reliable check-in and attendance app for tutoring and enrichment centers, Sunday schools, clubs, and camps. 7-day free trial, then $2.99/month, $24.99/year, or a $39.99 lifetime license. Data stays on your device."
 >
   <!-- HERO -->
-  <section class="hero">
-    <div class="wrap hero-top">
-      <div class="hero-copy">
-        <img class="hero-mark" src="/logos/matdo-check-mark.png" width="552" height="782" alt="" />
-        <h1 class="hero-title">Matdo Check</h1>
-        <p class="hero-sub">Simple. Reliable. Easy setup.</p>
-        <p class="hero-lede">The calm way to check attendees in and out — for tutoring and enrichment centers, Sunday schools, clubs, and camps. On the tablet you already have.</p>
-      </div>
-      <div class="hero-actions">
-        <StoreBadges class="hero-badges" vertical />
-      </div>
-    </div>
-    <div class="wrap">
-      <figure class="video-frame reveal">
+<ProductHero name="Matdo Check" mark="/logos/matdo-check-mark.png" subtitle="Simple. Reliable. Easy setup." description="The calm way to check attendees in and out — for tutoring and enrichment centers, Sunday schools, clubs, and camps. On the tablet you already have.">
+<StoreBadges slot="downloads" vertical />
+<figure slot="video" class="video-frame reveal">
         <video
           class="demo-video"
           poster="/demo/matdo-check-film-poster.jpg"
@@ -132,8 +122,7 @@ const ucIcon = (k: string) => ICONS[k] || "";
           Your browser can't play embedded video — <a href="/demo/matdo-check-film.mp4">watch it here</a>.
         </video>
       </figure>
-    </div>
-  </section>
+</ProductHero>
 
   <!-- HOW IT WORKS — tap a cartoon to watch a how-to -->
   <section id="how" class="section-pad band-cream2">
@@ -403,22 +392,6 @@ const ucIcon = (k: string) => ICONS[k] || "";
 </script>
 
 <style>
-  /* ── Hero (title left, download badges stacked at right) ── */
-  .hero { padding: 140px 0 60px; }
-  .hero-top { display: flex; align-items: center; justify-content: space-between; gap: 48px; }
-  .hero-copy { text-align: left; }
-  /* Product mark sits above the title so the two together read as the lockup */
-  .hero-mark { display: block; height: 96px; width: auto; margin-bottom: 1.1rem; }
-  .hero-actions { flex: none; }
-  /* stack the two download badges one on top of the other */
-  .hero-actions :global(.store-badges) { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 14px; }
-  .hero-title { font-size: clamp(3rem, 8vw, 5.5rem); line-height: 1; letter-spacing: -0.03em; }
-  .hero-sub { font-family: var(--font-display); font-size: clamp(1.25rem, 3vw, 1.9rem); color: var(--color-teal); font-weight: 500; margin-top: 0.6rem; }
-  .hero-lede { font-size: 1.15rem; color: #3d4b47; max-width: 38rem; margin-top: 1.1rem; }
-
-  .video-frame { margin: 2.6rem auto 0; max-width: 1000px; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid var(--color-line); background: var(--color-cream); }
-  .demo-video { display: block; width: 100%; height: auto; }
-
   /* ── Flip-card flow ── */
   .flow { max-width: 1060px; margin: 0 auto; display: grid; gap: 22px; }
   .flow-lane { background: #fff; border: 1px solid var(--color-line); border-radius: var(--radius-lg); padding: 20px 20px 24px; box-shadow: var(--shadow-sm); }
@@ -479,10 +452,6 @@ const ucIcon = (k: string) => ICONS[k] || "";
   .price-link { color: var(--color-teal); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
 
   @media (max-width: 900px) {
-    .hero { padding: 116px 0 44px; }
-    .hero-mark { height: 74px; margin-bottom: 0.9rem; }
-    .hero-top { flex-direction: column; align-items: flex-start; gap: 26px; }
-    .hero-actions { align-self: stretch; }
     .usecases { grid-template-columns: repeat(2, 1fr); }
     .price-grid { grid-template-columns: repeat(2, 1fr); gap: 22px; max-width: 620px; }
   }
