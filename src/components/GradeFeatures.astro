@@ -199,7 +199,22 @@ const turn =
     .gf-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
   }
   @media (max-width: 600px) {
-    .gf-grid { grid-template-columns: minmax(0, 1fr); max-width: 420px; margin: 0 auto; }
+    .gf-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .gf-inner { position: relative; }
+    .gf-face { border-radius: 16px; }
+    .gf-front { height: 100%; min-height: 240px; padding: 14px 10px; }
+    .gf-front img { width: min(90%, 120px); }
+    .gf-kicker { font-size: 0.65rem; letter-spacing: 0.07em; overflow-wrap: anywhere; }
+    .gf-title { font-size: 1.05rem; }
+    .gf-hint { font-size: 0.75rem; gap: 4px; }
+    /* Keep fronts compact, then let a flipped row grow to fit its caption. */
+    .gf-back { position: absolute; inset: 0; padding: 14px 12px; gap: 8px; }
+    .gf-card[aria-pressed="true"] .gf-front { position: absolute; inset: 0; }
+    .gf-card[aria-pressed="true"] .gf-back { position: relative; inset: auto; min-height: 240px; }
+    .gf-back .gf-kicker { margin-top: 0; }
+    .gf-back .gf-title { font-size: 1.1rem; }
+    .gf-back .gf-caption { font-size: 0.95rem; line-height: 1.5; }
+    .gf-back .gf-kicker, .gf-back .gf-title, .gf-back .gf-hint { flex-shrink: 0; }
   }
 
   /* No turning for people who asked for less motion: the faces cross-fade. */

@@ -104,9 +104,9 @@ const fmt = (n: number) => n.toLocaleString("en-US");
   .pr-more :global(.pr-badge) { margin-top: 1.4rem; }
   @media (max-width: 1080px) { .pr-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   @media (max-width: 640px) {
-    .pr-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-    .pr-card { padding: 18px 16px; }
-    .pr-price { font-size: 1.6rem; }
+    .pr-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; max-width: 420px; margin-inline: auto; }
+    .pr-card { padding: 22px; }
+    .pr-price { font-size: 2rem; }
   }
 
 

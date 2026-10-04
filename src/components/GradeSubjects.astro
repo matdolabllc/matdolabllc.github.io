@@ -29,9 +29,14 @@ const subjects = [
   .subject-card { min-width: 0; background: #faf8ed; border: 2px solid var(--color-forest); border-radius: 12px; overflow: hidden; text-align: center; box-shadow: var(--shadow-sm); }
   .subject-card img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
   .subject-card h3 { display: flex; align-items: center; justify-content: center; min-height: 3.8em; padding: 0 4px 8px; font-size: clamp(0.45rem, 1.25vw, 1rem); line-height: 1.15; overflow-wrap: anywhere; color: var(--color-forest); }
-  @media (max-width: 600px) {
-    .subjects-section .wrap { padding-inline: 10px; }
-    .subject-card { border-width: 1px; border-radius: 5px; box-shadow: none; }
-    .subject-card h3 { min-height: 4.5em; padding: 0 1px 4px; }
+  @media (max-width: 760px) {
+    .subjects-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .subject-card h3 { min-height: 3.2em; padding: 4px 6px 10px; font-size: 1rem; line-height: 1.25; overflow-wrap: normal; }
+  }
+  @media (max-width: 520px) {
+    .subjects-section .wrap { padding-inline: 16px; }
+    .subjects-grid { gap: 6px; }
+    .subject-card { border-width: 1px; border-radius: 8px; }
+    .subject-card h3 { min-height: 3.3em; padding: 4px 1px 8px; font-size: clamp(0.75rem, 3.2vw, 0.875rem); line-height: 1.25; }
   }
 </style>

@@ -86,6 +86,15 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
     .menu-toggle { display: inline-flex; }
     .mobile-menu.open { display: flex; }
   }
+  @media (max-width: 760px) {
+    header { background: rgb(250 248 241 / 0.96); }
+    .nav { gap: 12px; }
+    .nav-right { gap: 8px; }
+    .nav-right .btn { min-height: 44px; padding: 10px 16px; font-size: 0.9rem; }
+    .menu-toggle { width: 44px; height: 44px; align-items: center; justify-content: center; }
+    .mobile-menu { padding-inline: 20px; max-height: calc(100dvh - 80px); overflow-y: auto; }
+    .mobile-menu a { min-height: 44px; }
+  }
 </style>
 
 <script>

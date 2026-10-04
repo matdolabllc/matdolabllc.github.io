@@ -832,10 +832,15 @@ const icons = {
 
   @media (max-width: 760px) {
     /* Thumbnails scroll sideways; panes stack, scan first. */
-    .gs-thumbs { justify-content: flex-start; overflow-x: auto; scroll-snap-type: x mandatory; padding: 10px 4px 16px; margin: 0 -24px; padding-inline: 24px; }
+    .gs-thumbs { justify-content: flex-start; overflow-x: auto; scroll-snap-type: x mandatory; padding: 10px 4px 16px; margin: 0 -20px; padding-inline: 20px; }
     .gs-thumbs li { scroll-snap-align: start; flex: none; }
     .gs-thumb { width: 104px; }
     .gs-panes { grid-template-columns: 1fr; }
+    .gs-show { font-size: 1rem; padding: 0.85rem 1.2rem; }
+    .gs-row-main { min-height: 44px; }
+    .gs-rubric li { flex-wrap: wrap; gap: 8px; }
+    .gs-nav { width: 44px; height: 44px; top: calc(25% + 0.9rem); }
+    .gs-context { max-width: 92%; white-space: normal; text-align: center; }
   }
 
   @media (prefers-reduced-motion: reduce) {

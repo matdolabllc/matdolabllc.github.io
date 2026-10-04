@@ -171,6 +171,9 @@ import MatdoMark from "../components/MatdoMark.astro";
     .hero { padding: 116px 0 20px; }
     .apps, .why { grid-template-columns: 1fr; }
     .product-preview { height: 300px; }
+    .hero-title { text-wrap: balance; }
+    .hero-sub { font-size: 1.05rem; }
+    .why-sec h2 { white-space: normal; font-size: clamp(1.9rem, 5vw, 2.65rem); text-wrap: balance; }
   }
   @media (max-width: 520px) {
     .product-heading, .product-caption { padding: 20px; }
@@ -178,5 +181,8 @@ import MatdoMark from "../components/MatdoMark.astro";
     .product-preview { height: 260px; padding: 16px; gap: 16px; }
     .why-item { padding: 20px; }
     .cta-actions { flex-direction: column; }
+    .check-preview { height: auto; aspect-ratio: 8 / 5; }
+    .cta { padding: 28px 24px; }
+    .cta-actions .btn { justify-content: center; white-space: normal; padding-inline: 16px; }
   }
 </style>

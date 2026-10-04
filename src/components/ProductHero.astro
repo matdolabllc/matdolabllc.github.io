@@ -43,4 +43,12 @@ const { name, mark, subtitle, description, accent = "var(--color-teal)" } = Astr
     .product-actions :global(.store-badges) { align-items: flex-start; }
     .product-actions :global(.store-badge), .product-actions :global(.asb) { width: 220px; }
   }
+  @media (max-width: 760px) {
+    .product-hero { padding: 108px 0 40px; }
+    .product-copy, .product-actions { min-height: 0; }
+    .product-mark { height: 64px; }
+    h1 { font-size: clamp(2.25rem, 9vw, 3.5rem); }
+    .product-lede { font-size: 1.05rem; }
+    .product-hero :global(.video-frame) { margin-top: 28px; border-radius: 16px; }
+  }
 </style>
