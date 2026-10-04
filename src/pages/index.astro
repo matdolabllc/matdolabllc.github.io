@@ -21,7 +21,7 @@ const icon = (k: string) => ICONS[k] || "";
 ---
 <Layout
   title="Matdo — Less admin, more teaching"
-  description="Matdo makes simple, reliable apps for the people who teach — tutoring and enrichment centers, Sunday schools, clubs, and camps. Matdo Check for attendance; Matdo Grade for AI homework grading (coming soon)."
+  description="Matdo makes simple, reliable apps for the people who teach — tutoring and enrichment centers, Sunday schools, clubs, and camps. Matdo Check for attendance; Matdo Grade for AI homework grading."
 >
   <!-- HERO -->
   <section class="hero">
@@ -60,18 +60,16 @@ const icon = (k: string) => ICONS[k] || "";
           </div>
         </a>
 
-        <!-- Matdo Grade (coming soon) — flips like its sibling, but nothing to open yet -->
-        <div class="flip-card reveal is-soon">
+        <!-- Matdo Grade — explore AI homework grading -->
+        <a class="flip-card reveal" href="/grade" aria-label="Matdo Grade — AI homework grading">
           <div class="flip-inner">
             <div class="flip-face flip-front">
               <img class="flip-logo" src="/logos/matdo-grade.png" width="1254" height="1254" loading="lazy" alt="Matdo Grade" />
               <p class="flip-tag">AI homework grading</p>
-              <span class="soon-ribbon">Coming soon</span>
             </div>
             <div class="flip-face flip-back">
               <div class="flip-shot">
                 <img src="/demo/screens/screen-grade.webp" width="1600" height="1000" loading="lazy" alt="Matdo Grade — AI homework grading" />
-                <span class="soon-ribbon">Coming soon</span>
               </div>
               <div class="app-meta">
                 <div class="app-id">
@@ -81,11 +79,11 @@ const icon = (k: string) => ICONS[k] || "";
                     <p>AI homework grading</p>
                   </div>
                 </div>
-                <span class="app-link disabled" aria-disabled="true">Coming soon</span>
+                <span class="app-link">Explore →</span>
               </div>
             </div>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </section>

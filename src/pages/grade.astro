@@ -2,7 +2,6 @@
 import Layout from "../layouts/Layout.astro";
 import GradedSamples from "../components/GradedSamples.astro";
 import GradeFeatures from "../components/GradeFeatures.astro";
-import AppStoreSoon from "../components/AppStoreSoon.astro";
 
 // Matches the app (Plan.swift, MatdoGrade.storekit) and the server's free grant
 // (server/src/lib/plans.js). Page counts are quoted at Brief, 10 units for a
@@ -24,7 +23,6 @@ const fmt = (n: number) => n.toLocaleString("en-US");
   <!-- HERO -->
   <section class="page-hero">
     <div class="wrap ph-grid">
-      <AppStoreSoon class="hero-store" />
       <div>
         <img class="hero-mark" src="/logos/matdo-grade-mark.png" width="552" height="782" alt="" />
         <h1 class="hero-title">Matdo Grade</h1>
@@ -86,7 +84,6 @@ const fmt = (n: number) => n.toLocaleString("en-US");
       <div class="pr-more reveal">
         <p><b>Top-Up:</b> 1,000 extra units for $6.99, never expire.</p>
         <p class="pr-fine">Prices in US dollars — the App Store shows your local price. Plans renew monthly and can be cancelled anytime in your Apple account settings.</p>
-        <AppStoreSoon class="pr-badge" />
       </div>
     </div>
   </section>
