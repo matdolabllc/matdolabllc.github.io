@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import AppStoreSoon from "../components/AppStoreSoon.astro";
-import { GRADE_APP_STORE_URL } from "../consts";
+import GradeSubjects from "../components/GradeSubjects.astro";
 import GradedSamples from "../components/GradedSamples.astro";
 import GradeFeatures from "../components/GradeFeatures.astro";
 
@@ -32,13 +32,13 @@ const fmt = (n: number) => n.toLocaleString("en-US");
         <p class="lede">Use AI to help your children and students by scanning their handwritten homework and providing instant feedback.</p>
       </div>
 
-      <div class="hero-actions"><AppStoreSoon href={GRADE_APP_STORE_URL} /></div>
+      <div class="hero-actions"><AppStoreSoon /></div>
     </div>
   </section>
 
   <section class="film-section" aria-label="Matdo Grade introduction video">
     <div class="wrap">
-<figure class="video-frame reveal">
+      <figure class="video-frame reveal">
         <video class="demo-video" controls playsinline preload="none"
           width="1280" height="720" poster="/demo/matdo-grade-film-poster.jpg"
           aria-label="Matdo Grade introduction film">
@@ -49,6 +49,8 @@ const fmt = (n: number) => n.toLocaleString("en-US");
       </figure>
     </div>
   </section>
+
+  <GradeSubjects />
 
   <!-- SEE IT GRADE -->
   <GradedSamples />

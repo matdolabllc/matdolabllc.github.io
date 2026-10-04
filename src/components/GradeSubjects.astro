@@ -1,0 +1,33 @@
+---
+const subjects = [
+  { id: "math", label: "Math" },
+  { id: "english", label: "English" },
+  { id: "reading", label: "Reading Comprehension" },
+  { id: "social-studies", label: "Social Studies" },
+  { id: "chemistry", label: "Chemistry" },
+  { id: "physics", label: "Physics" },
+  { id: "biology", label: "Biology" },
+  { id: "history", label: "History" },
+];
+---
+<section id="subjects" class="section-pad subjects-section" aria-labelledby="subjects-title">
+  <div class="wrap">
+    <div class="sec-head center reveal"><h2 id="subjects-title">Subjects</h2></div>
+    <ul class="subjects-grid">
+      {subjects.map((s) => (
+        <li class="subject-card reveal">
+          <img src={`/demo/grade/subjects/${s.id}.webp`} width="512" height="512" alt="" loading="lazy" decoding="async" />
+          <h3>{s.label}</h3>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+<style>
+  .subjects-section { padding-top: 0; scroll-margin-top: 110px; }
+  .subjects-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; list-style: none; padding: 0; margin: 0; }
+  .subject-card { background: #faf8ed; border: 3px solid var(--color-forest); border-radius: 22px; overflow: hidden; text-align: center; box-shadow: var(--shadow-sm); }
+  .subject-card img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
+  .subject-card h3 { display: flex; align-items: center; justify-content: center; min-height: 3em; padding: 0 12px 18px; font-size: clamp(1.2rem, 2.2vw, 1.85rem); line-height: 1.15; color: var(--color-forest); }
+  @media (max-width: 700px) { .subjects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; } }
+</style>
