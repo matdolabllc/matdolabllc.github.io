@@ -1,6 +1,6 @@
 # Matdo Grade portrait film
 
-The locally integrated mobile advertisement is 60 seconds, 4:5, and 30 fps. The master is 1080 × 1350; website copies are 720 × 900. The original desktop media and shared ProductHero component are preserved.
+This portrait advertisement is retained as a draft for a future mobile revision. The Grade page currently uses the approved desktop film at every screen size. The mobile draft is 60 seconds, 4:5, and 30 fps. The master is 1080 × 1350; website copies are 720 × 900. The original desktop media and shared ProductHero component are preserved.
 
 ## Playback assets
 
@@ -24,6 +24,8 @@ Subject cards accumulate in reading order: Math at 36s, English at 38s, Science 
 The approved Voice A uses Kokoro `af_heart` at speed 0.94. The original procedural 120 BPM music and synthesized effects are retained and ducked under narration. Privacy narration now says “Saved on your device. We don’t store your homework.” The image also states that Google processes grading. This follows `src/pages/privacy/grade.astro`, sections 3, 4, and 7, and avoids implying homework is never processed outside the device. Paid-plan wording and the free-trial closing are preserved.
 
 ## Website integration
+
+The mobile player is currently inactive: the Grade page uses the original desktop video markup. The component and assets below are retained for future revision.
 
 `src/components/GradeVideo.astro` owns one player and switches the video sources, poster, captions, and fallback link together. It selects the mobile version at 760 CSS pixels and below, and the unchanged desktop assets above that width. Sources initially have no URL, preventing both films from being downloaded at page load. Source changes preserve playback position, pause state, mute/volume, and caption preference; changes are deferred during fullscreen. A replaced caption track prevents old cues from lingering. The portrait aspect ratio is scoped to the Grade component. Check and the shared hero component were not edited for this task.
 
