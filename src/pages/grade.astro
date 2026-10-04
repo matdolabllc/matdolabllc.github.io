@@ -1,5 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import AppStoreSoon from "../components/AppStoreSoon.astro";
+import { GRADE_APP_STORE_URL } from "../consts";
 import GradedSamples from "../components/GradedSamples.astro";
 import GradeFeatures from "../components/GradeFeatures.astro";
 
@@ -26,35 +28,17 @@ const fmt = (n: number) => n.toLocaleString("en-US");
       <div>
         <img class="hero-mark" src="/logos/matdo-grade-mark.png" width="552" height="782" alt="" />
         <h1 class="hero-title">Matdo Grade</h1>
-        <p class="hero-sub">iPad/iPhone grading for handwritten homework</p>
+        <p class="hero-sub">For parents, tutors, teachers</p>
         <p class="lede">Use AI to help your children and students by scanning their handwritten homework and providing instant feedback.</p>
       </div>
 
-      <div class="ph-art">
-        <div class="mock" role="img" aria-label="iPad grading a math worksheet with an 18 out of 20 score">
-          <div class="mock-head">
-            <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
-            <span class="mock-title">Worksheet · Math</span>
-          </div>
-          <div class="worksheet">
-            <div class="score-badge">18/20</div>
-            <div style="position:relative"><div class="ws-line mid"></div><svg class="check-svg" style="top:-2px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div style="position:relative"><div class="ws-line short"></div><svg class="check-svg" style="top:-2px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div style="position:relative"><div class="ws-line"></div><svg class="check-svg" style="top:-2px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div style="position:relative"><div class="ws-line mid" style="margin-bottom:0"></div></div>
-          </div>
-        </div>
-      </div>
+      <div class="hero-actions"><AppStoreSoon href={GRADE_APP_STORE_URL} /></div>
     </div>
   </section>
 
-  <section class="film-section" aria-labelledby="film-title">
+  <section class="film-section" aria-label="Matdo Grade introduction video">
     <div class="wrap">
-      <div class="sec-head center reveal">
-        <h2 id="film-title">Meet Matdo Grade</h2>
-        <p>See Matdo Grade in action in this one-minute film.</p>
-      </div>
-      <figure class="video-frame reveal">
+<figure class="video-frame reveal">
         <video class="demo-video" controls playsinline preload="none"
           width="1280" height="720" poster="/demo/matdo-grade-film-poster.jpg"
           aria-label="Matdo Grade introduction film">
@@ -148,13 +132,13 @@ const fmt = (n: number) => n.toLocaleString("en-US");
   .hero-title { font-size: clamp(3rem, 8vw, 5.5rem); line-height: 1; letter-spacing: -0.03em; }
   .hero-sub { font-family: var(--font-display); font-size: clamp(1.25rem, 3vw, 1.9rem); color: #b08a3e; font-weight: 500; line-height: 1.25; margin: 0.6rem 0 0; }
   .page-hero .lede { font-size: 1.15rem; color: #3d4b47; max-width: 34rem; margin: 1.1rem 0 0; }
-  .ph-art .mock { max-width: 420px; margin-left: auto; }
+  .hero-actions { align-self: start; justify-self: end; padding-top: 100px; }
 
 
   @media (max-width: 900px) {
     .page-hero { padding: 120px 0 28px; }
     .hero-mark { height: 70px; margin-bottom: 0.9rem; }
     .ph-grid { grid-template-columns: 1fr; gap: 40px; }
-    .ph-art .mock { margin: 0 auto; }
+    .hero-actions { justify-self: start; padding-top: 0; }
   }
 </style>
