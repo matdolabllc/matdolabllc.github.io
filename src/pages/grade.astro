@@ -8,9 +8,9 @@ import GradeFeatures from "../components/GradeFeatures.astro";
 
 // Matches the app (Plan.swift, MatdoGrade.storekit) and the server's free grant
 // (server/src/lib/plans.js). Page counts are quoted at Brief, 10 units for a
-// typical page. Detailed is deliberately not quoted: the server bills it at a
-// flat 30 today, and PRICING_PROPOSAL.md's token bands would make it 10–30 by
-// page. A page the grader only reads costs 5.
+// typical page (the middle of the 5 / 10 / 15 / 20 Brief bands the server bills
+// by output tokens). Detailed is not quoted: it is the band plus 5 or 10, so
+// 10–30 by page. A page the grader only reads costs 3.
 const plans = [
   { name: "Lite", price: "$4.99", units: 750, for: "Parents helping one child" },
   { name: "Plus", price: "$9.99", units: 2000, for: "Tutoring several children" },
