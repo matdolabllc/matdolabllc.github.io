@@ -1,0 +1,66 @@
+<section id="how-grade-works" class="section-pad band-cream2" aria-labelledby="grade-workflow-title">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <h2 id="grade-workflow-title">How it works</h2>
+      <p>Take a photo of the finished homework; see the marks on the iPad.</p>
+    </div>
+    <ol class="grade-workflow">
+      <li class="reveal">
+        <div class="step-picture">
+          <img src="/demo/grade/workflow/capture.webp?v=2" width="800" height="600" loading="lazy" decoding="async" alt="A parent photographs a completed worksheet with a phone." />
+          <span class="step-number" aria-hidden="true">1</span>
+        </div>
+        <div class="step-caption">
+        <h3>Photograph the homework</h3>
+        <p>Capture the finished work, including the questions and any reading passage.</p>
+        </div>
+      </li>
+      <li class="reveal">
+        <div class="step-picture">
+          <img src="/demo/grade/workflow/review.webp?v=2" width="800" height="600" loading="lazy" decoding="async" alt="A parent and student review grading marks and feedback on a tablet." />
+          <span class="step-number" aria-hidden="true">2</span>
+        </div>
+        <div class="step-caption">
+        <h3>Review the checked page</h3>
+        <p>Review the marks, correct answers, and worked explanations together.</p>
+        </div>
+      </li>
+      <li class="reveal">
+        <div class="step-picture">
+          <img src="/demo/grade/workflow/retry.webp?v=2" width="800" height="600" loading="lazy" decoding="async" alt="A student revises the paper homework with a parent nearby." />
+          <span class="step-number" aria-hidden="true">3</span>
+        </div>
+        <div class="step-caption">
+        <h3>Help your student try again</h3>
+        <p>Let your student use the feedback to make another attempt on paper.</p>
+        </div>
+      </li>
+    </ol>
+    <details class="grade-review-note reveal">
+      <summary>Tips for reviewing feedback</summary>
+      <ul>
+        <li>Review the feedback before relying on it.</li>
+        <li>If a result seems wrong, compare the student’s answer shown in the details with the original page.</li>
+        <li>Capture a clearer photo or include missing instructions when needed.</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<style>
+  #how-grade-works { scroll-margin-top: 100px; }
+  .grade-workflow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; margin: 0; padding: 0; list-style: none; counter-reset: steps; }
+  .grade-workflow li { min-width: 0; overflow: hidden; border: 1px solid var(--color-line); border-radius: var(--radius); background: var(--color-cream); }
+  .step-picture { position: relative; background: var(--color-cream); }
+  .step-picture img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+  .step-caption { padding: 22px 24px 26px; }
+  .step-number { position: absolute; top: 14px; left: 14px; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin-bottom: 1rem; border-radius: 50%; background: var(--color-teal); color: #fff; font-weight: 700; }
+  .grade-workflow h3 { font-size: 1.45rem; }
+  .grade-workflow p { margin: 0.8rem 0 0; color: #4a5854; }
+  .grade-review-note { max-width: 52rem; margin: 36px auto 0; padding: 24px 28px; border-left: 3px solid var(--color-teal); background: #fff; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+  .grade-review-note summary { font-size: 1.05rem; font-weight: 600; cursor: pointer; color: var(--color-forest); }
+  .grade-review-note summary:focus-visible { outline: 3px solid var(--color-teal); outline-offset: 5px; }
+  .grade-review-note ul { margin: 1rem 0 0; padding-left: 1.3rem; color: #4a5854; }
+  .grade-review-note li + li { margin-top: 0.6rem; }
+  @media (max-width: 760px) { .grade-workflow { grid-template-columns: 1fr; gap: 16px; } .step-caption { padding: 20px 24px 24px; } .grade-review-note { padding: 24px; } }
+</style>

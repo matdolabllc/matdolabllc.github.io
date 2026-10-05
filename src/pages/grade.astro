@@ -5,6 +5,8 @@ import AppStoreSoon from "../components/AppStoreSoon.astro";
 import GradeSubjects from "../components/GradeSubjects.astro";
 import GradedSamples from "../components/GradedSamples.astro";
 import GradeFeatures from "../components/GradeFeatures.astro";
+import GradeWorkflow from "../components/GradeWorkflow.astro";
+import GradeFAQ from "../components/GradeFAQ.astro";
 
 // Matches the app (Plan.swift, MatdoGrade.storekit) and the server's free grant
 // (server/src/lib/plans.js). Page counts are quoted at Brief, 10 units for a
@@ -20,12 +22,22 @@ const plans = [
 const fmt = (n: number) => n.toLocaleString("en-US");
 ---
 <Layout
-  title="Matdo Grade — Scan. Grade. Learn."
-  description="Scan handwritten homework. Get AI marks and feedback. Help them learn. For iPad and iPhone."
+  title="Matdo Grade — Check homework without an answer key"
+  description="Photograph completed paper homework. Review marks, correct answers, and explanations with Matdo Grade on iPad and iPhone. No answer key needed."
 >
   <!-- HERO -->
-<ProductHero name="Matdo Grade" mark="/logos/matdo-grade-mark.png" subtitle="For parents. By Parents." description="Scan homework. Spot mistakes. Help them learn." accent="#b08a3e">
-<AppStoreSoon slot="downloads" />
+<ProductHero name="Matdo Grade" mark="/logos/matdo-grade-mark.png" headline="Matdo Grade" subtitle="For Parents. By Parents." description="Photograph your student’s finished homework. Review marks, correct answers, and explanations so you can help them try again." accent="#b08a3e">
+<div slot="downloads" class="grade-download">
+  <AppStoreSoon />
+  <p>For iPad and iPhone.<br />App Store download not yet available.</p>
+</div>
+<div slot="actions" class="grade-actions">
+  <a class="btn btn-primary" href="#samples">See a graded example</a>
+  <a class="btn btn-ghost" href="#how-grade-works">How it works</a>
+  <ul class="grade-benefits" aria-label="Homework checking benefits">
+    <li>No answer key to upload</li><li>No assignment to create</li><li>Feedback on your page</li>
+  </ul>
+</div>
 <figure slot="video" class="video-frame reveal">
         <video class="demo-video" controls autoplay muted loop playsinline preload="metadata"
           width="1280" height="720" poster="/demo/matdo-grade-film-poster.jpg?v=20261004-v4"
@@ -38,10 +50,10 @@ const fmt = (n: number) => n.toLocaleString("en-US");
       </figure>
 </ProductHero>
 
-  <GradeSubjects />
-
-  <!-- SEE IT GRADE -->
+  <!-- Actual grading results come before subject and feature descriptions. -->
   <GradedSamples />
+  <GradeWorkflow />
+  <GradeSubjects />
 
   <!-- FEATURES — tap a card to read its caption -->
   <GradeFeatures />
@@ -78,9 +90,17 @@ const fmt = (n: number) => n.toLocaleString("en-US");
       </div>
     </div>
   </section>
+  <GradeFAQ />
 </Layout>
 
 <style>
+  .grade-actions { margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 12px; }
+  .grade-actions .btn { white-space: normal; text-align: center; justify-content: center; }
+  .grade-benefits { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 8px 22px; list-style: none; padding: 0; margin: 0.5rem 0 0; font-size: 0.88rem; color: #4a5854; }
+  .grade-benefits li::before { content: "✓"; margin-right: 7px; color: var(--color-teal); font-weight: 700; }
+  .grade-download p { margin: 0.7rem 0 0; font-size: 0.82rem; color: #55665f; }
+  @media (max-width: 760px) { .grade-benefits { display: grid; gap: 8px; } }
+
 
 
   .pr-soon { margin-top: 0.4rem; }
