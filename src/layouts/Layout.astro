@@ -6,11 +6,20 @@ import Footer from "../components/Footer.astro";
 interface Props {
   title?: string;
   description?: string;
+  /** Link-preview card (1200x630). Defaults to the card for the page's product. */
+  image?: string;
 }
+// Without an og:image, iMessage and others pick an arbitrary large image from
+// the page. Cards live in public/og and are rendered by design/share-cards.
+const path = Astro.url.pathname;
+const defaultImage = /\bgrade\b/.test(path) ? "/og/grade.jpg" : /\bcheck\b/.test(path) ? "/og/check.jpg" : "/og/site.jpg";
 const {
   title = "Matdo — Less admin, more teaching",
   description = "Matdo makes simple, reliable apps for the people who teach — tutoring and enrichment centers, Sunday schools, clubs, and camps. Matdo Check for attendance; Matdo Grade for AI homework grading.",
+  image = defaultImage,
 } = Astro.props;
+const pageUrl = new URL(path, Astro.site).href;
+const imageUrl = new URL(image, Astro.site).href;
 ---
 
 <!doctype html>
@@ -25,6 +34,16 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Matdo" />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
     <meta name="theme-color" content="#faf8f1" />
   </head>
   <body>
