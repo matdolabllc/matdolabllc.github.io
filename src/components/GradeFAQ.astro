@@ -1,0 +1,59 @@
+---
+const faqs = [
+  {
+    q: "Do I need an answer key?",
+    a: "No. Matdo checks completed work from the questions and answers on your pages. You do not need to upload an answer key or create an assignment. Include any instructions or reference material needed to answer the questions."
+  },
+  {
+    q: "Can I check several pages together?",
+    a: "Yes. Turn on Multi-page in the app and capture the pages in order. Matdo can check work that continues across pages. Readable photos and complete question context still matter."
+  },
+  {
+    q: "Can a passage or instructions be on another page?",
+    a: 'Yes. Tag reference material as a <strong>Context Page</strong>. Matdo reads it to check the answer pages without marking the reference page itself. Context pages use grading units too; see <a href="/support/grade">the support guide</a> for details.'
+  },
+  {
+    q: "Does it read handwriting and mark the worksheet?",
+    a: "Yes. Matdo reads handwritten answers and places grading marks on the page where it can identify their positions. If an answer was checked but could not be located, it remains in the details without an on-page mark."
+  },
+  {
+    q: "What if handwriting is unclear or a result seems wrong?",
+    a: "Open the details and compare the student's transcribed answer with the paper. Review the correct answer and explanation, and capture a clearer page or add missing context if needed. Re-grade checks the same captured pages again and is charged as a new grade. An explanation does not prove the child's reasoning."
+  },
+  {
+    q: "What kinds of homework can it check?",
+    a: 'Matdo supports handwritten math, science and reading work, plus essay feedback. Brief mode shows answers and a short working check; Detailed mode adds worked explanations. Essays use a standard or custom rubric. Explore the <a href="#samples">actual grading examples</a> and review results for your particular assignment.'
+  },
+  {
+    q: "Can teachers and tutors use it too?",
+    a: "Yes. Teachers and tutors can use the same scanning, multi-page grading, explanations and essay feedback. The plans on this page are available to parents, teachers and tutors; choose based on how much work you check."
+  },
+  {
+    q: "How can I delete homework, and where is it processed?",
+    a: 'Delete saved work in <strong>Previous Grading</strong> in the app. Selected pages are sent through our server to Google for grading; Matdo Lab does not save page images or grading content on its server. Device backups, exported copies and Google’s handling are separate from deleting local work. Read the <a href="/privacy/grade">Grade privacy policy</a> for details.'
+  }
+];
+---
+<section id="grade-faq" class="section-pad grade-faq" aria-labelledby="grade-faq-title">
+  <div class="wrap faq-wrap">
+    <div class="sec-head center reveal">
+      <h2 id="grade-faq-title">A few questions before you start</h2>
+      <p>How paper homework, explanations and saved work fit together.</p>
+    </div>
+    <div class="faq-list">
+      {faqs.map(faq => <details><summary>{faq.q}</summary><div class="faq-answer" set:html={faq.a} /></details>)}
+    </div>
+    <p class="faq-support">Need more detail? <a href="/support/grade">Read the support guide</a> or <a href="/contact">contact Matdo Lab</a>.</p>
+  </div>
+</section>
+
+<style>
+  .faq-wrap { max-width: 900px; }
+  .faq-list { border-top: 1px solid var(--color-line); }
+  details { border-bottom: 1px solid var(--color-line); }
+  summary { padding: 22px 8px; cursor: pointer; font-weight: 600; color: var(--color-forest); min-height: 48px; }
+  summary:focus-visible { outline: 3px solid var(--color-mint); outline-offset: 3px; border-radius: 12px; }
+  .faq-answer { padding: 0 8px 24px; color: #4a5854; }
+  .faq-answer :global(a), .faq-support a { color: var(--color-teal); text-decoration: underline; text-underline-offset: 3px; }
+  .faq-support { margin: 1.5rem 0 0; color: #4a5854; }
+</style>

@@ -12,12 +12,16 @@ import { markPaths, placeEssayNotes, placeMarks } from "../lib/gradeMarks";
 // makes the section jump; each page is fitted inside it at its own shape.
 const FRAME = 3 / 4;
 // The sample open when the page loads.
-const DEFAULT_SAMPLE = "sprint";
+const DEFAULT_SAMPLE = "math";
+const featuredResponse = samples.find(s => s.id === "math")?.rows?.find(r => r.n === "12");
 const MARKS_START = 0.15; // seconds after a page appears
 const MARK_STEP = 0.09;
 
-const prepared = samples.map((s) => ({
+const firstExamples = ["math", "reading", "essay"];
+const orderedSamples = [...firstExamples.flatMap(id => samples.filter(s => s.id === id)), ...samples.filter(s => !firstExamples.includes(s.id))];
+const prepared = orderedSamples.map((s) => ({
   ...s,
+  label: s.id === "math" ? "Math worksheet" : s.id === "reading" ? "Reading + passage" : s.label,
   tally: s.rows && {
     right: s.rows.filter((r) => r.result === "correct").length,
     wrong: s.rows.filter((r) => r.result === "incorrect").length,
@@ -60,12 +64,12 @@ const icons = {
 };
 ---
 
-<section id="samples" class="section-pad gs-section">
+<section id="samples" class="section-pad gs-section" aria-labelledby="samples-title">
   <div class="wrap">
     <hr class="gs-rule" />
     <div class="sec-head center reveal">
-      <h2>Examples</h2>
-      <p>Explore real examples: compare the original scan with marked answers, corrections, worked steps, and writing feedback.</p>
+      <h2 id="samples-title">See a real checked page</h2>
+      <p>Compare a completed worksheet with its actual Matdo Grade result. Start with the decimal answers below, or choose another example.</p>
     </div>
 
     <div class="gs reveal" data-gs>
@@ -280,6 +284,24 @@ const icons = {
               )}
             </div>
 
+            {s.id === "math" && featuredResponse && (
+              <aside class="gs-featured-feedback" aria-labelledby="decimal-feedback-title">
+                <div>
+                  <p class="gs-feedback-kicker">Question {featuredResponse.n} · actual Detailed-mode result</p>
+                  <h3 id="decimal-feedback-title">A closer look at one answer</h3>
+                  <dl class="gs-answer-pair">
+                    <div><dt>Student’s answer</dt><dd class="bad">✗ {featuredResponse.student}</dd></div>
+                    <div><dt>Correct answer</dt><dd class="ok">{featuredResponse.correct}</dd></div>
+                  </dl>
+                </div>
+                <div class="gs-featured-steps">
+                  <h4>Worked explanation</h4>
+                  {featuredResponse.steps?.map(step => <p>{step.text}{step.math && <span class="gs-worked-equation">{step.math}</span>}</p>)}
+                  <p class="gs-feedback-limit">Review the result against the original page. An explanation of an answer does not prove how a child reached it.</p>
+                </div>
+              </aside>
+            )}
+            {s.id === "reading" && <p class="gs-case-note">This four-page example reads two passage pages as context, then checks the questions. Question 10 is listed in the details even though its position could not be identified.</p>}
             {s.pages.length > 1 && (
               <nav class="gs-pager" aria-label="Pages">
                 {s.pages.map((p, k) => (
@@ -476,8 +498,22 @@ const icons = {
 </script>
 
 <style>
+  .gs-featured-feedback { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 28px; padding: clamp(20px, 3vw, 32px); background: #fff; border: 1px solid var(--color-line); border-radius: var(--radius); }
+  .gs-feedback-kicker { margin: 0 0 0.5rem; color: var(--color-teal); font-size: 0.85rem; font-weight: 600; }
+  .gs-featured-feedback h3 { font-size: 1.6rem; }
+  .gs-featured-feedback h4 { font-size: 1.3rem; }
+  .gs-answer-pair { display: flex; flex-wrap: wrap; gap: 24px; margin: 1.4rem 0 0; }
+  .gs-answer-pair dt { color: #55665f; font-size: 0.88rem; }
+  .gs-answer-pair dd { margin: 0.25rem 0 0; font-size: 1.7rem; font-weight: 600; }
+  .gs-answer-pair .bad { color: #c23a12; }
+  .gs-answer-pair .ok { color: var(--color-teal); }
+  .gs-featured-steps p { margin: 0.75rem 0 0; }
+  .gs-worked-equation { display: block; margin-top: 0.6rem; font-size: clamp(1.1rem, 2vw, 1.5rem); font-weight: 600; overflow-wrap: anywhere; }
+  .gs-feedback-limit { font-size: 0.88rem; color: #55665f; }
+  .gs-case-note { margin: 1.3rem 0; color: #4a5854; }
+
   /* Sits right under the hero: a hairline instead of a band of empty space. */
-  .gs-section { padding-top: 0; }
+  .gs-section { padding-top: 0; scroll-margin-top: 100px; }
   .gs-rule { border: 0; border-top: 1px solid var(--color-line); margin: 0 0 clamp(28px, 4vw, 44px); }
   .gs-section .sec-head { margin-bottom: clamp(1.4rem, 3vw, 2rem); }
   .gs-section .sec-head h2 { margin: 0; }
@@ -831,6 +867,7 @@ const icons = {
 
 
   @media (max-width: 760px) {
+    .gs-featured-feedback { grid-template-columns: 1fr; gap: 24px; }
     /* Thumbnails scroll sideways; panes stack, scan first. */
     .gs-thumbs { justify-content: flex-start; overflow-x: auto; scroll-snap-type: x mandatory; padding: 10px 4px 16px; margin: 0 -20px; padding-inline: 20px; }
     .gs-thumbs li { scroll-snap-align: start; flex: none; }

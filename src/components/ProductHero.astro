@@ -5,16 +5,20 @@ interface Props {
   subtitle: string;
   description: string;
   accent?: string;
+  headline?: string;
 }
-const { name, mark, subtitle, description, accent = "var(--color-teal)" } = Astro.props;
+const { name, mark, subtitle, description, headline, accent = "var(--color-teal)" } = Astro.props;
 ---
-<section class="product-hero" style={`--product-accent:${accent}`}>
+<section class:list={["product-hero", { "has-headline": headline && headline !== name }]} style={`--product-accent:${accent}`}>
   <div class="wrap product-top">
     <div class="product-copy">
       <img class="product-mark" src={mark} width="552" height="782" alt="" />
-      <h1>{name}</h1>
-      <p class="product-sub">{subtitle}</p>
+      {headline && headline !== name && <p class="product-name">{name}</p>}
+      <h1>{headline ?? name}</h1>
+      {!headline && <p class="product-sub">{subtitle}</p>}
       <p class="product-lede">{description}</p>
+      {headline && <p class="product-founder">{subtitle}</p>}
+      <slot name="actions" />
     </div>
     <div class="product-actions"><slot name="downloads" /></div>
   </div>
@@ -34,6 +38,9 @@ const { name, mark, subtitle, description, accent = "var(--color-teal)" } = Astr
   .product-actions :global(.asb-logo) { width: 24px; height: 27px; }
   .product-hero :global(.video-frame) { margin: 2.6rem auto 0; max-width: 1000px; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid var(--color-line); background: var(--color-cream); }
   .product-hero :global(.demo-video) { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; }
+  .has-headline .product-name { margin: 0 0 0.75rem; font-weight: 700; color: var(--product-accent); }
+  .has-headline h1 { font-size: clamp(2.5rem, 4.4vw, 4rem); line-height: 1.08; text-wrap: balance; }
+  .product-founder { font-family: var(--font-display); color: var(--product-accent); font-size: 1.1rem; margin: 1rem 0 0; }
   @media (max-width: 900px) {
     .product-hero { padding: 116px 0 44px; }
     .product-top { grid-template-columns: minmax(0, 1fr); gap: 26px; }
@@ -48,6 +55,7 @@ const { name, mark, subtitle, description, accent = "var(--color-teal)" } = Astr
     .product-copy, .product-actions { min-height: 0; }
     .product-mark { height: 64px; }
     h1 { font-size: clamp(2.25rem, 9vw, 3.5rem); }
+    .has-headline h1 { font-size: clamp(2rem, 9vw, 3.1rem); }
     .product-lede { font-size: 1.05rem; }
     .product-hero :global(.video-frame) { margin-top: 28px; border-radius: 16px; }
   }
