@@ -2,7 +2,7 @@
 interface Props {
   name: string;
   mark: string;
-  subtitle: string;
+  subtitle?: string;
   description: string;
   accent?: string;
   headline?: string;
@@ -15,9 +15,9 @@ const { name, mark, subtitle, description, headline, accent = "var(--color-teal)
       <img class="product-mark" src={mark} width="552" height="782" alt="" />
       {headline && headline !== name && <p class="product-name">{name}</p>}
       <h1>{headline ?? name}</h1>
-      {!headline && <p class="product-sub">{subtitle}</p>}
+      {!headline && subtitle && <p class="product-sub">{subtitle}</p>}
       <p class="product-lede">{description}</p>
-      {headline && <p class="product-founder">{subtitle}</p>}
+      {headline && subtitle && <p class="product-founder">{subtitle}</p>}
       <slot name="actions" />
     </div>
     <div class="product-actions"><slot name="downloads" /></div>
