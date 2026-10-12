@@ -5,6 +5,17 @@ const faqs = [
     a: "No. Matdo checks completed work from the questions and answers on your pages. You do not need to upload an answer key or create an assignment. Include any instructions or reference material needed to answer the questions."
   },
   {
+    q: "Why not just use ChatGPT?",
+    a: "<p>You certainly can. But Matdo is built for one job: checking finished homework.</p>"
+      + "<ul>"
+      + "<li><b>Take a photo, and we do the rest.</b> No answer key, no prompts, nothing to type. We’re parents too, and we know how long checking homework takes.</li>"
+      + "<li><b>Marks on the paper.</b> See right on the page which answers need another look, without going back and forth between a chat and the worksheet.</li>"
+      + "<li><b>Step-by-step explanations</b> that help you help your child, not just hand over answers.</li>"
+      + "<li><b>Made for parents.</b> A simple app built around homework, not a chat window.</li>"
+      + "</ul>"
+      + "<p>Like any AI, Matdo can make mistakes, so give the marks a quick look.</p>"
+  },
+  {
     q: "Can I check several pages together?",
     a: "Yes. Turn on Multi-page in the app and capture the pages in order. Matdo can check work that continues across pages. Readable photos and complete question context still matter."
   },
@@ -54,6 +65,12 @@ const faqs = [
   summary { padding: 22px 8px; cursor: pointer; font-weight: 600; color: var(--color-forest); min-height: 48px; }
   summary:focus-visible { outline: 3px solid var(--color-mint); outline-offset: 3px; border-radius: 12px; }
   .faq-answer { padding: 0 8px 24px; color: #4a5854; }
+  /* Answers with paragraphs or a list (most are a single plain sentence block). */
+  .faq-answer :global(p) { margin: 0 0 0.6rem; }
+  .faq-answer :global(p:last-child) { margin-bottom: 0; }
+  .faq-answer :global(ul) { list-style: disc; padding-left: 1.3rem; margin: 0 0 0.6rem; }
+  .faq-answer :global(li) { margin: 0.35rem 0; }
+  .faq-answer :global(b) { color: var(--color-forest); }
   .faq-answer :global(a), .faq-support a { color: var(--color-teal); text-decoration: underline; text-underline-offset: 3px; }
   .faq-support { margin: 1.5rem 0 0; color: #4a5854; }
 </style>
