@@ -17,7 +17,7 @@ const hasDownloads = Astro.slots.has("downloads");
     <div class="product-copy">
       <img class="product-mark" src={mark} width="552" height="782" alt="" />
       {headline && headline !== name && <p class="product-name">{name}</p>}
-      <h1>{headline ?? name}</h1>
+      <h1>{(headline ?? name).split("\n").map((line, i) => <Fragment>{i > 0 && <br />}{line}</Fragment>)}</h1>
       {!headline && subtitle && <p class="product-sub">{subtitle}</p>}
       <p class="product-lede">{description}</p>
       {headline && subtitle && <p class="product-founder">{subtitle}</p>}
@@ -44,8 +44,6 @@ const hasDownloads = Astro.slots.has("downloads");
   .product-hero :global(.demo-video) { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; }
   .has-headline .product-name { margin: 0 0 0.75rem; font-weight: 700; color: var(--product-accent); }
   .has-headline h1 { font-size: clamp(2.5rem, 4.4vw, 4rem); line-height: 1.08; text-wrap: balance; }
-  /* Full-width copy: keep the headline breaking as it did beside the downloads column. */
-  .no-downloads.product-top h1 { max-width: 11em; }
   .product-founder { font-family: var(--font-display); color: var(--product-accent); font-size: 1.1rem; margin: 1rem 0 0; }
   @media (max-width: 900px) {
     .product-hero { padding: 116px 0 44px; }
