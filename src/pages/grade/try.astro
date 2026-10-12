@@ -125,11 +125,11 @@ const countries = [
             </div>
           </div>
 
-          <fieldset class="field group" data-group="Child's grade">
-            <legend>Your child’s grade <span class="opt">(choose all that apply)</span></legend>
+          <fieldset class="field group" data-group="Children's / students' grade">
+            <legend>Your children’s / students’ grade <span class="opt">(choose all that apply)</span></legend>
             <div class="chips">
               {grades.map((g) => (
-                <label class="chip"><input type="checkbox" name="Child's grade" value={g} /><span>{g}</span></label>
+                <label class="chip"><input type="checkbox" name="Children's / students' grade" value={g} /><span>{g}</span></label>
               ))}
             </div>
             <p class="group-err" hidden>Choose at least one grade.</p>
@@ -159,13 +159,14 @@ const countries = [
             <input id="heard" name="Heard about us" type="text" />
           </div>
           <div class="field">
-            <label for="message">Anything else? <span class="opt">(optional)</span></label>
-            <textarea id="message" name="message" rows="3" placeholder="What homework do you check, and how do you check it now?"></textarea>
+            <label for="message">Tell us something about yourself, your children / students, the school / subjects, etc. <span class="opt">(optional)</span></label>
+            <p class="field-hint" id="message-hint">Anything you feel comfortable sharing with us helps us determine whether you are a good fit for our pre-launch testing.</p>
+            <textarea id="message" name="message" rows="4" aria-describedby="message-hint"></textarea>
           </div>
 
           <label class="confirm">
-            <input type="checkbox" name="Parent or guardian, 18+" value="Yes" required />
-            <span>I’m a parent or guardian, 18 or older.</span>
+            <input type="checkbox" name="18+ parent, guardian, teacher or tutor" value="Yes" required />
+            <span>I’m 18 or older and a parent, guardian, teacher or tutor.</span>
           </label>
 
           <button type="submit" class="btn btn-primary submit">Sign me up</button>
@@ -275,7 +276,7 @@ const countries = [
     padding: 0.7rem 0.9rem; transition: border-color 0.2s, box-shadow 0.2s;
   }
   .field textarea { resize: vertical; }
-  .field textarea::placeholder { color: #9aa39d; }
+  .field-hint { margin: -0.1rem 0 0.55rem; font-size: 0.84rem; line-height: 1.45; color: #6b7772; }
   .field input:focus, .field select:focus, .field textarea:focus {
     outline: none; border-color: var(--color-teal2); box-shadow: 0 0 0 3px rgb(79 209 197 / 0.25); background: #fff;
   }
