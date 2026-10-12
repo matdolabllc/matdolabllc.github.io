@@ -1,0 +1,325 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+// Sign-ups for the Matdo Grade TestFlight beta, worded for parents who don't
+// know the word "beta". The public TestFlight link is not on the site: we read
+// each sign-up and send the link to families who fit.
+// The free units quoted here must match the live server's QUOTA_LIMIT_UNITS.
+const FREE_UNITS = 1000;
+const fmt = (n: number) => n.toLocaleString("en-US");
+
+const grades = ["K", "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th"];
+const subjects = ["Math", "Writing & essays", "Reading", "Science", "Social studies", "World language", "Other"];
+// Countries and regions, A to Z. The pinned one (our main market) is also
+// listed first in the menu.
+const pinnedCountries = ["United States"];
+const countries = [
+  "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina",
+  "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados",
+  "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana",
+  "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada",
+  "Cape Verde", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo",
+  "Costa Rica", "Côte d’Ivoire", "Croatia", "Cuba", "Cyprus", "Czech Republic",
+  "Democratic Republic of the Congo", "Denmark", "Djibouti", "Dominica", "Dominican Republic",
+  "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia",
+  "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada",
+  "Guam", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary",
+  "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan",
+  "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia",
+  "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau",
+  "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania",
+  "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco",
+  "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua",
+  "Niger", "Nigeria", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama",
+  "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar",
+  "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia",
+  "Saint Vincent and the Grenadines", "Samoa", "San Marino", "São Tomé and Príncipe", "Saudi Arabia",
+  "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia",
+  "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka",
+  "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand",
+  "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu",
+  "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay",
+  "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe",
+];
+---
+<Layout
+  title="Matdo Grade pre-launch testing — Matdo"
+  description={`Try Matdo Grade on iPhone and iPad before it's in the App Store. Each family we invite gets ${fmt(FREE_UNITS)} free units.`}
+>
+  <section class="page-hero">
+    <div class="wrap beta-grid">
+      <!-- Left: what the beta is -->
+      <div class="reveal">
+        <span class="eyebrow">Pre-launch testing</span>
+        <h1>Help us try out Matdo&nbsp;Grade.</h1>
+        <p class="lede">
+          Would you like free units to use Matdo Grade before it’s in the App Store? Each
+          family we invite gets <strong>{fmt(FREE_UNITS)} free units</strong>, the credits the app uses to check
+          homework. That’s enough for about {fmt(FREE_UNITS / 10)} pages.
+        </p>
+
+        <ul class="beta-points">
+          <li>
+            <span class="bp-ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+            </span>
+            <div><b>It’s free.</b> You won’t be asked to pay for anything.</div>
+          </li>
+          <li>
+            <span class="bp-ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></svg>
+            </span>
+            <div><b>For iPhone and iPad.</b> You’ll install it with TestFlight, Apple’s free app for trying new apps early. We’ll send simple steps.</div>
+          </li>
+          <li>
+            <span class="bp-ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            </span>
+            <div><b>We’ll reach out when we find a fit.</b> We’re starting with a small group of families. If there’s a place for you, we’ll email you a link to get started.</div>
+          </li>
+          <li>
+            <span class="bp-ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V4"/><path d="M4 4h12l-2 4 2 4H4"/></svg>
+            </span>
+            <div><b>Tell us what works and what doesn’t.</b> Use it on your child’s real homework, and let us know when it helps and when it gets something wrong.</div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Right: sign-up form -->
+      <div class="reveal">
+        <form id="beta-form" class="form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+          <!-- Web3Forms delivers each sign-up by email. The access key is public by
+               design: it only names the destination inbox. -->
+          <input type="hidden" name="access_key" value="1cd659cf-10e3-4a98-938b-7b6d67986e74" />
+          <input type="hidden" name="subject" value="Matdo Grade beta sign-up" />
+          <input type="hidden" name="from_name" value="Matdo Grade beta" />
+          <!-- Where the visitor came from: /grade/try?src=parent-group-name -->
+          <input type="hidden" name="Source" id="beta-source" value="" />
+          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+          <h2 class="form-title">Sign up for pre-launch testing</h2>
+
+          <div class="field">
+            <label for="name">Your name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="city">City</label>
+              <input id="city" name="City" type="text" autocomplete="address-level2" required />
+            </div>
+            <div class="field">
+              <label for="country">Country</label>
+              <select id="country" name="Country" autocomplete="country-name" required>
+                <option value="" disabled selected>Choose</option>
+                {pinnedCountries.map((c) => <option>{c}</option>)}
+                <option disabled>──────────</option>
+                {countries.map((c) => <option>{c}</option>)}
+              </select>
+            </div>
+          </div>
+
+          <fieldset class="field group" data-group="Child's grade">
+            <legend>Your child’s grade <span class="opt">(choose all that apply)</span></legend>
+            <div class="chips">
+              {grades.map((g) => (
+                <label class="chip"><input type="checkbox" name="Child's grade" value={g} /><span>{g}</span></label>
+              ))}
+            </div>
+            <p class="group-err" hidden>Choose at least one grade.</p>
+          </fieldset>
+
+          <fieldset class="field group" data-group="Subjects">
+            <legend>Subjects you’d like help checking</legend>
+            <div class="chips">
+              {subjects.map((s) => (
+                <label class="chip"><input type="checkbox" name="Subjects" value={s} /><span>{s}</span></label>
+              ))}
+            </div>
+            <p class="group-err" hidden>Choose at least one subject.</p>
+          </fieldset>
+
+          <fieldset class="field">
+            <legend>Which device would you use?</legend>
+            <div class="chips">
+              {["iPhone", "iPad", "Both"].map((d) => (
+                <label class="chip"><input type="radio" name="Device" value={d} required /><span>{d}</span></label>
+              ))}
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="heard">How did you hear about us? <span class="opt">(optional)</span></label>
+            <input id="heard" name="Heard about us" type="text" />
+          </div>
+          <div class="field">
+            <label for="message">Anything else? <span class="opt">(optional)</span></label>
+            <textarea id="message" name="message" rows="3" placeholder="What homework do you check, and how do you check it now?"></textarea>
+          </div>
+
+          <label class="confirm">
+            <input type="checkbox" name="Parent or guardian, 18+" value="Yes" required />
+            <span>I’m a parent or guardian, 18 or older.</span>
+          </label>
+
+          <button type="submit" class="btn btn-primary submit">Sign me up</button>
+          <p class="form-status" id="beta-status" role="status" hidden></p>
+        </form>
+
+        <div id="beta-thanks" class="form thanks" hidden tabindex="-1">
+          <span class="thanks-ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+          </span>
+          <h2>Thanks, you’re on the list.</h2>
+          <p>We’re starting with a small group of families. If there’s a place for you, we’ll email you a link and simple steps to get started.</p>
+          <a class="btn btn-ghost" href="/grade">Back to Matdo Grade</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const form = document.getElementById("beta-form") as HTMLFormElement | null;
+  const status = document.getElementById("beta-status");
+  const thanks = document.getElementById("beta-thanks");
+
+  // Record the ?src= tag a shared link carries, so sign-ups can be traced to
+  // the group or post that sent them.
+  const source = document.getElementById("beta-source") as HTMLInputElement | null;
+  const src = new URLSearchParams(location.search).get("src");
+  if (source && src) source.value = src.slice(0, 60);
+
+  const groups = Array.from(form?.querySelectorAll<HTMLFieldSetElement>("fieldset.group") ?? []);
+  const checkedIn = (g: HTMLFieldSetElement) =>
+    Array.from(g.querySelectorAll<HTMLInputElement>("input:checked")).map((i) => i.value);
+
+  // A choice in a group clears that group's error.
+  groups.forEach((g) => g.addEventListener("change", () => {
+    if (checkedIn(g).length) g.querySelector<HTMLElement>(".group-err")!.hidden = true;
+  }));
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!status || !thanks) return;
+
+    // Checkbox groups have no native "at least one" rule, so check them here,
+    // then let the browser report the ordinary required fields.
+    let firstBad: HTMLElement | null = null;
+    for (const g of groups) {
+      const empty = checkedIn(g).length === 0;
+      g.querySelector<HTMLElement>(".group-err")!.hidden = !empty;
+      if (empty && !firstBad) firstBad = g;
+    }
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    if (firstBad) { firstBad.scrollIntoView({ behavior: "smooth", block: "center" }); return; }
+
+    // One line per group in the email ("3rd, 5th") instead of repeated fields.
+    const data = new FormData(form);
+    for (const g of groups) data.set(g.dataset.group!, checkedIn(g).join(", "));
+
+    const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const original = btn?.textContent ?? "";
+    status.hidden = true;
+    if (btn) { btn.disabled = true; btn.textContent = "Sending…"; }
+    try {
+      const res = await fetch(form.action, {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!(res.ok && json.success)) throw new Error(json.message || "send-failed");
+      form.hidden = true;
+      thanks.hidden = false;
+      thanks.focus();
+      thanks.scrollIntoView({ behavior: "smooth", block: "center" });
+    } catch {
+      status.className = "form-status err";
+      status.textContent = "Sorry, that didn’t send. Please try again, or email matdo@matdolab.com.";
+      status.hidden = false;
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = original; }
+    }
+  });
+</script>
+
+<style>
+  .page-hero { padding: 150px 0 100px; }
+  .beta-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 56px; align-items: start; }
+  .page-hero h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); margin: 1.1rem 0 1rem; text-wrap: balance; }
+  .page-hero .lede { font-size: 1.15rem; color: #3d4b47; max-width: 32rem; margin-bottom: 2rem; }
+  .page-hero .lede strong { color: var(--color-forest); }
+
+  .beta-points { list-style: none; padding: 0; margin: 0; display: grid; gap: 1.1rem; max-width: 30rem; }
+  .beta-points li { display: flex; gap: 0.9rem; align-items: flex-start; color: #4a5854; font-size: 0.98rem; line-height: 1.55; }
+  .beta-points b { color: var(--color-forest); }
+  .bp-ic { width: 38px; height: 38px; flex: none; border-radius: 11px; background: rgb(79 209 197 / 0.16); color: var(--color-teal); display: grid; place-items: center; }
+  .bp-ic svg { width: 20px; height: 20px; }
+
+  .form { background: #fff; border: 1px solid var(--color-line); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow-md); }
+  .form-title { font-size: 1.5rem; margin: 0 0 1.4rem; }
+  .field { margin: 0 0 1.1rem; }
+  fieldset.field { border: 0; padding: 0; min-width: 0; }
+  .field label, .field legend { display: block; font-size: 0.88rem; font-weight: 600; color: var(--color-forest); margin-bottom: 0.4rem; padding: 0; }
+  .field .opt { font-weight: 400; color: #8b968f; }
+  .field input, .field select, .field textarea {
+    width: 100%; font: inherit; color: var(--color-ink);
+    background: var(--color-cream); border: 1px solid var(--color-line); border-radius: 12px;
+    padding: 0.7rem 0.9rem; transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .field textarea { resize: vertical; }
+  .field textarea::placeholder { color: #9aa39d; }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none; border-color: var(--color-teal2); box-shadow: 0 0 0 3px rgb(79 209 197 / 0.25); background: #fff;
+  }
+  .field-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; }
+
+  /* Checkbox and radio choices as pills */
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { position: relative; display: inline-flex; margin: 0 !important; cursor: pointer; }
+  .chip input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+  .chip span {
+    display: inline-block; padding: 0.42rem 0.9rem; border-radius: 999px;
+    border: 1px solid var(--color-line); background: var(--color-cream);
+    font-size: 0.9rem; font-weight: 500; color: var(--color-forest); line-height: 1.3;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .chip:hover span { border-color: rgb(29 59 52 / 0.3); }
+  .chip input:checked + span { background: var(--color-teal); border-color: var(--color-teal); color: #fff; }
+  .chip input:focus-visible + span { outline: 3px solid var(--color-mint); outline-offset: 2px; }
+  .group-err { margin: 0.5rem 0 0; font-size: 0.84rem; font-weight: 500; color: #a8843c; }
+
+  .confirm { display: flex; gap: 0.65rem; align-items: flex-start; margin: 0.4rem 0 1.3rem; font-size: 0.93rem; color: var(--color-forest); cursor: pointer; }
+  .confirm input { width: 18px; height: 18px; margin: 0.15rem 0 0; flex: none; accent-color: var(--color-teal); }
+
+  .submit { width: 100%; justify-content: center; white-space: normal; text-align: center; }
+  .hp { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; opacity: 0; }
+  .form-status { margin-top: 0.9rem; padding: 0.75rem 1rem; border-radius: 12px; font-size: 0.92rem; font-weight: 500; line-height: 1.45; }
+  .form-status.err { background: rgb(196 127 16 / 0.1); color: #a8843c; }
+
+  .thanks { text-align: center; padding: 44px 32px; outline: none; }
+  .thanks-ic { width: 56px; height: 56px; margin: 0 auto 1.1rem; border-radius: 50%; background: rgb(79 209 197 / 0.18); color: var(--color-teal); display: grid; place-items: center; }
+  .thanks-ic svg { width: 28px; height: 28px; }
+  .thanks h2 { font-size: 1.6rem; margin-bottom: 0.7rem; }
+  .thanks p { color: #4a5854; max-width: 26rem; margin: 0 auto 1.6rem; }
+
+  @media (max-width: 900px) {
+    .page-hero { padding: 120px 0 70px; }
+    .beta-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  }
+  @media (max-width: 760px) {
+    .page-hero { padding: 108px 0 56px; }
+    .form { padding: 24px 20px; }
+    .field input, .field select, .field textarea { min-width: 0; font-size: 1rem; }
+  }
+  @media (max-width: 420px) {
+    .field-row { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  }
+</style>

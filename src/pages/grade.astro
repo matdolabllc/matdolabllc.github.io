@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ProductHero from "../components/ProductHero.astro";
-import AppStoreSoon from "../components/AppStoreSoon.astro";
+import GradeBetaButton from "../components/GradeBetaButton.astro";
 import GradeSubjects from "../components/GradeSubjects.astro";
 import GradedSamples from "../components/GradedSamples.astro";
 import GradeFeatures from "../components/GradeFeatures.astro";
@@ -27,13 +27,14 @@ const fmt = (n: number) => n.toLocaleString("en-US");
 >
   <!-- HERO -->
 <ProductHero name="Matdo Grade" mark="/logos/matdo-grade-mark.png" headline="Paper homework. Graded on iPad." subtitle="For Parents. By Parents." description="Photograph your student’s finished homework. Review marks, correct answers, and explanations so you can help them try again." accent="#b08a3e">
-<div slot="downloads" class="grade-download">
-  <AppStoreSoon />
-  <p>For iPad and iPhone.<br />App Store download not yet available.</p>
-</div>
 <div slot="actions" class="grade-actions">
-  <a class="btn btn-primary" href="#samples">See a graded example</a>
-  <a class="btn btn-ghost" href="#how-grade-works">How it works</a>
+  <a class="btn btn-primary ga-example" href="#samples">See a graded example</a>
+  <a class="btn btn-ghost ga-how" href="#how-grade-works">How it works</a>
+  <!-- Pre-launch sign-up: on a wide screen it sits at the right end of this row,
+       level with the buttons, with "Coming Soon!" above it and the note below. -->
+  <p class="ga-soon">Coming Soon!</p>
+  <GradeBetaButton class="ga-signup" />
+  <p class="ga-note">Qualified pre-launch testers get 1,000 free units.</p>
   <ul class="grade-benefits" aria-label="Homework checking benefits">
     <li>No answer key to upload</li><li>No assignment to create</li><li>Feedback on your page</li>
   </ul>
@@ -87,6 +88,7 @@ const fmt = (n: number) => n.toLocaleString("en-US");
 
       <div class="pr-more reveal">
         <p><b>Top-Up:</b> 1,000 extra units for $6.99, never expire.</p>
+        <p><b>Pre-launch testing:</b> families who help us test Matdo Grade before launch get 1,000 free units. <a href="/grade/try">Sign up for pre-launch testing</a>.</p>
       </div>
     </div>
   </section>
@@ -94,11 +96,36 @@ const fmt = (n: number) => n.toLocaleString("en-US");
 </Layout>
 
 <style>
-  .grade-actions { margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 12px; }
+  .grade-actions { margin-top: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
   .grade-actions .btn { white-space: normal; text-align: center; justify-content: center; }
   .grade-benefits { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 8px 22px; list-style: none; padding: 0; margin: 0.5rem 0 0; font-size: 0.88rem; color: #4a5854; }
   .grade-benefits li::before { content: "✓"; margin-right: 7px; color: var(--color-teal); font-weight: 700; }
-  .grade-download p { margin: 0.7rem 0 0; font-size: 0.82rem; color: #55665f; }
+  .ga-soon { margin: 0; font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; line-height: 1.2; color: #b08a3e; }
+  .ga-note { margin: 0; font-size: 0.9rem; color: #55665f; }
+
+  /* Wide screens: the sign-up button shares a row with the two buttons and is
+     centred on them; "Coming Soon!" hangs above it (absolutely placed in the
+     same grid cell, so it takes no row height) and the note sits under it. */
+  @media (min-width: 901px) {
+    .grade-actions {
+      position: relative; display: grid; column-gap: 12px; row-gap: 0;
+      grid-template-columns: auto auto minmax(0, 1fr) auto;
+      grid-template-areas: "ex how . signup" "ben ben ben note";
+    }
+    .ga-example { grid-area: ex; }
+    .ga-how { grid-area: how; }
+    .grade-actions :global(.ga-signup) { grid-area: signup; }
+    .ga-soon { grid-area: signup; position: absolute; left: 0; bottom: 100%; margin-bottom: 0.7rem; }
+    .ga-note { grid-area: note; align-self: start; margin-top: 0.8rem; }
+    .grade-benefits { grid-area: ben; align-self: start; margin-top: 1.1rem; }
+  }
+  /* Narrow screens: the two buttons, the benefits, then the sign-up block. */
+  @media (max-width: 900px) {
+    .grade-benefits { order: 1; }
+    .ga-soon { order: 2; flex-basis: 100%; margin-top: 1.4rem; }
+    .grade-actions :global(.ga-signup) { order: 3; }
+    .ga-note { order: 4; flex-basis: 100%; }
+  }
   @media (max-width: 760px) { .grade-benefits { display: grid; gap: 8px; } }
 
 
@@ -120,6 +147,7 @@ const fmt = (n: number) => n.toLocaleString("en-US");
   .pr-more { max-width: 46rem; margin: 2.2rem auto 0; text-align: center; color: #4a5854; }
   .pr-more p { margin: 0.35rem 0; }
   .pr-more b { color: var(--color-forest); }
+  .pr-more a { color: var(--color-teal); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
   .pr-more .pr-fine { font-size: 0.82rem; color: #8b968f; }
   .pr-more :global(.pr-badge) { margin-top: 1.4rem; }
   @media (max-width: 1080px) { .pr-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }

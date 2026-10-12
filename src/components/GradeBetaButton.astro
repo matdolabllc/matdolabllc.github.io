@@ -1,0 +1,32 @@
+---
+// Grade's download button before launch: it opens the early-access sign-up form.
+// It is shaped like the App Store badge but is not Apple's badge, which may
+// only link to the App Store. Swap back to AppStoreSoon with the store URL at launch.
+interface Props { href?: string; class?: string; }
+const { href = "/grade/try", class: cls = "" } = Astro.props;
+---
+<a class={`asb beta-dl ${cls}`} href={href}>
+  <svg class="asb-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 3v12" /><path d="m7 10 5 5 5-5" /><path d="M5 21h14" />
+  </svg>
+  <span class="asb-text"><small>Sign up for</small><strong>Pre-Launch Testing</strong></span>
+</a>
+
+<style>
+  .asb {
+    position: relative; display: inline-flex; align-items: center; gap: 16px;
+    padding: 18px 30px 18px 24px; max-width: 100%;
+    border-radius: 16px; border: 1px solid rgb(255 255 255 / 0.14);
+    background: #1a2422; color: #fff; white-space: nowrap;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .asb:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+  .asb-logo { width: 32px; height: 34px; flex: none; }
+  .asb-text { display: flex; flex-direction: column; line-height: 1.12; text-align: left; }
+  .asb-text small { font-size: 0.92rem; font-weight: 500; letter-spacing: 0.02em; opacity: 0.9; }
+  .asb-text strong { font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; }
+  @media (max-width: 400px) {
+    .asb { gap: 12px; padding: 15px 20px 15px 18px; }
+    .asb-text strong { font-size: 1.35rem; }
+  }
+</style>
