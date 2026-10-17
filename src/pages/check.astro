@@ -23,7 +23,6 @@ const FILM_VERSION = "20261004-narrated-v1";
 const setupFlow = [
   { cartoon: "first-run",   label: "Set up a new iPad",  video: "first-run" },
   { cartoon: "pin",         label: "Change the PIN",     video: "set-pin" },
-  { cartoon: "pin",         label: "Forgot the PIN",     video: "forgot-pin" },
   { cartoon: "icloud",      label: "Back up to iCloud",  video: "icloud-backup" },
   { cartoon: "switch-ipad", label: "Move to a new iPad", video: "switch-ipad" },
 ];
@@ -45,12 +44,43 @@ const teamFlow = [
   { cartoon: "another-day",   label: "Look at another day",          video: "another-day" },
   { cartoon: "export",        label: "Monthly spreadsheets",         video: "export-csv" },
   { cartoon: "audit-log",     label: "The change log",               video: "change-log" },
+  { cartoon: "pin",           label: "Forgot the PIN",               video: "forgot-pin" },
 ];
 
 const tutorialGroups = [
   { id: "getting-started", title: "Getting started", description: "Set up your tablet, protect access, and keep a backup.", cards: setupFlow },
   { id: "front-desk", title: "At the front desk", description: "A smooth arrival, a simple goodbye, and a tidy end to the day.", cards: familyFlow },
   { id: "team-tools", title: "For your team", description: "Keep your roster, attendance records, and exports in order.", cards: teamFlow },
+];
+
+// Genuine 1.2 captures (the App Store set, scaled to 1600×1200), so a visitor
+// sees exactly the screens they will get. Replace these with the next
+// release's screenshots when the UI changes.
+const appScreens = [
+  {
+    src: "kiosk",
+    title: "The check-in kiosk",
+    caption: "Students type their name and tap Check In. No accounts, no passwords.",
+    alt: "Matdo Check kiosk with a student's name typed and the green Check In button ready",
+  },
+  {
+    src: "records",
+    title: "Records",
+    caption: "Who's in class, for how long, and who has already gone home.",
+    alt: "The Attendance Dashboard: counts for In Class, Already Done, Not Present and Unenrolled, and a table of students with times in class",
+  },
+  {
+    src: "add-new",
+    title: "Add New",
+    caption: "Type names into the table, or paste them straight from a spreadsheet.",
+    alt: "The Add New Attendee table with three students marked Ready, above the name-sheet upload",
+  },
+  {
+    src: "export",
+    title: "Export",
+    caption: "Every month saved as a spreadsheet, with a daily backup to iCloud.",
+    alt: "The Export page with the iCloud backup switch and this month's attendance spreadsheet",
+  },
 ];
 
 const useCases = [
@@ -129,13 +159,35 @@ const plans = [
       </figure>
 </ProductHero>
 
+  <!-- INSIDE THE APP — real screens, so nobody is surprised by what they get -->
+  <section id="screens" class="section-pad" aria-labelledby="screens-title">
+    <div class="wrap">
+      <div class="sec-head center reveal">
+        <span class="eyebrow">Inside the app</span>
+        <h2 id="screens-title">Matdo Check at a Glance.</h2>
+        <p>Real screens from Matdo Check on iPad — the kiosk your students use, and the panel only instructors can open.</p>
+      </div>
+      <ul class="screens reveal" role="list">
+        {appScreens.map((s) => (
+          <li class="screen">
+            <a class="screen-frame" href={`/demo/check/screens/${s.src}.webp`} target="_blank" rel="noopener" aria-label={`${s.title} — open full size`}>
+              <img src={`/demo/check/screens/${s.src}.webp`} alt={s.alt} width="1600" height="1200" loading="lazy" decoding="async" />
+            </a>
+            <h3 class="screen-title">{s.title}</h3>
+            <p class="screen-caption">{s.caption}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
   <!-- HOW IT WORKS — illustrated cards open the how-to videos -->
   <section id="how" class="section-pad band-cream2">
     <div class="wrap">
       <div class="sec-head center reveal">
         <span class="eyebrow">Quick tutorials</span>
-        <h2>A little guidance, every step of the way.</h2>
-        <p>Each one is a step-by-step walk-through of the real app, captioned throughout.</p>
+        <h2>Tutorial Videos</h2>
+        <p>Step-by-step walk-throughs of how to use the app.</p>
         <nav class="tutorial-nav" aria-label="Tutorial groups">
           {tutorialGroups.map((group) => <a href={`#${group.id}`}>{group.title}</a>)}
         </nav>
@@ -206,8 +258,8 @@ const plans = [
     <div class="wrap">
       <div class="sec-head center reveal">
         <span class="eyebrow">Pricing</span>
-        <h2>Simple pricing. Your choice.</h2>
-        <p>Start with a free week. Then pick the plan that fits — subscribe, or pay once and keep it forever.</p>
+        <h2>Affordable Pricing</h2>
+        <p>We offer multiple tiers of pricing to meet your needs.</p>
       </div>
 
       <div class="price-grid reveal">
@@ -415,6 +467,18 @@ const plans = [
   @keyframes lbFade { from { opacity: 0; } to { opacity: 1; } }
   @keyframes lbPop { from { opacity: 0; transform: scale(0.94); } to { opacity: 1; transform: none; } }
 
+  /* ── Inside the app ── */
+  #screens { scroll-margin-top: 96px; }
+  .screens { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 36px; list-style: none; margin: 0 auto; padding: 0; max-width: 1060px; }
+  .screen { min-width: 0; text-align: center; }
+  /* An iPad bezel around each capture, so it reads as a device, not a poster. */
+  .screen-frame { display: block; padding: 12px; background: #1d2421; border-radius: 26px; box-shadow: var(--shadow-lg); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .screen-frame:hover { transform: translateY(-4px); box-shadow: 0 18px 44px rgb(29 59 52 / 0.22); }
+  .screen-frame:focus-visible { outline: 3px solid var(--color-mint); outline-offset: 4px; }
+  .screen-frame img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; border-radius: 14px; }
+  .screen-title { margin: 18px 0 0; font-family: var(--font-display); font-weight: 600; font-size: 1.3rem; color: var(--color-forest); }
+  .screen-caption { margin: 6px auto 0; max-width: 30rem; font-size: 0.98rem; color: #4a5854; }
+
   /* ── Use cases ── */
   #where { scroll-margin-top: 96px; }
   .usecases { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px 28px; list-style: none; margin: 0; padding: 24px 0; border-block: 1px solid var(--color-line); }
@@ -450,6 +514,9 @@ const plans = [
     .price-grid { grid-template-columns: repeat(2, 1fr); gap: 22px; max-width: 620px; }
   }
   @media (max-width: 620px) {
+    .screens { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+    .screen-frame { padding: 8px; border-radius: 18px; }
+    .screen-frame img { border-radius: 10px; }
     .flow { gap: 32px; }
     .flow-lane + .flow-lane { padding-top: 28px; }
     .lane-head { gap: 12px; }
