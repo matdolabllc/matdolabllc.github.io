@@ -1,65 +1,65 @@
 WEBVTT
 
 1
-00:00:15.493 --> 00:00:20.906
+00:00:15.492 --> 00:00:20.884
 First, what your sheet needs to look like.
 
 2
-00:00:20.906 --> 00:00:26.911
+00:00:20.884 --> 00:00:26.888
 Three columns: Last name, First name, Phone.
 
 3
-00:00:26.911 --> 00:00:33.141
+00:00:26.888 --> 00:00:33.096
 The phone column is optional — a blank cell is fine.
 
 4
-00:00:33.141 --> 00:00:45.467
-No other columns, one attendee per row. Save it as .csv or .xlsx.
+00:00:33.096 --> 00:00:44.599
+One attendee per row. Save it as .csv or .xlsx.
 
 5
-00:00:45.467 --> 00:00:49.275
+00:00:44.599 --> 00:00:48.414
 Everything an instructor does starts from the kiosk.
 
 6
-00:00:49.275 --> 00:00:56.564
-Tap Instructor, in the row under the two big buttons.
+00:00:48.414 --> 00:00:55.814
+Tap Management, in the row under the two big buttons.
 
 7
-00:00:56.564 --> 00:00:59.756
+00:00:55.814 --> 00:00:59.000
 The panel is behind your instructor PIN.
 
 8
-00:00:59.756 --> 00:01:03.980
+00:00:59.000 --> 00:01:03.224
 Face ID is the shortcut — the PIN is what actually opens it.
 
 9
-00:01:03.980 --> 00:01:10.002
-Type your six digits.
+00:01:03.224 --> 00:01:08.897
+Type your PIN.
 
 10
-00:01:10.002 --> 00:01:15.390
+00:01:08.897 --> 00:01:14.381
 Then tap Unlock.
 
 11
-00:01:15.390 --> 00:01:20.972
-This is the Instructor Panel. Five tabs across the top.
+00:01:14.381 --> 00:01:20.126
+This is the Instructor Panel: Records, Add New and Export.
 
 12
-00:01:20.972 --> 00:01:26.750
-Open the Upload tab.
+00:01:20.126 --> 00:01:26.082
+Open the Add New tab.
 
 13
-00:01:26.750 --> 00:01:33.848
-The app shows the same three columns, so you can check as you go.
+00:01:26.082 --> 00:01:32.607
+The upload is under the table: Or Upload a Name Sheet.
 
 14
-00:01:33.848 --> 00:01:40.284
+00:01:32.607 --> 00:01:39.032
 Existing attendees are matched and merged, never duplicated.
 
 15
-00:01:40.284 --> 00:01:47.089
+00:01:39.032 --> 00:01:45.959
 Tap Choose File and pick your sheet.
 
 16
-00:01:47.089 --> 00:01:54.967
+00:01:45.959 --> 00:01:53.867
 The summary says what was added and what was already there.

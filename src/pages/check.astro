@@ -7,7 +7,7 @@ import { APP_STORE_URL } from "../consts";
 // The tutorial clips keep the same filenames every time they're re-cut, so a
 // returning visitor would be served the previous recording from cache. Bump
 // this whenever the files under public/demo/tutorials/ are replaced.
-const TUTORIAL_VERSION = "2026092202";
+const TUTORIAL_VERSION = "2026101601";
 const FILM_VERSION = "20261004-narrated-v1";
 
 // Illustrated cards open the existing how-to videos of the real app.
@@ -15,9 +15,15 @@ const FILM_VERSION = "20261004-narrated-v1";
 // Each clip now opens with its own title sequence — the Matdo Check mark, the
 // slogan, the tutorial's name, and the problem it answers — so the poster frame
 // (`/demo/tutorials/<video>.jpg`) is a title card rather than a frame of iPad.
+//
+// Recorded against Matdo Check 1.2 (Replica rig in the matdo-check repo).
+// Four of the cards borrow a neighbour's illustration until they get their
+// own: Paste from a spreadsheet (upload), Forgot the PIN (pin), Time in class
+// (fix-time) and Check in or out from Records (check-out-all).
 const setupFlow = [
   { cartoon: "first-run",   label: "Set up a new iPad",  video: "first-run" },
-  { cartoon: "pin",         label: "Set PIN",            video: "set-pin" },
+  { cartoon: "pin",         label: "Change the PIN",     video: "set-pin" },
+  { cartoon: "pin",         label: "Forgot the PIN",     video: "forgot-pin" },
   { cartoon: "icloud",      label: "Back up to iCloud",  video: "icloud-backup" },
   { cartoon: "switch-ipad", label: "Move to a new iPad", video: "switch-ipad" },
 ];
@@ -28,14 +34,17 @@ const familyFlow = [
   { cartoon: "reset",         label: "Reset check-in",        video: "reset" },
 ];
 const teamFlow = [
-  { cartoon: "add-names",    label: "Add attendees",       video: "add-name" },
-  { cartoon: "upload",       label: "Import CSV",          video: "upload" },
-  { cartoon: "edit-profile", label: "Edit profile",        video: "edit-profile" },
-  { cartoon: "enroll",       label: "Enroll & unenroll",   video: "enroll-unenroll" },
-  { cartoon: "fix-time",     label: "Fix a time",          video: "fix-time" },
-  { cartoon: "another-day",  label: "Look at another day", video: "another-day" },
-  { cartoon: "export",       label: "Export CSV",          video: "export-csv" },
-  { cartoon: "audit-log",    label: "The override log",    video: "audit-log" },
+  { cartoon: "add-names",     label: "Add attendees",                video: "add-name" },
+  { cartoon: "upload",        label: "Paste from a spreadsheet",     video: "paste-columns" },
+  { cartoon: "upload",        label: "Import CSV",                   video: "upload" },
+  { cartoon: "edit-profile",  label: "Edit profile",                 video: "edit-profile" },
+  { cartoon: "enroll",        label: "Enroll & unenroll",            video: "enroll-unenroll" },
+  { cartoon: "fix-time",      label: "Time in class",                video: "time-in-class" },
+  { cartoon: "check-out-all", label: "Check in or out from Records", video: "check-out-from-records" },
+  { cartoon: "fix-time",      label: "Fix a time",                   video: "fix-time" },
+  { cartoon: "another-day",   label: "Look at another day",          video: "another-day" },
+  { cartoon: "export",        label: "Monthly spreadsheets",         video: "export-csv" },
+  { cartoon: "audit-log",     label: "The change log",               video: "change-log" },
 ];
 
 const tutorialGroups = [

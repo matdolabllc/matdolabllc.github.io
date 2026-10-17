@@ -1,37 +1,33 @@
 WEBVTT
 
 1
-00:00:15.890 --> 00:00:19.554
+00:00:15.919 --> 00:00:19.577
 The PIN is changed in Settings, not in the panel.
 
 2
-00:00:19.554 --> 00:00:26.765
+00:00:19.577 --> 00:00:26.943
 Tap the gear, at the top right of the kiosk.
 
 3
-00:00:26.765 --> 00:00:31.924
-Settings opens with Face ID, never the PIN.
+00:00:26.943 --> 00:00:33.395
+Settings opens with Face ID or the iPad passcode, never the PIN.
 
 4
-00:00:31.924 --> 00:00:38.307
-That is deliberate: a forgotten PIN can still be replaced here.
-
-5
-00:00:38.307 --> 00:00:43.804
+00:00:33.395 --> 00:00:39.016
 Tap Change PIN.
 
-6
-00:00:43.804 --> 00:00:50.138
+5
+00:00:39.016 --> 00:00:45.364
 Type the PIN you use now.
 
-7
-00:00:50.138 --> 00:00:55.944
+6
+00:00:45.364 --> 00:00:51.196
 Then the new one.
 
-8
-00:00:55.944 --> 00:01:02.097
+7
+00:00:51.196 --> 00:00:57.372
 And again, to be sure.
 
-9
-00:01:02.097 --> 00:01:11.533
-Tap Save. The new PIN works straight away.
+8
+00:00:57.372 --> 00:01:07.233
+Tap Change PIN. The new one works straight away.

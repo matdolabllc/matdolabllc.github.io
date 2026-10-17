@@ -1,61 +1,57 @@
 WEBVTT
 
 1
-00:00:16.297 --> 00:00:22.125
+00:00:16.298 --> 00:00:22.329
 This is what Matdo Check shows the very first time it opens.
 
 2
-00:00:22.125 --> 00:00:24.485
-Step one is your center.
+00:00:22.329 --> 00:00:28.867
+Three things to set up: your center, its time zone, and a PIN.
 
 3
-00:00:24.485 --> 00:00:34.376
-Type the name families will see on the kiosk.
+00:00:28.867 --> 00:00:34.930
+Tap Set Up Your Center.
 
 4
-00:00:34.376 --> 00:00:39.347
-Then pick your timezone.
+00:00:34.930 --> 00:00:45.261
+Type your center’s name. It is shown on your backups.
 
 5
-00:00:39.347 --> 00:00:46.468
-This matters: “today” is worked out in the center’s timezone, not the iPad’s.
+00:00:45.261 --> 00:00:50.285
+Then pick your time zone.
 
 6
-00:00:46.468 --> 00:00:52.071
-Tap Continue.
+00:00:50.285 --> 00:00:57.460
+This matters: “today” is worked out in the center’s time zone, not the iPad’s.
 
 7
-00:00:52.071 --> 00:00:56.197
-Step two is the instructor PIN.
+00:00:57.460 --> 00:01:03.196
+Tap Continue.
 
 8
-00:00:56.197 --> 00:01:02.942
-Six digits, and not an obvious one.
+00:01:03.196 --> 00:01:08.210
+Now the instructor PIN. There is no default one.
 
 9
-00:01:02.942 --> 00:01:09.369
-Type it again to confirm.
+00:01:08.210 --> 00:01:14.946
+Six digits, and not an obvious one.
 
 10
-00:01:09.369 --> 00:01:15.775
-Leave Face ID on if your instructors are enrolled on this iPad.
+00:01:14.946 --> 00:01:21.387
+Type it again to confirm.
 
 11
-00:01:15.775 --> 00:01:21.527
-Tap Set PIN.
+00:01:21.387 --> 00:01:27.731
+Turn on Face ID if your instructors are enrolled on this iPad.
 
 12
-00:01:21.527 --> 00:01:26.983
-Now the important screen: your recovery code.
+00:01:27.731 --> 00:01:33.859
+Tap Finish Setup.
 
 13
-00:01:26.983 --> 00:01:32.632
-Write it down and keep it away from the iPad.
+00:01:33.859 --> 00:01:40.420
+Three things to know before your first day.
 
 14
-00:01:32.632 --> 00:01:39.675
-It is the only way into your iCloud backups if the PIN is ever lost.
-
-15
-00:01:39.675 --> 00:01:52.800
-Tick the box, then tap Continue. Setup is done.
+00:01:40.420 --> 00:01:49.433
+Tap Get Started. The kiosk is ready.
