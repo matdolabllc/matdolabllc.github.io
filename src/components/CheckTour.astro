@@ -1,0 +1,418 @@
+---
+// "Matdo Check at a Glance": a day at the center, one step at a time. Each step
+// shows a real 1.3 capture (2026-10-18; iPad Pro 11-inch, a 13-inch iPad upright
+// for Edit Time) with numbered pins on the features that step is about, and
+// the same numbers in the list beside it.
+//
+// Pin positions are percentages of the capture itself. The screen boxes below
+// are sized to each capture's exact aspect ratio, so nothing is cropped and a
+// pin stays on its button at every width. A pin sits on the top-left corner
+// (or the left edge) of what it points at, so it never hides the label. Retaking a screenshot means checking
+// its pins again.
+//
+// Sources: matdo-check app-store-1.3.0-assets/screenshots-iPad/plain/01–04,
+// matdo-check build/ipad13-plain/04-edit-time (the 13-inch iPad simulator), and
+// Marketing/assets/1.3/iphone-records (the iPhone half of the App Store header).
+// Words follow the 1.3.0 App Store description (docs/AppStore-1.3.0.md).
+
+// On the sync step, `on` says which screen a pin sits on; a point without one
+// is listed but not pinned.
+type Pin = { x: number; y: number; t: string; d: string; on?: "ipad" | "iphone" };
+type Step = {
+  id: string;
+  label: string;
+  title: string;
+  lead: string;
+  device: "ipad" | "ipad-tall" | "iphone" | "both";
+  img?: string;
+  alt: string;
+  pins: Pin[];
+  // How-to clips from the Tutorial Videos section below (public/demo/tutorials/),
+  // opened in its lightbox and listed under the screen. Titles match that
+  // section's cards; `s` is the clip's length in seconds (ffprobe of the .mp4),
+  // so re-check it when a clip is re-cut.
+  videos?: { v: string; t: string; s: number }[];
+};
+
+const steps: Step[] = [
+  {
+    id: "check-in",
+    label: "Check in",
+    title: "Students check themselves in.",
+    lead: "The device on your counter becomes the kiosk. No accounts, no passwords, and it keeps working when the Wi-Fi doesn't.",
+    device: "ipad",
+    img: "kiosk",
+    alt: "The Matdo Check kiosk: Who's here today?, a name search field, Check In and Check Out buttons, and Reset, Add Attendee and Management below",
+    videos: [
+      { v: "first-run", t: "Set up a new iPad", s: 109 },
+      { v: "check-in", t: "Check in", s: 57 },
+      { v: "check-out", t: "Check out", s: 50 },
+      { v: "reset", t: "Reset check-in", s: 76 },
+      { v: "set-pin", t: "Change the PIN", s: 67 },
+      { v: "forgot-pin", t: "Forgot the PIN", s: 64 },
+    ],
+    pins: [
+      { x: 23.3, y: 43.6, t: "Type a name", d: "First or last name. The match appears as they type." },
+      { x: 23.6, y: 58.2, t: "Tap Check In", d: "Check In on arrival, Check Out to leave, with a full-screen welcome." },
+      { x: 42.8, y: 6.4, t: "A live clock", d: "Always in your center's own timezone." },
+      { x: 59.9, y: 72.6, t: "Management", d: "The instructor panel, behind a six-digit PIN." },
+    ],
+  },
+  {
+    id: "records",
+    label: "Watch the day",
+    title: "See who's in class, and for how long.",
+    lead: "Records is the live dashboard behind the PIN. Every arrival and departure lands here the moment it happens.",
+    device: "ipad",
+    img: "records",
+    alt: "The Attendance Dashboard: counts for In Class, Already Done, Not Present and Unenrolled, a Check Out All Now bar, and attendee rows with times and buttons",
+    videos: [
+      { v: "time-in-class", t: "Time in class", s: 85 },
+      { v: "check-out-from-records", t: "Check in or out from Records", s: 100 },
+      { v: "check-out-all", t: "Close up for the day", s: 105 },
+      { v: "another-day", t: "Look at another day", s: 97 },
+    ],
+    pins: [
+      { x: 25.3, y: 28.6, t: "The day in four numbers", d: "In class now, already done, not present, unenrolled." },
+      { x: 44.3, y: 58.4, t: "Time in class", d: "Highlighted when someone has stayed too long." },
+      { x: 63, y: 58.4, t: "One-tap check-in and out", d: "For the student who forgot to stop at the kiosk." },
+      { x: 3, y: 38.2, t: "Close up for the day", d: "Hold for two seconds to check everyone still here out." },
+      { x: 95, y: 23.2, t: "Any day, not just today", d: "Step back through earlier dates." },
+    ],
+  },
+  {
+    id: "edit-time",
+    label: "Fix a time",
+    title: "Correct a time in one tap.",
+    lead: "Someone forgot to check out? Tap Edit Time on their row. The check-in and the check-out each get their own card.",
+    device: "ipad-tall",
+    img: "edit-time",
+    alt: "Edit Time on an iPad for Daniel Cho: a Check In card at 5:20 PM and a Check Out card at 6:27 PM, each with Reset, the time in class, and an Override button",
+    videos: [
+      { v: "fix-time", t: "Fix a time", s: 98 },
+      { v: "change-log", t: "The change log", s: 86 },
+    ],
+    pins: [
+      { x: 43.6, y: 58.2, t: "Change a time", d: "Tap the check-in or check-out time and pick the right one." },
+      { x: 66.4, y: 64.2, t: "Reset", d: "Clear a time that shouldn't be there." },
+      { x: 23.5, y: 70.9, t: "Override", d: "Saves in one tap, with the old and new times written to a read-only change log." },
+    ],
+  },
+  {
+    id: "add-names",
+    label: "Add names",
+    title: "Bring your roster in.",
+    lead: "Type names, paste them from the spreadsheet you already keep, or import the file. Enroll and unenroll without losing anyone's history.",
+    device: "ipad",
+    img: "add-new",
+    alt: "The Add New Attendee table with Paste Columns, Add Row and Clear buttons, Last Name, First Name and Phone columns, and Or Upload a Name Sheet below",
+    videos: [
+      { v: "add-name", t: "Add attendees", s: 105 },
+      { v: "paste-columns", t: "Paste from a spreadsheet", s: 119 },
+      { v: "upload", t: "Import CSV", s: 114 },
+      { v: "edit-profile", t: "Edit profile", s: 92 },
+      { v: "enroll-unenroll", t: "Enroll & unenroll", s: 97 },
+    ],
+    pins: [
+      { x: 15.6, y: 26.3, t: "Paste Columns", d: "Straight from Excel, Numbers or Google Sheets. A header row is skipped." },
+      { x: 15.6, y: 32.4, t: "Or type them in", d: "Last name, first name, and a phone if you want one." },
+      { x: 12.4, y: 86.8, t: "Or upload a name sheet", d: "A .csv or .xlsx file." },
+    ],
+  },
+  {
+    id: "export",
+    label: "Keep the record",
+    title: "Backed up every day, in your own iCloud.",
+    lead: "Nothing goes to a Matdo server, because there isn't one. Your records stay on your devices and in your iCloud.",
+    device: "ipad",
+    img: "export",
+    alt: "The Export page: Automatic Backup to iCloud switched on, Sync with my other iPads and iPhones, and this month's attendance spreadsheet",
+    videos: [
+      { v: "icloud-backup", t: "Back up to iCloud", s: 96 },
+      { v: "export-csv", t: "Monthly spreadsheets", s: 115 },
+      { v: "switch-ipad", t: "Move to a new iPad", s: 92 },
+    ],
+    pins: [
+      { x: 78.4, y: 21.7, t: "Automatic backup", d: "A daily copy in your iCloud, so a new iPad or iPhone can restore everything." },
+      { x: 78.4, y: 46.4, t: "Sync your devices", d: "One switch keeps your other iPads and iPhones in step." },
+      { x: 13.4, y: 85, t: "Monthly spreadsheets", d: "Every month as a .csv to share to Mail, Files, Numbers or Excel." },
+    ],
+  },
+  {
+    id: "devices",
+    label: "Every device",
+    title: "One center, on every iPad and iPhone.",
+    lead: "Keep the kiosk on the counter and Records in your pocket. A check-in on one device shows up on the others within seconds.",
+    device: "both",
+    alt: "The same Records page on an iPad and an iPhone, both showing Clara Bennett checked in at 8:03 PM",
+    pins: [
+      { on: "ipad", x: 25.5, y: 60.6, t: "Checked in at the counter…", d: "Clara taps in on the front-desk iPad." },
+      { on: "iphone", x: 48, y: 57.4, t: "…and on your iPhone", d: "Same records, every device, through your own iCloud." },
+      { x: 0, y: 0, t: "Invite your teachers", d: "A teacher on their own Apple ID joins by scanning an invite code. You can rename or remove any device." },
+    ],
+  },
+];
+
+const pad = (n: number) => String(n).padStart(2, "0");
+// 34 → "34 seconds", 105 → "1 min 45 sec"
+const length = (s: number) => (s < 60 ? `${s} seconds` : `${Math.floor(s / 60)} min${s % 60 ? ` ${s % 60} sec` : ""}`);
+---
+
+<section id="screens" class="section-pad tour-section" aria-labelledby="screens-title">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">Inside the app</span>
+      <h2 id="screens-title">Matdo Check at a Glance.</h2>
+      <p>Follow a day at your center, from the first check-in to the monthly spreadsheet. Real screens from version 1.3, on iPad and iPhone.</p>
+    </div>
+
+    <div class="tour reveal" data-tour>
+      <div class="tour-steps" role="tablist" aria-label="Steps through a day with Matdo Check">
+        {steps.map((s, i) => (
+          <button type="button" role="tab" class="tour-step" id={`tour-tab-${s.id}`} aria-controls={`tour-panel-${s.id}`}
+            aria-selected={i === 0 ? "true" : "false"} tabindex={i === 0 ? 0 : -1} data-step={i}>
+            <span class="tour-step-n">{pad(i + 1)}</span>
+            <span class="tour-step-l">{s.label}</span>
+            {s.id === "devices" && <span class="tour-new">New</span>}
+          </button>
+        ))}
+      </div>
+
+      {steps.map((s, i) => (
+        <div class="tour-panel" role="tabpanel" id={`tour-panel-${s.id}`} aria-labelledby={`tour-tab-${s.id}`} hidden={i !== 0} data-panel={i}>
+          <div class="tour-visual">
+            <div class={`tour-stage tour-stage-${s.device}`}>
+              {s.device === "both" ? (
+                <div class="tour-both" role="img" aria-label={s.alt}>
+                  <div class="tour-frame tour-frame-ipad"><div class="tour-screen tour-screen-ipad">
+                    <img src="/demo/check/sync/ipad-records.webp" alt="" width="1400" height="978" loading="lazy" decoding="async" />
+                    {s.pins.map((p, j) => p.on === "ipad" && <span class="tour-pin" style={`left:${p.x}%;top:${p.y}%`} data-pin={j} aria-hidden="true">{j + 1}</span>)}
+                  </div></div>
+                  <div class="tour-frame tour-frame-iphone"><div class="tour-screen tour-screen-iphone">
+                    <img src="/demo/check/sync/iphone-records.webp" alt="" width="600" height="1304" loading="lazy" decoding="async" />
+                    {s.pins.map((p, j) => p.on === "iphone" && <span class="tour-pin" style={`left:${p.x}%;top:${p.y}%`} data-pin={j} aria-hidden="true">{j + 1}</span>)}
+                  </div></div>
+                  <span class="tour-sync" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 0 1-13.7 5.7M4 12a8 8 0 0 1 13.7-5.7M18 3v4h-4M6 21v-4h4"/></svg>
+                    In step
+                  </span>
+                </div>
+              ) : (
+                <div class={`tour-frame tour-frame-${s.device}`}>
+                  <div class={`tour-screen tour-screen-${s.device}`}>
+                    <img src={`/demo/check/tour/${s.img}.webp`} alt={s.alt} width={s.device === "ipad" ? 1400 : s.device === "ipad-tall" ? 900 : 600} height={s.device === "ipad" ? 978 : s.device === "ipad-tall" ? 1200 : 1304} loading={i === 0 ? "eager" : "lazy"} decoding="async" />
+                    {s.pins.map((p, j) => <span class="tour-pin" style={`left:${p.x}%;top:${p.y}%`} data-pin={j} aria-hidden="true">{j + 1}</span>)}
+                  </div>
+                </div>
+              )}
+            </div>
+            {s.videos && (
+              <div class="tour-videos">
+                <p class="tour-videos-head">Watch Video Tutorials</p>
+                <ul role="list">
+                  {s.videos.map((v) => (
+                    <li>
+                      <button type="button" class="tour-video" data-video={v.v} data-title={v.t}>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4" width="19" height="16" rx="2"/><path d="M7 4v16M17 4v16M2.5 9H7M2.5 15H7M17 9h4.5M17 15h4.5M2.5 12h19"/></svg>
+                        <span><span class="tour-video-t">{v.t}</span> <span class="tour-video-c">(Watch Video Tutorial, {length(v.s)})</span></span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+
+          <div class="tour-copy">
+            <p class="tour-kicker">Step {i + 1} of {steps.length}{s.id === "devices" && " · New in 1.3"}</p>
+            <h3 class="tour-title">{s.title}</h3>
+            <p class="tour-lead">{s.lead}</p>
+            <ol class="tour-points">
+              {s.pins.map((p, j) => (
+                <li data-point={j}>
+                  <span class="tour-point-n" aria-hidden="true">{j + 1}</span>
+                  <span><strong>{p.t}</strong> {p.d}</span>
+                </li>
+              ))}
+            </ol>
+            <div class="tour-nav">
+              <button type="button" class="tour-prev" data-go={i - 1} disabled={i === 0}>
+                <span aria-hidden="true">←</span> Back
+              </button>
+              {i < steps.length - 1 ? (
+                <button type="button" class="tour-next" data-go={i + 1}>
+                  Next: {steps[i + 1].label} <span aria-hidden="true">→</span>
+                </button>
+              ) : (
+                <a class="tour-next" href="#how">Watch the tutorials <span aria-hidden="true">→</span></a>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  // Tabs: click a step (or Back / Next) to show it; arrow keys move between
+  // steps. Hovering or focusing a feature in the list lights up its pin.
+  document.querySelectorAll<HTMLElement>("[data-tour]").forEach((tour) => {
+    const tabs = [...tour.querySelectorAll<HTMLButtonElement>(".tour-step")];
+    const panels = [...tour.querySelectorAll<HTMLElement>(".tour-panel")];
+
+    function show(i: number, focus = false) {
+      if (i < 0 || i >= tabs.length) return;
+      tabs.forEach((t, k) => {
+        const on = k === i;
+        t.setAttribute("aria-selected", String(on));
+        t.tabIndex = on ? 0 : -1;
+      });
+      panels.forEach((p, k) => (p.hidden = k !== i));
+      if (focus) tabs[i].focus();
+      // Keep the chosen step in view in the scrolling strip on a phone.
+      tabs[i].scrollIntoView({ block: "nearest", inline: "nearest" });
+    }
+
+    tabs.forEach((t, i) => {
+      t.addEventListener("click", () => show(i));
+      t.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight" || e.key === "ArrowDown") { e.preventDefault(); show((i + 1) % tabs.length, true); }
+        if (e.key === "ArrowLeft" || e.key === "ArrowUp") { e.preventDefault(); show((i - 1 + tabs.length) % tabs.length, true); }
+      });
+    });
+
+    tour.querySelectorAll<HTMLButtonElement>("button[data-go]").forEach((b) =>
+      b.addEventListener("click", () => show(Number(b.dataset.go)))
+    );
+
+    panels.forEach((panel) => {
+      const pins = [...panel.querySelectorAll<HTMLElement>(".tour-pin")];
+      panel.querySelectorAll<HTMLElement>("[data-point]").forEach((li) => {
+        const j = li.dataset.point;
+        const set = (on: boolean) => {
+          li.classList.toggle("is-hot", on);
+          pins.forEach((p) => p.dataset.pin === j && p.classList.toggle("is-hot", on));
+        };
+        li.addEventListener("mouseenter", () => set(true));
+        li.addEventListener("mouseleave", () => set(false));
+      });
+      pins.forEach((p) => {
+        const li = panel.querySelector<HTMLElement>(`[data-point="${p.dataset.pin}"]`);
+        p.addEventListener("mouseenter", () => { p.classList.add("is-hot"); li?.classList.add("is-hot"); });
+        p.addEventListener("mouseleave", () => { p.classList.remove("is-hot"); li?.classList.remove("is-hot"); });
+      });
+    });
+  });
+</script>
+
+<style>
+  #screens { scroll-margin-top: 96px; }
+  .tour { max-width: 1120px; margin: 0 auto; }
+
+  /* ── Step strip ── */
+  .tour-steps { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; margin: 0 0 28px; padding: 6px;
+    background: #fff; border: 1px solid var(--color-line); border-radius: 18px; box-shadow: var(--shadow-lg); }
+  .tour-step { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; min-width: 0; padding: 12px 14px;
+    border: 0; border-radius: 12px; background: transparent; font: inherit; text-align: left; cursor: pointer; color: #4a5854; transition: background 0.15s ease, color 0.15s ease; }
+  .tour-step:hover { background: rgb(99 140 109 / 0.08); }
+  .tour-step:focus-visible { outline: 3px solid var(--color-mint); outline-offset: 2px; }
+  .tour-step[aria-selected="true"] { background: var(--color-forest); color: #fff; }
+  .tour-step-n { font-family: var(--font-display); font-weight: 600; font-size: 0.85rem; color: #638c6d; }
+  .tour-step[aria-selected="true"] .tour-step-n { color: rgb(255 255 255 / 0.7); }
+  .tour-step-l { font-weight: 600; font-size: 0.98rem; line-height: 1.25; }
+  .tour-new { position: absolute; top: 10px; right: 10px; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: #fff; background: var(--color-teal); padding: 0.18rem 0.45rem; border-radius: 999px; }
+
+  /* ── Panel: device on the left, what to notice on the right ── */
+  .tour-panel { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 44px; align-items: center;
+    padding: 40px; border-radius: var(--radius-lg);
+    background: radial-gradient(560px 440px at 34% 50%, rgb(99 140 109 / 0.22), transparent 70%), linear-gradient(180deg, #f7f4ec 0%, #eef2ec 100%); }
+  .tour-panel[hidden] { display: none; }
+  .tour-panel:not([hidden]) .tour-stage { animation: tourIn 0.35s ease both; }
+  @keyframes tourIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  .tour-stage { display: flex; justify-content: center; min-width: 0; }
+  .tour-frame { background: #1b1c1e; box-shadow: 0 30px 70px rgb(24 70 60 / 0.28), 0 0 0 2px #3a3b3e inset; }
+  .tour-frame-ipad { width: 100%; padding: 2.2%; border-radius: 30px; }
+  .tour-frame-iphone { width: min(100%, 280px); padding: 10px; border-radius: 46px; }
+  .tour-frame-ipad-tall { width: min(100%, 400px); padding: 14px; border-radius: 30px; }
+  .tour-screen { position: relative; overflow: hidden; background: #f2f2f7; }
+  .tour-screen-ipad { aspect-ratio: 2388 / 1668; border-radius: 16px; }
+  .tour-screen-iphone { aspect-ratio: 1206 / 2622; border-radius: 37px; }
+  .tour-screen-ipad-tall { aspect-ratio: 2064 / 2752; border-radius: 16px; }
+  .tour-screen img { display: block; width: 100%; height: 100%; }
+
+  /* The sync step: the header's iPad with an iPhone in front */
+  .tour-both { position: relative; width: 100%; aspect-ratio: 1.42; }
+  .tour-both .tour-frame-ipad { position: absolute; left: 0; top: 0; width: 84%; transform: rotate(-1.2deg); }
+  .tour-both .tour-frame-iphone { position: absolute; right: 0; bottom: 0; width: 26%; padding: 1.4%; border-radius: 22% / 10%; transform: rotate(2deg); }
+  .tour-both .tour-screen-iphone { border-radius: 18% / 8.5%; }
+  .tour-sync { position: absolute; left: 38%; bottom: 0; transform: translateX(-50%); display: flex; align-items: center; gap: 8px; padding: 9px 16px 9px 12px;
+    border-radius: 999px; background: #638c6d; color: #fff; font-size: 0.9rem; font-weight: 700; white-space: nowrap;
+    box-shadow: 0 0 0 5px rgb(255 255 255 / 0.85), 0 12px 30px rgb(24 70 60 / 0.3); }
+  .tour-sync svg { width: 20px; height: 20px; }
+
+  /* ── Pins ── */
+  .tour-pin { position: absolute; z-index: 1; display: grid; place-items: center; width: 28px; height: 28px; margin: -14px 0 0 -14px; border-radius: 50%;
+    background: var(--color-teal); color: #fff; font-size: 0.82rem; font-weight: 700; line-height: 1;
+    box-shadow: 0 0 0 3px #fff, 0 4px 12px rgb(24 70 60 / 0.35); transition: transform 0.15s ease, background 0.15s ease; }
+  .tour-pin::after { content: ""; position: absolute; inset: -3px; border-radius: 50%; border: 2px solid var(--color-teal); opacity: 0; animation: pinPulse 2.4s ease-out infinite; }
+  .tour-pin.is-hot { transform: scale(1.25); background: var(--color-forest); }
+  @keyframes pinPulse { 0% { opacity: 0.7; transform: scale(1); } 80%, 100% { opacity: 0; transform: scale(1.6); } }
+
+  /* ── Copy ── */
+  .tour-copy { min-width: 0; text-align: left; }
+  .tour-kicker { margin: 0; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #638c6d; }
+  .tour-title { margin: 10px 0 0; font-family: var(--font-display); font-weight: 600; font-size: clamp(1.6rem, 2.6vw, 2.1rem); line-height: 1.1; letter-spacing: -0.015em; color: var(--color-forest); text-wrap: balance; }
+  .tour-lead { margin: 12px 0 0; font-size: 1rem; line-height: 1.5; color: #4a5854; }
+  .tour-points { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 6px; }
+  .tour-points li { display: flex; gap: 12px; align-items: flex-start; padding: 10px 12px; border-radius: 12px; font-size: 0.95rem; line-height: 1.45; color: #4a5854; transition: background 0.15s ease; }
+  .tour-points li.is-hot { background: rgb(255 255 255 / 0.8); }
+  .tour-points strong { color: var(--color-forest); }
+  .tour-point-n { flex: none; display: grid; place-items: center; width: 24px; height: 24px; margin-top: 1px; border-radius: 50%; background: var(--color-teal); color: #fff; font-size: 0.75rem; font-weight: 700; }
+  .tour-visual { min-width: 0; }
+  .tour-videos { max-width: 520px; margin: 28px auto 0; }
+  .tour-videos-head { margin: 0 0 8px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #8b968f; }
+  .tour-videos ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgb(24 70 60 / 0.1); }
+  .tour-videos li { border-bottom: 1px solid rgb(24 70 60 / 0.1); }
+  .tour-video { display: flex; align-items: flex-start; gap: 10px; width: 100%; padding: 10px 4px; border: 0; background: none;
+    font: inherit; font-size: 0.95rem; line-height: 1.4; text-align: left; color: #4a5854; cursor: pointer; }
+  .tour-video svg { width: 20px; height: 20px; margin-top: 1px; color: var(--color-teal); flex: none; }
+  .tour-video-t { font-weight: 600; color: var(--color-forest); text-decoration: underline; text-decoration-color: rgb(24 70 60 / 0.25); text-underline-offset: 3px; }
+  .tour-video-c { color: #8b968f; }
+  .tour-video:hover .tour-video-t { text-decoration-color: currentColor; }
+  .tour-video:focus-visible { outline: 3px solid var(--color-mint); outline-offset: 2px; border-radius: 6px; }
+  .tour-nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 22px; }
+  .tour-prev, .tour-next { display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; border-radius: 999px; font: inherit; font-size: 0.92rem; font-weight: 600; cursor: pointer; text-decoration: none; }
+  .tour-prev { border: 1px solid var(--color-line); background: #fff; color: var(--color-forest); }
+  .tour-prev:disabled { visibility: hidden; }
+  .tour-next { border: 0; background: var(--color-forest); color: #fff; }
+  .tour-prev:focus-visible, .tour-next:focus-visible { outline: 3px solid var(--color-mint); outline-offset: 2px; }
+
+  @media (max-width: 980px) {
+    .tour-panel { grid-template-columns: minmax(0, 1fr); gap: 28px; padding: 28px; }
+    .tour-stage-ipad, .tour-stage-both { max-width: 640px; width: 100%; margin: 0 auto; }
+  }
+  @media (max-width: 760px) {
+    /* The strip scrolls sideways rather than squeezing six steps into a phone. */
+    .tour-steps { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: -16px; border-radius: 0; border-inline: 0; padding: 6px 16px; }
+    .tour-steps::-webkit-scrollbar { display: none; }
+    .tour-step { flex: none; scroll-snap-align: start; padding: 10px 14px; }
+    .tour-step-l { white-space: nowrap; }
+    .tour-new { position: static; margin-top: 4px; }
+    .tour-panel { padding: 20px 16px 24px; margin-inline: -16px; border-radius: 0; }
+    .tour-frame-ipad { border-radius: 16px; padding: 6px; }
+    .tour-screen-ipad { border-radius: 10px; }
+    .tour-frame-iphone { width: min(70%, 240px); }
+    .tour-frame-ipad-tall { width: min(80%, 300px); padding: 8px; border-radius: 18px; }
+    .tour-screen-ipad-tall { border-radius: 10px; }
+    .tour-pin { width: 22px; height: 22px; margin: -11px 0 0 -11px; font-size: 0.7rem; box-shadow: 0 0 0 2px #fff, 0 3px 8px rgb(24 70 60 / 0.35); }
+    .tour-sync { font-size: 0.78rem; padding: 7px 12px 7px 9px; }
+    .tour-sync svg { width: 16px; height: 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tour-pin::after { animation: none; }
+    .tour-panel:not([hidden]) .tour-stage { animation: none; }
+  }
+</style>
