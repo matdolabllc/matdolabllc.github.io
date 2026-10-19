@@ -4,7 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 
 // LEGAL DOCUMENT — treat edits with care.
 //
-// The app-behaviour sections (5, 8, 9, 10) are the authoritative web version of
+// The app-behaviour sections (5 and 8 to 12) are the authoritative web version of
 // the in-app policy at matdo-check/App/Settings/PrivacyView.swift. If the app's
 // behaviour changes, change both: App Review compares the listing, the website,
 // and the binary, and a mismatch is a Guideline 5.1.1 problem.
@@ -30,25 +30,29 @@ const toc = [
   ["s6", "Information we receive"],
   ["s7", "Purchases and subscriptions"],
   ["s8", "Automatic Backup to iCloud"],
-  ["s9", "Device-level iCloud backup"],
-  ["s10", "Access controls within the App"],
-  ["s11", "Children's information"],
-  ["s12", "How we use information"],
-  ["s13", "Legal bases for processing (EEA and UK)"],
-  ["s14", "Disclosure of information"],
-  ["s15", "International transfers"],
-  ["s16", "Retention"],
-  ["s17", "Security"],
-  ["s18", "Your rights"],
-  ["s19", "The Site"],
-  ["s20", "Changes to this Policy"],
-  ["s21", "Contact and complaints"],
+  ["s9", "Multiple Devices"],
+  ["s10", "Camera"],
+  ["s11", "Device-level iCloud backup"],
+  ["s12", "Access controls within the App"],
+  ["s13", "Children's information"],
+  ["s14", "How we use information"],
+  ["s15", "Legal bases for processing (EEA and UK)"],
+  ["s16", "Disclosure of information"],
+  ["s17", "International transfers"],
+  ["s18", "Retention"],
+  ["s19", "Security"],
+  ["s20", "Your rights"],
+  ["s21", "The Site"],
+  ["s22", "Changes to this Policy"],
+  ["s23", "Contact and complaints"],
 ];
 
 const summary = [
-  "We do not receive, store, or have access to your attendance records. They stay on your iPad.",
+  "We do not receive, store, or have access to your attendance records. They stay on your iPad or iPhone, and in your own iCloud.",
   "The App has no accounts, no analytics, no advertising, and no servers operated by us.",
   "Automatic Backup to iCloud is on unless you switch it off. It writes a daily backup and monthly spreadsheets to your own Apple Account, not to us, and the App does not encrypt them.",
+  "Multiple Devices is off unless you switch it on. It syncs records through your own iCloud to your other devices and to staff you invite, not to us.",
+  "The camera is used only to scan an invite code. The image is not kept.",
   "Apple processes all purchases. We never see payment details.",
   "The only personal information we receive is what you send us — a contact-form message or an email.",
 ];
@@ -56,7 +60,7 @@ const summary = [
 
 <Layout
   title="Privacy Policy — Matdo Check"
-  description="The Matdo Check privacy policy. Attendance records stay on your iPad; Matdo Lab LLC does not receive, store, or have access to them. Includes GDPR, UK GDPR, CCPA and COPPA disclosures."
+  description="The Matdo Check privacy policy. Attendance records stay on your iPad or iPhone and in your own iCloud; Matdo Lab LLC does not receive, store, or have access to them. Includes GDPR, UK GDPR, CCPA and COPPA disclosures."
 >
   <!-- MASTHEAD -->
   <section class="doc-head">
@@ -64,7 +68,7 @@ const summary = [
       <LegalProductTabs product="check" document="privacy" />
       <span class="eyebrow">Legal</span>
       <h1>Privacy Policy</h1>
-      <p class="doc-sub">Matdo Check for iPad, and matdolab.com</p>
+      <p class="doc-sub">Matdo Check for iPad and iPhone, and matdolab.com</p>
 
       <dl class="doc-meta">
         <div><dt>Effective</dt><dd><time datetime="2026-09-25">{EFFECTIVE}</time></dd></div>
@@ -90,10 +94,10 @@ const summary = [
         <!-- 1 -->
         <h2 id="s1">1. Introduction</h2>
         <p>
-          This Privacy Policy (the <strong>“Policy”</strong>) explains how {COMPANY} (<strong>“Matdo”</strong>, <strong>“we”</strong>, <strong>“us”</strong>, <strong>“our”</strong>) handles personal information in connection with the Matdo Check application for iPad (the <strong>“App”</strong>) and the website at matdolab.com (the <strong>“Site”</strong>).
+          This Privacy Policy (the <strong>“Policy”</strong>) explains how {COMPANY} (<strong>“Matdo”</strong>, <strong>“we”</strong>, <strong>“us”</strong>, <strong>“our”</strong>) handles personal information in connection with the Matdo Check application for iPad and iPhone (the <strong>“App”</strong>) and the website at matdolab.com (the <strong>“Site”</strong>).
         </p>
         <p>
-          Matdo Check is designed so that the information it records never reaches us. Much of this Policy therefore describes information that stays under your control rather than information we hold. Sections 5 and 8 to 10 describe how the App handles data on your device; sections 6, 14 and 19 describe the limited categories of personal information we actually receive.
+          Matdo Check is designed so that the information it records never reaches us. Much of this Policy therefore describes information that stays under your control rather than information we hold. Sections 5 and 8 to 12 describe how the App handles data on your device and in your own iCloud; sections 6, 16 and 21 describe the limited categories of personal information we actually receive.
         </p>
         <p>
           This Policy does not form part of any contract of sale. Downloads and purchases through the App Store are also governed by <a href="https://www.apple.com/legal/internet-services/itunes/" rel="noopener">Apple's applicable terms</a>.
@@ -116,14 +120,14 @@ const summary = [
         <dl class="defs">
           <dt>Attendee Records</dt>
           <dd>
-            The data a Center enters into or generates within the App: attendee names; optional telephone numbers, grade and student number; check-in and check-out times; and the audit log of instructor corrections and resets.
+            The data a Center enters into or generates within the App: attendee names; optional telephone numbers and grade; check-in and check-out times; and the audit log of instructor corrections and resets.
           </dd>
           <dt>Center</dt>
           <dd>
             The tutoring center, school, place of worship, club, camp, or other organisation that installs and operates the App on its own device.
           </dd>
           <dt>Device</dt>
-          <dd>The iPad or other Apple device on which the App is installed.</dd>
+          <dd>The iPad or iPhone on which the App is installed.</dd>
           <dt>You</dt>
           <dd>
             The reader of this Policy: a Center operating the App, a member of its staff, or a visitor to the Site.
@@ -133,7 +137,7 @@ const summary = [
         <!-- 4 -->
         <h2 id="s4">4. Our role and your role</h2>
         <p>
-          The App is licensed software that runs entirely on your Device. It is not a hosted service. We do not operate a backend, we do not maintain a database of Attendee Records, and we have no technical means of retrieving Attendee Records from a Device.
+          The App is licensed software that runs on your Device. It is not a hosted service. We do not operate a backend, we do not maintain a database of Attendee Records, and we have no technical means of retrieving Attendee Records from a Device.
         </p>
         <p>
           Accordingly, as between you and us:
@@ -156,13 +160,13 @@ const summary = [
         <!-- 5 -->
         <h2 id="s5">5. Attendee Records: what the App stores, and where</h2>
         <p>
-          The App stores all Attendee Records in a single database inside the App's private storage area on the Device. There are no user accounts and no cloud service operated by us. With Automatic Backup to iCloud switched off (section 8) and no purchase in progress (section 7), the Device may remain offline indefinitely and every check-in function continues to work.
+          The App stores all Attendee Records in a single database inside the App's private storage area on the Device. There are no user accounts and no cloud service operated by us. With Automatic Backup to iCloud switched off (section 8), Multiple Devices switched off (section 9), and no purchase in progress (section 7), the Device may remain offline indefinitely and every check-in function continues to work.
         </p>
         <p>
           The database is protected by the operating system's file protection, so its contents are encrypted at rest and unreadable until the Device has been unlocked at least once after starting up.
         </p>
         <p>
-          Deleting the App from the Device deletes the database, its local backups, and the monthly spreadsheets kept on the Device. Copies previously written to iCloud are addressed in sections 8 and 9.
+          Deleting the App from the Device deletes the database, its local backups, and the monthly spreadsheets kept on the Device. Copies previously written to iCloud are addressed in sections 8, 9 and 11.
         </p>
 
         <!-- 6 -->
@@ -176,7 +180,7 @@ const summary = [
           If you complete the contact form on the Site, we receive your name, email address, the organisation you enter (optional), your selected area of interest, and the content of your message. If you email us directly, we receive your email address and whatever the message contains.
         </p>
         <p>
-          Contact-form submissions are transmitted to Web3Forms, a third-party form-delivery service, before reaching our mailbox. Web3Forms also receives technical information needed to deliver and protect the form, such as the request's IP address and browser information, and may retain submission or log data under the settings and policies applicable to our account. See sections 14 to 16.
+          Contact-form submissions are transmitted to Web3Forms, a third-party form-delivery service, before reaching our mailbox. Web3Forms also receives technical information needed to deliver and protect the form, such as the request's IP address and browser information, and may retain submission or log data under the settings and policies applicable to our account. See sections 16 to 18.
         </p>
 
         <h3>6.2 Reports provided to us by Apple</h3>
@@ -191,7 +195,7 @@ const summary = [
 
         <h3>6.4 Server logs for the Site</h3>
         <p>
-          The Site is hosted by GitHub Pages. When you visit it, GitHub — not Matdo — logs and stores your IP address for security purposes and may process other standard request information under its own privacy statement. We do not receive GitHub's visitor logs. See section 14.
+          The Site is hosted by GitHub Pages. When you visit it, GitHub — not Matdo — logs and stores your IP address for security purposes and may process other standard request information under its own privacy statement. We do not receive GitHub's visitor logs. See section 16.
         </p>
 
         <!-- 7 -->
@@ -206,7 +210,7 @@ const summary = [
         <!-- 8 -->
         <h2 id="s8">8. Automatic Backup to iCloud</h2>
         <p>
-          The App copies its data to iCloud so that a lost, damaged, or replaced Device does not take the Center's roster and attendance history with it. <strong>This feature is on unless a member of staff switches it off</strong> in Settings, under Data, then Automatic Backup to iCloud. One switch controls both kinds of copy described below.
+          The App copies its data to iCloud so that a lost, damaged, or replaced Device does not take the Center's roster and attendance history with it. <strong>This feature is on unless a member of staff switches it off</strong> in the instructor area, on the Export page, under Automatic Backup to iCloud (Daily Backup on iPhone). One switch controls both kinds of copy described below.
         </p>
         <p>
           Both are written by the operating system to the Center's own Apple Account. They are not sent to us, and we have no access to them.
@@ -219,10 +223,10 @@ const summary = [
 
         <h3>8.2 Monthly spreadsheets</h3>
         <p>
-          The App also keeps each month's attendance as a spreadsheet (a CSV file) in the Center's own iCloud Drive, in the folder Matdo Check, then Monthly Attendance, so the record can be opened without the App. While the feature is on and the Device is signed in to iCloud, the current month's file is updated every day, and an earlier month's file is updated when its records are corrected. Each file holds attendee names and their check-in and check-out times for that month; the full record stays in the App. The current month's file, and any that staff save, are also kept on the Device, in the Files app under On My iPad, then Matdo Check.
+          The App also keeps each month's attendance as a spreadsheet (a CSV file) in the Center's own iCloud Drive, in the folder Matdo Check, then Monthly Attendance, so the record can be opened without the App. While the feature is on and the Device is signed in to iCloud, the current month's file is updated every day, and an earlier month's file is updated when its records are corrected. Each file holds attendee names and their check-in and check-out times for that month; the full record stays in the App. The current month's file, and any that staff save, are also kept on the Device, in the Files app under On My iPad (or On My iPhone), then Matdo Check.
         </p>
         <p>
-          <strong>These files are not encrypted.</strong> Anyone who can open the Center's iCloud Drive, on another iPad, a Mac, or iCloud.com, can read them, and iCloud Drive may copy them to those devices.
+          <strong>These files are not encrypted.</strong> Anyone who can open the Center's iCloud Drive, on another iPad or iPhone, a Mac, or iCloud.com, can read them, and iCloud Drive may copy them to those devices.
         </p>
 
         <h3>8.3 Switching it off, and removing copies</h3>
@@ -236,13 +240,37 @@ const summary = [
         </p>
 
         <!-- 9 -->
-        <h2 id="s9">9. Device-level iCloud backup</h2>
+        <h2 id="s9">9. Multiple Devices</h2>
         <p>
-          Separately from section 8, if the Device backs itself up to iCloud, the App's database is included in that device backup under the Center's own Apple Account. This is a function of the operating system rather than of the App. It is managed in the Device's Settings, under your Apple Account, then iCloud, then Backups.
+          <strong>Multiple Devices is off unless a member of staff switches it on</strong> in Settings, under Multiple Devices. It keeps several iPads and iPhones in step for one Center.
+        </p>
+        <p>
+          While it is on, the roster, attendance times, profiles, the Center's name, and the audit log are synced through Apple's CloudKit service, in the private iCloud database of the Apple Account that set up the Center. Devices signed in to that Apple Account read it directly. They are not sent to us, and we have no access to them.
+        </p>
+        <p>
+          A Device signed in to a different Apple Account — a member of staff's own phone, for example — can read and change those records only after joining through an invite link or QR code created on the Center's main Device. It keeps that access until it leaves or is removed. <strong>Anyone holding a live invite link or code can join</strong>, so the Center should share invites only with its own staff, and remove any device it does not recognise. Giving staff access in this way is the Center's decision; it does not make us a recipient of the records.
+        </p>
+        <p>
+          Each Device's instructor PIN, Face ID setting, and Automatic Backup to iCloud switch stay on that Device and are not synced.
+        </p>
+        <p>
+          To delete the synced copy, stop sharing and then delete the App's iCloud data from the Device's Settings, under your Apple Account, then iCloud.
         </p>
 
         <!-- 10 -->
-        <h2 id="s10">10. Access controls within the App</h2>
+        <h2 id="s10">10. Camera</h2>
+        <p>
+          The App uses the camera only to scan the invite code that joins a Device to a Center under section 9, and only when a member of staff chooses to scan one. The image is read on the Device and is not kept, and nothing from the camera is sent to us or to anyone else.
+        </p>
+
+        <!-- 11 -->
+        <h2 id="s11">11. Device-level iCloud backup</h2>
+        <p>
+          Separately from sections 8 and 9, if the Device backs itself up to iCloud, the App's database is included in that device backup under the Center's own Apple Account. This is a function of the operating system rather than of the App. It is managed in the Device's Settings, under your Apple Account, then iCloud, then Backups.
+        </p>
+
+        <!-- 12 -->
+        <h2 id="s12">12. Access controls within the App</h2>
         <p>
           The check-in screen is intended to be visible at a counter and displays attendee names during search and confirmation. Every other function — the roster, records, history, and corrections — is behind the instructor PIN, and the Settings area is additionally behind Face ID, Touch ID, or the Device passcode. Instructor screens relock automatically after two minutes without interaction.
         </p>
@@ -253,10 +281,10 @@ const summary = [
           The Center is responsible for choosing a PIN that is not easily guessed, for limiting who knows it, and for keeping the Device itself protected by a passcode.
         </p>
 
-        <!-- 11 -->
-        <h2 id="s11">11. Children's information</h2>
+        <!-- 13 -->
+        <h2 id="s13">13. Children's information</h2>
         <p>
-          Centers using the App commonly record the names of children. Because those records remain on the Center's own Device and, where Automatic Backup to iCloud is on, within the Center's own Apple Account, <strong>we do not collect, receive, or process personal information from or about children</strong>, and we have no ability to access it.
+          Centers using the App commonly record the names of children. Because those records remain on the Center's own Devices and, where Automatic Backup to iCloud or Multiple Devices is on, within the Center's own Apple Account and on the devices of staff the Center has invited, <strong>we do not collect, receive, or process personal information from or about children</strong>, and we have no ability to access it.
         </p>
         <p>
           The App is not directed at children as its users and does not request any information from a child. An attendee checking in types only a name that a member of Center staff has already enrolled. The App contains no advertising, no analytics, no social features, and no mechanism by which a child could transmit information to us or to any third party.
@@ -265,8 +293,8 @@ const summary = [
           Responsibility for obtaining any notice or consent required before a child's details are entered — whether under the Children's Online Privacy Protection Act, education-records legislation, applicable data protection law, or a franchise agreement — rests with the Center.
         </p>
 
-        <!-- 12 -->
-        <h2 id="s12">12. How we use information</h2>
+        <!-- 14 -->
+        <h2 id="s14">14. How we use information</h2>
         <p>The limited information described in section 6 is used only as follows:</p>
         <ul>
           <li><strong>Messages you send us</strong> — to respond to your enquiry and to provide support.</li>
@@ -278,8 +306,8 @@ const summary = [
           We do not use any of this information for advertising, for profiling, or for automated decision-making that produces legal or similarly significant effects. We do not sell personal information, and we do not share it for cross-context behavioural advertising.
         </p>
 
-        <!-- 13 -->
-        <h2 id="s13">13. Legal bases for processing (EEA and UK)</h2>
+        <!-- 15 -->
+        <h2 id="s15">15. Legal bases for processing (EEA and UK)</h2>
         <p>
           If you are in the European Economic Area or the United Kingdom, we rely on the following legal bases under Article 6 of the GDPR and UK GDPR:
         </p>
@@ -291,12 +319,12 @@ const summary = [
             <strong>Diagnostic reports</strong> — where those reports constitute personal information, our legitimate interests in maintaining the App's security, reliability, and performance. Apple makes them available only if the Device holder has enabled sharing with app developers.
           </li>
           <li>
-            <strong>Site request logs</strong> — GitHub determines its own legal bases for the visitor information it processes as the independent provider of GitHub Pages. See GitHub's privacy statement in section 14.
+            <strong>Site request logs</strong> — GitHub determines its own legal bases for the visitor information it processes as the independent provider of GitHub Pages. See GitHub's privacy statement in section 16.
           </li>
         </ul>
 
-        <!-- 14 -->
-        <h2 id="s14">14. Disclosure of information</h2>
+        <!-- 16 -->
+        <h2 id="s16">16. Disclosure of information</h2>
         <p>
           We do not sell personal information or disclose it for advertising purposes. Personal information may be handled by the following providers or recipients in the circumstances described:
         </p>
@@ -318,53 +346,53 @@ const summary = [
           </li>
         </ul>
         <p>
-          No Attendee Records are disclosed to any of the above, because we do not hold them.
+          No Attendee Records are disclosed to any of the above, because we do not hold them. Where a Center uses Multiple Devices (section 9) to give its own staff access to its records, that is the Center's choice and a sharing by the Center within its own organisation. It is not a disclosure by us: the records travel through Apple's CloudKit under the Center's Apple Account, and we never receive them.
         </p>
 
-        <!-- 15 -->
-        <h2 id="s15">15. International transfers</h2>
+        <!-- 17 -->
+        <h2 id="s17">17. International transfers</h2>
         <p>
-          We are established in the United States. The service providers named in section 14 may process information in the United States and other countries described in their notices. If you contact us from outside the United States, the information in your message will be transferred to and processed in the United States, where data protection law may differ from that of your own jurisdiction. Where applicable law requires a transfer mechanism for processing for which we are responsible, we will use one permitted by that law.
+          We are established in the United States. The service providers named in section 16 may process information in the United States and other countries described in their notices. If you contact us from outside the United States, the information in your message will be transferred to and processed in the United States, where data protection law may differ from that of your own jurisdiction. Where applicable law requires a transfer mechanism for processing for which we are responsible, we will use one permitted by that law.
         </p>
         <p>
-          Attendee Records are not transferred internationally by us, because they are not transferred to us at all. Where Automatic Backup to iCloud is on, storage locations are determined by Apple under the Center's own Apple Account.
+          Attendee Records are not transferred internationally by us, because they are not transferred to us at all. Where Automatic Backup to iCloud or Multiple Devices is on, storage locations are determined by Apple under the Center's own Apple Account.
         </p>
 
-        <!-- 16 -->
-        <h2 id="s16">16. Retention</h2>
+        <!-- 18 -->
+        <h2 id="s18">18. Retention</h2>
         <ul>
           <li>
-            <strong>Attendee Records</strong> — retained on the Device for as long as the Center chooses. We hold none and therefore retain none. Deleting the App deletes the database, its local backups, and the spreadsheets kept on the Device; copies in iCloud, including the monthly spreadsheets in iCloud Drive, persist until deleted as described in section 8.
+            <strong>Attendee Records</strong> — retained on the Device for as long as the Center chooses. We hold none and therefore retain none. Deleting the App deletes the database, its local backups, and the spreadsheets kept on the Device; copies in iCloud, including the monthly spreadsheets in iCloud Drive and the records synced by Multiple Devices, persist until deleted as described in sections 8 and 9.
           </li>
           <li>
             <strong>Correspondence</strong> — retained for as long as reasonably necessary to handle your enquiry, provide support, maintain appropriate business records, and establish or defend legal claims, and then deleted or anonymised.
           </li>
           <li>
-            <strong>Provider-held information</strong> — diagnostic reports, contact-form delivery data, and Site request logs are retained under the settings and retention practices of Apple, Web3Forms, and GitHub respectively. The provider notices linked in section 14 contain further details.
+            <strong>Provider-held information</strong> — diagnostic reports, contact-form delivery data, and Site request logs are retained under the settings and retention practices of Apple, Web3Forms, and GitHub respectively. The provider notices linked in section 16 contain further details.
           </li>
         </ul>
 
-        <!-- 17 -->
-        <h2 id="s17">17. Security</h2>
+        <!-- 19 -->
+        <h2 id="s19">19. Security</h2>
         <p>
-          The App applies operating-system file protection to its database, requires a six-digit instructor PIN stored only as a slow, salted hash, enforces an escalating lockout after failed attempts, and gates the Settings area, and the replacement of a forgotten PIN, behind device-owner authentication. Copies written to iCloud under section 8 are not encrypted by the App; they are protected by the Center's Apple Account.
+          The App applies operating-system file protection to its database, requires a six-digit instructor PIN stored only as a slow, salted hash, enforces an escalating lockout after failed attempts, and gates the Settings area, and the replacement of a forgotten PIN, behind device-owner authentication. Copies written to iCloud under section 8 are not encrypted by the App; they are protected by the Center's Apple Account. Records synced under section 9 are not separately encrypted by the App; like the copies under section 8, they are protected by Apple's iCloud security under the Center's Apple Account.
         </p>
         <p>
           For information we ourselves hold, we apply measures appropriate to its limited nature and volume, including access controls on our mailbox.
         </p>
         <p>
-          No method of storage or transmission is completely secure. The security of Attendee Records depends substantially on measures within the Center's control — the Device passcode, who is told the instructor PIN, and who can sign in to the Center's Apple Account.
+          No method of storage or transmission is completely secure. The security of Attendee Records depends substantially on measures within the Center's control — the Device passcode, who is told the instructor PIN, who can sign in to the Center's Apple Account, and to whom the Center sends a Multiple Devices invite.
         </p>
 
-        <!-- 18 -->
-        <h2 id="s18">18. Your rights</h2>
+        <!-- 20 -->
+        <h2 id="s20">20. Your rights</h2>
 
-        <h3>18.1 EEA and UK</h3>
+        <h3>20.1 EEA and UK</h3>
         <p>
           Subject to the conditions and exemptions in applicable law, you have the right to request access to the personal information we hold about you; to have it corrected or erased; to restrict or object to its processing; to receive it in a portable form; and to withdraw consent where processing is based on consent. You also have the right to lodge a complaint with your supervisory authority, and in the United Kingdom with the Information Commissioner's Office.
         </p>
 
-        <h3>18.2 California</h3>
+        <h3>20.2 California</h3>
         <p>
           Subject to the conditions and exemptions in the California Consumer Privacy Act as amended, California residents have the right to know what personal information we have collected, used, and disclosed; to request its deletion or correction; to opt out of the sale or sharing of personal information; to limit the use of sensitive personal information; and not to be discriminated against for exercising these rights.
         </p>
@@ -372,21 +400,21 @@ const summary = [
           <strong>We do not sell or share personal information</strong> as those terms are defined in that Act, and we do not use or disclose sensitive personal information for purposes requiring a right to limit.
         </p>
 
-        <h3>18.3 Other jurisdictions</h3>
+        <h3>20.3 Other jurisdictions</h3>
         <p>
           Residents of other US states with comprehensive privacy legislation have comparable rights of access, correction, deletion, portability, and opt-out. We honour such requests on the same basis as those described above.
         </p>
 
-        <h3>18.4 Exercising your rights</h3>
+        <h3>20.4 Exercising your rights</h3>
         <p>
-          Write to us at the address in section 21. We will verify your request by reference to the email address from which you contact us, and respond within the period required by applicable law. You may use an authorised agent where the law permits.
+          Write to us at the address in section 23. We will verify your request by reference to the email address from which you contact us, and respond within the period required by applicable law. You may use an authorised agent where the law permits.
         </p>
         <p class="notice">
           Please note the practical limit: the only personal information we hold about you is your correspondence with us. <strong>We cannot provide, correct, or delete Attendee Records, because we do not have them.</strong> A request concerning attendance records should be directed to the Center that operates the App. If you are unsure which Center that is, we will help you identify the right recipient where we can.
         </p>
 
-        <!-- 19 -->
-        <h2 id="s19">19. The Site</h2>
+        <!-- 21 -->
+        <h2 id="s21">21. The Site</h2>
         <p>
           The Site is a static website. Matdo sets no cookies, runs no analytics, and embeds no advertising technology, third-party trackers, or social widgets. Fonts and other assets are served from the Site itself.
         </p>
@@ -394,8 +422,8 @@ const summary = [
           The two exceptions are described above: standard server logging by our host (section 6.4), and delivery of contact-form submissions by Web3Forms (section 6.1). Matdo does not use either to profile visitors.
         </p>
 
-        <!-- 20 -->
-        <h2 id="s20">20. Changes to this Policy</h2>
+        <!-- 22 -->
+        <h2 id="s22">22. Changes to this Policy</h2>
         <p>
           We may amend this Policy from time to time. The current version is always published at this address, with its effective date shown at the top. Where a change materially affects your rights, we will take reasonable steps to bring it to your attention. The corresponding text shown inside the App is updated to match in the next release.
         </p>
@@ -403,8 +431,8 @@ const summary = [
           Changes apply from the effective date shown above. If a change requires your consent under applicable law, we will request it separately.
         </p>
 
-        <!-- 21 -->
-        <h2 id="s21">21. Contact and complaints</h2>
+        <!-- 23 -->
+        <h2 id="s23">23. Contact and complaints</h2>
         <p>
           The controller responsible for personal information received directly by Matdo, as described in sections 6.1 and 6.3, is {COMPANY}. Apple and GitHub act as independent controllers for the processing described in this Policy under their respective privacy notices.
         </p>
