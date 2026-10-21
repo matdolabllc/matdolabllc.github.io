@@ -22,6 +22,16 @@ const plans = [
 const fmt = (n: number) => n.toLocaleString("en-US");
 ---
 <Layout
+  schema={[{
+    "@type": "SoftwareApplication",
+    name: "Matdo Grade",
+    description: "Photograph completed paper homework and review AI marks, correct answers, and explanations. No answer key needed.",
+    applicationCategory: "EducationalApplication",
+    operatingSystem: "iOS, iPadOS",
+    url: "https://matdolab.com/grade/",
+    publisher: { "@id": "https://matdolab.com/#organization" },
+    offers: { "@type": "AggregateOffer", priceCurrency: "USD", lowPrice: "4.99", highPrice: "39.99", offerCount: plans.length },
+  }]}
   title="Matdo Grade — Paper homework, graded on your iPhone or iPad"
   description="Photograph completed paper homework. Review marks, correct answers, and explanations with Matdo Grade on iPad and iPhone. No answer key needed."
 >

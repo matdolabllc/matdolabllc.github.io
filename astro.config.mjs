@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,6 +15,9 @@ export default defineConfig({
     '/grade/privacy': '/privacy/grade',
     '/grade/terms': '/terms/grade',
   },
+
+  // /grade/try is invite-only (and noindex), so it stays out of the sitemap.
+  integrations: [sitemap({ filter: (page) => !page.includes('/grade/try') })],
 
   vite: {
     plugins: [tailwindcss()],

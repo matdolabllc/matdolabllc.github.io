@@ -8,6 +8,10 @@ interface Props {
   description?: string;
   /** Link-preview card (1200x630). Defaults to the card for the page's product. */
   image?: string;
+  /** Keep the page out of search results (invite-only pages). */
+  noindex?: boolean;
+  /** Extra schema.org objects for this page, e.g. the product's SoftwareApplication. */
+  schema?: Record<string, unknown>[];
 }
 // Without an og:image, iMessage and others pick an arbitrary large image from
 // the page. Cards live in public/og and are rendered by design/share-cards.
@@ -17,9 +21,37 @@ const {
   title = "Matdo — Less admin, more teaching",
   description = "Matdo makes simple, reliable apps for the people who teach — tutoring and enrichment centers, Sunday schools, clubs, and camps. Matdo Check for attendance; Matdo Grade for AI homework grading.",
   image = defaultImage,
+  noindex = false,
+  schema = [],
 } = Astro.props;
 const pageUrl = new URL(path, Astro.site).href;
 const imageUrl = new URL(image, Astro.site).href;
+
+// Structured data so search engines know who runs the site. Every page carries
+// the organization and website; product pages add their app via `schema`.
+const siteUrl = new URL("/", Astro.site).href;
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}#organization`,
+      name: "Matdo Lab LLC",
+      alternateName: "Matdo",
+      url: siteUrl,
+      logo: new URL("/logos/matdo-mark.png", Astro.site).href,
+      email: "matdo@matdolab.com",
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}#website`,
+      name: "Matdo",
+      url: siteUrl,
+      publisher: { "@id": `${siteUrl}#organization` },
+    },
+    ...schema,
+  ],
+};
 ---
 
 <!doctype html>
@@ -31,6 +63,9 @@ const imageUrl = new URL(image, Astro.site).href;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={pageUrl} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
@@ -45,6 +80,7 @@ const imageUrl = new URL(image, Astro.site).href;
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageUrl} />
     <meta name="theme-color" content="#faf8f1" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
     <Header />
