@@ -73,8 +73,9 @@ const fmt = (n: number) => n.toLocaleString("en-US");
   <section id="pricing" class="section-pad pricing">
     <div class="wrap">
       <div class="sec-head center reveal">
-        <h2>Pricing</h2>
-        <p class="pr-soon">For iPad and iPhone.</p>
+        <h2>Pricing at launch</h2>
+        <p class="pr-soon">For iPad and iPhone. Purchases open when Matdo Grade reaches the App Store.</p>
+        <p class="pr-units-explain"><b>How units work:</b> each graded page uses units. A typical page takes about 10 units in <b>Brief</b> mode (marks, correct answers, and a short check of the working). <b>Detailed</b> mode adds a worked solution and where the working went wrong, for 5 or 10 more units a page.</p>
       </div>
 
       <div class="pr-grid reveal">
@@ -83,7 +84,7 @@ const fmt = (n: number) => n.toLocaleString("en-US");
           <p class="pr-price">$0</p>
           <p class="pr-units"><b>100</b> units, one time</p>
           <p class="pr-pages">About 10 pages of Brief grading</p>
-          <p class="pr-for">Free trial</p>
+          <p class="pr-for">Free to start</p>
         </div>
         {plans.map((p) => (
           <div class="pr-card">
@@ -129,18 +130,21 @@ const fmt = (n: number) => n.toLocaleString("en-US");
     .ga-note { grid-area: note; align-self: start; margin-top: 0.8rem; }
     .grade-benefits { grid-area: ben; align-self: start; margin-top: 1.1rem; }
   }
-  /* Narrow screens: the two buttons, the benefits, then the sign-up block. */
+  /* Narrow screens: the sign-up block first, since it is the one thing a
+     visitor can do today, then the two buttons and the benefits. */
   @media (max-width: 900px) {
+    .ga-soon { order: -3; flex-basis: 100%; }
+    .grade-actions :global(.ga-signup) { order: -2; }
+    .ga-note { order: -1; flex-basis: 100%; margin-bottom: 0.8rem; }
     .grade-benefits { order: 1; }
-    .ga-soon { order: 2; flex-basis: 100%; margin-top: 1.4rem; }
-    .grade-actions :global(.ga-signup) { order: 3; }
-    .ga-note { order: 4; flex-basis: 100%; }
   }
   @media (max-width: 760px) { .grade-benefits { display: grid; gap: 8px; } }
 
 
 
   .pr-soon { margin-top: 0.4rem; }
+  .pr-units-explain { max-width: 44rem; margin: 1rem auto 0; padding: 14px 18px; border-radius: 12px; background: var(--color-cream2); font-size: 0.95rem; line-height: 1.55; color: #3d4b47; text-align: left; }
+  .pr-units-explain b { color: var(--color-forest); }
   .pr-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
   .pr-card {
     display: flex; flex-direction: column; gap: 0.35rem;

@@ -11,7 +11,7 @@ import MatdoMark from "../components/MatdoMark.astro";
   <section class="hero">
     <div class="wrap">
       <h1 class="hero-title"><span class="hero-logo"><MatdoMark height="1em" /></span>Less Admin. More Teaching.</h1>
-      <p class="hero-sub">Simple, reliable, affordable tools for educators.</p>
+      <p class="hero-sub">Simple, reliable, affordable tools for parents, tutors, and educators.</p>
     </div>
   </section>
 
@@ -32,13 +32,13 @@ import MatdoMark from "../components/MatdoMark.astro";
         <a class="product-card product-grade reveal" href="/grade">
           <div class="product-heading">
             <img class="app-icon" src="/logos/matdo-grade-mark.png" width="552" height="782" alt="" />
-            <div><h2>Matdo Grade</h2><p>AI homework grading</p></div>
+            <div><h2>Matdo Grade <span class="soon-badge">Coming soon</span></h2><p>AI homework grading</p></div>
           </div>
           <div class="product-preview grade-preview">
             <img src="/demo/screens/grade-home.webp" width="600" height="1304" alt="Matdo Grade home screen with capture and grading controls" />
             <img src="/demo/screens/grade-marks.webp" width="600" height="1304" alt="Matdo Grade showing checks and corrections on handwritten homework" />
           </div>
-          <div class="product-caption"><p>Scan homework. Review the feedback.</p><span>Explore Grade <span aria-hidden="true">→</span></span></div>
+          <div class="product-caption"><p>Scan homework. Review the feedback. Pre-launch testing is open now.</p><span>Explore Grade <span aria-hidden="true">→</span></span></div>
         </a>
       </div>
     </div>
@@ -70,7 +70,7 @@ import MatdoMark from "../components/MatdoMark.astro";
         </article>
         <article class="why-item why-grade reveal">
           <div class="why-top">
-            <span class="why-label">Matdo Grade</span>
+            <span class="why-label">Matdo Grade <span class="soon-badge">Coming soon</span></span>
             <span class="why-purpose">Homework</span>
           </div>
           <figure class="why-picture">
@@ -93,10 +93,11 @@ import MatdoMark from "../components/MatdoMark.astro";
   <section class="section-pad">
     <div class="wrap">
       <div class="cta reveal">
-        <h2>Get Matdo products today.</h2>
+        <h2>Get started with Matdo.</h2>
+        <p class="cta-sub">Matdo Check is on the App Store with a 7-day free trial. Matdo Grade is coming soon: join pre-launch testing to try it first.</p>
         <div class="cta-actions">
-          <a class="btn btn-cta cta-check" href="/check">Explore Matdo Check →</a>
-          <a class="btn btn-cta cta-grade" href="/grade">Explore Matdo Grade →</a>
+          <a class="btn btn-cta cta-check" href="/check">Try Matdo Check free →</a>
+          <a class="btn btn-cta cta-grade" href="/grade/try">Test Matdo Grade early →</a>
         </div>
       </div>
     </div>
@@ -126,6 +127,8 @@ import MatdoMark from "../components/MatdoMark.astro";
   .app-icon { height: 48px; width: auto; flex: none; }
   .product-heading h2 { font-size: 1.6rem; }
   .product-heading p { font-size: 0.94rem; color: #55665f; margin-top: 4px; }
+  /* Grade is not in the App Store yet; say so wherever it is offered. */
+  .soon-badge { display: inline-block; vertical-align: middle; margin-left: 0.4rem; padding: 3px 10px; border-radius: 999px; background: #b08a3e; color: #fff; font-family: var(--font-sans); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; line-height: 1.4; }
   .product-preview { height: clamp(260px, 30vw, 350px); padding: 20px; background: var(--product-tint); display: flex; align-items: center; justify-content: center; gap: 20px; }
   .product-preview img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; border: 1px solid var(--color-line); border-radius: 10px; }
   .grade-preview img { width: auto; max-width: 44%; height: 100%; }
@@ -161,7 +164,8 @@ import MatdoMark from "../components/MatdoMark.astro";
   .why-link:hover { text-decoration: underline; text-underline-offset: 4px; }
   /* Closing action: one surface, one route for each product. */
   .cta { background: var(--color-forest); border-radius: 16px; padding: clamp(32px, 6vw, 64px); text-align: center; }
-  .cta h2 { color: var(--color-cream); font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 28px; }
+  .cta h2 { color: var(--color-cream); font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 14px; }
+  .cta-sub { color: rgb(255 255 255 / 0.78); max-width: 36rem; margin: 0 auto 28px; }
   .cta-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 16px; }
   .btn-cta { background: var(--color-cream); color: var(--color-forest); border-radius: 12px; box-shadow: none; border: 2px solid transparent; }
   .cta-check { border-color: #7c9a6f; }
