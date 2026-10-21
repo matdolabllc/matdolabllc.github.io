@@ -3,3 +3,10 @@
 export const APP_STORE_URL = "https://apps.apple.com/us/app/matdo-check/id6805625085";
 
 export const GRADE_APP_STORE_URL = "https://apps.apple.com/app/id6816818411";
+
+// Matdo's social profiles: the footer icons and the Organization's sameAs.
+export const SOCIAL_LINKS = [
+  { name: "LinkedIn", url: "https://www.linkedin.com/company/matdo-lab/" },
+  { name: "Facebook", url: "https://www.facebook.com/profile.php?id=61595437285261" },
+  { name: "Instagram", url: "https://www.instagram.com/matdo.lab/" },
+];
