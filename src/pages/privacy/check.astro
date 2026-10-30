@@ -2,19 +2,6 @@
 import LegalProductTabs from "../../components/LegalProductTabs.astro";
 import Layout from "../../layouts/Layout.astro";
 
-// DRAFT FOR MATDO CHECK 1.4.0 — do not publish before 1.4.0 is live on the App
-// Store. While this guard is here the site will not build, so merging this
-// branch into main early fails the Pages deploy instead of publishing it.
-// On release day: set EFFECTIVE (and the datetime attribute) to that day and
-// delete this block in the same commit. Preview locally with
-// PUBLISH_CHECK_1_4_0=1 npm run dev.
-if (process.env.PUBLISH_CHECK_1_4_0 !== "1") {
-  throw new Error(
-    "Matdo Check 1.4.0 privacy/terms draft: not for publishing before 1.4.0 ships. " +
-      "See docs/AppStore-1.4.0.md (Before submitting) in matdo-check.",
-  );
-}
-
 // LEGAL DOCUMENT — treat edits with care.
 //
 // The app-behaviour sections (5 and 8 to 12) are the authoritative web version of
@@ -32,7 +19,7 @@ const POSTAL_ADDRESS = "";
 const BUSINESS_LOCATION = "West Lafayette, Indiana, United States";
 
 const EFFECTIVE = "29 October 2026";
-const SUPERSEDES = "27 August 2026";
+const SUPERSEDES = "25 September 2026";
 
 const toc = [
   ["s1", "Introduction"],
@@ -85,7 +72,7 @@ const summary = [
 
       <dl class="doc-meta">
         <div><dt>Effective</dt><dd><time datetime="2026-10-29">{EFFECTIVE}</time></dd></div>
-        <div><dt>Supersedes</dt><dd><time datetime="2026-08-27">{SUPERSEDES}</time></dd></div>
+        <div><dt>Supersedes</dt><dd><time datetime="2026-09-25">{SUPERSEDES}</time></dd></div>
         <div><dt>Publisher</dt><dd>{COMPANY}</dd></div>
       </dl>
     </div>
