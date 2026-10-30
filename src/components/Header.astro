@@ -3,17 +3,18 @@ import Logo from "./Logo.astro";
 
 const nav = [
   { label: "Home", href: "/" },
-  { label: "Matdo Check", href: "/check" },
-  { label: "Matdo Grade", href: "/grade", soon: false },
-  { label: "About", href: "/about" },
+  { label: "Matdo Check", href: "/check/" },
+  { label: "Matdo Grade", href: "/grade/", soon: false },
+  { label: "About", href: "/about/" },
 ];
 
-// Highlight the active top-level route
-const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+// Highlight the active top-level route. Links end in "/" because GitHub Pages
+// redirects /check to /check/, so the path is compared in that form too.
+const path = Astro.url.pathname.replace(/\/?$/, "/");
 
 // Support follows the product being viewed, as in the footer.
-const isGrade = /^\/grade(\/|$)/.test(path) || /^\/(privacy|terms|support)\/grade$/.test(path);
-nav.push({ label: "Support", href: `/support/${isGrade ? "grade" : "check"}` });
+const isGrade = /^\/grade\//.test(path) || /^\/(privacy|terms|support)\/grade\/$/.test(path);
+nav.push({ label: "Support", href: `/support/${isGrade ? "grade" : "check"}/` });
 ---
 <header id="site-header">
   <div class="wrap nav">
@@ -30,7 +31,7 @@ nav.push({ label: "Support", href: `/support/${isGrade ? "grade" : "check"}` });
     </nav>
 
     <div class="nav-right">
-      <a class="btn btn-sage" href="/contact">Contact</a>
+      <a class="btn btn-sage" href="/contact/">Contact</a>
       <button id="menu-toggle" class="menu-toggle" aria-label="Open menu" aria-expanded="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="24" height="24">
           <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/>
@@ -46,7 +47,7 @@ nav.push({ label: "Support", href: `/support/${isGrade ? "grade" : "check"}` });
         ? <span class="mm-soon" aria-disabled="true">{i.label}<span class="soon-tag">Soon</span></span>
         : <a href={i.href}>{i.label}</a>
     ))}
-    <a href="/contact" class="mm-contact">Contact</a>
+    <a href="/contact/" class="mm-contact">Contact</a>
   </div>
 </header>
 

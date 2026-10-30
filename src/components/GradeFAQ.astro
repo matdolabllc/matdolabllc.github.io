@@ -25,7 +25,7 @@ const faqs = [
   },
   {
     q: "Is my child’s homework kept private?",
-    a: 'Your pages go through our server to Google’s AI for checking. Matdo Lab does not keep a copy of the pages or results unless you send us a problem report, and neither we nor Google use them to train AI models. Saved checks stay on your device; delete them anytime in <strong>Previous Grading</strong>. See the <a href="/privacy/grade">privacy policy</a> for details.'
+    a: 'Your pages go through our server to Google’s AI for checking. Matdo Lab does not keep a copy of the pages or results unless you send us a problem report, and neither we nor Google use them to train AI models. Saved checks stay on your device; delete them anytime in <strong>Previous Grading</strong>. See the <a href="/privacy/grade/">privacy policy</a> for details.'
   },
 ];
 ---
@@ -38,7 +38,7 @@ const faqs = [
     <div class="faq-list">
       {faqs.map(faq => <details><summary>{faq.q}</summary><div class="faq-answer" set:html={faq.a} /></details>)}
     </div>
-    <p class="faq-support">Need more detail? <a href="/support/grade">Read the support guide</a> or <a href="/contact">contact Matdo Lab</a>.</p>
+    <p class="faq-support">Need more detail? <a href="/support/grade/">Read the support guide</a> or <a href="/contact/">contact Matdo Lab</a>.</p>
   </div>
 </section>
 

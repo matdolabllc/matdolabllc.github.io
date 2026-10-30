@@ -3,7 +3,7 @@
 // It is shaped like the App Store badge but is not Apple's badge, which may
 // only link to the App Store. Swap back to AppStoreSoon with the store URL at launch.
 interface Props { href?: string; class?: string; }
-const { href = "/grade/try", class: cls = "" } = Astro.props;
+const { href = "/grade/try/", class: cls = "" } = Astro.props;
 ---
 <a class={`asb beta-dl ${cls}`} href={href}>
   <svg class="asb-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
