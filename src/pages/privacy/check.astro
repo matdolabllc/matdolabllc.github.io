@@ -182,7 +182,10 @@ const summary = [
           The database is protected by the operating system's file protection, so its contents are encrypted at rest and unreadable until the Device has been unlocked at least once after starting up.
         </p>
         <p>
-          Separately from Attendee Records, the App keeps a few display preferences on the Device: its appearance (light or dark), the language it is shown in, and whether names are listed by first or last name. They contain no personal information, stay on that Device, and are not part of the App's backups, its monthly spreadsheets, or Multiple Devices.
+          Separately from Attendee Records, the App keeps a few display preferences on the Device: its appearance (light or dark), the language it is shown in, whether names are listed by first or last name, and the Too Short and Too Long alerts that color times in Records. They contain no personal information, stay on that Device, and are not part of the App's backups, its monthly spreadsheets, or Multiple Devices.
+        </p>
+        <p>
+          Instructors can correct or clear individual records within the App, and every such change is written to the audit log. An unenrolled attendee can also be removed: they leave the roster, the records screens and check-in search for good, but their past attendance is kept — in the database, the audit log, the monthly spreadsheets and any backups — so the record stays complete. With Multiple Devices on, a removal reaches the other devices too.
         </p>
         <p>
           Deleting the App from the Device deletes the database, its local backups, and the monthly spreadsheets kept on the Device. Copies previously written to iCloud are addressed in sections 8, 9 and 11.
@@ -381,7 +384,7 @@ const summary = [
         <h2 id="s18">18. Retention</h2>
         <ul>
           <li>
-            <strong>Attendee Records</strong> — retained on the Device for as long as the Center chooses. We hold none and therefore retain none. Deleting the App deletes the database, its local backups, and the spreadsheets kept on the Device; copies in iCloud, including the monthly spreadsheets in iCloud Drive and the records synced by Multiple Devices, persist until deleted as described in sections 8 and 9.
+            <strong>Attendee Records</strong> — retained on the Device for as long as the Center chooses. We hold none and therefore retain none. Removing an attendee in the App takes them off the roster but keeps their past attendance (section 5). Deleting the App deletes the database, its local backups, and the spreadsheets kept on the Device; copies in iCloud, including the monthly spreadsheets in iCloud Drive and the records synced by Multiple Devices, persist until deleted as described in sections 8 and 9.
           </li>
           <li>
             <strong>Correspondence</strong> — retained for as long as reasonably necessary to handle your enquiry, provide support, maintain appropriate business records, and establish or defend legal claims, and then deleted or anonymised.
