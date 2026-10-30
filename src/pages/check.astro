@@ -111,6 +111,17 @@ const plans = [
 
 ---
 <Layout
+  schema={[{
+    "@type": "SoftwareApplication",
+    name: "Matdo Check",
+    description: "Check-in and attendance app for tutoring and enrichment centers, Sunday schools, clubs, and camps.",
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "iOS, iPadOS",
+    url: "https://matdolab.com/check/",
+    downloadUrl: APP_STORE_URL,
+    publisher: { "@id": "https://matdolab.com/#organization" },
+    offers: { "@type": "AggregateOffer", priceCurrency: "USD", lowPrice: "2.99", highPrice: "39.99", offerCount: 3 },
+  }]}
   title="Matdo Check — Simple, reliable, easy setup"
   description="Matdo Check is a simple, reliable check-in and attendance app for iPad and iPhone, for tutoring and enrichment centers, Sunday schools, clubs, and camps. Keep every device in step with Multiple Devices. 7-day free trial, then $2.99/month, $24.99/year, or a $39.99 lifetime license. Data stays on your devices and in your own iCloud."
 >

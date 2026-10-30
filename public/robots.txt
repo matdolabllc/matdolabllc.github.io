@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://matdolab.com/sitemap-index.xml
