@@ -74,7 +74,7 @@ const steps: Step[] = [
     ],
     pins: [
       { x: 25.3, y: 28.6, t: "The day in four numbers", d: "In class now, already done, not present, unenrolled." },
-      { x: 44.3, y: 58.4, t: "Time in class", d: "Highlighted when someone has stayed too long." },
+      { x: 44.3, y: 58.4, t: "Time in class", d: "Red when someone has stayed too long, amber when a visit ended too soon." },
       { x: 63, y: 58.4, t: "One-tap check-in and out", d: "For the student who forgot to stop at the kiosk." },
       { x: 3, y: 38.2, t: "Close up for the day", d: "Hold for two seconds to check everyone still here out." },
       { x: 95, y: 23.2, t: "Any day, not just today", d: "Step back through earlier dates." },
@@ -102,7 +102,7 @@ const steps: Step[] = [
     id: "add-names",
     label: "Add names",
     title: "Bring your roster in.",
-    lead: "Type names, paste them from the spreadsheet you already keep, or import the file. Enroll and unenroll without losing anyone's history.",
+    lead: "Type names, paste them from the spreadsheet you already keep, or import the file. Enroll and unenroll without losing anyone's history, and remove someone for good while keeping their past attendance.",
     device: "ipad",
     img: "add-new",
     alt: "The Add New Attendee table with Paste Columns, Add Row and Clear buttons, Last Name, First Name and Phone columns, and Or Upload a Name Sheet below",
