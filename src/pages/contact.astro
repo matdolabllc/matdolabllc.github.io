@@ -104,6 +104,22 @@ const EMAIL = "matdo@matdolab.com";
         form.reset();
         status.className = "form-status ok";
         status.textContent = "Thanks! Your message is on its way — we'll be in touch soon.";
+        // A next step while they wait: the answers may already be on a support page.
+        const next = document.createElement("span");
+        next.className = "form-next";
+        next.append("Meanwhile, see common questions for ");
+        const links: [string, string][] = [["/support/check/", "Matdo Check"], ["/support/grade/", "Matdo Grade"]];
+        links.forEach(([href, label], i) => {
+          const link = document.createElement("a");
+          link.href = href;
+          link.textContent = label;
+          next.append(link, i === 0 ? " or " : ", or go back ");
+        });
+        const home = document.createElement("a");
+        home.href = "/";
+        home.textContent = "home";
+        next.append(home, ".");
+        status.append(next);
       } else {
         throw new Error(json.message || "send-failed");
       }
@@ -121,6 +137,8 @@ const EMAIL = "matdo@matdolab.com";
   .hp { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; opacity: 0; }
   .form-status { margin-top: 0.9rem; padding: 0.75rem 1rem; border-radius: 12px; font-size: 0.92rem; font-weight: 500; line-height: 1.45; }
   .form-status.ok { background: rgb(79 209 197 / 0.15); color: var(--color-teal); }
+  .form-status :global(.form-next) { display: block; margin-top: 0.4rem; color: #3d4b47; font-weight: 400; }
+  .form-status :global(.form-next a) { color: var(--color-teal); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
   .form-status.err { background: rgb(196 127 16 / 0.1); color: #a8843c; }
 </style>
 <style>

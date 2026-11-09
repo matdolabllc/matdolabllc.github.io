@@ -40,11 +40,11 @@ const fmt = (n: number) => n.toLocaleString("en-US");
 <div slot="actions" class="grade-actions">
   <a class="btn btn-primary ga-example" href="#samples">See a graded example</a>
   <a class="btn btn-ghost ga-how" href="#how-grade-works">How it works</a>
-  <!-- Pre-launch sign-up: on a wide screen it sits at the right end of this row,
-       level with the buttons, with "Coming Soon!" above it and the note below. -->
-  <p class="ga-soon">Coming Soon!</p>
+  <!-- Early-access sign-up: on a wide screen it sits at the right end of this row,
+       level with the buttons, with "Now in early access" above it and the note below. -->
+  <p class="ga-soon">Now in early access</p>
   <GradeBetaButton class="ga-signup" />
-  <p class="ga-note">Qualified pre-launch testers get 1,000 free units.</p>
+  <p class="ga-note">Early-access families get 1,000 free units.</p>
   <ul class="grade-benefits" aria-label="Homework checking benefits">
     <li>No answer key to upload</li><li>No assignment to create</li><li>Feedback on your page</li>
   </ul>
@@ -60,6 +60,19 @@ const fmt = (n: number) => n.toLocaleString("en-US");
         </video>
       </figure>
 </ProductHero>
+
+  <!-- On this page: a long page, so every section is one tap away. Sticks under the header. -->
+  <nav class="grade-jump" aria-label="On this page">
+    <div class="wrap">
+      <a href="#samples">Examples</a>
+      <a href="#how-grade-works">How it works</a>
+      <a href="#subjects">Subjects</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#grade-faq">FAQ</a>
+      <a class="grade-jump-cta" href="/grade/try/">Join early access</a>
+    </div>
+  </nav>
 
   <!-- Actual grading results come before subject and feature descriptions. -->
   <GradedSamples />
@@ -99,11 +112,22 @@ const fmt = (n: number) => n.toLocaleString("en-US");
 
       <div class="pr-more reveal">
         <p><b>Top-Up:</b> 1,000 extra units for $6.99, never expire.</p>
-        <p><b>Pre-launch testing:</b> families who help us test Matdo Grade before launch get 1,000 free units. <a href="/grade/try/">Sign up for pre-launch testing</a>.</p>
+        <p><b>Early access:</b> families who try Matdo Grade before launch get 1,000 free units. <a href="/grade/try/">Join early access</a>.</p>
       </div>
     </div>
   </section>
   <GradeFAQ />
+
+  <!-- Closing action: the page ends with the one thing to do next. -->
+  <section class="section-pad grade-end">
+    <div class="wrap">
+      <div class="grade-cta reveal">
+        <h2>Try Matdo Grade before launch.</h2>
+        <p>Early-access families get 1,000 free units, about 100 pages of Brief grading, on iPhone and iPad.</p>
+        <GradeBetaButton />
+      </div>
+    </div>
+  </section>
 </Layout>
 
 <style>
@@ -115,7 +139,7 @@ const fmt = (n: number) => n.toLocaleString("en-US");
   .ga-note { margin: 0; font-size: 0.9rem; color: #55665f; }
 
   /* Wide screens: the sign-up button shares a row with the two buttons and is
-     centred on them; "Coming Soon!" hangs above it (absolutely placed in the
+     centred on them; "Now in early access" hangs above it (absolutely placed in the
      same grid cell, so it takes no row height) and the note sits under it. */
   @media (min-width: 901px) {
     .grade-actions {
@@ -141,6 +165,21 @@ const fmt = (n: number) => n.toLocaleString("en-US");
   @media (max-width: 760px) { .grade-benefits { display: grid; gap: 8px; } }
 
 
+
+  /* On-this-page links */
+  .grade-jump { position: sticky; top: 84px; z-index: 50; background: rgb(250 248 241 / 0.94); backdrop-filter: blur(8px); border-block: 1px solid var(--color-line); }
+  .grade-jump .wrap { display: flex; align-items: center; gap: 4px; overflow-x: auto; scrollbar-width: none; padding-block: 8px; }
+  .grade-jump .wrap::-webkit-scrollbar { display: none; }
+  .grade-jump a { flex: none; padding: 8px 14px; border-radius: 999px; font-size: 0.9rem; font-weight: 600; color: #3d4b47; white-space: nowrap; }
+  .grade-jump a:hover { background: var(--color-cream2); color: var(--color-forest); }
+  .grade-jump .grade-jump-cta { margin-left: auto; background: #1a2422; color: #fff; }
+  .grade-jump .grade-jump-cta:hover { background: var(--color-forest); color: #fff; }
+  /* Closing call to action */
+  .grade-end { padding-top: 0; }
+  .grade-cta { display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; padding: clamp(32px, 6vw, 56px); border-radius: 16px; background: var(--color-cream2); }
+  .grade-cta h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
+  .grade-cta p { max-width: 34rem; color: #4a5854; margin-bottom: 8px; }
+  @media (max-width: 760px) { .grade-jump { top: 74px; } .grade-jump .grade-jump-cta { margin-left: 8px; } }
 
   .pr-soon { margin-top: 0.4rem; }
   .pr-units-explain { max-width: 44rem; margin: 1rem auto 0; padding: 14px 18px; border-radius: 12px; background: var(--color-cream2); font-size: 0.95rem; line-height: 1.55; color: #3d4b47; text-align: left; }

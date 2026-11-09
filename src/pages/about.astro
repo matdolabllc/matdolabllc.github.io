@@ -22,19 +22,11 @@ import MatdoMark from "../components/MatdoMark.astro";
     </div>
   </section>
 
-  <section class="about-section" aria-labelledby="name-title">
-    <div class="wrap name-sec">
-      <div class="name-badge reveal">
-        <span class="mat-cn" lang="zh-HK">乜都</span>
-        <span class="mat-say">“Mut&nbsp;Dou”</span>
-        <span class="mat-mean">everything</span>
-      </div>
-      <div class="name-body reveal">
-        <span class="eyebrow">The name</span>
-        <h2 id="name-title">Matdo means “everything.”</h2>
-        <p>Matdo comes from the Cantonese expression <span lang="zh-HK">乜都</span>—<strong>“Mut&nbsp;Dou”</strong>, meaning <em>everything</em>.</p>
-        <p>For us, it means taking care of the everyday tasks around learning, from attendance to homework.</p>
-      </div>
+  <section class="about-section" id="story" aria-labelledby="story-title">
+    <div class="wrap story-copy reveal">
+      <span class="eyebrow">Our story</span>
+      <h2 id="story-title">Why we built Matdo</h2>
+      <p>Matdo was started by a parent in West Lafayette, Indiana. Years of working alongside teachers, parents and local tutoring centers showed him how much time goes into the everyday tasks around learning: signing kids in at the front desk, checking homework at the kitchen table. Matdo builds simple, affordable tools that take care of that work, so the adults in a child's life can spend more time helping them learn. We hope Matdo becomes a trusted helper for parents and teachers everywhere.</p>
     </div>
   </section>
 
@@ -64,7 +56,23 @@ import MatdoMark from "../components/MatdoMark.astro";
     </div>
   </section>
 
-  <section class="about-section" aria-labelledby="logo-title">
+  <section class="about-section" aria-labelledby="name-title">
+    <div class="wrap name-sec">
+      <div class="name-badge reveal">
+        <span class="mat-cn" lang="zh-HK">乜都</span>
+        <span class="mat-say">“Mut&nbsp;Dou”</span>
+        <span class="mat-mean">everything</span>
+      </div>
+      <div class="name-body reveal">
+        <span class="eyebrow">The name</span>
+        <h2 id="name-title">Matdo means “everything.”</h2>
+        <p>Matdo comes from the Cantonese expression <span lang="zh-HK">乜都</span>—<strong>“Mut&nbsp;Dou”</strong>, meaning <em>everything</em>.</p>
+        <p>For us, it means taking care of the everyday tasks around learning, from attendance to homework.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-section band-cream2" aria-labelledby="logo-title">
     <div class="wrap story-copy reveal">
       <span class="eyebrow">The logo</span>
       <h2 id="logo-title">A pocket for useful tools</h2>
@@ -105,6 +113,7 @@ import MatdoMark from "../components/MatdoMark.astro";
   .hero-logo { display: inline-block; vertical-align: -0.12em; margin-right: 0.3em; }
   .lede { font-size: 1.2rem; color: #3d4b47; max-width: 42rem; margin-inline: auto; }
   .about-section { padding: clamp(56px, 7vw, 88px) 0; }
+  #story { scroll-margin-top: 40px; }
   .story-copy { max-width: 828px; text-align: center; }
   .story-copy h2, .name-body h2, .section-heading h2 { font-size: clamp(1.9rem, 3.6vw, 2.7rem); margin: 0.8rem 0 1rem; text-wrap: balance; }
   .story-copy .mission-line { font-size: clamp(2.2rem, 5vw, 3.4rem); letter-spacing: -0.02em; }

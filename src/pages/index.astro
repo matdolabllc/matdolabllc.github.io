@@ -1,104 +1,106 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import MatdoMark from "../components/MatdoMark.astro";
+import HomeDemo from "../components/HomeDemo.astro";
 
 ---
 <Layout
-  title="Matdo — Less admin, more teaching"
-  description="Matdo makes simple, reliable apps for the people who teach — tutoring and enrichment centers, Sunday schools, clubs, and camps. Matdo Check for attendance; Matdo Grade for AI homework grading."
+  title="Matdo — Everything, from front desk to homework"
+  description="Two simple iPad and iPhone apps. Matdo Check runs the front desk for tutoring centers; Matdo Grade checks paper homework for parents, tutors and teachers."
 >
   <!-- HERO -->
   <section class="hero">
     <div class="wrap">
-      <h1 class="hero-title"><span class="hero-logo"><MatdoMark height="1em" /></span>Less Admin. More Teaching.</h1>
-      <p class="hero-sub">Simple, reliable, affordable tools for parents, tutors, and educators.</p>
+      <h1 class="hero-title"><span class="hero-logo"><MatdoMark height="1em" /></span>Everything, from front desk to homework.</h1>
+      <p class="hero-sub">Matdo&nbsp;Check runs the front desk for tutoring centers. Matdo&nbsp;Grade checks paper homework for parents, tutors and teachers.</p>
+      <HomeDemo />
     </div>
   </section>
 
-  <!-- Product previews: visible on every device, without a hover or tap. -->
-  <section class="section-pad apps-sec" aria-label="Matdo products">
+  <!-- Devices: what each app runs on, shown with real screens. -->
+  <section class="section-pad dev-sec" aria-labelledby="dev-title">
     <div class="wrap">
-      <div class="apps">
-        <a class="product-card product-check reveal" href="/check/">
-          <div class="product-heading">
-            <img class="app-icon" src="/logos/matdo-check-mark.png" width="552" height="782" alt="" />
-            <div><h2>Matdo Check</h2><p>Check-in &amp; attendance</p></div>
+      <h2 id="dev-title" class="dev-title">Works on the iPad and iPhone you already have.</h2>
+      <div class="devs">
+        <figure class="dev dev-check">
+          <div class="dev-pic">
+            <img src="/demo/home/check-devices-v2.webp" width="1600" height="1000" loading="lazy" alt="Matdo Check's attendance dashboard on an iPad, with the same records on an iPhone" />
           </div>
-          <div class="product-preview check-preview">
-            <img src="/demo/check/tour/kiosk.webp" width="1400" height="978" alt="The Matdo Check kiosk: Who's here today?, a name search field, and Check In and Check Out buttons" />
+          <figcaption>
+            <span class="dev-app">Matdo Check</span>
+            <h3>Pair your iPads and iPhones.</h3>
+            <p>Run the front desk on an iPad and see the same attendance on your iPhone. With Multiple Devices on, every device stays in step through your own iCloud.</p>
+          </figcaption>
+        </figure>
+        <figure class="dev dev-grade">
+          <div class="dev-pic">
+            <img src="/demo/home/grade-feedback.webp" width="1600" height="1000" loading="lazy" alt="Matdo Grade on an iPad showing written feedback on a student's essay, and on an iPhone showing a marked math worksheet" />
           </div>
-          <div class="product-caption"><p>Run your front desk from an iPad or iPhone.</p><span>Explore Check <span aria-hidden="true">→</span></span></div>
-        </a>
-        <a class="product-card product-grade reveal" href="/grade/">
-          <div class="product-heading">
-            <img class="app-icon" src="/logos/matdo-grade-mark.png" width="552" height="782" alt="" />
-            <div><h2>Matdo Grade <span class="soon-badge">Coming soon</span></h2><p>AI homework grading</p></div>
-          </div>
-          <div class="product-preview grade-preview">
-            <img src="/demo/screens/grade-home.webp" width="600" height="1304" alt="Matdo Grade home screen with capture and grading controls" />
-            <img src="/demo/screens/grade-marks.webp" width="600" height="1304" alt="Matdo Grade showing checks and corrections on handwritten homework" />
-          </div>
-          <div class="product-caption"><p>Scan homework. Review the feedback. Pre-launch testing is open now.</p><span>Explore Grade <span aria-hidden="true">→</span></span></div>
-        </a>
+          <figcaption>
+            <span class="dev-app">Matdo Grade</span>
+            <h3>Feedback you can read together.</h3>
+            <p>Snap the page with your iPhone, then go through the feedback together on an iPad at the homework table. Your graded results are saved in the app on your device.</p>
+          </figcaption>
+        </figure>
       </div>
     </div>
   </section>
-  <!-- SECTION 2 — why Matdo -->
-  <section class="section-pad why-sec" aria-labelledby="why-title">
+
+  <!-- Customer quotes: private messages from customers, quoted word for word and kept anonymous.
+       They are not App Store reviews, so they carry no star rating. -->
+  <section class="section-pad reviews-sec" aria-labelledby="reviews-title">
     <div class="wrap">
-      <div class="sec-head center reveal">
-        <span class="eyebrow">Why Matdo?</span>
-        <h2 id="why-title">Attendance sorted. Homework understood.</h2>
+      <div class="reviews-head">
+        <h2 id="reviews-title">What customers say</h2>
       </div>
-      <div class="why">
-        <article class="why-item why-check reveal">
-          <div class="why-top">
-            <span class="why-label">Matdo Check</span>
-            <span class="why-purpose">Attendance</span>
-          </div>
-          <figure class="why-picture">
-            <img src="/demo/cartoons/check-in-illustration.webp" width="960" height="720" loading="lazy" alt="A smiling child checking in on a tablet at a welcoming tutoring center reception desk" />
-            <figcaption>Tap in. Tap out. Attendance sorted.</figcaption>
+      <div class="review-group review-check">
+        <h3 class="review-label">Matdo Check · tutoring centers</h3>
+        <div class="reviews">
+          <figure class="review">
+            <blockquote>“Matdo Check is a great app for my tutoring center. Very simple to use and very intuitive; the least complicated solution I have found so far. And very affordable.”</blockquote>
+            <figcaption>Matdo Check customer</figcaption>
           </figure>
-          <ul class="why-benefits">
-            <li>Quick check-in and check-out</li>
-            <li>Works offline on iPad and iPhone</li>
-            <li>Every device in step with Multiple Devices</li>
-            <li>Records and backups stay in your own iCloud</li>
-          </ul>
-          <a class="why-link" href="/check/">Explore Matdo Check <span aria-hidden="true">→</span></a>
-        </article>
-        <article class="why-item why-grade reveal">
-          <div class="why-top">
-            <span class="why-label">Matdo Grade <span class="soon-badge">Coming soon</span></span>
-            <span class="why-purpose">Homework</span>
-          </div>
-          <figure class="why-picture">
-            <img src="/demo/grade/features/parent-ipad-illustration.webp" width="960" height="720" loading="lazy" alt="A mother holding an iPad helping her child with homework, with a corner inset showing marked math answers on an iPad" />
-            <figcaption>Scan. Check. Help them learn.</figcaption>
+          <figure class="review">
+            <blockquote>“Great app at great price, and most importantly it gets the front desk job done!”</blockquote>
+            <figcaption>Matdo Check customer</figcaption>
           </figure>
-          <ul class="why-benefits">
-            <li>Scan handwritten homework</li>
-            <li>Check math, science, reading and essays</li>
-            <li>See worked solutions and writing feedback</li>
-            <li>Review AI results and make the final call</li>
-          </ul>
-          <a class="why-link" href="/grade/">Explore Matdo Grade <span aria-hidden="true">→</span></a>
-        </article>
+          <figure class="review">
+            <blockquote>“I am mostly impressed by the customer support. They listen to customers so well, and even update the app after hearing my needs.”</blockquote>
+            <figcaption>Matdo Check customer</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="review-group review-grade">
+        <h3 class="review-label">Matdo Grade · parents</h3>
+        <div class="reviews">
+          <figure class="review">
+            <blockquote>“This grading app is SO GOOD. No answer keys needed; and can grade literally ANY subject.”</blockquote>
+            <figcaption>Matdo Grade parent</figcaption>
+          </figure>
+          <figure class="review">
+            <blockquote>“The math grading ability is impressive. It even tell me what possible mistakes the student made. Detailed explanation, much better than a generic AI app.”</blockquote>
+            <figcaption>Matdo Grade parent</figcaption>
+          </figure>
+          <figure class="review">
+            <blockquote>“Matdo Grade saves me many evenings. Now I can help my children check homework so much faster and can spend the time on places they struggle. Truly useful tool.”</blockquote>
+            <figcaption>Matdo Grade parent</figcaption>
+          </figure>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- SECTION 4 — CTA -->
-  <section class="section-pad">
+  <section class="section-pad cta-sec">
     <div class="wrap">
       <div class="cta reveal">
         <h2>Get started with Matdo.</h2>
-        <p class="cta-sub">Matdo Check is on the App Store with a 7-day free trial. Matdo Grade is coming soon: join pre-launch testing to try it first.</p>
+        <p class="cta-sub">Matdo Check is on the App Store with a 7-day free trial. Matdo Grade is in early access: join to try it before launch.</p>
         <div class="cta-actions">
           <a class="btn btn-cta cta-check" href="/check/">Try Matdo Check free →</a>
-          <a class="btn btn-cta cta-grade" href="/grade/try/">Test Matdo Grade early →</a>
+          <a class="btn btn-cta cta-grade" href="/grade/try/">Join Grade early access →</a>
         </div>
+        <p class="cta-maker"><a href="/about/#story"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Made by a parent in West Lafayette, Indiana. Read our story →</a></p>
       </div>
     </div>
   </section>
@@ -108,64 +110,50 @@ import MatdoMark from "../components/MatdoMark.astro";
 
 <style>
   /* Hero */
-  .hero { padding: 136px 0 24px; text-align: center; }
-  .hero-title { font-size: clamp(2.2rem, 6vw, 4.4rem); line-height: 1.15; letter-spacing: -0.03em; }
+  .hero { padding: 120px 0 24px; text-align: center; }
+  .hero-title { font-size: clamp(2.2rem, 6vw, 4.4rem); line-height: 1.15; letter-spacing: -0.03em; text-wrap: balance; }
   /* The mark rides on the first line of the title; -0.12em drops it from the
      text baseline onto the visual baseline of the pocket. */
   .hero-logo { display: inline-block; vertical-align: -0.12em; margin-right: 0.3em; }
-  .hero-sub { font-size: 1.2rem; color: #3d4b47; max-width: 40rem; margin: 1.2rem auto 0; }
+  .hero-sub { font-size: 1.2rem; color: #3d4b47; max-width: 40rem; margin: 1.2rem auto 0; text-wrap: balance; }
 
-  /* Shared product accents and card treatment. */
-  .apps-sec { padding-top: 2rem; }
-  .apps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
-  .product-card, .why-item { --product-accent: var(--color-teal); --product-tint: #edf3ee; border-radius: 16px; box-shadow: 0 2px 8px rgb(29 59 52 / 0.04); }
-  .product-grade, .why-grade { --product-accent: #806123; --product-tint: #f3eede; }
-  .product-card { display: flex; flex-direction: column; overflow: hidden; background: var(--color-cream); border: 1px solid var(--color-line); border-top: 4px solid var(--product-accent); color: var(--color-forest); }
-  .product-card:hover { border-color: var(--product-accent); }
-  .product-card:focus-visible { outline: 3px solid var(--product-accent); outline-offset: 4px; }
-  .product-heading { display: flex; align-items: center; gap: 16px; padding: 24px; }
-  .app-icon { height: 48px; width: auto; flex: none; }
-  .product-heading h2 { font-size: 1.6rem; }
-  .product-heading p { font-size: 0.94rem; color: #55665f; margin-top: 4px; }
-  /* Grade is not in the App Store yet; say so wherever it is offered. */
-  .soon-badge { display: inline-block; vertical-align: middle; margin-left: 0.4rem; padding: 3px 10px; border-radius: 999px; background: #b08a3e; color: #fff; font-family: var(--font-sans); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; line-height: 1.4; }
-  .product-preview { height: clamp(260px, 30vw, 350px); padding: 20px; background: var(--product-tint); display: flex; align-items: center; justify-content: center; gap: 20px; }
-  .product-preview img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; border: 1px solid var(--color-line); border-radius: 10px; }
-  .grade-preview img { width: auto; max-width: 44%; height: 100%; }
-  .product-caption { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 22px 24px; }
-  .product-caption p { font-size: 0.92rem; color: #55665f; }
-  .product-caption > span { font-size: 0.92rem; font-weight: 700; color: var(--product-accent); }
-  /* Section 2 — why */
-  .why-sec { background: var(--color-cream2); }
-  .why-sec .eyebrow { color: var(--color-forest); }
-  .why-sec h2 { margin-inline: auto; white-space: nowrap; font-size: clamp(0.95rem, 3.6vw, 2.65rem); letter-spacing: -0.025em; }
-  .why { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
-  .why-item {
-    display: flex;
-    flex-direction: column;
-    padding: clamp(24px, 3vw, 36px);
-    border: 1px solid var(--color-line);
-    border-top: 4px solid var(--product-accent);
-    background: var(--color-cream);
-    color: var(--color-forest);
-  }
-
-  .why-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
-  .why-label { color: var(--product-accent); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-  .why-purpose { color: #55665f; font-size: 0.8rem; }
-  .why-picture { margin: 0 0 28px; text-align: center; }
-  .why-picture img { display: block; width: 100%; aspect-ratio: 4 / 3; height: auto; object-fit: contain; margin: 0 auto 20px; border-radius: 10px; }
-  .why-picture figcaption { font-family: var(--font-display); color: var(--color-forest); font-weight: 600; font-size: clamp(1.3rem, 2vw, 1.6rem); line-height: 1.3; min-height: 2.6em; display: grid; place-items: center; text-wrap: balance; }
-  .why-benefits { margin: 0 0 28px; padding-left: 1.2rem; }
-  .why-benefits li { padding-left: 4px; margin-bottom: 10px; color: #4a5854; font-size: 0.95rem; line-height: 1.5; }
-  .why-benefits li::marker { color: var(--product-accent); }
-  .why-link { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: auto; padding-top: 8px; color: var(--color-forest); font-weight: 700; }
-  .why-link span { color: var(--product-accent); font-size: 1.4rem; }
-  .why-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+  /* Devices */
+  .dev-sec { padding-top: clamp(48px, 6vw, 80px); }
+  .dev-title { text-align: center; font-size: clamp(1.7rem, 3.4vw, 2.4rem); margin-bottom: 28px; text-wrap: balance; }
+  .devs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .dev { margin: 0; display: flex; flex-direction: column; border-radius: 16px; overflow: hidden; background: #fff; border: 1px solid var(--color-line); box-shadow: var(--shadow-sm); --tint: #edf3ee; --accent: var(--color-teal); }
+  .dev-grade { --tint: #f3eede; --accent: #806123; }
+  .dev-pic { aspect-ratio: 8 / 5; background: var(--tint); overflow: hidden; }
+  .dev-pic > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .dev figcaption { padding: 20px 24px 24px; }
+  .dev-app { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+  .dev h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); margin: 6px 0 6px; }
+  .dev p { font-size: 0.95rem; line-height: 1.55; color: #4a5854; }
+  /* Reviews */
+  .reviews-sec { padding-top: 0; }
+  .reviews-head { text-align: center; margin-bottom: 28px; }
+  .reviews-score { display: inline-flex; align-items: center; gap: 8px; color: var(--color-forest); font-size: 0.95rem; }
+  .review-stars { color: #e0a526; letter-spacing: 1px; }
+  .reviews-head h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); margin-top: 10px; text-wrap: balance; }
+  .reviews { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .review-group { --accent: var(--color-teal); }
+  .review-group + .review-group { margin-top: 32px; }
+  .review-grade { --accent: #806123; }
+  .review-label { font-family: var(--font-sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+  .review-group .review { border-top: 3px solid var(--accent); }
+  .review { margin: 0; display: flex; flex-direction: column; gap: 12px; padding: 24px; border-radius: 16px; background: #fff; border: 1px solid var(--color-line); box-shadow: var(--shadow-sm); }
+  .review blockquote { margin: 0; flex: 1; font-family: var(--font-display); font-size: 1.12rem; line-height: 1.45; color: var(--color-forest); }
+  .review figcaption { font-size: 0.85rem; color: #55665f; }
+  @media (max-width: 900px) { .reviews { grid-template-columns: 1fr; } }
+  .cta-sec { padding-top: 0; }
   /* Closing action: one surface, one route for each product. */
   .cta { background: var(--color-forest); border-radius: 16px; padding: clamp(32px, 6vw, 64px); text-align: center; }
   .cta h2 { color: var(--color-cream); font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 14px; }
   .cta-sub { color: rgb(255 255 255 / 0.78); max-width: 36rem; margin: 0 auto 28px; }
+  .cta-maker { max-width: none; margin: 26px auto 0; color: #fff; font-size: 1rem; font-weight: 600; }
+  .cta-maker a { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; background: rgb(255 255 255 / 0.1); border: 1px solid rgb(255 255 255 / 0.22); color: inherit; text-decoration: none; }
+  .cta-maker svg { width: 18px; height: 18px; flex: none; color: var(--color-gold); }
+  .cta-maker a:hover { background: rgb(255 255 255 / 0.18); }
   .cta-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 16px; }
   .btn-cta { background: var(--color-cream); color: var(--color-forest); border-radius: 12px; box-shadow: none; border: 2px solid transparent; }
   .cta-check { border-color: #7c9a6f; }
@@ -173,19 +161,12 @@ import MatdoMark from "../components/MatdoMark.astro";
   .btn-cta:hover { background: #fff; box-shadow: none; transform: none; }
   @media (max-width: 760px) {
     .hero { padding: 116px 0 20px; }
-    .apps, .why { grid-template-columns: 1fr; }
-    .product-preview { height: 300px; }
+    .devs { grid-template-columns: 1fr; }
     .hero-title { text-wrap: balance; }
     .hero-sub { font-size: 1.05rem; }
-    .why-sec h2 { white-space: normal; font-size: clamp(1.9rem, 5vw, 2.65rem); text-wrap: balance; }
   }
   @media (max-width: 520px) {
-    .product-heading, .product-caption { padding: 20px; }
-    .product-heading h2 { font-size: 1.4rem; }
-    .product-preview { height: 260px; padding: 16px; gap: 16px; }
-    .why-item { padding: 20px; }
     .cta-actions { flex-direction: column; }
-    .check-preview { height: auto; aspect-ratio: 8 / 5; }
     .cta { padding: 28px 24px; }
     .cta-actions .btn { justify-content: center; white-space: normal; padding-inline: 16px; }
   }

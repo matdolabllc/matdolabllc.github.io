@@ -1,5 +1,6 @@
 ---
 import Logo from "./Logo.astro";
+import { APP_STORE_URL } from "../consts";
 
 const nav = [
   { label: "Home", href: "/" },
@@ -15,6 +16,7 @@ const path = Astro.url.pathname.replace(/\/?$/, "/");
 // Support follows the product being viewed, as in the footer.
 const isGrade = /^\/grade\//.test(path) || /^\/(privacy|terms|support)\/grade\/$/.test(path);
 nav.push({ label: "Support", href: `/support/${isGrade ? "grade" : "check"}/` });
+nav.push({ label: "Contact", href: "/contact/" });
 ---
 <header id="site-header">
   <div class="wrap nav">
@@ -31,8 +33,10 @@ nav.push({ label: "Support", href: `/support/${isGrade ? "grade" : "check"}/` })
     </nav>
 
     <div class="nav-right">
-      <a class="btn btn-sage" href="/contact/">Contact</a>
-      <button id="menu-toggle" class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+      <!-- The header's buttons are the two things a visitor can do next. Contact is a nav link. -->
+      <a class="btn hb hb-check" href={APP_STORE_URL} rel="noopener" aria-label="Try Matdo Check free on the App Store"><span>Try Check<span class="hb-free"> free</span></span></a>
+      <a class="btn hb hb-grade" href="/grade/try/">Join Grade</a>
+      <button id="menu-toggle" class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="24" height="24">
           <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/>
         </svg>
@@ -45,9 +49,8 @@ nav.push({ label: "Support", href: `/support/${isGrade ? "grade" : "check"}/` })
     {nav.map((i) => (
       i.soon
         ? <span class="mm-soon" aria-disabled="true">{i.label}<span class="soon-tag">Soon</span></span>
-        : <a href={i.href}>{i.label}</a>
+        : <a href={i.href} aria-current={path === i.href || (i.label === "Support" && path.startsWith("/support")) ? "page" : undefined}>{i.label}</a>
     ))}
-    <a href="/contact/" class="mm-contact">Contact</a>
   </div>
 </header>
 
@@ -72,7 +75,12 @@ nav.push({ label: "Support", href: `/support/${isGrade ? "grade" : "check"}/` })
   .nav-links .link.soon { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--color-ink); opacity: 0.45; cursor: default; }
   .soon-tag { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #08130d; background: var(--color-mint); padding: 1px 6px; border-radius: 999px; }
   .mm-soon { display: flex; align-items: center; gap: 0.5rem; padding: 0.7rem 0; font-weight: 500; color: var(--color-ink); opacity: 0.5; border-bottom: 1px solid var(--color-line); }
-  .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+  .nav-right { display: flex; align-items: center; gap: 10px; }
+  .hb { min-height: 42px; padding: 9px 16px; font-size: 0.9rem; white-space: nowrap; box-shadow: none; }
+  .hb-check { background: var(--color-teal); color: #fff; }
+  .hb-check:hover { background: var(--color-teal2); transform: translateY(-1px); }
+  .hb-grade { background: #1a2422; color: #fff; }
+  .hb-grade:hover { background: var(--color-forest); transform: translateY(-1px); }
   .menu-toggle { display: none; background: none; border: none; color: var(--color-forest); cursor: pointer; padding: 4px; }
 
   .mobile-menu {
@@ -84,6 +92,7 @@ nav.push({ label: "Support", href: `/support/${isGrade ? "grade" : "check"}/` })
   }
   .mobile-menu a { padding: 0.7rem 0; font-weight: 500; color: var(--color-ink); border-bottom: 1px solid var(--color-line); }
   .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a[aria-current="page"] { color: var(--color-teal); font-weight: 600; }
   .mobile-menu .mm-contact { color: var(--color-teal); font-weight: 600; }
 
   @media (max-width: 900px) {
@@ -95,8 +104,18 @@ nav.push({ label: "Support", href: `/support/${isGrade ? "grade" : "check"}/` })
     header { background: rgb(250 248 241 / 0.96); }
     .nav { gap: 12px; }
     .nav-right { gap: 8px; }
-    .nav-right .btn { min-height: 44px; padding: 10px 16px; font-size: 0.9rem; }
+    .nav-right .btn { min-height: 44px; padding: 10px 12px; font-size: 0.86rem; }
     .menu-toggle { width: 44px; height: 44px; align-items: center; justify-content: center; }
+  }
+  @media (max-width: 420px) {
+    .nav { gap: 6px; }
+    .nav-right { gap: 6px; }
+    .nav-right .btn { padding: 10px 9px; font-size: 0.8rem; }
+    .menu-toggle { width: 40px; }
+    .hb-free { display: none; }
+  }
+  @media (max-width: 350px) {
+    .hb-grade { display: none; }
     .mobile-menu { padding-inline: 20px; max-height: calc(100dvh - 80px); overflow-y: auto; }
     .mobile-menu a { min-height: 44px; }
   }
@@ -114,10 +133,24 @@ nav.push({ label: "Support", href: `/support/${isGrade ? "grade" : "check"}/` })
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 
-  toggle?.addEventListener("click", () => {
-    if (!menu) return;
-    const open = menu.classList.toggle("open");
+  const setMenu = (open: boolean) => {
+    if (!menu || !toggle) return;
+    menu.classList.toggle("open", open);
     menu.hidden = !open;
     toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  };
+  const isOpen = () => toggle?.getAttribute("aria-expanded") === "true";
+
+  toggle?.addEventListener("click", () => setMenu(!isOpen()));
+  // Close after choosing a link, so an in-page link like #pricing isn't hidden behind the menu.
+  menu?.addEventListener("click", (e) => {
+    if ((e.target as Element).closest("a")) setMenu(false);
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && isOpen()) { setMenu(false); toggle?.focus(); }
+  });
+  document.addEventListener("click", (e) => {
+    if (isOpen() && header && !header.contains(e.target as Node)) setMenu(false);
   });
 </script>

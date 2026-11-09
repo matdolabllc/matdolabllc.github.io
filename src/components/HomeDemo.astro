@@ -1,0 +1,725 @@
+---
+// The home page's hands-on hero: Check and Grade side by side, both live on load.
+//
+// Check: the kiosk ("front desk") and the Records dashboard, sharing one roster.
+// The kiosk follows the app's own check-in/out flow (see the tutorial captions in
+// public/demo/tutorials/check-in.vtt and check-out.vtt). Names are the app's demo roster.
+// Grade: real Matdo Grade results, already graded. Pages, mark positions, answers
+// and explanations all come from src/data/gradedSamples.ts (copied from the app).
+import { APP_STORE_URL } from "../consts";
+import { samples } from "../data/gradedSamples";
+import { markPaths, placeEssayNotes, placeMarks } from "../lib/gradeMarks";
+
+const show = (v: string, unit?: string) => (!unit ? v : unit === "$" ? `$${v}` : `${v} ${unit}`);
+
+// Math: a Detailed-mode worksheet, with steps and "possible mistake" notes.
+const mathS = samples.find((x) => x.id === "math")!;
+const mPage = mathS.pages[0];
+const mMarks = mPage.marks ?? [];
+const mPlaced = placeMarks(mMarks.map((m) => m.box), mPage.width, mPage.height);
+const mRows = mathS.rows ?? [];
+const math = {
+  page: mPage, alt: mathS.alt, seconds: mathS.seconds, mode: mathS.mode,
+  correct: mRows.filter((r) => r.result === "correct").length,
+  wrong: mRows.filter((r) => r.result === "incorrect").length,
+  items: mMarks.map((m, i) => {
+    const r = mRows.find((x) => x.n === m.n)!;
+    return { n: m.n, result: m.result, q: mPlaced[i], student: show(r.student, r.unit), answer: show(r.correct, r.unit),
+      why: r.explanation ?? "", steps: r.steps ?? [], mistakes: r.mistakes ?? [] };
+  }),
+};
+const firstWrong = math.items.find((i) => i.result === "incorrect")?.n ?? math.items[0].n;
+// The callout beside the first ✗: the app's verdict, readable without a tap.
+const featured = math.items.find((i) => i.n === firstWrong)!;
+const featuredTop = (featured.q.y / math.page.height) * 100;
+
+// Writing: an Essay Mode result, with paragraph notes, fixes, rubric and comment.
+const essayS = samples.find((x) => x.id === "essay")!;
+const ePage = essayS.pages[0];
+const eNotes = ePage.essayNotes ?? [];
+const eSpots = placeEssayNotes(eNotes.map((n) => n.box), ePage.width, ePage.height);
+const essay = {
+  page: ePage, alt: essayS.alt, seconds: essayS.seconds, mode: essayS.mode, ...essayS.essay!,
+  badges: eNotes.map((n, i) => ({
+    n, sp: `s${i}`, view: n.kind === "paragraph" ? `p${n.index}` : "fixes",
+    strong: n.kind === "paragraph" && n.isStrong,
+    left: (eSpots[i].x / ePage.width) * 100, top: (eSpots[i].y / ePage.height) * 100,
+    bw: ((1.7 * eSpots[i].size) / ePage.width) * 100,
+    label: n.kind === "spelling" ? `${n.issue}: ${n.from}, should be ${n.to}` : `Paragraph ${n.index} note`,
+  })),
+};
+const paragraphs = eNotes.flatMap((n) => (n.kind === "paragraph" ? [n] : []));
+const fixes = eNotes.flatMap((n, i) => (n.kind === "spelling" ? [{ ...n, sp: `s${i}` }] : []));
+const resultClass = (r: string) => (r === "Met" ? "ok" : r === "Not met" ? "bad" : "part");
+const icons = {
+  thumb: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 10h4v11H2zM8 10l4-8c1.7 0 3 1.3 3 3v4h5.5c1.1 0 2 1 1.8 2.1l-1.6 8.5c-.2.9-1 1.4-1.9 1.4H8z"/></svg>',
+  bang: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9.6" y="2.5" width="4.8" height="13" rx="2.4"/><circle cx="12" cy="20" r="2.5"/></svg>',
+};
+
+const roster = [
+  { last: "Bennett", first: "Clara", start: "in" },
+  { last: "Harrison", first: "Anna", start: "done" },
+  { last: "Lu", first: "Jason", start: "out" },
+  { last: "Kennedy", first: "Charles", start: "out" },
+  { last: "Smith", first: "Emily", start: "out" },
+];
+---
+<!-- On a phone the panels stack; parents get a shortcut past the Check kiosk. -->
+<a class="hd-jump" href="#hd-grade">Here for homework? Jump to Matdo Grade ↓</a>
+<div class="hd" data-hd>
+  <!-- ================= Matdo Check ================= -->
+  <section class="hd-panel hd-check" aria-labelledby="hd-check-title">
+    <header class="hd-head">
+      <img src="/logos/matdo-check-mark.png" width="552" height="782" alt="" />
+      <div>
+        <h2 id="hd-check-title">Matdo Check</h2>
+        <p>For tutoring center owners, managers and tutors. Works offline; pair iPads and iPhones.</p>
+      </div>
+      <a class="hd-more" href="/check/" aria-label="Learn more about Matdo Check">Learn more →</a>
+    </header>
+
+    <div class="hd-demo" data-desk>
+      <div class="hd-bar">
+        <div class="seg" role="group" aria-label="Demo screen">
+          <button type="button" aria-pressed="true" data-view="kiosk">Front desk</button>
+          <button type="button" aria-pressed="false" data-view="board">Dashboard</button>
+        </div>
+        <span class="hd-tag">Try it</span>
+        <button type="button" class="hd-reset" data-reset>Start over</button>
+      </div>
+
+      <!-- Front desk (kiosk) -->
+      <div class="view kiosk" data-pane="kiosk">
+        <p class="k-prompt" data-prompt><span aria-hidden="true">👆</span> <span data-prompt-text>Jason is selected. Tap the green <b>Check In</b>.</span></p>
+        <p class="k-clock"><b data-clock>&nbsp;</b><span data-date>&nbsp;</span></p>
+        <p class="k-kicker">Attendee check-in</p>
+        <h3 class="k-title">Who's here today?</h3>
+        <label class="k-search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span class="sr">Search attendees</span>
+          <input type="text" placeholder="Type first or last name…" autocomplete="off" spellcheck="false" data-search />
+        </label>
+        <ul class="k-results" data-results aria-label="Matching attendees"></ul>
+        <p class="k-hint" data-hint>Try typing <button type="button" data-try="Lu">Lu</button> or <button type="button" data-try="Clara">Clara</button></p>
+        <div class="k-actions">
+          <button type="button" class="k-btn" data-act="in" disabled>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.6 2.7-6 6-6s6 2.4 6 6z"/><path d="m15 9 2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span data-in-label>Check In</span>
+          </button>
+          <button type="button" class="k-btn" data-act="out" disabled>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 12V6.5a1.5 1.5 0 0 1 3 0V11m0-5.5V4.5a1.5 1.5 0 0 1 3 0V11m0-5.5a1.5 1.5 0 0 1 3 0V12m0-3.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1.5a6 6 0 0 1-5-2.7L3.7 14.6a1.5 1.5 0 0 1 2.4-1.8L7 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Check Out</span>
+          </button>
+        </div>
+        <!-- The app's front desk has this row under Check In / Check Out. -->
+        <div class="k-tools">
+          <button type="button" data-kiosk-clear><span class="kt-ic" aria-hidden="true">↺ </span>Reset</button>
+          <button type="button" disabled title="Not available in this demo" aria-label="Add Attendee (not available in this demo)"><span class="kt-ic" aria-hidden="true">＋ </span>Add Attendee</button>
+          <button type="button" data-view-go="board"><span class="kt-ic" aria-hidden="true">▤ </span>Management</button>
+        </div>
+        <div class="k-done" data-done hidden>
+          <span class="k-done-ic" aria-hidden="true">✓</span>
+          <p data-done-text></p>
+        </div>
+      </div>
+
+      <!-- Dashboard (Records) -->
+      <div class="view board" data-pane="board" hidden>
+        <p class="b-title">Attendance Dashboard <span data-today></span></p>
+        <div class="b-counts">
+          <div class="cnt in"><b data-count="in">1</b><span>In Class</span></div>
+          <div class="cnt done"><b data-count="done">1</b><span>Already Done</span></div>
+          <div class="cnt out"><b data-count="out">3</b><span>Not Present</span></div>
+        </div>
+        <ul class="b-rows" data-rows>
+          {roster.map((r) => (
+            <li class="b-row" data-name={`${r.first} ${r.last}`} data-last={r.last} data-first={r.first} data-start={r.start}>
+              <div class="b-name"><b>{r.last}</b>, {r.first}<span class="b-when"></span></div>
+              <button type="button" class="b-btn"></button>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <p class="sr" aria-live="polite" data-status></p>
+    </div>
+
+    <div class="hd-cta">
+      <a class="btn btn-primary" href={APP_STORE_URL} rel="noopener">Try free on the App Store</a>
+      <p class="hd-proof"><span class="stars" aria-hidden="true">★★★★★</span> <b>5.0</b> on the App Store · 5 ratings · 7-day free trial, then from $2.99/month</p>
+      <p class="hd-proof">One plan covers every iPad and iPhone on your Apple Account · Records stay in your own iCloud</p>
+    </div>
+  </section>
+
+  <!-- ================= Matdo Grade ================= -->
+  <section class="hd-panel hd-grade" id="hd-grade" aria-labelledby="hd-grade-title">
+    <header class="hd-head">
+      <img src="/logos/matdo-grade-mark.png" width="552" height="782" alt="" />
+      <div>
+        <h2 id="hd-grade-title">Matdo Grade <span class="badge">Early access</span></h2>
+        <p>For parents, tutors and teachers. Math, science, reading and essays. You review every mark.</p>
+      </div>
+      <a class="hd-more" href="/grade/" aria-label="Learn more about Matdo Grade">Learn more →</a>
+    </header>
+
+    <div class="hd-demo" data-grade>
+      <div class="hd-bar">
+        <div class="seg" role="group" aria-label="Graded example">
+          <button type="button" aria-pressed="true" data-example="math">Math worksheet</button>
+          <button type="button" aria-pressed="false" data-example="essay">Writing</button>
+        </div>
+        <span class="hd-tag">Real results</span>
+      </div>
+
+      <!-- ---------- Math ---------- -->
+      <div class="gx" data-ex="math">
+        <div class="gx-page">
+          <div class="sheet" style={`aspect-ratio:${math.page.width} / ${math.page.height};--ar:${(math.page.width / math.page.height).toFixed(4)}`}>
+            <img src={math.page.src} width={math.page.width} height={math.page.height} alt={math.alt} decoding="async" />
+            <svg class="marks" viewBox={`0 0 ${math.page.width} ${math.page.height}`} aria-hidden="true">
+              {math.items.map((m) => (
+                <g class={`mark ${m.result}`} transform={`translate(${m.q.x.toFixed(1)} ${m.q.y.toFixed(1)})`}>
+                  {markPaths(m.result, m.q.size).map((d) => <path d={d} stroke-width={(m.q.size * 0.17).toFixed(1)} />)}
+                </g>
+              ))}
+            </svg>
+            {math.items.map((m) => (
+              <button type="button" class={`hit ${m.result}`} data-sel={`q${m.n}`} tabindex="-1" aria-hidden="true"
+                style={`left:${((m.q.x / math.page.width) * 100).toFixed(2)}%;top:${((m.q.y / math.page.height) * 100).toFixed(2)}%`}></button>
+            ))}
+            <button type="button" class="callout" data-sel={`q${featured.n}`} style={`top:${featuredTop.toFixed(2)}%`}
+              aria-label={`Question ${featured.n}: the student wrote ${featured.student}, the correct answer is ${featured.answer}. The decimal places were misaligned. Show details.`}>
+              <span class="co-top"><span class="bad">✗ Q{featured.n}</span> <s>{featured.student}</s> → <b class="ok">{featured.answer}</b></span>
+              <span class="co-why">Misaligned the decimal places</span>
+              <span class="co-more">More ›</span>
+            </button>
+          </div>
+          <p class="summary"><span class="ok">✓ {math.correct}</span><span class="bad">✗ {math.wrong}</span><span class="sum-note">{math.mode} · {math.seconds} s</span></p>
+          <button type="button" class="show-detail" data-open aria-expanded="false" aria-controls="fb-math">Show Detail</button>
+        </div>
+
+        <div class="fb-card" id="fb-math" role="region" aria-label="Detailed grading" hidden>
+          <div class="fb-top"><button type="button" class="fb-back" data-close>← Back to page</button><span class="fb-label">Grading Details</span></div>
+          <div class="fb-scroll">
+            <div class="fb-nav" role="group" aria-label="Questions">
+              {math.items.map((m) => (
+                <button type="button" data-sel={`q${m.n}`} aria-pressed={m.n === firstWrong ? "true" : "false"} class={m.result}>
+                  {m.n}<span aria-hidden="true">{m.result === "correct" ? "✓" : "✗"}</span><span class="sr">{m.result === "correct" ? " correct" : " incorrect"}</span>
+                </button>
+              ))}
+            </div>
+            {math.items.map((m) => (
+              <article class="fb" data-fb={`q${m.n}`} hidden={m.n !== firstWrong}>
+                <div class="fb-head">
+                  <h3>Question {m.n}</h3>
+                  <span class={`chip ${m.result === "correct" ? "ok" : "bad"}`}>{m.result === "correct" ? "✓ Correct" : "✗ Incorrect"}</span>
+                </div>
+                {m.result === "correct" ? (
+                  <dl class="fb-ans one"><div><dt>Answer</dt><dd class="ok">{m.student}</dd></div></dl>
+                ) : (
+                  <dl class="fb-ans"><div><dt>Student's answer</dt><dd class="bad">{m.student}</dd></div><div><dt>Correct answer</dt><dd class="ok">{m.answer}</dd></div></dl>
+                )}
+                {m.mistakes.length > 0 && (
+                  <section class="fb-sec fb-mistake">
+                    <h4>{m.mistakes.length > 1 ? "Possible mistakes" : "Possible mistake"}</h4>
+                    {m.mistakes.map((x) => <p><b>{x.step === 0 ? "Overall" : `At step ${x.step}`}:</b> {x.detail}</p>)}
+                  </section>
+                )}
+                {m.why && <section class="fb-sec"><h4>Why</h4><p>{m.why}</p></section>}
+                {m.steps.length > 0 && (
+                  <section class="fb-sec">
+                    <h4>Worked solution</h4>
+                    <ol class="fb-steps">
+                      {m.steps.map((st) => <li>{st.text}{st.math && <code>{st.math}</code>}</li>)}
+                    </ol>
+                  </section>
+                )}
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- ---------- Writing ---------- -->
+      <div class="gx" data-ex="essay" hidden>
+        <div class="gx-page">
+          <div class="sheet" style={`aspect-ratio:${essay.page.width} / ${essay.page.height};--ar:${(essay.page.width / essay.page.height).toFixed(4)}`}>
+            <img src={essay.page.src} width={essay.page.width} height={essay.page.height} alt={essay.alt} loading="lazy" decoding="async" />
+            {essay.badges.map((b) => (
+              <button type="button" class={`ebadge${b.strong ? " strong" : ""}`} data-sel={b.view} data-sp={b.n.kind === "spelling" ? b.sp : undefined}
+                tabindex="-1" aria-hidden="true" title={b.label}
+                style={`left:${b.left.toFixed(2)}%;top:${b.top.toFixed(2)}%;width:${b.bw.toFixed(2)}%`}
+                set:html={b.strong ? icons.thumb : icons.bang} />
+            ))}
+          </div>
+          <p class="summary"><span class="sum-mode">{essay.mode}</span><span class="sum-note">{fixes.length} fixes · {essay.seconds} s</span></p>
+          <button type="button" class="show-detail" data-open aria-expanded="false" aria-controls="fb-essay">Show Detail</button>
+        </div>
+
+        <div class="fb-card" id="fb-essay" role="region" aria-label="Detailed feedback" hidden>
+          <div class="fb-top"><button type="button" class="fb-back" data-close>← Back to page</button><span class="fb-label">Essay Feedback</span></div>
+          <div class="fb-scroll">
+            <div class="fb-nav" role="group" aria-label="Feedback">
+              <button type="button" data-sel="overall" aria-pressed="true">Overall</button>
+              {paragraphs.map((n) => <button type="button" data-sel={`p${n.index}`} aria-pressed="false">¶{n.index}</button>)}
+              <button type="button" data-sel="fixes" aria-pressed="false">Fixes <span class="count">{fixes.length}</span></button>
+            </div>
+
+            <article class="fb" data-fb="overall">
+              <div class="fb-head"><h3>Teacher-style feedback</h3></div>
+              <p class="fb-comment">{essay.comment}</p>
+              <section class="fb-sec">
+                <h4>Rubric</h4>
+                <ul class="rubric">
+                  {essay.rubric.map((r) => (
+                    <li><div class="rubric-top"><b>{r.title}</b><span class={`chip ${resultClass(r.result)}`}>{r.result}</span></div>{r.detail && <p>{r.detail}</p>}</li>
+                  ))}
+                </ul>
+              </section>
+            </article>
+
+            {paragraphs.map((n) => (
+              <article class="fb" data-fb={`p${n.index}`} hidden>
+                <div class="fb-head"><h3>Paragraph {n.index}</h3><span class={`chip ${n.isStrong ? "ok" : "part"}`}>{n.isStrong ? "Strong" : "Needs work"}</span></div>
+                <p class="fb-comment">{n.comment}</p>
+              </article>
+            ))}
+
+            <article class="fb" data-fb="fixes" hidden>
+              <div class="fb-head"><h3>Spelling and grammar</h3><span class="chip part">{fixes.length} fixes</span></div>
+              <ul class="fixes">
+                {fixes.map((f) => (
+                  <li data-sp={f.sp}><span class="fix-issue">{f.issue}</span><span class="fix-change"><s>{f.from}</s> → <b>{f.to}</b></span></li>
+                ))}
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+      <p class="sr" aria-live="polite" data-gstatus></p>
+    </div>
+
+    <div class="hd-cta">
+      <a class="btn btn-primary btn-dark" href="/grade/try/">Join early access</a>
+      <p class="hd-proof">Early access: about 100 pages free, on iPhone and iPad. Sign up and we'll reply within 48 hours.</p>
+      <p class="hd-proof">Pages are sent for grading only. Matdo keeps no copy unless you send a problem report, and homework is never used to train AI.</p>
+    </div>
+  </section>
+</div>
+
+<style>
+  .hd { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 36px; text-align: left; }
+  .hd-panel { display: flex; flex-direction: column; gap: 16px; padding: 22px; border-radius: 20px; background: #fff; border: 1px solid var(--color-line); border-top: 4px solid var(--accent); box-shadow: var(--shadow-md); --accent: var(--color-teal); --tint: #edf3ee; }
+  .hd-grade { --accent: #b08a3e; --tint: #f6f0e0; }
+  .hd-head { display: flex; align-items: center; gap: 14px; }
+  .hd-head img { height: 44px; width: auto; flex: none; }
+  .hd-head h2 { font-size: 1.5rem; line-height: 1.15; display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .hd-head p { margin-top: 2px; font-size: 0.95rem; color: #34433e; }
+  .hd-head > div { flex: 1; min-width: 0; }
+  .hd-more { flex: none; align-self: flex-start; margin-top: 4px; font-size: 0.86rem; font-weight: 700; color: var(--accent); white-space: nowrap; }
+  .hd-grade .hd-more { color: #806123; }
+  .hd-more:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .hd-jump { display: none; }
+  #hd-grade { scroll-margin-top: 90px; }
+  .badge { padding: 2px 9px; border-radius: 999px; background: #b08a3e; color: #fff; font-family: var(--font-sans); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+
+  /* Demo frame */
+  .hd-demo { position: relative; flex: 1; display: flex; flex-direction: column; padding: 12px; border-radius: 14px; background: var(--tint); }
+  .hd-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .seg { display: inline-flex; padding: 3px; border-radius: 999px; background: #fff; border: 1px solid var(--color-line); min-width: 0; }
+  .seg button { border: 0; background: transparent; border-radius: 999px; padding: 6px 12px; font: inherit; font-size: 0.84rem; font-weight: 600; color: #55665f; cursor: pointer; white-space: nowrap; }
+  .seg button[aria-pressed="true"] { background: var(--color-forest); color: #fff; }
+  .hd-tag { margin-left: auto; flex: none; padding: 4px 10px; border-radius: 999px; background: #fff; border: 1px solid currentColor; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent); }
+  .hd-grade .hd-tag { color: #806123; }
+  .hd-reset { flex: none; border: 1px solid var(--color-line); background: #fff; border-radius: 999px; padding: 5px 11px; font: inherit; font-size: 0.8rem; font-weight: 600; color: #3d4b47; cursor: pointer; }
+  .seg button:focus-visible, .hd-reset:focus-visible, .k-btn:focus-visible, .b-btn:focus-visible, .fb-nav button:focus-visible, .k-results :global(button:focus-visible), .k-hint button:focus-visible { outline: 3px solid var(--color-mint); outline-offset: 2px; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .view { position: relative; flex: 1; border-radius: 10px; background: #f2f2f7; padding: 16px; min-height: 380px; }
+  .kiosk:not([hidden]) { display: flex; flex-direction: column; justify-content: center; }
+  .view[hidden] { display: none; }
+
+  /* Kiosk, after the app's front desk */
+  .k-clock { display: grid; justify-items: center; line-height: 1.15; }
+  .k-clock b { font-size: 1.05rem; color: #1c1c1e; }
+  .k-clock span { font-size: 0.8rem; color: #55555a; }
+  .k-kicker { margin-top: 18px; text-align: center; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #6f9a74; }
+  .k-title { text-align: center; font-family: var(--font-sans); font-size: 1.45rem; font-weight: 700; color: #1c1c1e; margin: 2px 0 12px; }
+  .k-search { display: flex; align-items: center; gap: 8px; padding: 0 12px; height: 46px; border-radius: 12px; background: #fff; box-shadow: 0 2px 10px rgb(0 0 0 / 0.06); color: #8e8e93; }
+  .k-search svg { width: 18px; height: 18px; flex: none; }
+  .k-search input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font: inherit; font-size: 1rem; color: #1c1c1e; }
+  .k-search:focus-within { box-shadow: 0 0 0 3px rgb(79 209 197 / 0.5); }
+  .k-results { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 4px; }
+  .k-results :global(button) { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid transparent; border-radius: 10px; background: #fff; font: inherit; font-size: 0.93rem; color: #1c1c1e; cursor: pointer; text-align: left; }
+  .k-results :global(button[aria-pressed="true"]) { border-color: #6f9a74; background: #eef5ef; }
+  .k-results :global(small) { color: #6b6b70; font-size: 0.78rem; }
+  .k-results :global(.k-none) { padding: 8px 12px; font-size: 0.85rem; color: #6b6b70; }
+  .k-prompt { align-self: center; margin: 0 auto 14px; padding: 6px 14px; border-radius: 999px; background: #fff; border: 1px solid rgb(111 154 116 / 0.45); color: #2f4a35; font-size: 0.9rem; text-align: center; box-shadow: 0 2px 8px rgb(0 0 0 / 0.05); }
+  .k-prompt b { color: #4f7f56; }
+  .k-hint { margin-top: 8px; text-align: center; font-size: 0.9rem; color: #55555a; }
+  .k-hint button { border: 0; background: #fff; border-radius: 6px; padding: 1px 7px; font: inherit; font-weight: 600; color: var(--color-teal); cursor: pointer; }
+  .k-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+  .k-btn { display: grid; justify-items: center; gap: 2px; padding: 10px 6px; border-radius: 12px; border: 1px solid rgb(0 0 0 / 0.06); background: #fafafa; font: inherit; font-weight: 600; font-size: 0.95rem; color: #b0b0b5; cursor: default; }
+  .k-btn svg { width: 24px; height: 24px; fill: currentColor; }
+  .k-btn.ready { background: #6f9a74; border-color: #6f9a74; color: #fff; cursor: pointer; box-shadow: 0 6px 16px rgb(111 154 116 / 0.35); }
+  .k-btn.finished { color: #6f9a74; background: #eef5ef; }
+  .k-tools { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin-top: 8px; }
+  .k-tools button { min-height: 38px; padding: 6px 4px; border-radius: 10px; border: 1px solid rgb(0 0 0 / 0.06); background: #fff; font: inherit; font-size: 0.82rem; font-weight: 600; color: #4f7f56; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .k-tools button:disabled { color: #a3b3a6; cursor: not-allowed; }
+  .k-tools button:focus-visible { outline: 3px solid var(--color-mint); outline-offset: 2px; }
+  .k-done { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 8px; border-radius: 10px; background: rgb(242 242 247 / 0.96); text-align: center; padding: 16px; }
+  .k-done[hidden] { display: none; }
+  .k-done-ic { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: #6f9a74; color: #fff; font-size: 1.8rem; font-weight: 700; }
+  .k-done p { font-weight: 600; color: #1c1c1e; }
+
+  /* Dashboard, after the app's Records screen */
+  .b-title { font-weight: 700; color: #1c1c1e; margin-bottom: 10px; }
+  .b-title span { font-weight: 500; font-size: 0.8rem; color: #6b6b70; margin-left: 4px; }
+  .b-counts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px; }
+  .cnt { display: grid; justify-items: center; padding: 6px 4px; border-radius: 10px; border: 1px solid rgb(0 0 0 / 0.06); }
+  .cnt b { font-size: 1.25rem; line-height: 1.1; }
+  .cnt span { font-size: 0.78rem; color: #4f5b57; }
+  .cnt.in { background: #e6efe7; } .cnt.in b { color: #5d8a63; }
+  .cnt.done { background: #fbf0dc; } .cnt.done b { color: #b9802c; }
+  .cnt.out { background: #ececea; } .cnt.out b { color: #6b6b68; }
+  .b-rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; }
+  .b-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 7px 8px 7px 12px; border-radius: 10px; background: #fff; transition: background 0.25s; }
+  .b-row.in { background: #e6efe7; } .b-row.done { background: #fbf0dc; }
+  .b-name { min-width: 0; font-size: 0.9rem; color: #1c1c1e; }
+  .b-when { display: block; font-size: 0.82rem; color: #4a5854; }
+  .b-btn { flex: none; min-width: 92px; min-height: 36px; border: 0; border-radius: 9px; font: inherit; font-size: 0.84rem; font-weight: 600; cursor: pointer; }
+  .b-row.out .b-btn { background: #6f9a74; color: #fff; }
+  .b-row.in .b-btn { background: #1a1a1a; color: #fff; }
+  .b-row.done .b-btn { background: #dcd9d2; color: #6b6b68; cursor: default; }
+
+  /* Grade: the real page beside the app's feedback */
+  .gx { position: relative; flex: 1; display: flex; flex-direction: column; }
+  .gx[hidden] { display: none; }
+  .gx-page { flex: 1; display: flex; flex-direction: column; align-items: center; }
+  .sheet { position: relative; width: min(100%, calc(400px * var(--ar))); border-radius: 8px; overflow: hidden; background: #fff; box-shadow: var(--shadow-sm); }
+  .sheet img { display: block; width: 100%; height: 100%; }
+  /* The decimals photo is grey and dim; lift it so the marks stand out. Display only. */
+  [data-ex="math"] .sheet img { filter: brightness(1.14) contrast(1.22) saturate(0.9); }
+  .marks { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .mark path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .mark.correct path { stroke: #638c6d; }
+  .mark.incorrect path { stroke: #f24e1e; }
+  .hit { position: absolute; width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%; border: 0; background: transparent; cursor: pointer; }
+  .hit:hover { background: rgb(29 59 52 / 0.1); }
+  .hit[aria-pressed="true"] { box-shadow: 0 0 0 3px #ffb039; background: rgb(255 176 57 / 0.18); }
+  /* Callout beside the first wrong answer, in the page's blank right margin */
+  .callout { position: absolute; left: 51%; right: 2%; translate: 0 -50%; display: grid; gap: 2px; padding: 9px 12px; border: 1px solid rgb(242 78 30 / 0.35); border-radius: 10px; background: rgb(255 255 255 / 0.96); box-shadow: 0 6px 18px rgb(29 59 52 / 0.18); font: inherit; text-align: left; color: #1d2b27; cursor: pointer; }
+  .callout::before { content: ""; position: absolute; left: -6px; top: 50%; width: 10px; height: 10px; translate: 0 -50%; rotate: 45deg; background: #fff; border-left: 1px solid rgb(242 78 30 / 0.35); border-bottom: 1px solid rgb(242 78 30 / 0.35); }
+  .co-top { font-size: 0.95rem; line-height: 1.3; font-weight: 700; }
+  .co-top s { color: #b23410; font-weight: 600; }
+  .co-why { font-size: 0.86rem; line-height: 1.35; color: #2f3d39; }
+  .co-more { font-size: 0.82rem; font-weight: 700; color: #4f7f56; }
+  .callout:hover { border-color: #f24e1e; }
+  .callout:focus-visible { outline: 3px solid var(--color-mint); outline-offset: 2px; }
+  .ebadge { position: absolute; aspect-ratio: 1; padding: 0; translate: -50% -50%; display: grid; place-items: center; background: rgb(255 255 255 / 0.95); border: 1px solid rgb(60 60 67 / 0.3); border-radius: 50%; box-shadow: 0 2px 6px rgb(29 59 52 / 0.14); color: #ffb039; cursor: pointer; }
+  .ebadge.strong { color: #638c6d; }
+  .ebadge :global(svg) { width: 62%; height: 62%; fill: currentColor; }
+  .ebadge[aria-pressed="true"] { border-color: #ffb039; box-shadow: 0 0 0 3px rgb(255 176 57 / 0.45); }
+  .summary { display: flex; align-items: center; gap: 10px; width: min(100%, 360px); margin-top: 8px; padding: 6px 10px; border-radius: 10px; background: #fff; font-weight: 700; font-size: 0.92rem; }
+  .sum-mode { color: #806123; white-space: nowrap; }
+  .sum-note { margin-left: auto; font-weight: 500; font-size: 0.85rem; color: #4a5854; text-align: right; }
+
+  .show-detail { width: min(100%, 360px); margin-top: 8px; min-height: 44px; border: 0; border-radius: 12px; background: #638c6d; color: #fff; font: inherit; font-weight: 700; font-size: 0.98rem; cursor: pointer; box-shadow: 0 6px 16px rgb(99 140 109 / 0.3); }
+  .show-detail:hover { background: #557a5e; }
+  .show-detail:focus-visible, .fb-back:focus-visible { outline: 3px solid var(--color-mint); outline-offset: 2px; }
+
+  /* Detail view: opens over the page, inside the panel, so both panels keep their size */
+  .fb-card { position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; border-radius: 10px; background: #fff; box-shadow: var(--shadow-md); animation: fbin 0.22s ease-out; }
+  .fb-card[hidden] { display: none; }
+  @keyframes fbin { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  .fb-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px; border-bottom: 1px solid var(--color-line); }
+  .fb-back { border: 0; background: transparent; padding: 6px 8px; margin-left: -8px; border-radius: 8px; font: inherit; font-weight: 700; font-size: 0.9rem; color: var(--color-teal); cursor: pointer; }
+  .fb-back:hover { background: var(--color-cream); }
+  .fb-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #6b7772; }
+  .fb-scroll { flex: 1; min-height: 0; overflow-y: auto; padding: 12px 14px 14px; overscroll-behavior: contain; }
+  .fb-nav { display: flex; flex-wrap: wrap; gap: 5px; padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid var(--color-line); }
+  .fb-nav button { display: inline-flex; align-items: center; gap: 3px; min-height: 30px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--color-line); background: #fff; font: inherit; font-size: 0.8rem; font-weight: 600; color: #3d4b47; cursor: pointer; }
+  .fb-nav button.correct span[aria-hidden] { color: #4b7a55; }
+  .fb-nav button.incorrect span[aria-hidden] { color: #c23a12; }
+  .fb-nav button[aria-pressed="true"] { background: var(--color-forest); border-color: var(--color-forest); color: #fff; }
+  .fb-nav button[aria-pressed="true"] span[aria-hidden] { color: #fff; }
+  .fb-nav .count { padding: 0 6px; border-radius: 999px; background: #ffb039; color: #1d2b27; font-size: 0.72rem; }
+  .fb[hidden] { display: none; }
+  .fb-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+  .fb-head h3 { font-family: var(--font-sans); font-size: 1rem; font-weight: 700; color: #1d2b27; }
+  .chip { flex: none; padding: 2px 9px; border-radius: 999px; font-size: 0.74rem; font-weight: 700; }
+  .chip.ok { background: #e6efe7; color: #3f6b48; }
+  .chip.bad { background: #fde6dd; color: #b23410; }
+  .chip.part { background: #fbf0dc; color: #8a5a12; }
+  .fb-ans { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 0 0 10px; }
+  .fb-ans.one { grid-template-columns: 1fr; }
+  .fb-ans div { padding: 6px 9px; border-radius: 8px; background: #f6f6f3; }
+  .fb-ans dt { font-size: 0.72rem; color: #6b7772; }
+  .fb-ans dd { margin: 0; font-weight: 700; font-size: 1rem; word-break: break-word; }
+  .fb-sec { margin-top: 10px; }
+  .fb-sec h4 { font-family: var(--font-sans); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: #6b7772; margin-bottom: 4px; }
+  .fb-sec p, .fb-comment { font-size: 0.88rem; line-height: 1.5; color: #2f3d39; }
+  .fb-mistake { padding: 8px 10px; border-radius: 8px; background: #fff6e6; border-left: 3px solid #ffb039; }
+  .fb-mistake p + p { margin-top: 4px; }
+  .fb-steps { margin: 0; padding-left: 1.2rem; display: grid; gap: 6px; font-size: 0.86rem; line-height: 1.45; color: #2f3d39; }
+  .fb-steps code { display: block; margin-top: 3px; padding: 4px 8px; border-radius: 6px; background: #f2f4f1; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.82rem; color: #1d2b27; white-space: pre-wrap; }
+  .rubric { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .rubric li { padding: 8px 10px; border-radius: 8px; background: #f6f6f3; }
+  .rubric-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 0.9rem; }
+  .rubric p { margin-top: 3px; font-size: 0.84rem; line-height: 1.45; color: #3d4b47; }
+  .fixes { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .fixes li { display: grid; gap: 2px; padding: 7px 10px; border-radius: 8px; background: #f6f6f3; border: 2px solid transparent; }
+  .fixes li.on { border-color: #ffb039; background: #fff6e6; }
+  .fix-issue { font-size: 0.76rem; color: #6b7772; }
+  .fix-change { font-size: 0.92rem; }
+  .fix-change s { color: #b23410; }
+  .fix-change b { color: #3f6b48; }
+  .ok { color: #4b7a55; } .bad { color: #c23a12; }
+
+  /* Calls to action */
+  .hd-cta { display: grid; gap: 6px; justify-items: start; }
+  .hd-cta .btn { width: 100%; justify-content: center; }
+  .btn-dark { background: #1a2422; box-shadow: 0 8px 20px rgb(26 36 34 / 0.22); }
+  .btn-dark:hover { background: var(--color-forest); }
+  .hd-proof { font-size: 0.92rem; line-height: 1.45; color: #34433e; }
+  .stars { color: #e0a526; letter-spacing: 1px; }
+
+  @media (max-width: 1080px) {
+    .hd { grid-template-columns: minmax(0, 1fr); }
+    .hd-jump { display: inline-block; margin-top: 20px; padding: 8px 16px; border-radius: 999px; background: #f6f0e0; border: 1px solid rgb(176 138 62 / 0.4); color: #806123; font-weight: 700; font-size: 0.92rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .fb-card { animation: none; } }
+  @media (max-width: 520px) {
+    .hd-head { flex-wrap: wrap; align-items: flex-start; }
+    .hd-head > div { flex: 1 1 calc(100% - 60px); }
+    .hd-more { order: 3; flex-basis: calc(100% - 58px); margin: -4px 0 0 58px; }
+    .k-tools button { white-space: normal; line-height: 1.2; font-size: 0.78rem; padding: 6px 3px; }
+  }
+  @media (max-width: 400px) {
+    .kt-ic { display: none; }
+    .k-tools { gap: 4px; }
+    .k-tools button { font-size: 0.72rem; padding: 6px 1px; }
+    .hd { margin-top: 28px; gap: 20px; }
+    .hd-panel { padding: 16px; }
+    .hd-demo { padding: 8px; }
+    .view { padding: 12px; min-height: 300px; }
+    .seg button { padding: 6px 9px; font-size: 0.8rem; }
+    .hd-tag { display: none; }
+  }
+</style>
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-hd]");
+  if (root) {
+    const fmt = (d: Date) => d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+    // The demo runs on an after-school clock: it starts at 3:45 PM today and moves with real time,
+    // so the front desk never shows "11:11 PM" to a late-night visitor.
+    const demoStart = new Date(); demoStart.setHours(15, 45, 0, 0);
+    const loadedAt = Date.now();
+    const demoNow = () => new Date(demoStart.getTime() + (Date.now() - loadedAt));
+    const ago = (min: number) => fmt(new Date(demoNow().getTime() - min * 60000));
+    const toMin = (s: string) => { const [, h, m, ap] = s.match(/(\d+):(\d+)\s*(AM|PM)/i) ?? []; return ((Number(h) % 12) + (/pm/i.test(ap ?? "") ? 12 : 0)) * 60 + Number(m); };
+    const mins = (a: string, b: string) => { const m = toMin(b) - toMin(a); return Number.isFinite(m) ? (m + 1440) % 1440 : 0; };
+
+    /* ================= Check ================= */
+    const desk = root.querySelector<HTMLElement>("[data-desk]")!;
+    const status = desk.querySelector<HTMLElement>("[data-status]")!;
+    const say = (t: string) => { status.textContent = t; };
+    type Person = { name: string; last: string; first: string; start: string; state: string; in: string; out: string };
+    const people: Person[] = [...desk.querySelectorAll<HTMLElement>(".b-row")].map((r) => ({
+      name: r.dataset.name!, last: r.dataset.last!, first: r.dataset.first!, start: r.dataset.start!, state: "", in: "", out: "",
+    }));
+    // Times are relative to the visitor's clock, so every duration makes sense.
+    const seed = () => people.forEach((p) => {
+      p.state = p.start;
+      p.in = p.start === "in" ? ago(25) : p.start === "done" ? ago(90) : "";
+      p.out = p.start === "done" ? ago(35) : "";
+    });
+
+    // Clock and date, like the kiosk header.
+    const tick = () => {
+      const d = demoNow();
+      desk.querySelector("[data-clock]")!.textContent = fmt(d);
+      desk.querySelector("[data-date]")!.textContent = d.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
+      desk.querySelector("[data-today]")!.textContent = d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+    };
+    tick(); setInterval(tick, 20000);
+
+    // Front desk / Dashboard
+    const views = [...desk.querySelectorAll<HTMLButtonElement>("[data-view]")];
+    const show = (v: string) => {
+      views.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.view === v)));
+      desk.querySelectorAll<HTMLElement>("[data-pane]").forEach((p) => (p.hidden = p.dataset.pane !== v));
+    };
+    views.forEach((b) => b.addEventListener("click", () => show(b.dataset.view!)));
+
+    // Dashboard
+    const renderBoard = () => {
+      const counts: Record<string, number> = { in: 0, done: 0, out: 0 };
+      desk.querySelectorAll<HTMLElement>(".b-row").forEach((row, i) => {
+        const p = people[i];
+        counts[p.state]++;
+        row.className = `b-row ${p.state}`;
+        const when = row.querySelector<HTMLElement>(".b-when")!;
+        const btn = row.querySelector<HTMLButtonElement>(".b-btn")!;
+        if (p.state === "out") { when.textContent = "Not in yet"; btn.textContent = "Check In"; btn.disabled = false; btn.setAttribute("aria-label", `Check in ${p.name}`); }
+        if (p.state === "in") { when.textContent = `In at ${p.in}`; btn.textContent = "Check Out"; btn.disabled = false; btn.setAttribute("aria-label", `Check out ${p.name}`); }
+        if (p.state === "done") { when.textContent = `${p.in} – ${p.out} · ${mins(p.in, p.out)} min`; btn.textContent = "Done"; btn.disabled = true; btn.removeAttribute("aria-label"); }
+      });
+      for (const k in counts) desk.querySelector(`[data-count="${k}"]`)!.textContent = String(counts[k]);
+    };
+    const act = (p: Person) => {
+      if (p.state === "out") { p.state = "in"; p.in = fmt(demoNow()); return `${p.name} checked in at ${p.in}.`; }
+      if (p.state === "in") { p.state = "done"; p.out = fmt(demoNow()); return `${p.name} checked out at ${p.out}.`; }
+      return "";
+    };
+    desk.querySelector("[data-rows]")!.addEventListener("click", (e) => {
+      const btn = (e.target as Element).closest<HTMLButtonElement>(".b-btn");
+      if (!btn || btn.disabled) return;
+      const i = [...desk.querySelectorAll(".b-btn")].indexOf(btn);
+      say(act(people[i]));
+      renderBoard();
+      renderResults();
+    });
+
+    // Kiosk: type → pick a name → the ready button turns green → tap it.
+    const search = desk.querySelector<HTMLInputElement>("[data-search]")!;
+    const results = desk.querySelector<HTMLElement>("[data-results]")!;
+    const hint = desk.querySelector<HTMLElement>("[data-hint]")!;
+    const inBtn = desk.querySelector<HTMLButtonElement>('[data-act="in"]')!;
+    const outBtn = desk.querySelector<HTMLButtonElement>('[data-act="out"]')!;
+    const inLabel = desk.querySelector<HTMLElement>("[data-in-label]")!;
+    const done = desk.querySelector<HTMLElement>("[data-done]")!;
+    let picked: Person | null = null;
+    let doneTimer = 0;
+
+    const renderButtons = () => {
+      inBtn.className = "k-btn"; outBtn.className = "k-btn";
+      inBtn.disabled = outBtn.disabled = true;
+      inLabel.textContent = "Check In";
+      if (!picked) return;
+      if (picked.state === "out") { inBtn.classList.add("ready"); inBtn.disabled = false; }
+      else { inBtn.classList.add("finished"); inLabel.textContent = `In ${picked.in}`; }
+      if (picked.state === "in") { outBtn.classList.add("ready"); outBtn.disabled = false; }
+    };
+    function renderResults() {
+      const q = search.value.trim().toLowerCase();
+      results.innerHTML = "";
+      hint.hidden = q.length > 0;
+      if (!q) { picked = null; renderButtons(); return; }
+      const hits = people.filter((p) => p.first.toLowerCase().includes(q) || p.last.toLowerCase().includes(q));
+      if (!hits.includes(picked!)) picked = null;
+      for (const p of hits) {
+        const li = document.createElement("li");
+        const b = document.createElement("button");
+        b.type = "button";
+        b.setAttribute("aria-pressed", String(p === picked));
+        const name = document.createElement("span");
+        name.textContent = `${p.first} ${p.last}`;
+        const note = document.createElement("small");
+        note.textContent = p.state === "in" ? `In since ${p.in}` : p.state === "done" ? "Done for today" : "Not in yet";
+        b.append(name, note);
+        b.addEventListener("click", () => { picked = p; renderResults(); say(`${p.name} selected.`); (p.state === "out" ? inBtn : outBtn).focus({ preventScroll: true }); });
+        li.append(b);
+        results.append(li);
+      }
+      if (!hits.length) {
+        const li = document.createElement("li");
+        li.className = "k-none";
+        li.textContent = "No match in this demo roster.";
+        results.append(li);
+      }
+      renderButtons();
+    }
+    search.addEventListener("input", renderResults);
+    // Kiosk Reset clears the search (as in the app); Management opens the dashboard.
+    desk.querySelector("[data-kiosk-clear]")!.addEventListener("click", () => {
+      search.value = ""; picked = null; renderResults(); search.focus({ preventScroll: true });
+    });
+    desk.querySelector("[data-view-go]")!.addEventListener("click", () => show("board"));
+    desk.querySelectorAll<HTMLButtonElement>("[data-try]").forEach((b) => b.addEventListener("click", () => {
+      search.value = b.dataset.try!; renderResults(); search.focus({ preventScroll: true });
+    }));
+    const promptText = desk.querySelector<HTMLElement>("[data-prompt-text]")!;
+    const setPrompt = (html: string) => { promptText.innerHTML = html; };
+    const finish = (msg: string) => {
+      desk.querySelector("[data-done-text]")!.textContent = msg;
+      done.hidden = false;
+      say(msg);
+      renderBoard();
+      clearTimeout(doneTimer);
+      // As in the app: the kiosk returns on its own, ready for the next person.
+      setPrompt("Now type another name, or open the <b>Dashboard</b>.");
+      doneTimer = window.setTimeout(() => {
+        done.hidden = true; search.value = ""; picked = null; renderResults();
+        search.focus({ preventScroll: true });
+      }, 2200);
+    };
+    inBtn.addEventListener("click", () => { if (picked && picked.state === "out") finish(act(picked)); });
+    outBtn.addEventListener("click", () => { if (picked && picked.state === "in") finish(act(picked)); });
+
+    desk.querySelector("[data-reset]")!.addEventListener("click", () => {
+      clearTimeout(doneTimer); done.hidden = true;
+      seed(); search.value = ""; picked = null; renderResults(); renderBoard(); say("Demo reset.");
+      setPrompt("Type a name, tap it, then tap the green button.");
+    });
+    seed(); renderBoard();
+    // Start ready to try: one attendee found and selected, Check In already green.
+    search.value = "Jason";
+    renderResults();
+    picked = people.find((p) => p.first === "Jason") ?? null;
+    renderResults();
+
+    /* ================= Grade ================= */
+    const grade = root.querySelector<HTMLElement>("[data-grade]")!;
+    const gsay = (t: string) => { grade.querySelector("[data-gstatus]")!.textContent = t; };
+    const exButtons = [...grade.querySelectorAll<HTMLButtonElement>("[data-example]")];
+    exButtons.forEach((b) => b.addEventListener("click", () => {
+      exButtons.forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+      grade.querySelectorAll<HTMLElement>(".fb-card").forEach((c) => (c.hidden = true));
+      grade.querySelectorAll("[data-open]").forEach((o) => o.setAttribute("aria-expanded", "false"));
+      grade.querySelectorAll<HTMLElement>("[data-ex]").forEach((ex) => (ex.hidden = ex.dataset.ex !== b.dataset.example));
+    }));
+    // One selection per example: the nav chip, the mark or badge on the page,
+    // and the feedback shown beside it all follow it.
+    const select = (ex: HTMLElement, id: string, sp?: string, quiet = false) => {
+      ex.querySelectorAll<HTMLElement>("[data-fb]").forEach((f) => (f.hidden = f.dataset.fb !== id));
+      ex.querySelectorAll<HTMLElement>(".fb-nav [data-sel]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.sel === id)));
+      ex.querySelectorAll<HTMLElement>(".sheet [data-sel]").forEach((b) =>
+        b.setAttribute("aria-pressed", String(sp ? b.dataset.sp === sp : b.dataset.sel === id && !b.dataset.sp)));
+      ex.querySelectorAll<HTMLElement>(".fixes li").forEach((li) => li.classList.toggle("on", !!sp && li.dataset.sp === sp));
+      const scroller = ex.querySelector<HTMLElement>(".fb-scroll")!;
+      const target = sp ? ex.querySelector<HTMLElement>(`.fixes li[data-sp="${sp}"]`) : null;
+      if (target) target.scrollIntoView({ block: "nearest" }); else scroller.scrollTop = 0;
+      const shown = ex.querySelector<HTMLElement>(`[data-fb="${id}"] h3`);
+      if (!quiet) gsay(shown ? `${shown.textContent} feedback shown.` : "");
+    };
+    // Show Detail (or a mark on the page) opens the detail view over the page.
+    const openDetail = (ex: HTMLElement) => {
+      const card = ex.querySelector<HTMLElement>(".fb-card")!;
+      card.hidden = false;
+      ex.querySelector("[data-open]")!.setAttribute("aria-expanded", "true");
+      card.querySelector<HTMLElement>("[data-close]")!.focus({ preventScroll: true });
+    };
+    const closeDetail = (ex: HTMLElement) => {
+      const card = ex.querySelector<HTMLElement>(".fb-card")!;
+      if (card.hidden) return;
+      card.hidden = true;
+      const opener = ex.querySelector<HTMLElement>("[data-open]")!;
+      opener.setAttribute("aria-expanded", "false");
+      opener.focus({ preventScroll: true });
+    };
+    grade.querySelectorAll<HTMLElement>("[data-ex]").forEach((ex) => {
+      ex.addEventListener("click", (e) => {
+        const t = e.target as Element;
+        if (t.closest("[data-open]")) { openDetail(ex); return; }
+        if (t.closest("[data-close]")) { closeDetail(ex); return; }
+        const b = t.closest<HTMLElement>("[data-sel]");
+        if (!b) return;
+        select(ex, b.dataset.sel!, b.dataset.sp);
+        if (b.closest(".sheet")) openDetail(ex);
+      });
+      ex.addEventListener("keydown", (e) => { if (e.key === "Escape") closeDetail(ex); });
+      const first = ex.querySelector<HTMLElement>('.fb-nav [aria-pressed="true"]');
+      if (first) select(ex, first.dataset.sel!, undefined, true);
+    });
+  }
+</script>
