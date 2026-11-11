@@ -51,7 +51,7 @@ This must read as **an app result**, not a loose photo:
 
 ## Report back
 
-Write `design/illustration-prompts/home-product-cards.v3.report.md` **last**, after the image is
+Write `design/illustration-prompts/home-product-cards/home-product-cards.v3.report.md` **last**, after the image is
 saved. Claude watches for it. Use the same sections as before:
 
 1. The output, with pixel size and file size.

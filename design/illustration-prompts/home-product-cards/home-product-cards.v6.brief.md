@@ -24,7 +24,7 @@ names).
 
 ## Report back
 
-Write `design/illustration-prompts/home-product-cards.v6.report.md` **last**, after the image is
+Write `design/illustration-prompts/home-product-cards/home-product-cards.v6.report.md` **last**, after the image is
 saved. Include:
 
 - which option you chose;

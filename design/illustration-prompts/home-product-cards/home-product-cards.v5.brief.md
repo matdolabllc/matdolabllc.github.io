@@ -73,7 +73,7 @@ marks on the second device.
 
 ## Report back
 
-Write `design/illustration-prompts/home-product-cards.v5.report.md` **last**, after both images
+Write `design/illustration-prompts/home-product-cards/home-product-cards.v5.report.md` **last**, after both images
 are saved. Use the same sections as before:
 
 1. The outputs, with pixel size and file size.

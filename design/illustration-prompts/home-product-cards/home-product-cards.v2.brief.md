@@ -36,7 +36,7 @@ The top ~210 px of the canvas is empty background. Move both devices up by about
 
 ## Report back
 
-Write `design/illustration-prompts/home-product-cards.v2.report.md` **last**, after both files are
+Write `design/illustration-prompts/home-product-cards/home-product-cards.v2.report.md` **last**, after both files are
 saved. Claude watches for it. Use the same sections as round 1:
 
 1. Outputs, with pixel size and file size.

@@ -53,7 +53,7 @@ out exactly like `check-card.webp`, so the two tiles read as a pair:
 
 ## Report back
 
-Write `design/illustration-prompts/home-product-cards.v4.report.md` **last**, after the image is
+Write `design/illustration-prompts/home-product-cards/home-product-cards.v4.report.md` **last**, after the image is
 saved. Use the same sections as before:
 
 1. The output, with pixel size and file size.

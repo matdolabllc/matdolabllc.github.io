@@ -60,7 +60,7 @@ device screen must be a pixel crop of the source file named below.
 Put both files at the paths above and leave the old images in place. Do not edit any file under
 `src/`, and do not commit.
 
-**Report back** by writing `design/illustration-prompts/home-product-cards.report.md` **last**,
+**Report back** by writing `design/illustration-prompts/home-product-cards/home-product-cards.report.md` **last**,
 after both images are saved. Claude watches for that file. It should cover:
 
 1. The two output paths, each with its pixel size and file size.
