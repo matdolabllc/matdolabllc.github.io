@@ -1,0 +1,49 @@
+---
+// Second row under LegalProductTabs on a product that has a separate policy
+// for each platform (Matdo Grade's Privacy Policy). Written by
+// matdo-grade/tools/legal_to_web.py into the generated pages.
+interface Props {
+  product: "grade";
+  document: "privacy";
+  platform: "ios" | "android";
+}
+
+const { product, document, platform } = Astro.props;
+const platforms = [
+  { id: "ios", label: "iPhone & iPad", href: `/${document}/${product}/` },
+  { id: "android", label: "Android", href: `/${document}/${product}-android/` },
+];
+---
+
+<nav class="legal-platform-tabs" aria-label="Platform">
+  {platforms.map(({ id, label, href }) => (
+    <a href={href} aria-current={platform === id ? "page" : undefined}>{label}</a>
+  ))}
+</nav>
+
+<style>
+  .legal-platform-tabs {
+    display: flex;
+    width: fit-content;
+    gap: 4px;
+    padding: 4px;
+    margin: 0 0 24px;
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+  }
+  a {
+    padding: 6px 16px;
+    border-radius: 999px;
+    color: #55665f;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+  }
+  a:hover { background: #f0f4f1; color: var(--color-forest); }
+  a[aria-current="page"] {
+    color: #fff;
+    background: var(--color-forest);
+  }
+  a:focus-visible { outline: 2px solid var(--color-teal); outline-offset: 3px; }
+  @media print { .legal-platform-tabs { display: none; } }
+</style>
