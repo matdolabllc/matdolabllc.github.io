@@ -1,58 +1,46 @@
 ---
 /**
- * "Features" on /grade: one flip card per feature. The front is a cartoon
- * and the feature's name; a tap turns the card over to the caption.
- *
- * Illustrations match the subject cards' cream, green and gold palette.
+ * "Features" on /grade: one text card per feature (kicker, name, caption).
  * Every caption describes what the app does today.
  */
 const features = [
   {
-    cartoon: "grade-feat-steps",
     kicker: "Grading",
     title: "Step-by-step",
     caption:
       "Check answers quickly, or see a worked solution. Where working is shown, review a possible explanation for an error.",
   },
   {
-    cartoon: "grade-feat-pages",
     kicker: "Multi-page",
     title: "Whole assignments",
     caption:
       "Scan several pages and grade them together—even when a question continues on the next page.",
   },
   {
-    cartoon: "grade-feat-reading",
     kicker: "Comprehension",
     title: "Reading help",
     caption:
       "Add the passage and the questions. The app uses the passage to check answers without marking the passage itself.",
   },
   {
-    cartoon: "grade-feat-one-step",
     kicker: "Phone & tablet",
     title: "Scan & grade",
     caption:
       "Take a photo of the homework. See marks on the page, all in one app.",
   },
   {
-    cartoon: "grade-feat-subjects",
     kicker: "Subjects",
     title: "Many subjects",
     caption:
       "Check handwritten math, science, reading, and essays—from everyday homework to advanced problems.",
   },
   {
-    cartoon: "grade-feat-rubric",
     kicker: "Writing",
     title: "Essay feedback",
     caption:
       "Get feedback on grammar and writing, paragraph by paragraph. Use the standard rubric or add your own criteria.",
   },
 ];
-
-const turn =
-  '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>';
 ---
 <section id="features" class="section-pad band-cream2">
   <div class="wrap">
@@ -62,102 +50,31 @@ const turn =
       <p>Scan homework. Understand mistakes. Help learning move forward.</p>
     </div>
 
-    <div class="gf-grid reveal">
+    <ul class="gf-grid reveal">
       {features.map((f) => (
-        <button type="button" class="gf-card" aria-pressed="false" aria-label={`${f.kicker}: ${f.title}`} aria-describedby={`gf-${f.cartoon}`}>
-          <span class="gf-inner">
-            <span class="gf-face gf-front" aria-hidden="true">
-              <img src={`/demo/grade/features/${f.cartoon}.webp`} alt="" width="512" height="512" loading="lazy" decoding="async" />
-              <span class="gf-kicker">{f.kicker}</span>
-              <span class="gf-title">{f.title}</span>
-              <span class="gf-hint"><Fragment set:html={turn} />Tap to read</span>
-            </span>
-            <span class="gf-face gf-back" aria-hidden="true">
-              <span class="gf-kicker">{f.kicker}</span>
-              <span class="gf-title">{f.title}</span>
-              <span class="gf-caption" id={`gf-${f.cartoon}`}>{f.caption}</span>
-              <span class="gf-hint"><Fragment set:html={turn} />Tap to flip back</span>
-            </span>
-          </span>
-        </button>
+        <li class="gf-card">
+          <span class="gf-kicker">{f.kicker}</span>
+          <h3 class="gf-title">{f.title}</h3>
+          <p class="gf-caption">{f.caption}</p>
+        </li>
       ))}
-    </div>
+    </ul>
   </div>
 </section>
 
-<script>
-  // A tap turns a card over, and back. The caption is the button's description
-  // either way, so a screen reader gets it without the flip.
-  document.querySelectorAll<HTMLButtonElement>(".gf-card").forEach((card) =>
-    card.addEventListener("click", () =>
-      card.setAttribute("aria-pressed", String(card.getAttribute("aria-pressed") !== "true")),
-    ),
-  );
-</script>
-
 <style>
-  .gf-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  .gf-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 0; padding: 0; list-style: none; }
 
   .gf-card {
-    all: unset;
-    display: block;
-    cursor: pointer;
-    perspective: 1600px;
-    border-radius: var(--radius);
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  /* Both faces share one grid cell, so a card is as tall as its taller face. */
-  .gf-inner {
-    display: grid;
-    height: 100%;
-    transform-style: preserve-3d;
-    transition: transform 0.7s cubic-bezier(0.2, 0.75, 0.2, 1);
-  }
-  .gf-card[aria-pressed="true"] .gf-inner { transform: rotateY(180deg); }
-  @media (hover: hover) {
-    .gf-card:hover .gf-inner { transform: translateY(-4px); }
-    .gf-card[aria-pressed="true"]:hover .gf-inner { transform: rotateY(180deg) translateY(-4px); }
-    .gf-card:hover .gf-front { border-color: var(--color-teal); box-shadow: 0 10px 26px rgb(31 111 99 / 0.14); }
-  }
-
-  .gf-face {
-    grid-area: 1 / 1;
     display: flex;
     flex-direction: column;
-    border-radius: var(--radius);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    /* backface-visibility alone can let a face show through mid-turn (see
-       GradedSamples): the face turning away is hidden once the card is
-       edge-on, and the face turning in shows at once. */
-    transition: visibility 0s linear 0.1s, border-color 0.2s ease, box-shadow 0.2s ease;
-  }
-  .gf-card[aria-pressed="false"] .gf-back,
-  .gf-card[aria-pressed="true"] .gf-front { visibility: hidden; }
-  .gf-card[aria-pressed="false"] .gf-front,
-  .gf-card[aria-pressed="true"] .gf-back { transition-delay: 0s, 0s, 0s; }
-  .gf-card:focus-visible .gf-face { outline: 3px solid var(--color-mint); outline-offset: 3px; }
-
-  .gf-front {
-    align-items: center;
-    gap: 4px;
-    padding: 16px 20px 20px;
-    text-align: center;
-    background: var(--color-cream);
-    border: 2px solid var(--color-forest);
-  }
-  .gf-front img { display: block; width: min(78%, 220px); height: auto; aspect-ratio: 1; margin-bottom: 8px; border-radius: 12px; }
-
-  .gf-back {
     gap: 10px;
-    padding: 28px 26px 22px;
-    transform: rotateY(180deg);
+    padding: 28px 26px;
+    border-radius: var(--radius);
     color: var(--color-cream);
     background:
       radial-gradient(120% 70% at 100% 0%, rgb(232 166 46 / 0.2), transparent 60%),
       var(--color-forest);
-    border: 2px solid var(--color-forest);
   }
 
   .gf-kicker {
@@ -165,69 +82,28 @@ const turn =
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--color-teal);
+    color: #e8a62e;
   }
-  /* Centres the caption in the space above the hint. */
-  .gf-back .gf-kicker { margin-top: auto; color: #e8a62e; }
 
   .gf-title {
+    margin: 0;
     font-family: var(--font-display);
-    font-size: 1.2rem;
+    font-size: 1.45rem;
     font-weight: 600;
     line-height: 1.2;
-    color: var(--color-forest);
+    color: var(--color-cream);
     text-wrap: balance;
   }
-  .gf-back .gf-title { font-size: 1.45rem; color: var(--color-cream); }
 
-  .gf-caption { font-size: 1.02rem; line-height: 1.6; color: rgb(250 248 241 / 0.86); }
-
-  .gf-hint {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: auto;
-    padding-top: 10px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--color-teal);
-  }
-  .gf-back .gf-hint { color: rgb(250 248 241 / 0.6); }
-  .gf-hint :global(svg) { width: 14px; height: 14px; }
+  .gf-caption { margin: 0; font-size: 1.02rem; line-height: 1.6; color: rgb(250 248 241 / 0.86); }
 
   @media (max-width: 900px) {
     .gf-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
   }
   @media (max-width: 600px) {
-    .gf-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-    .gf-inner { position: relative; }
-    .gf-face { border-radius: 16px; }
-    .gf-front { height: 100%; min-height: 240px; padding: 14px 10px; }
-    .gf-front img { width: min(90%, 120px); }
-    .gf-kicker { font-size: 0.65rem; letter-spacing: 0.07em; overflow-wrap: anywhere; }
-    .gf-title { font-size: 1.05rem; }
-    .gf-hint { font-size: 0.75rem; gap: 4px; }
-    /* Keep fronts compact, then let a flipped row grow to fit its caption. */
-    .gf-back { position: absolute; inset: 0; padding: 14px 12px; gap: 8px; }
-    .gf-card[aria-pressed="true"] .gf-front { position: absolute; inset: 0; }
-    .gf-card[aria-pressed="true"] .gf-back { position: relative; inset: auto; min-height: 240px; }
-    .gf-back .gf-kicker { margin-top: 0; }
-    .gf-back .gf-title { font-size: 1.1rem; }
-    .gf-back .gf-caption { font-size: 0.95rem; line-height: 1.5; }
-    .gf-back .gf-kicker, .gf-back .gf-title, .gf-back .gf-hint { flex-shrink: 0; }
-  }
-
-  /* No turning for people who asked for less motion: the faces cross-fade. */
-  @media (prefers-reduced-motion: reduce) {
-    .gf-inner,
-    .gf-card:hover .gf-inner,
-    .gf-card[aria-pressed="true"] .gf-inner,
-    .gf-card[aria-pressed="true"]:hover .gf-inner { transform: none; transition: none; }
-    .gf-back { transform: none; }
-    .gf-face { transition: opacity 0.2s, visibility 0s linear 0.2s; }
-    .gf-card[aria-pressed="false"] .gf-back,
-    .gf-card[aria-pressed="true"] .gf-front { opacity: 0; }
-    .gf-card[aria-pressed="false"] .gf-front,
-    .gf-card[aria-pressed="true"] .gf-back { transition-delay: 0s; }
+    .gf-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+    .gf-card { padding: 22px 20px; }
+    .gf-title { font-size: 1.25rem; }
+    .gf-caption { font-size: 0.98rem; line-height: 1.55; }
   }
 </style>
