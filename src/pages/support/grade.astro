@@ -9,7 +9,13 @@ import Layout from "../../layouts/Layout.astro";
 // matdo-grade/MatdoGrade/LegalViews.swift); change them together.
 const EMAIL = "matdo@matdolab.com";
 
+// Android answers mirror /privacy/grade-android (no purchases yet, free test
+// units, no Android backup); change them together.
 const faqs = [
+  {
+    q: "Which devices does Matdo Grade work on?",
+    a: 'iPhone, iPad and Android phones and tablets. On iPhone and iPad, early-access families install it with TestFlight. Matdo Grade for Android is in testing on Google Play: <a href="/grade/try/">join early access</a>, choose Android, and we\'ll email you a link.',
+  },
   {
     q: "How do I grade a page?",
     a: "Tap <strong>Grade</strong>, line the page up inside the dashed guide, and press the shutter. For a worksheet that runs over several pages, turn on <strong>Multi-page</strong> and capture them one after another; include any reading passage or instructions the student did not write on, and Matdo reads them without marking them. For an essay, switch to Essay mode and edit the rubric first.",
@@ -20,11 +26,11 @@ const faqs = [
   },
   {
     q: "What does it cost?",
-    a: 'New users get a one-time grant of free units. After that, grading needs a monthly plan — Lite, Plus, Pro or Max — or a top-up that never expires. Each plan\'s allowance resets every month at 12:01 a.m. your time, on the day of the month your subscription started. The details are in the <a href="/terms/grade/#s13">Terms of Use</a>.',
+    a: 'New users get a one-time grant of free units. After that, grading needs a monthly plan — Lite, Plus, Pro or Max — or a top-up that never expires. Each plan\'s allowance resets every month at 12:01 a.m. your time, on the day of the month your subscription started. The details are in the <a href="/terms/grade/#s13">Terms of Use</a>. <strong>On Android</strong>, the app does not offer purchases yet: testers grade with a free grant of units.',
   },
   {
     q: "Does Matdo keep my students' work?",
-    a: 'No. A page is sent through our grading service to Google\'s Gemini model to be graded, and we keep no copy of the page or the grade unless you send us a <a href="/privacy/grade/#s4">problem report</a> about it. The marked page is saved only on your iPhone or iPad. See the <a href="/privacy/grade/">Privacy Policy</a> for exactly what we do receive.',
+    a: 'No. A page is sent through our grading service to Google\'s Gemini model to be graded, and we keep no copy of the page or the grade unless you send us a <a href="/privacy/grade/#s4">problem report</a> about it. The marked page is saved only on your phone or tablet. See the Privacy Policy for <a href="/privacy/grade/">iPhone and iPad</a> or <a href="/privacy/grade-android/">Android</a> for exactly what we do receive.',
   },
   {
     q: "A mark looks wrong.",
@@ -32,11 +38,15 @@ const faqs = [
   },
   {
     q: "How do I manage or cancel my subscription?",
-    a: "In the app, open Settings and tap Cancel Subscription, which opens Apple\'s subscription page, where you can also change plan. Or, on your device, open Settings, tap your name, then Subscriptions, and choose Matdo Grade. Refunds are requested from Apple at reportaproblem.apple.com.",
+    a: "<strong>On iPhone and iPad:</strong> in the app, open Settings and tap Cancel Subscription, which opens Apple\'s subscription page, where you can also change plan. Or, on your device, open Settings, tap your name, then Subscriptions, and choose Matdo Grade. Refunds are requested from Apple at reportaproblem.apple.com. <strong>On Android:</strong> there are no subscriptions yet, so there is nothing to cancel.",
   },
   {
     q: "I have a new iPhone or iPad.",
     a: "Install Matdo Grade and sign in with the same Apple Account. Your plan and unit balance follow your Apple Account; if they don't appear, tap Restore Purchases. Saved grades live on the old device and move only with a device backup or a device-to-device transfer.",
+  },
+  {
+    q: "I have a new Android phone or tablet.",
+    a: "Install Matdo Grade on the new device from the Google Play test. Saved grades stay on the old device: the app opts out of Android backup, so they are not copied to a new phone or tablet. If your test units don't appear on the new device, email us.",
   },
   {
     q: "Something is broken, or I have an idea.",
@@ -47,7 +57,7 @@ const faqs = [
 
 <Layout
   title="Support — Matdo Grade"
-  description="Get help with Matdo Grade. Email matdo@matdolab.com — we usually reply within one business day."
+  description="Get help with Matdo Grade on iPhone, iPad and Android. Email matdo@matdolab.com — we usually reply within one business day."
 >
   <section class="page-hero">
     <div class="wrap sup-wrap">
