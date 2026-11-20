@@ -7,6 +7,7 @@ import GradedSamples from "../components/GradedSamples.astro";
 import GradeFeatures from "../components/GradeFeatures.astro";
 import GradeWorkflow from "../components/GradeWorkflow.astro";
 import GradeFAQ from "../components/GradeFAQ.astro";
+import GradeTechnology from "../components/GradeTechnology.astro";
 
 // Matches the app (Plan.swift, MatdoGrade.storekit) and the server's free grant
 // (server/src/lib/plans.js). Page counts are quoted at Brief, 10 units for a
@@ -25,7 +26,7 @@ const fmt = (n: number) => n.toLocaleString("en-US");
   schema={[{
     "@type": "SoftwareApplication",
     name: "Matdo Grade",
-    description: "Photograph completed paper homework and review AI marks, correct answers, and explanations. No answer key needed.",
+    description: "AI homework grading built on Google Cloud. Photograph completed paper homework and review marks, correct answers, worked solutions, and likely mistakes, graded by Gemini through Vertex AI. No answer key needed.",
     applicationCategory: "EducationalApplication",
     operatingSystem: "iOS, iPadOS",
     url: "https://matdolab.com/grade/",
@@ -33,7 +34,7 @@ const fmt = (n: number) => n.toLocaleString("en-US");
     offers: { "@type": "AggregateOffer", priceCurrency: "USD", lowPrice: "4.99", highPrice: "39.99", offerCount: plans.length },
   }]}
   title="Matdo Grade — Paper homework, graded on your iPhone or iPad"
-  description="Photograph completed paper homework. Review marks, correct answers, and explanations with Matdo Grade on iPad and iPhone. No answer key needed."
+  description="Matdo Grade is AI homework grading for iPhone and iPad, built on Google Cloud. Photograph completed paper homework and review marks, correct answers, and explanations. No answer key needed."
 >
   <!-- HERO -->
 <ProductHero name="Matdo Grade" mark="/logos/matdo-grade-mark.png" headline={"Paper homework.\nGraded on your iPhone/iPad."} subtitle="For Parents. By Parents." description="Photograph your child’s finished homework. Review marks, correct answers, and explanations so you can help them try again." accent="#b08a3e">
@@ -66,6 +67,7 @@ const fmt = (n: number) => n.toLocaleString("en-US");
     <div class="wrap">
       <a href="#samples">Examples</a>
       <a href="#how-grade-works">How it works</a>
+      <a href="#technology">Technology</a>
       <a href="#subjects">Subjects</a>
       <a href="#features">Features</a>
       <a href="#pricing">Pricing</a>
@@ -77,6 +79,7 @@ const fmt = (n: number) => n.toLocaleString("en-US");
   <!-- Actual grading results come before subject and feature descriptions. -->
   <GradedSamples />
   <GradeWorkflow />
+  <GradeTechnology />
   <GradeSubjects />
 
   <!-- FEATURES — tap a card to read its caption -->

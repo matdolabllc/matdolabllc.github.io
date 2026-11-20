@@ -5,15 +5,42 @@ import HomeDemo from "../components/HomeDemo.astro";
 
 ---
 <Layout
-  title="Matdo — Everything, from front desk to homework"
-  description="Two simple iPad and iPhone apps. Matdo Check runs the front desk for tutoring centers; Matdo Grade checks paper homework for parents, tutors and teachers."
+  title="Matdo Lab — AI homework grading and front-desk apps for education"
+  description="Matdo Lab LLC builds iPhone and iPad apps for education. Matdo Grade is AI homework grading built on Google Cloud and Gemini; Matdo Check runs the front desk for tutoring centers."
 >
   <!-- HERO -->
   <section class="hero">
     <div class="wrap">
       <h1 class="hero-title"><span class="hero-logo"><MatdoMark height="1em" /></span>Everything, from front desk to homework.</h1>
-      <p class="hero-sub">Matdo&nbsp;Check runs the front desk for tutoring centers. Matdo&nbsp;Grade checks paper homework for parents, tutors and teachers.</p>
+      <p class="hero-sub">Matdo&nbsp;Lab builds iPhone and iPad apps for learning. Matdo&nbsp;Check runs the front desk for tutoring centers. Matdo&nbsp;Grade uses AI to check paper homework for parents, tutors and teachers.</p>
       <HomeDemo />
+    </div>
+  </section>
+
+  <!-- Company at a glance: what Matdo Lab is, in plain words, before the product detail. -->
+  <section class="section-pad co-sec" aria-labelledby="co-title">
+    <div class="wrap">
+      <div class="co-head">
+        <span class="eyebrow">Matdo Lab LLC</span>
+        <h2 id="co-title">An education technology company in West Lafayette, Indiana.</h2>
+        <p>We build two products for the people around a child's learning: an AI grading service for paper homework, and an attendance app for tutoring centers.</p>
+      </div>
+      <div class="co-grid">
+        <article class="co-card co-grade">
+          <span class="co-label">Matdo Grade · AI grading · early access</span>
+          <h3>AI that grades handwritten homework.</h3>
+          <p>Photograph a finished page. Our grading service on Google Cloud uses Gemini through Vertex AI to read the handwriting, mark each answer without an answer key, show a worked solution, and point to the step where the working went wrong. Essays get rubric feedback.</p>
+          <p class="co-meta">iPhone &amp; iPad, Android in testing · Monthly plans from $4.99 at launch</p>
+          <a href="/grade/#technology">How the technology works <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="co-card co-check">
+          <span class="co-label">Matdo Check · attendance · on the App Store</span>
+          <h3>Front-desk check-in for tutoring centers.</h3>
+          <p>Students check in and out on an iPad; staff see attendance on any paired iPad or iPhone. Works offline, syncs through the center's own iCloud, and exports monthly attendance spreadsheets.</p>
+          <p class="co-meta">iPad &amp; iPhone · 7-day free trial, then from $2.99/month</p>
+          <a href="/check/">See Matdo Check <span aria-hidden="true">→</span></a>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -116,6 +143,22 @@ import HomeDemo from "../components/HomeDemo.astro";
      text baseline onto the visual baseline of the pocket. */
   .hero-logo { display: inline-block; vertical-align: -0.12em; margin-right: 0.3em; }
   .hero-sub { font-size: 1.2rem; color: #3d4b47; max-width: 40rem; margin: 1.2rem auto 0; text-wrap: balance; }
+
+  /* Company at a glance */
+  .co-sec { padding-top: clamp(48px, 6vw, 80px); }
+  .co-head { max-width: 46rem; margin: 0 auto 32px; text-align: center; }
+  .co-head h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); margin: 10px 0 12px; text-wrap: balance; }
+  .co-head p { color: #3d4b47; font-size: 1.08rem; line-height: 1.6; }
+  .co-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .co-card { --accent: var(--color-teal); display: flex; flex-direction: column; gap: 10px; padding: clamp(20px, 3vw, 32px); border-radius: 16px; background: #fff; border: 1px solid var(--color-line); border-top: 4px solid var(--accent); box-shadow: var(--shadow-sm); }
+  .co-grade { --accent: #806123; }
+  .co-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+  .co-card h3 { font-size: clamp(1.3rem, 2vw, 1.6rem); }
+  .co-card p { color: #4a5854; font-size: 0.98rem; line-height: 1.6; }
+  .co-card .co-meta { font-size: 0.88rem; color: #55665f; }
+  .co-card a { margin-top: auto; padding-top: 6px; color: var(--accent); font-weight: 700; }
+  .co-card a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  @media (max-width: 760px) { .co-grid { grid-template-columns: 1fr; } }
 
   /* Devices */
   .dev-sec { padding-top: clamp(48px, 6vw, 80px); }

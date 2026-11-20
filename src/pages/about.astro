@@ -1,16 +1,25 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import MatdoMark from "../components/MatdoMark.astro";
+import { APP_STORE_URL } from "../consts";
+
+// Founder card: shown only once a name is filled in. Leave name empty to hide it.
+const FOUNDER = {
+  name: "",
+  role: "Founder",
+  bio: "",
+  linkedin: "",
+};
 ---
 <Layout
-  title="About — Matdo"
-  description="Meet Matdo: simple, reliable, affordable tools for parents, tutors, and educators. Discover the story behind our name, our logo, and our mission: less admin, more teaching."
+  title="About Matdo Lab — Education technology company"
+  description="Matdo Lab LLC is an education technology company in West Lafayette, Indiana. We build Matdo Grade, AI homework grading on Google Cloud, and Matdo Check, attendance for tutoring centers."
 >
   <section class="page-hero" aria-labelledby="about-title">
     <div class="wrap">
       <span class="eyebrow">About</span>
-      <h1 id="about-title"><span class="hero-logo"><MatdoMark height="1em" /></span>About Matdo</h1>
-      <p class="lede">Simple, reliable, affordable tools for parents, tutors, and educators.</p>
+      <h1 id="about-title"><span class="hero-logo"><MatdoMark height="1em" /></span>About Matdo Lab</h1>
+      <p class="lede">Matdo Lab LLC is an education technology company in West Lafayette, Indiana. We build simple, reliable, affordable apps for parents, tutors, and educators.</p>
     </div>
   </section>
 
@@ -30,7 +39,35 @@ import MatdoMark from "../components/MatdoMark.astro";
     </div>
   </section>
 
-  <section class="about-section band-cream2" aria-labelledby="people-title">
+  <!-- Company at a glance: the facts a partner, investor or program reviewer looks for. -->
+  <section class="about-section band-cream2" id="company" aria-labelledby="company-title">
+    <div class="wrap">
+      <div class="section-heading reveal">
+        <span class="eyebrow">Company</span>
+        <h2 id="company-title">Matdo Lab at a glance</h2>
+      </div>
+      <dl class="facts reveal">
+        <div><dt>Company</dt><dd>Matdo Lab LLC</dd></div>
+        <div><dt>Location</dt><dd>West Lafayette, Indiana, USA</dd></div>
+        <div><dt>Industry</dt><dd>Education technology: AI grading and school-administration software</dd></div>
+        <div><dt>Products</dt><dd><a href="/grade/">Matdo Grade</a>: AI homework grading, in early access on iPhone and iPad, with Android in testing.<br /><a href="/check/">Matdo Check</a>: check-in and attendance for tutoring centers, <a href={APP_STORE_URL}>live on the App Store</a>.</dd></div>
+        <div><dt>Technology</dt><dd>Matdo Grade's grading service runs on Google Cloud in the United States and grades pages with Google's Gemini model through Vertex AI, with Firebase App Check securing requests from the apps. <a href="/grade/#technology">How it works</a>. Matdo Check runs on the device and syncs through the customer's own iCloud.</dd></div>
+        <div><dt>Business model</dt><dd>Subscriptions. Matdo Check: 7-day free trial, then from $2.99 a month. Matdo Grade at launch: free start, monthly plans from $4.99 to $39.99, and top-ups.</dd></div>
+        <div><dt>Contact</dt><dd><a href="mailto:matdo@matdolab.com">matdo@matdolab.com</a> · <a href="/contact/">Contact form</a></dd></div>
+      </dl>
+      {FOUNDER.name && (
+        <div class="founder reveal">
+          <span class="eyebrow">Founder</span>
+          <h3>{FOUNDER.name}</h3>
+          <p class="founder-role">{FOUNDER.role}, Matdo Lab LLC</p>
+          {FOUNDER.bio && <p>{FOUNDER.bio}</p>}
+          {FOUNDER.linkedin && <a href={FOUNDER.linkedin}>LinkedIn <span aria-hidden="true">→</span></a>}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="about-section" aria-labelledby="people-title">
     <div class="wrap">
       <div class="section-heading reveal">
         <span class="eyebrow">Our tools</span>
@@ -56,7 +93,7 @@ import MatdoMark from "../components/MatdoMark.astro";
     </div>
   </section>
 
-  <section class="about-section" aria-labelledby="name-title">
+  <section class="about-section band-cream2" aria-labelledby="name-title">
     <div class="wrap name-sec">
       <div class="name-badge reveal">
         <span class="mat-cn" lang="zh-HK">乜都</span>
@@ -72,7 +109,7 @@ import MatdoMark from "../components/MatdoMark.astro";
     </div>
   </section>
 
-  <section class="about-section band-cream2" aria-labelledby="logo-title">
+  <section class="about-section" aria-labelledby="logo-title">
     <div class="wrap story-copy reveal">
       <span class="eyebrow">The logo</span>
       <h2 id="logo-title">A pocket for useful tools</h2>
@@ -129,6 +166,19 @@ import MatdoMark from "../components/MatdoMark.astro";
   .name-body p:last-child { margin-bottom: 0; }
 
   .section-heading { max-width: 42rem; margin: 0 auto 36px; text-align: center; }
+
+  #company { scroll-margin-top: 40px; }
+  .facts { max-width: 860px; margin: 0 auto; background: #fff; border: 1px solid var(--color-line); border-radius: 16px; overflow: hidden; }
+  .facts > div { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 20px; padding: 16px 24px; }
+  .facts > div + div { border-top: 1px solid var(--color-line); }
+  .facts dt { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-forest); padding-top: 3px; }
+  .facts dd { margin: 0; color: #3d4b47; line-height: 1.6; }
+  .facts a, .founder a { color: var(--color-teal); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+  .founder { max-width: 860px; margin: 24px auto 0; padding: 24px; background: #fff; border: 1px solid var(--color-line); border-radius: 16px; }
+  .founder h3 { font-size: 1.5rem; margin: 8px 0 2px; }
+  .founder-role { color: #55665f; font-size: 0.95rem; margin-bottom: 10px; }
+  .founder p { color: #3d4b47; line-height: 1.6; }
+  @media (max-width: 600px) { .facts > div { grid-template-columns: 1fr; gap: 4px; padding: 14px 18px; } }
   .people-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
   .people-card, .logo-card { --product-accent: var(--color-forest); background: var(--color-cream); border: 1px solid var(--color-line); border-radius: 16px; box-shadow: 0 2px 8px rgb(29 59 52 / 0.04); }
   .check-card { --product-accent: var(--color-teal); }
