@@ -11,11 +11,22 @@ const { class: cls = "", dark = false, vertical = false } = Astro.props;
     </svg>
     <span class="sb-text"><small>Download on the</small><strong>App Store</strong></span>
   </a>
-
+  <!-- Android is on the way: shown under the App Store badge, not a link yet.
+       A generic play shape, not Google's badge, which is only for live listings. -->
+  <span class="store-badge soon" aria-label="Matdo Check on Google Play, coming soon">
+    <svg class="sb-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true">
+      <path d="M5 3.5v17a1 1 0 0 0 1.5.86l14.2-8.5a1 1 0 0 0 0-1.72L6.5 2.64A1 1 0 0 0 5 3.5Z"/>
+    </svg>
+    <span class="sb-text"><small>Coming soon to</small><strong>Google Play</strong></span>
+  </span>
 </div>
 
 <style>
-  .store-badges { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  /* Badges stack: App Store first, Google Play just below. */
+  .store-badges { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+  .store-badge.soon { background: transparent; color: var(--color-forest); border: 1px dashed #8a978f; cursor: default; }
+  .store-badge.soon .sb-logo { width: 22px; height: 24px; }
+  .on-dark .store-badge.soon { background: transparent; color: #fff; border-color: rgba(255,255,255,.5); }
   .store-badges.vertical { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 14px; }
   .store-badge {
     display: inline-flex; align-items: center; gap: 12px;
