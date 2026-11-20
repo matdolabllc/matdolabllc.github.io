@@ -45,7 +45,7 @@ const countries = [
 <Layout
   noindex
   title="Matdo Grade early access — Matdo"
-  description={`Try Matdo Grade on iPhone and iPad before it's in the App Store. Each family we invite gets ${fmt(FREE_UNITS)} free units.`}
+  description={`Try Matdo Grade on iPhone, iPad or Android before it launches. Each family we invite gets ${fmt(FREE_UNITS)} free units.`}
 >
   <section class="page-hero">
     <div class="wrap beta-grid">
@@ -54,7 +54,7 @@ const countries = [
         <span class="eyebrow">Early access</span>
         <h1>Help us try out Matdo&nbsp;Grade.</h1>
         <p class="lede">
-          Would you like free units to use Matdo Grade before it’s in the App Store? Each
+          Would you like free units to use Matdo Grade before it launches? Each
           family we invite gets <strong>{fmt(FREE_UNITS)} free units</strong>, the credits the app uses to check
           homework. That’s enough for about {fmt(FREE_UNITS / 10)} pages.
         </p>
@@ -70,7 +70,7 @@ const countries = [
             <span class="bp-ic" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></svg>
             </span>
-            <div><b>For iPhone and iPad.</b> You’ll install it with TestFlight, Apple’s free app for trying new apps early. We’ll send simple steps.</div>
+            <div><b>For iPhone, iPad and Android.</b> On iPhone and iPad you’ll install it with TestFlight, Apple’s free app for trying new apps early; on Android, through Google Play. We’ll send simple steps.</div>
           </li>
           <li>
             <span class="bp-ic" aria-hidden="true">
@@ -149,7 +149,7 @@ const countries = [
           <fieldset class="field">
             <legend>Which device would you use?</legend>
             <div class="chips">
-              {["iPhone", "iPad", "Both"].map((d) => (
+              {["iPhone", "iPad", "Android", "More than one"].map((d) => (
                 <label class="chip"><input type="radio" name="Device" value={d} required /><span>{d}</span></label>
               ))}
             </div>

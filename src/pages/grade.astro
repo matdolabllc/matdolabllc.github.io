@@ -7,7 +7,6 @@ import GradedSamples from "../components/GradedSamples.astro";
 import GradeFeatures from "../components/GradeFeatures.astro";
 import GradeWorkflow from "../components/GradeWorkflow.astro";
 import GradeFAQ from "../components/GradeFAQ.astro";
-import GradeTechnology from "../components/GradeTechnology.astro";
 
 // Matches the app (Plan.swift, MatdoGrade.storekit) and the server's free grant
 // (server/src/lib/plans.js). Page counts are quoted at Brief, 10 units for a
@@ -26,18 +25,18 @@ const fmt = (n: number) => n.toLocaleString("en-US");
   schema={[{
     "@type": "SoftwareApplication",
     name: "Matdo Grade",
-    description: "AI homework grading built on Google Cloud. Photograph completed paper homework and review marks, correct answers, worked solutions, and likely mistakes, graded by Gemini through Vertex AI. No answer key needed.",
+    description: "AI homework grading with Google Gemini for iPhone, iPad and Android. Photograph completed paper homework and review marks, correct answers, worked solutions, and likely mistakes. No answer key needed.",
     applicationCategory: "EducationalApplication",
-    operatingSystem: "iOS, iPadOS",
+    operatingSystem: "iOS, iPadOS, Android",
     url: "https://matdolab.com/grade/",
     publisher: { "@id": "https://matdolab.com/#organization" },
     offers: { "@type": "AggregateOffer", priceCurrency: "USD", lowPrice: "4.99", highPrice: "39.99", offerCount: plans.length },
   }]}
-  title="Matdo Grade — Paper homework, graded on your iPhone or iPad"
-  description="Matdo Grade is AI homework grading for iPhone and iPad, built on Google Cloud. Photograph completed paper homework and review marks, correct answers, and explanations. No answer key needed."
+  title="Matdo Grade — Paper homework, graded on your phone or tablet"
+  description="Matdo Grade is AI homework grading for iPhone, iPad and Android, powered by Google Gemini. Photograph completed paper homework and review marks, correct answers, and explanations. No answer key needed."
 >
   <!-- HERO -->
-<ProductHero name="Matdo Grade" mark="/logos/matdo-grade-mark.png" headline={"Paper homework.\nGraded on your iPhone/iPad."} subtitle="For Parents. By Parents." description="Photograph your child’s finished homework. Review marks, correct answers, and explanations so you can help them try again." accent="#b08a3e">
+<ProductHero name="Matdo Grade" mark="/logos/matdo-grade-mark.png" headline={"Paper homework.\nGraded on your phone or tablet."} subtitle="For Parents. By Parents." description="Photograph your child’s finished homework. Review marks, correct answers, and explanations so you can help them try again." accent="#b08a3e">
 <div slot="actions" class="grade-actions">
   <a class="btn btn-primary ga-example" href="#samples">See a graded example</a>
   <a class="btn btn-ghost ga-how" href="#how-grade-works">How it works</a>
@@ -67,7 +66,6 @@ const fmt = (n: number) => n.toLocaleString("en-US");
     <div class="wrap">
       <a href="#samples">Examples</a>
       <a href="#how-grade-works">How it works</a>
-      <a href="#technology">Technology</a>
       <a href="#subjects">Subjects</a>
       <a href="#features">Features</a>
       <a href="#pricing">Pricing</a>
@@ -79,7 +77,6 @@ const fmt = (n: number) => n.toLocaleString("en-US");
   <!-- Actual grading results come before subject and feature descriptions. -->
   <GradedSamples />
   <GradeWorkflow />
-  <GradeTechnology />
   <GradeSubjects />
 
   <!-- FEATURES — tap a card to read its caption -->
@@ -90,7 +87,7 @@ const fmt = (n: number) => n.toLocaleString("en-US");
     <div class="wrap">
       <div class="sec-head center reveal">
         <h2>Pricing at launch</h2>
-        <p class="pr-soon">For iPad and iPhone. Purchases open when Matdo Grade reaches the App Store.</p>
+        <p class="pr-soon">For iPhone, iPad and Android. Purchases open when Matdo Grade launches.</p>
         <p class="pr-units-explain"><b>How units work:</b> each graded page uses units. A typical page takes about 10 units in <b>Brief</b> mode (marks, correct answers, and a short check of the working). <b>Detailed</b> mode adds a worked solution and where the working went wrong, for 5 or 10 more units a page.</p>
       </div>
 
@@ -126,7 +123,7 @@ const fmt = (n: number) => n.toLocaleString("en-US");
     <div class="wrap">
       <div class="grade-cta reveal">
         <h2>Try Matdo Grade before launch.</h2>
-        <p>Early-access families get 1,000 free units, about 100 pages of Brief grading, on iPhone and iPad.</p>
+        <p>Early-access families get 1,000 free units, about 100 pages of Brief grading, on iPhone, iPad and Android.</p>
         <GradeBetaButton />
       </div>
     </div>

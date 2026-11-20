@@ -1,41 +1,47 @@
+<!-- How it works: one flow, phone or tablet -> Gemini -> feedback, drawn with the
+     workflow illustrations and arrows on a single background. Each step spans two
+     subgrid rows (picture, then words) so the arrows line up with the pictures. -->
 <section id="how-grade-works" class="section-pad band-cream2" aria-labelledby="grade-workflow-title">
   <div class="wrap">
     <div class="sec-head center reveal">
       <h2 id="grade-workflow-title">How it works</h2>
-      <p>Take a photo of the finished homework; see the marks on the iPad.</p>
+      <p>Take a photo of the finished homework. Google’s Gemini AI checks it. You see the marks on the page.</p>
     </div>
-    <ol class="grade-workflow">
-      <li class="reveal">
-        <div class="step-picture">
-          <img src="/demo/grade/workflow/capture.webp?v=2" width="800" height="600" loading="lazy" decoding="async" alt="A parent photographs a completed worksheet with a phone." />
-          <span class="step-number" aria-hidden="true">1</span>
-        </div>
-        <div class="step-caption">
-        <h3>Photograph the homework</h3>
-        <p>Capture the finished work, including the questions and any reading passage.</p>
-        </div>
-      </li>
-      <li class="reveal">
-        <div class="step-picture">
-          <img src="/demo/grade/workflow/review.webp?v=2" width="800" height="600" loading="lazy" decoding="async" alt="A parent and student review grading marks and feedback on a tablet." />
-          <span class="step-number" aria-hidden="true">2</span>
-        </div>
-        <div class="step-caption">
-        <h3>Review the checked page</h3>
-        <p>Review the marks, correct answers, and worked explanations together.</p>
+    <ol class="flow reveal">
+      <li class="flow-step">
+        <img src="/demo/grade/workflow/capture.webp?v=2" width="800" height="600" loading="lazy" decoding="async" alt="A parent photographs a completed worksheet with a phone." />
+        <div class="flow-words">
+          <h3>Photograph the homework</h3>
+          <p>Snap the finished page with the Matdo Grade app.</p>
+          <ul class="flow-devices" aria-label="Works on">
+            <li>iPhone</li><li>iPad</li><li>Android</li>
+          </ul>
         </div>
       </li>
-      <li class="reveal">
-        <div class="step-picture">
-          <img src="/demo/grade/workflow/retry.webp?v=2" width="800" height="600" loading="lazy" decoding="async" alt="A student revises the paper homework with a parent nearby." />
-          <span class="step-number" aria-hidden="true">3</span>
+      <li class="flow-arrow" aria-hidden="true">
+        <svg viewBox="0 0 64 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h58M50 3l10 9-10 9"/></svg>
+      </li>
+      <li class="flow-step flow-ai">
+        <div class="ai-badge" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="currentColor"><path d="M24 4c1.2 10.6 9.4 18.8 20 20-10.6 1.2-18.8 9.4-20 20-1.2-10.6-9.4-18.8-20-20 10.6-1.2 18.8-9.4 20-20Z"/></svg>
         </div>
-        <div class="step-caption">
-        <h3>Help your student try again</h3>
-        <p>Let your student use the feedback to make another attempt on paper.</p>
+        <div class="flow-words">
+          <h3>Gemini checks it</h3>
+          <p>Google’s Gemini AI reads the handwriting and checks every answer. No answer key needed.</p>
+        </div>
+      </li>
+      <li class="flow-arrow" aria-hidden="true">
+        <svg viewBox="0 0 64 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h58M50 3l10 9-10 9"/></svg>
+      </li>
+      <li class="flow-step">
+        <img src="/demo/grade/workflow/review.webp?v=2" width="800" height="600" loading="lazy" decoding="async" alt="A parent and student review grading marks and feedback on a tablet." />
+        <div class="flow-words">
+          <h3>See the marks on the page</h3>
+          <p>Ticks, crosses, the correct answer and a worked explanation, so your child can try again.</p>
         </div>
       </li>
     </ol>
+    <p class="flow-privacy reveal">Pages are sent only to be graded. We keep no copy, and homework is never used to train AI. <a href="/privacy/grade/">Privacy details</a></p>
     <details class="grade-review-note reveal">
       <summary>Tips for reviewing feedback</summary>
       <ul>
@@ -49,18 +55,38 @@
 
 <style>
   #how-grade-works { scroll-margin-top: 100px; }
-  .grade-workflow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; margin: 0; padding: 0; list-style: none; counter-reset: steps; }
-  .grade-workflow li { min-width: 0; overflow: hidden; border: 1px solid var(--color-line); border-radius: var(--radius); background: var(--color-cream); }
-  .step-picture { position: relative; background: var(--color-cream); }
-  .step-picture img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
-  .step-caption { padding: 22px 24px 26px; }
-  .step-number { position: absolute; top: 14px; left: 14px; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin-bottom: 1rem; border-radius: 50%; background: var(--color-teal); color: #fff; font-weight: 700; }
-  .grade-workflow h3 { font-size: 1.45rem; }
-  .grade-workflow p { margin: 0.8rem 0 0; color: #4a5854; }
-  .grade-review-note { max-width: 52rem; margin: 36px auto 0; padding: 24px 28px; border-left: 3px solid var(--color-teal); background: #fff; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+  .flow { display: grid; grid-template-columns: minmax(0, 1.25fr) 64px minmax(0, 0.8fr) 64px minmax(0, 1.25fr); grid-template-rows: auto auto; row-gap: 18px; margin: 0; padding: 0; list-style: none; }
+  .flow-step { min-width: 0; grid-row: span 2; display: grid; grid-template-rows: subgrid; text-align: center; }
+  .flow-step > :first-child { align-self: center; }
+  /* Place every item by column: the arrows have a fixed row, and auto-placement
+     would otherwise put them ahead of the steps. */
+  .flow > :nth-child(1) { grid-column: 1; } .flow > :nth-child(2) { grid-column: 2; }
+  .flow > :nth-child(3) { grid-column: 3; } .flow > :nth-child(4) { grid-column: 4; }
+  .flow > :nth-child(5) { grid-column: 5; }
+  .flow-step img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 16px; }
+  .flow-words h3 { font-size: 1.35rem; margin: 0 0 6px; }
+  .flow-words p { margin: 0 auto; max-width: 22rem; color: #4a5854; font-size: 0.98rem; line-height: 1.55; }
+  .flow-devices { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; padding: 0; list-style: none; }
+  .flow-devices li { padding: 4px 12px; border-radius: 999px; border: 1px solid #b08a3e; color: #806123; font-size: 0.82rem; font-weight: 700; }
+  .ai-badge { display: grid; place-items: center; width: 112px; height: 112px; margin: 0 auto; border-radius: 50%; border: 2px solid #b08a3e; color: #b08a3e; background: var(--color-cream); }
+  .ai-badge svg { width: 54px; height: 54px; }
+  .flow-arrow { grid-row: 1; align-self: center; display: flex; justify-content: center; color: #806123; }
+  .flow-arrow svg { width: 52px; height: 24px; flex: none; }
+  .flow-privacy { max-width: 44rem; margin: 36px auto 0; text-align: center; font-size: 0.92rem; color: #55665f; }
+  .flow-privacy a { color: #806123; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+  .grade-review-note { max-width: 52rem; margin: 24px auto 0; padding: 24px 28px; border-left: 3px solid var(--color-teal); background: #fff; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
   .grade-review-note summary { font-size: 1.05rem; font-weight: 600; cursor: pointer; color: var(--color-forest); }
   .grade-review-note summary:focus-visible { outline: 3px solid var(--color-teal); outline-offset: 5px; }
   .grade-review-note ul { margin: 1rem 0 0; padding-left: 1.3rem; color: #4a5854; }
   .grade-review-note li + li { margin-top: 0.6rem; }
-  @media (max-width: 760px) { .grade-workflow { grid-template-columns: 1fr; gap: 16px; } .step-caption { padding: 20px 24px 24px; } .grade-review-note { padding: 24px; } }
+  @media (max-width: 860px) {
+    .flow { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; row-gap: 0; max-width: 26rem; margin-inline: auto; }
+    .flow > * { grid-column: 1 !important; }
+    .flow-step { grid-row: auto; display: block; }
+    .flow-words { margin-top: 16px; }
+    .ai-badge { width: 96px; height: 96px; }
+    .flow-arrow { grid-row: auto; padding: 18px 0; }
+    .flow-arrow svg { transform: rotate(90deg); width: 44px; }
+    .grade-review-note { padding: 24px; }
+  }
 </style>
