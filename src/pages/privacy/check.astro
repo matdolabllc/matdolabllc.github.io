@@ -169,7 +169,10 @@ const summary = [
           The database is protected by the operating system's file protection, so its contents are encrypted at rest and unreadable until the Device has been unlocked at least once after starting up.
         </p>
         <p>
-          Separately from Attendee Records, the App keeps a few display preferences on the Device: its appearance (light or dark), the language it is shown in, whether names are listed by first or last name, and the Too Short and Too Long alerts that color times in Records. They contain no personal information, stay on that Device, and are not part of the App's backups, its monthly spreadsheets, or Multiple Devices.
+          Separately from Attendee Records, the App keeps a few display preferences on the Device: its appearance (light or dark), the language it is shown in, whether names are listed by first or last name, and the Too Short and Too Long alerts that color times in Records, including whether each is switched on. They contain no personal information, stay on that Device, and are not part of the App's backups, its monthly spreadsheets, or Multiple Devices.
+        </p>
+        <p>
+          A Center that runs more than one site can give each Device a location name in Settings, under Location — "Main Street", for example. The name itself is a setting of that Device and is not synced, but every check-in made on the Device from then on is stored with it, as part of the Attendee Record, so that Records and the monthly spreadsheets can show each site on its own. The location is therefore included wherever Attendee Records are: in the App's backups, in the monthly spreadsheets (section 8.2) and, with Multiple Devices on, on the Center's other Devices (section 9). Past check-ins keep the location they were made with. While the field is empty, no check-in is labeled.
         </p>
         <p>
           Instructors can correct or clear individual records within the App, and every such change is written to the audit log. An unenrolled attendee can also be removed: they leave the roster, the records screens and check-in search for good, but their past attendance is kept — in the database, the audit log, the monthly spreadsheets and any backups — so the record stays complete. With Multiple Devices on, a removal reaches the other devices too.
@@ -232,7 +235,7 @@ const summary = [
 
         <h3>8.2 Monthly spreadsheets</h3>
         <p>
-          The App also keeps each month's attendance as a spreadsheet (a CSV file) in the Center's own iCloud Drive, in the folder Matdo Check, then Monthly Attendance, so the record can be opened without the App. While the feature is on and the Device is signed in to iCloud, the current month's file is updated every day, and an earlier month's file is updated when its records are corrected. Each file holds attendee names and their check-in and check-out times for that month; the full record stays in the App. The current month's file, and any that staff save, are also kept on the Device, in the Files app under On My iPad (or On My iPhone), then Matdo Check.
+          The App also keeps each month's attendance as a spreadsheet (an Excel workbook, or .xlsx file) in the Center's own iCloud Drive, in the folder Matdo Check, then Monthly Attendance, so the record can be opened without the App. While the feature is on and the Device is signed in to iCloud, the current month's file is updated every day, and an earlier month's file is updated when its records are corrected. Each file holds attendee names and their check-in and check-out times for that month, and, where check-ins carry a location (section 5), a separate tab for each location; the full record stays in the App. The current month's file, and any that staff save, are also kept on the Device, in the Files app under On My iPad (or On My iPhone), then Matdo Check.
         </p>
         <p>
           <strong>These files are not encrypted.</strong> Anyone who can open the Center's iCloud Drive, on another iPad or iPhone, a Mac, or iCloud.com, can read them, and iCloud Drive may copy them to those devices.
@@ -247,6 +250,9 @@ const summary = [
         <p>
           Before version 1.1, this feature was off unless switched on, no spreadsheets were written, and each backup was encrypted before it left the Device, with a key held by the instructor PIN and by a recovery code. Backups made that way can still be opened only with the PIN in use when they were made, or with that recovery code. <strong>Updating to version 1.1 switches the feature on for every Center</strong>, including Centers that had left it off. Staff who do not want it can switch it off again in the instructor area, on the Export page.
         </p>
+        <p>
+          Up to version 1.4, the monthly spreadsheets were CSV files. From version 1.5 they are written as .xlsx files instead. CSV files written earlier are not changed or deleted by the App; they stay in iCloud Drive and on the Device until staff delete them in the Files app.
+        </p>
 
         <!-- 9 -->
         <h2 id="s9">9. Multiple Devices</h2>
@@ -254,13 +260,13 @@ const summary = [
           <strong>Multiple Devices is off unless a member of staff switches it on</strong> in Settings, under Multiple Devices. It keeps several iPads and iPhones in step for one Center.
         </p>
         <p>
-          While it is on, the roster, attendance times, profiles, the Center's name, and the audit log are synced through Apple's CloudKit service, in the private iCloud database of the Apple Account that set up the Center. Devices signed in to that Apple Account read it directly. They are not sent to us, and we have no access to them.
+          While it is on, the roster, attendance times (with each check-in's location, if any), profiles, the Center's name, and the audit log are synced through Apple's CloudKit service, in the private iCloud database of the Apple Account that set up the Center. Devices signed in to that Apple Account read it directly. They are not sent to us, and we have no access to them.
         </p>
         <p>
           A Device signed in to a different Apple Account — a member of staff's own phone, for example — can read and change those records only after joining through an invite link or QR code created on the Center's main Device. It keeps that access until it leaves or is removed. <strong>Anyone holding a live invite link or code can join</strong>, so the Center should share invites only with its own staff, and remove any device it does not recognise. Giving staff access in this way is the Center's decision; it does not make us a recipient of the records.
         </p>
         <p>
-          Each Device's instructor PIN, Face ID setting, and Automatic Backup to iCloud switch stay on that Device and are not synced.
+          Each Device's instructor PIN, Face ID setting, Automatic Backup to iCloud switch, and location name stay on that Device and are not synced.
         </p>
         <p>
           To delete the synced copy, stop sharing and then delete the App's iCloud data from the Device's Settings, under your Apple Account, then iCloud.
